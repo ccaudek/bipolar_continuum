@@ -1,0 +1,43 @@
+TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person level;
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE: 
+  NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
+    scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  CLUSTER = user_id;  ! Clustering at the subject level
+  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  BETWEEN = neg_aff_Person;  ! Covariate at the person level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+
+MODEL:
+  %WITHIN%  ! Level 1: Within-subject and within-day variation
+    PositiveSelfCompassion_w BY scs_pos_1 scs_pos_3 scs_pos_6 scs_pos_7;  
+    ! Positive self-compassion factor on within level
+    NegativeSelfCompassion_w BY scs_neg_2 scs_neg_4 scs_neg_5 scs_neg_8;  
+    ! Negative self-compassion factor on within level
+    PositiveSelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress positive factor on momentary and daily negative affect
+    NegativeSelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress negative factor on momentary and daily negative affect
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    PositiveSelfCompassion_b BY scs_pos_1 scs_pos_3 scs_pos_6 scs_pos_7;  
+    ! Positive self-compassion factor on between level
+    NegativeSelfCompassion_b BY scs_neg_2 scs_neg_4 scs_neg_5 scs_neg_8;  
+    ! Negative self-compassion factor on between level
+    PositiveSelfCompassion_b ON neg_aff_Person;  
+    ! Regress positive factor on person-level negative affect
+    NegativeSelfCompassion_b ON neg_aff_Person;  
+    ! Regress negative factor on person-level negative affect
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;

@@ -1,0 +1,1453 @@
+Mplus VERSION 8.6 (Mac)
+MUTHEN & MUTHEN
+09/20/2024  10:28 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Multilevel Two-Factor Model with Day and Occasion Clustering;
+
+  DATA:
+    FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat";
+
+  VARIABLE:
+    NAMES = user_id day occasion pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+    USEVARIABLES = pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+    CLUSTER = user_id day;  ! Clustering at participant and day levels
+
+  MISSING = .;
+
+  ANALYSIS:
+    TYPE = THREELEVEL;  ! Multilevel model with three levels
+    ESTIMATOR = MLR;    ! Maximum likelihood estimation with robust standard errors
+
+  MODEL:
+    %WITHIN%  ! Level 1: Occasion-level variation (within days)
+      PositiveCompassion_w BY pos_1 pos_2 pos_3 pos_4;
+      NegativeCompassion_w BY neg_1 neg_2 neg_3 neg_4;
+      PositiveCompassion_w WITH NegativeCompassion_w;  ! Correlated factors
+
+    %BETWEEN day%  ! Level 2: Day-level variation (within participants)
+      PositiveCompassion_d BY pos_1 pos_2 pos_3 pos_4;
+      NegativeCompassion_d BY neg_1 neg_2 neg_3 neg_4;
+      PositiveCompassion_d WITH NegativeCompassion_d;
+
+    %BETWEEN user_id%  ! Level 3: Between-participant variation
+      PositiveCompassion_b BY pos_1 pos_2 pos_3 pos_4;
+      NegativeCompassion_b BY neg_1 neg_2 neg_3 neg_4;
+      PositiveCompassion_b WITH NegativeCompassion_b;
+
+  OUTPUT:
+    TECH1 TECH8 STANDARDIZED MODINDICES;
+
+
+
+*** WARNING
+  Clusters for DAY with the same IDs have been found in different clusters
+  for USER_ID.  These clusters are assumed to be different because clusters for
+  DAY are not allowed to appear in more than one cluster for USER_ID.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Multilevel Two-Factor Model with Day and Occasion Clustering;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       19400
+
+Number of dependent variables                                    8
+Number of independent variables                                  0
+Number of continuous latent variables                            6
+
+Observed dependent variables
+
+  Continuous
+   POS_1       NEG_1       POS_2       NEG_2       NEG_3       POS_3
+   POS_4       NEG_4
+
+Continuous latent variables
+   POSITIVE    NEGATIVE    POSITIVE    NEGATIVE    POSITIVE    NEGATIVE
+
+Variables with special functions
+
+  Cluster variables     USER_ID   DAY
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-02
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  /Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of DAY clusters                   4983
+     Number of USER_ID clusters                495
+
+     Average cluster size for DAY level        3.893
+
+     Estimated Intraclass Correlations for the Y Variables for DAY level
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     POS_1        0.150      NEG_1        0.145      POS_2        0.123
+     NEG_2        0.149      NEG_3        0.134      POS_3        0.138
+     POS_4        0.129      NEG_4        0.134
+
+     Average cluster size for USER_ID level       39.192
+
+     Estimated Intraclass Correlations for the Y Variables for USER_ID level
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     POS_1        0.407      NEG_1        0.500      POS_2        0.555
+     NEG_2        0.491      NEG_3        0.506      POS_3        0.410
+     POS_4        0.437      NEG_4        0.394
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1          1.000
+ NEG_1          1.000         1.000
+ POS_2          1.000         1.000         1.000
+ NEG_2          1.000         1.000         1.000         1.000
+ NEG_3          1.000         1.000         1.000         1.000         1.000
+ POS_3          1.000         1.000         1.000         1.000         1.000
+ POS_4          1.000         1.000         1.000         1.000         1.000
+ NEG_4          1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3          1.000
+ POS_4          1.000         1.000
+ NEG_4          1.000         1.000         1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     POS_1                 0.883      -0.777      -3.000    2.42%      -1.000      1.000      1.000
+           19400.000       2.322      -0.274       3.000    9.96%       2.000      2.000
+     NEG_1                 0.827      -0.483      -3.000    4.03%      -1.000      1.000      1.000
+           19400.000       3.393      -1.065       3.000   21.68%       2.000      3.000
+     POS_2                 1.280      -1.022      -3.000    3.74%      -1.000      1.000      2.000
+           19400.000       2.885       0.061       3.000   26.97%       2.000      3.000
+     NEG_2                 0.042       0.069      -3.000    7.88%      -2.000     -1.000     -1.000
+           19400.000       3.553      -1.322       3.000   10.94%       1.000      2.000
+     NEG_3                 0.744      -0.414      -3.000    4.35%      -1.000      1.000      1.000
+           19400.000       3.445      -1.140       3.000   20.53%       2.000      3.000
+     POS_3                 0.949      -0.851      -3.000    1.89%      -1.000      1.000      1.000
+           19400.000       2.202      -0.111       3.000    9.73%       2.000      2.000
+     POS_4                 0.657      -0.599      -3.000    3.82%      -1.000      1.000      1.000
+           19400.000       2.681      -0.731       3.000    8.59%       1.000      2.000
+     NEG_4                -0.465       0.543      -3.000    6.86%      -2.000     -1.000     -1.000
+           19400.000       2.778      -0.819       3.000    5.23%      -1.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       59
+
+Loglikelihood
+
+          H0 Value                     -240315.993
+          H0 Scaling Correction Factor      3.4057
+            for MLR
+          H1 Value                     -239875.168
+          H1 Scaling Correction Factor      2.5442
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  480749.986
+          Bayesian (BIC)                481214.494
+          Sample-Size Adjusted BIC      481026.995
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            533.525*
+          Degrees of Freedom                    57
+          P-Value                           0.0000
+          Scaling Correction Factor         1.6525
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.021
+
+CFI/TLI
+
+          CFI                                0.962
+          TLI                                0.944
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          12622.452
+          Degrees of Freedom                    84
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.019
+          Value for Between Level 2          0.047
+          Value for Between Level 3          0.049
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POSITIVE BY
+    POS_1              1.000      0.000    999.000    999.000
+    POS_2              0.463      0.048      9.657      0.000
+    POS_3              0.867      0.042     20.483      0.000
+    POS_4              1.063      0.035     30.780      0.000
+
+ NEGATIVE BY
+    NEG_1              1.000      0.000    999.000    999.000
+    NEG_2              0.826      0.032     25.598      0.000
+    NEG_3              0.983      0.031     32.022      0.000
+    NEG_4              0.366      0.031     11.713      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.318      0.018     17.457      0.000
+
+ Variances
+    POSITIVECO         0.311      0.023     13.784      0.000
+    NEGATIVECO         0.469      0.029     16.289      0.000
+
+ Residual Variances
+    POS_1              0.724      0.027     26.608      0.000
+    NEG_1              0.761      0.026     28.960      0.000
+    POS_2              0.862      0.043     20.282      0.000
+    NEG_2              0.956      0.031     30.458      0.000
+    NEG_3              0.811      0.030     26.828      0.000
+    POS_3              0.764      0.029     26.634      0.000
+    POS_4              0.825      0.033     25.269      0.000
+    NEG_4              1.258      0.039     32.642      0.000
+
+Between DAY Level
+
+ POSITIVE BY
+    POS_1              1.000      0.000    999.000    999.000
+    POS_2              0.328      0.067      4.903      0.000
+    POS_3              0.927      0.052     17.836      0.000
+    POS_4              1.065      0.037     29.149      0.000
+
+ NEGATIVE BY
+    NEG_1              1.000      0.000    999.000    999.000
+    NEG_2              0.839      0.040     20.752      0.000
+    NEG_3              0.919      0.032     28.408      0.000
+    NEG_4              0.443      0.039     11.436      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.260      0.020     13.057      0.000
+
+ Variances
+    POSITIVECO         0.245      0.024     10.002      0.000
+    NEGATIVECO         0.425      0.031     13.653      0.000
+
+ Residual Variances
+    POS_1              0.103      0.013      7.873      0.000
+    NEG_1              0.080      0.013      6.102      0.000
+    POS_2              0.327      0.034      9.706      0.000
+    NEG_2              0.232      0.018     12.618      0.000
+    NEG_3              0.106      0.014      7.603      0.000
+    POS_3              0.093      0.014      6.870      0.000
+    POS_4              0.071      0.013      5.296      0.000
+    NEG_4              0.293      0.022     13.545      0.000
+
+Between USER_ID Level
+
+ POSITIVE BY
+    POS_1              1.000      0.000    999.000    999.000
+    POS_2              0.474      0.077      6.181      0.000
+    POS_3              0.808      0.055     14.578      0.000
+    POS_4              1.187      0.041     29.055      0.000
+
+ NEGATIVE BY
+    NEG_1              1.000      0.000    999.000    999.000
+    NEG_2              0.840      0.033     25.325      0.000
+    NEG_3              1.010      0.026     39.306      0.000
+    NEG_4              0.224      0.050      4.512      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.902      0.073     12.420      0.000
+
+ Intercepts
+    POS_1              0.870      0.045     19.207      0.000
+    NEG_1              0.784      0.061     12.877      0.000
+    POS_2              1.277      0.058     22.013      0.000
+    NEG_2              0.021      0.061      0.341      0.733
+    NEG_3              0.706      0.061     11.507      0.000
+    POS_3              0.946      0.044     21.356      0.000
+    POS_4              0.638      0.051     12.612      0.000
+    NEG_4             -0.506      0.049    -10.346      0.000
+
+ Variances
+    POSITIVECO         0.777      0.073     10.653      0.000
+    NEGATIVECO         1.559      0.106     14.716      0.000
+
+ Residual Variances
+    POS_1              0.175      0.031      5.604      0.000
+    NEG_1              0.177      0.039      4.545      0.000
+    POS_2              1.422      0.103     13.825      0.000
+    NEG_2              0.636      0.064      9.887      0.000
+    NEG_3              0.182      0.038      4.773      0.000
+    POS_3              0.397      0.042      9.357      0.000
+    POS_4              0.096      0.034      2.804      0.005
+    NEG_4              1.023      0.072     14.221      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.538E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POSITIVE BY
+    POS_1              0.548      0.016     34.188      0.000
+    POS_2              0.268      0.023     11.629      0.000
+    POS_3              0.484      0.016     30.350      0.000
+    POS_4              0.547      0.018     30.779      0.000
+
+ NEGATIVE BY
+    NEG_1              0.618      0.013     46.309      0.000
+    NEG_2              0.501      0.015     33.432      0.000
+    NEG_3              0.599      0.014     42.420      0.000
+    NEG_4              0.218      0.019     11.474      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.831      0.022     37.382      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.699      0.018     39.725      0.000
+    NEG_1              0.619      0.016     37.558      0.000
+    POS_2              0.928      0.012     75.174      0.000
+    NEG_2              0.749      0.015     49.901      0.000
+    NEG_3              0.641      0.017     37.951      0.000
+    POS_3              0.766      0.015     49.543      0.000
+    POS_4              0.701      0.019     36.071      0.000
+    NEG_4              0.952      0.008    114.742      0.000
+
+Between DAY Level
+
+ POSITIVE BY
+    POS_1              0.839      0.022     37.318      0.000
+    POS_2              0.273      0.052      5.255      0.000
+    POS_3              0.833      0.025     33.966      0.000
+    POS_4              0.892      0.021     42.073      0.000
+
+ NEGATIVE BY
+    NEG_1              0.917      0.014     64.946      0.000
+    NEG_2              0.750      0.021     35.496      0.000
+    NEG_3              0.879      0.017     52.207      0.000
+    NEG_4              0.471      0.040     11.740      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.808      0.028     28.873      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.296      0.038      7.851      0.000
+    NEG_1              0.159      0.026      6.138      0.000
+    POS_2              0.926      0.028     32.642      0.000
+    NEG_2              0.437      0.032     13.766      0.000
+    NEG_3              0.227      0.030      7.682      0.000
+    POS_3              0.307      0.041      7.519      0.000
+    POS_4              0.204      0.038      5.401      0.000
+    NEG_4              0.778      0.038     20.592      0.000
+
+Between USER_ID Level
+
+ POSITIVE BY
+    POS_1              0.903      0.018     50.497      0.000
+    POS_2              0.331      0.052      6.351      0.000
+    POS_3              0.749      0.033     22.830      0.000
+    POS_4              0.959      0.015     65.659      0.000
+
+ NEGATIVE BY
+    NEG_1              0.948      0.012     78.315      0.000
+    NEG_2              0.796      0.024     33.423      0.000
+    NEG_3              0.947      0.011     82.411      0.000
+    NEG_4              0.266      0.058      4.627      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.820      0.027     30.260      0.000
+
+ Intercepts
+    POS_1              0.892      0.068     13.080      0.000
+    NEG_1              0.595      0.054     11.082      0.000
+    POS_2              1.010      0.068     14.771      0.000
+    NEG_2              0.016      0.046      0.341      0.733
+    NEG_3              0.531      0.051     10.403      0.000
+    POS_3              0.994      0.071     14.013      0.000
+    POS_4              0.584      0.058     10.101      0.000
+    NEG_4             -0.482      0.055     -8.727      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.184      0.032      5.690      0.000
+    NEG_1              0.102      0.023      4.435      0.000
+    POS_2              0.891      0.034     25.826      0.000
+    NEG_2              0.366      0.038      9.667      0.000
+    NEG_3              0.103      0.022      4.708      0.000
+    POS_3              0.439      0.049      8.921      0.000
+    POS_4              0.081      0.028      2.878      0.004
+    NEG_4              0.929      0.031     30.344      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POSITIVE BY
+    POS_1              0.548      0.016     34.188      0.000
+    POS_2              0.268      0.023     11.629      0.000
+    POS_3              0.484      0.016     30.350      0.000
+    POS_4              0.547      0.018     30.779      0.000
+
+ NEGATIVE BY
+    NEG_1              0.618      0.013     46.309      0.000
+    NEG_2              0.501      0.015     33.432      0.000
+    NEG_3              0.599      0.014     42.420      0.000
+    NEG_4              0.218      0.019     11.474      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.831      0.022     37.382      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.699      0.018     39.725      0.000
+    NEG_1              0.619      0.016     37.558      0.000
+    POS_2              0.928      0.012     75.174      0.000
+    NEG_2              0.749      0.015     49.901      0.000
+    NEG_3              0.641      0.017     37.951      0.000
+    POS_3              0.766      0.015     49.543      0.000
+    POS_4              0.701      0.019     36.071      0.000
+    NEG_4              0.952      0.008    114.742      0.000
+
+Between DAY Level
+
+ POSITIVE BY
+    POS_1              0.839      0.022     37.318      0.000
+    POS_2              0.273      0.052      5.255      0.000
+    POS_3              0.833      0.025     33.966      0.000
+    POS_4              0.892      0.021     42.073      0.000
+
+ NEGATIVE BY
+    NEG_1              0.917      0.014     64.946      0.000
+    NEG_2              0.750      0.021     35.496      0.000
+    NEG_3              0.879      0.017     52.207      0.000
+    NEG_4              0.471      0.040     11.740      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.808      0.028     28.873      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.296      0.038      7.851      0.000
+    NEG_1              0.159      0.026      6.138      0.000
+    POS_2              0.926      0.028     32.642      0.000
+    NEG_2              0.437      0.032     13.766      0.000
+    NEG_3              0.227      0.030      7.682      0.000
+    POS_3              0.307      0.041      7.519      0.000
+    POS_4              0.204      0.038      5.401      0.000
+    NEG_4              0.778      0.038     20.592      0.000
+
+Between USER_ID Level
+
+ POSITIVE BY
+    POS_1              0.903      0.018     50.497      0.000
+    POS_2              0.331      0.052      6.351      0.000
+    POS_3              0.749      0.033     22.830      0.000
+    POS_4              0.959      0.015     65.659      0.000
+
+ NEGATIVE BY
+    NEG_1              0.948      0.012     78.315      0.000
+    NEG_2              0.796      0.024     33.423      0.000
+    NEG_3              0.947      0.011     82.411      0.000
+    NEG_4              0.266      0.058      4.627      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.820      0.027     30.260      0.000
+
+ Intercepts
+    POS_1              0.892      0.068     13.080      0.000
+    NEG_1              0.595      0.054     11.082      0.000
+    POS_2              1.010      0.068     14.771      0.000
+    NEG_2              0.016      0.046      0.341      0.733
+    NEG_3              0.531      0.051     10.403      0.000
+    POS_3              0.994      0.071     14.013      0.000
+    POS_4              0.584      0.058     10.101      0.000
+    NEG_4             -0.482      0.055     -8.727      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.184      0.032      5.690      0.000
+    NEG_1              0.102      0.023      4.435      0.000
+    POS_2              0.891      0.034     25.826      0.000
+    NEG_2              0.366      0.038      9.667      0.000
+    NEG_3              0.103      0.022      4.708      0.000
+    POS_3              0.439      0.049      8.921      0.000
+    POS_4              0.081      0.028      2.878      0.004
+    NEG_4              0.929      0.031     30.344      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POSITIVE BY
+    POS_1              0.558      0.020     27.568      0.000
+    POS_2              0.258      0.024     10.586      0.000
+    POS_3              0.484      0.019     25.085      0.000
+    POS_4              0.593      0.023     26.259      0.000
+
+ NEGATIVE BY
+    NEG_1              0.685      0.021     32.578      0.000
+    NEG_2              0.566      0.021     26.758      0.000
+    NEG_3              0.673      0.022     31.222      0.000
+    NEG_4              0.251      0.023     11.125      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.831      0.022     37.382      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.724      0.027     26.608      0.000
+    NEG_1              0.761      0.026     28.960      0.000
+    POS_2              0.862      0.043     20.282      0.000
+    NEG_2              0.956      0.031     30.458      0.000
+    NEG_3              0.811      0.030     26.828      0.000
+    POS_3              0.764      0.029     26.634      0.000
+    POS_4              0.825      0.033     25.269      0.000
+    NEG_4              1.258      0.039     32.642      0.000
+
+Between DAY Level
+
+ POSITIVE BY
+    POS_1              0.495      0.025     20.004      0.000
+    POS_2              0.162      0.031      5.202      0.000
+    POS_3              0.459      0.022     21.091      0.000
+    POS_4              0.527      0.023     22.429      0.000
+
+ NEGATIVE BY
+    NEG_1              0.652      0.024     27.306      0.000
+    NEG_2              0.547      0.026     21.265      0.000
+    NEG_3              0.599      0.025     24.178      0.000
+    NEG_4              0.289      0.028     10.259      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.808      0.028     28.873      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.103      0.013      7.873      0.000
+    NEG_1              0.080      0.013      6.102      0.000
+    POS_2              0.327      0.034      9.706      0.000
+    NEG_2              0.232      0.018     12.618      0.000
+    NEG_3              0.106      0.014      7.603      0.000
+    POS_3              0.093      0.014      6.870      0.000
+    POS_4              0.071      0.013      5.296      0.000
+    NEG_4              0.293      0.022     13.545      0.000
+
+Between USER_ID Level
+
+ POSITIVE BY
+    POS_1              0.882      0.041     21.306      0.000
+    POS_2              0.418      0.069      6.080      0.000
+    POS_3              0.712      0.049     14.414      0.000
+    POS_4              1.046      0.040     26.129      0.000
+
+ NEGATIVE BY
+    NEG_1              1.248      0.042     29.432      0.000
+    NEG_2              1.048      0.049     21.281      0.000
+    NEG_3              1.261      0.040     31.610      0.000
+    NEG_4              0.279      0.063      4.465      0.000
+
+ POSITIVE WITH
+    NEGATIVECO         0.820      0.027     30.260      0.000
+
+ Intercepts
+    POS_1              0.870      0.045     19.207      0.000
+    NEG_1              0.784      0.061     12.877      0.000
+    POS_2              1.277      0.058     22.013      0.000
+    NEG_2              0.021      0.061      0.341      0.733
+    NEG_3              0.706      0.061     11.507      0.000
+    POS_3              0.946      0.044     21.356      0.000
+    POS_4              0.638      0.051     12.612      0.000
+    NEG_4             -0.506      0.049    -10.346      0.000
+
+ Variances
+    POSITIVECO         1.000      0.000    999.000    999.000
+    NEGATIVECO         1.000      0.000    999.000    999.000
+
+ Residual Variances
+    POS_1              0.175      0.031      5.604      0.000
+    NEG_1              0.177      0.039      4.545      0.000
+    POS_2              1.422      0.103     13.825      0.000
+    NEG_2              0.636      0.064      9.887      0.000
+    NEG_3              0.182      0.038      4.773      0.000
+    POS_3              0.397      0.042      9.357      0.000
+    POS_4              0.096      0.034      2.804      0.005
+    NEG_4              1.023      0.072     14.221      0.000
+
+
+R-SQUARE
+
+Within Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    POS_1              0.301      0.018     17.094      0.000
+    NEG_1              0.381      0.016     23.154      0.000
+    POS_2              0.072      0.012      5.815      0.000
+    NEG_2              0.251      0.015     16.716      0.000
+    NEG_3              0.359      0.017     21.210      0.000
+    POS_3              0.234      0.015     15.175      0.000
+    POS_4              0.299      0.019     15.389      0.000
+    NEG_4              0.048      0.008      5.737      0.000
+
+Between DAY Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    POS_1              0.704      0.038     18.659      0.000
+    NEG_1              0.841      0.026     32.473      0.000
+    POS_2              0.074      0.028      2.627      0.009
+    NEG_2              0.563      0.032     17.748      0.000
+    NEG_3              0.773      0.030     26.104      0.000
+    POS_3              0.693      0.041     16.983      0.000
+    POS_4              0.796      0.038     21.037      0.000
+    NEG_4              0.222      0.038      5.870      0.000
+
+Between USER_ID Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    POS_1              0.816      0.032     25.249      0.000
+    NEG_1              0.898      0.023     39.158      0.000
+    POS_2              0.109      0.034      3.175      0.001
+    NEG_2              0.634      0.038     16.711      0.000
+    NEG_3              0.897      0.022     41.206      0.000
+    POS_3              0.561      0.049     11.415      0.000
+    POS_4              0.919      0.028     32.829      0.000
+    NEG_4              0.071      0.031      2.314      0.021
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+Within Level
+
+BY Statements
+
+POSITIVE BY NEG_1                 14.193    -0.410     -0.229       -0.206
+POSITIVE BY NEG_3                 12.386     0.378      0.211        0.188
+NEGATIVE BY POS_1                 19.139    -0.353     -0.242       -0.238
+NEGATIVE BY POS_2                 51.940     0.433      0.297        0.308
+
+WITH Statements
+
+NEG_1    WITH POS_1               26.687    -0.053     -0.053       -0.072
+POS_2    WITH POS_1               36.016    -0.058     -0.058       -0.073
+POS_2    WITH NEG_1               24.445     0.048      0.048        0.060
+NEG_2    WITH POS_1               13.575     0.038      0.038        0.046
+NEG_2    WITH POS_2               15.041    -0.040     -0.040       -0.044
+NEG_3    WITH POS_2               35.841     0.060      0.060        0.071
+NEG_3    WITH NEG_2               10.066    -0.041     -0.041       -0.047
+POS_3    WITH NEG_1               15.250     0.039      0.039        0.051
+POS_3    WITH POS_2               15.033     0.037      0.037        0.045
+POS_4    WITH POS_1               73.469     0.107      0.107        0.138
+POS_4    WITH NEG_1               19.567    -0.048     -0.048       -0.061
+POS_4    WITH POS_2               30.390    -0.056     -0.056       -0.067
+POS_4    WITH POS_3               11.606    -0.038     -0.038       -0.048
+NEG_4    WITH POS_1               42.920    -0.071     -0.071       -0.074
+NEG_4    WITH NEG_1               20.518     0.055      0.055        0.056
+NEG_4    WITH POS_3               21.340     0.050      0.050        0.051
+
+Between DAY Level
+
+BY Statements
+
+POSITIVE BY NEG_1                 17.972    -0.423     -0.209       -0.294
+NEGATIVE BY POS_1                 20.301    -0.298     -0.194       -0.330
+NEGATIVE BY POS_2                 50.669     0.512      0.334        0.562
+NEGATIVE BY POS_3                 12.347     0.248      0.162        0.293
+
+WITH Statements
+
+NEG_1    WITH POS_1               34.388    -0.048     -0.048       -0.525
+POS_2    WITH POS_1               15.407    -0.038     -0.038       -0.208
+POS_2    WITH NEG_1               28.444     0.056      0.056        0.347
+NEG_2    WITH POS_1               10.383     0.031      0.031        0.202
+NEG_2    WITH POS_2               15.270    -0.044     -0.044       -0.159
+NEG_3    WITH POS_2               24.286     0.052      0.052        0.278
+NEG_3    WITH NEG_2               11.254    -0.037     -0.037       -0.235
+POS_3    WITH NEG_1               44.386     0.064      0.064        0.742
+POS_3    WITH POS_2               31.036     0.057      0.057        0.326
+POS_3    WITH NEG_3               16.661    -0.033     -0.033       -0.330
+POS_4    WITH POS_1              108.875     0.158      0.158        1.846
+POS_4    WITH NEG_1               22.186    -0.040     -0.040       -0.532
+POS_4    WITH POS_2               78.051    -0.102     -0.102       -0.667
+POS_4    WITH NEG_3               13.846     0.034      0.034        0.393
+POS_4    WITH POS_3               13.467    -0.034     -0.034       -0.419
+NEG_4    WITH POS_1               31.861    -0.057     -0.057       -0.327
+NEG_4    WITH NEG_1               14.850     0.045      0.045        0.294
+NEG_4    WITH POS_3               11.290     0.033      0.033        0.197
+
+Between USER_ID Level
+
+BY Statements
+
+POSITIVE BY NEG_1                 23.827    -0.524     -0.462       -0.351
+POSITIVE BY NEG_3                 18.491     0.476      0.419        0.315
+POSITIVE BY NEG_4                 10.844    -0.468     -0.413       -0.393
+NEGATIVE BY POS_3                 13.858     0.256      0.319        0.336
+
+WITH Statements
+
+NEG_1    WITH POS_1               10.653    -0.059     -0.059       -0.336
+NEG_2    WITH NEG_1               13.046     0.145      0.145        0.433
+NEG_3    WITH NEG_2               24.200    -0.196     -0.196       -0.577
+POS_3    WITH NEG_1               23.088     0.113      0.113        0.428
+POS_3    WITH NEG_3               11.646    -0.081     -0.081       -0.302
+POS_4    WITH POS_1               26.767     0.218      0.218        1.686
+NEG_4    WITH POS_3               10.772     0.137      0.137        0.215
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POS_1              0             0
+ NEG_1              0             0
+ POS_2              1             0
+ NEG_2              0             2
+ NEG_3              0             3
+ POS_3              4             0
+ POS_4              5             0
+ NEG_4              0             6
+
+
+           THETA
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1              7
+ NEG_1              0             8
+ POS_2              0             0             9
+ NEG_2              0             0             0            10
+ NEG_3              0             0             0             0            11
+ POS_3              0             0             0             0             0
+ POS_4              0             0             0             0             0
+ NEG_4              0             0             0             0             0
+
+
+           THETA
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3             12
+ POS_4              0            13
+ NEG_4              0             0            14
+
+
+           ALPHA
+              POSITIVE      NEGATIVE
+              ________      ________
+                    0             0
+
+
+           BETA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE           0             0
+ NEGATIVE           0             0
+
+
+           PSI
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE          15
+ NEGATIVE          16            17
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN DAY
+
+
+           NU
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POS_1              0             0
+ NEG_1              0             0
+ POS_2             18             0
+ NEG_2              0            19
+ NEG_3              0            20
+ POS_3             21             0
+ POS_4             22             0
+ NEG_4              0            23
+
+
+           THETA
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1             24
+ NEG_1              0            25
+ POS_2              0             0            26
+ NEG_2              0             0             0            27
+ NEG_3              0             0             0             0            28
+ POS_3              0             0             0             0             0
+ POS_4              0             0             0             0             0
+ NEG_4              0             0             0             0             0
+
+
+           THETA
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3             29
+ POS_4              0            30
+ NEG_4              0             0            31
+
+
+           ALPHA
+              POSITIVE      NEGATIVE
+              ________      ________
+                    0             0
+
+
+           BETA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE           0             0
+ NEGATIVE           0             0
+
+
+           PSI
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE          32
+ NEGATIVE          33            34
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN USER_ID
+
+
+           NU
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+                   35            36            37            38            39
+
+
+           NU
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+                   40            41            42
+
+
+           LAMBDA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POS_1              0             0
+ NEG_1              0             0
+ POS_2             43             0
+ NEG_2              0            44
+ NEG_3              0            45
+ POS_3             46             0
+ POS_4             47             0
+ NEG_4              0            48
+
+
+           THETA
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1             49
+ NEG_1              0            50
+ POS_2              0             0            51
+ NEG_2              0             0             0            52
+ NEG_3              0             0             0             0            53
+ POS_3              0             0             0             0             0
+ POS_4              0             0             0             0             0
+ NEG_4              0             0             0             0             0
+
+
+           THETA
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3             54
+ POS_4              0            55
+ NEG_4              0             0            56
+
+
+           ALPHA
+              POSITIVE      NEGATIVE
+              ________      ________
+                    0             0
+
+
+           BETA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE           0             0
+ NEGATIVE           0             0
+
+
+           PSI
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE          57
+ NEGATIVE          58            59
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POS_1          1.000         0.000
+ NEG_1          0.000         1.000
+ POS_2          1.000         0.000
+ NEG_2          0.000         1.000
+ NEG_3          0.000         1.000
+ POS_3          1.000         0.000
+ POS_4          1.000         0.000
+ NEG_4          0.000         1.000
+
+
+           THETA
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1          1.161
+ NEG_1          0.000         1.696
+ POS_2          0.000         0.000         1.443
+ NEG_2          0.000         0.000         0.000         1.776
+ NEG_3          0.000         0.000         0.000         0.000         1.722
+ POS_3          0.000         0.000         0.000         0.000         0.000
+ POS_4          0.000         0.000         0.000         0.000         0.000
+ NEG_4          0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3          1.101
+ POS_4          0.000         1.340
+ NEG_4          0.000         0.000         1.389
+
+
+           ALPHA
+              POSITIVE      NEGATIVE
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE       0.000         0.000
+ NEGATIVE       0.000         0.000
+
+
+           PSI
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE       0.050
+ NEGATIVE       0.000         0.050
+
+
+     STARTING VALUES FOR BETWEEN DAY
+
+
+           NU
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POS_1          1.000         0.000
+ NEG_1          0.000         1.000
+ POS_2          1.000         0.000
+ NEG_2          0.000         1.000
+ NEG_3          0.000         1.000
+ POS_3          1.000         0.000
+ POS_4          1.000         0.000
+ NEG_4          0.000         1.000
+
+
+           THETA
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1          1.161
+ NEG_1          0.000         1.696
+ POS_2          0.000         0.000         1.443
+ NEG_2          0.000         0.000         0.000         1.776
+ NEG_3          0.000         0.000         0.000         0.000         1.722
+ POS_3          0.000         0.000         0.000         0.000         0.000
+ POS_4          0.000         0.000         0.000         0.000         0.000
+ NEG_4          0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3          1.101
+ POS_4          0.000         1.340
+ NEG_4          0.000         0.000         1.389
+
+
+           ALPHA
+              POSITIVE      NEGATIVE
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE       0.000         0.000
+ NEGATIVE       0.000         0.000
+
+
+           PSI
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE       0.050
+ NEGATIVE       0.000         0.050
+
+
+     STARTING VALUES FOR BETWEEN USER_ID
+
+
+           NU
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+                0.883         0.827         1.280         0.042         0.744
+
+
+           NU
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+                0.949         0.657        -0.465
+
+
+           LAMBDA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POS_1          1.000         0.000
+ NEG_1          0.000         1.000
+ POS_2          1.000         0.000
+ NEG_2          0.000         1.000
+ NEG_3          0.000         1.000
+ POS_3          1.000         0.000
+ POS_4          1.000         0.000
+ NEG_4          0.000         1.000
+
+
+           THETA
+              POS_1         NEG_1         POS_2         NEG_2         NEG_3
+              ________      ________      ________      ________      ________
+ POS_1          1.161
+ NEG_1          0.000         1.696
+ POS_2          0.000         0.000         1.443
+ NEG_2          0.000         0.000         0.000         1.776
+ NEG_3          0.000         0.000         0.000         0.000         1.722
+ POS_3          0.000         0.000         0.000         0.000         0.000
+ POS_4          0.000         0.000         0.000         0.000         0.000
+ NEG_4          0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              POS_3         POS_4         NEG_4
+              ________      ________      ________
+ POS_3          1.101
+ POS_4          0.000         1.340
+ NEG_4          0.000         0.000         1.389
+
+
+           ALPHA
+              POSITIVE      NEGATIVE
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE       0.000         0.000
+ NEGATIVE       0.000         0.000
+
+
+           PSI
+              POSITIVE      NEGATIVE
+              ________      ________
+ POSITIVE       0.050
+ NEGATIVE       0.000         0.050
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.25996640D+06    0.0000000    0.0000000  EM
+              2 -0.24494396D+06 ************    0.0577861  EM
+              3 -0.24208050D+06 2863.4544552    0.0116902  EM
+              4 -0.24122511D+06  855.3901134    0.0035335  EM
+              5 -0.24085175D+06  373.3661127    0.0015478  EM
+              6 -0.24065698D+06  194.7680608    0.0008087  EM
+              7 -0.24054484D+06  112.1343345    0.0004660  EM
+              8 -0.24047581D+06   69.0348174    0.0002870  EM
+              9 -0.24043113D+06   44.6824669    0.0001858  EM
+             10 -0.24040104D+06   30.0829262    0.0001251  EM
+             11 -0.24038013D+06   20.9132681    0.0000870  EM
+             12 -0.24036520D+06   14.9312566    0.0000621  EM
+             13 -0.24035430D+06   10.9030658    0.0000454  EM
+             14 -0.24034618D+06    8.1161290    0.0000338  EM
+             15 -0.24034004D+06    6.1424838    0.0000256  EM
+             16 -0.24033532D+06    4.7161252    0.0000196  EM
+             17 -0.24033165D+06    3.6666380    0.0000153  EM
+             18 -0.24032877D+06    2.8823054    0.0000120  EM
+             19 -0.24032648D+06    2.2877358    0.0000095  EM
+             20 -0.24032465D+06    1.8314249    0.0000076  EM
+             21 -0.24032318D+06    1.4772654    0.0000061  EM
+             22 -0.24032198D+06    1.1996623    0.0000050  EM
+             23 -0.24032100D+06    0.9800897    0.0000041  EM
+             24 -0.24032019D+06    0.8050272    0.0000033  EM
+             25 -0.24031953D+06    0.6644217    0.0000028  EM
+             26 -0.24031898D+06    0.5507880    0.0000023  EM
+             27 -0.24031852D+06    0.4583762    0.0000019  EM
+             28 -0.24031813D+06    0.3828352    0.0000016  EM
+             29 -0.24031781D+06    0.3207841    0.0000013  EM
+             30 -0.24031754D+06    0.2695892    0.0000011  EM
+             31 -0.24031732D+06    0.2271854    0.0000009  EM
+             32 -0.24031712D+06    0.1919280    0.0000008  EM
+             33 -0.24031696D+06    0.1625218    0.0000007  EM
+             34 -0.24031682D+06    0.1379146    0.0000006  EM
+             35 -0.24031671D+06    0.1172659    0.0000005  EM
+             36 -0.24031661D+06    0.0998963    0.0000004  EM
+             37 -0.24031628D+06    0.3234187    0.0000013  FS
+             38 -0.24031616D+06    0.1262684    0.0000005  EM
+             39 -0.24031613D+06    0.0296456    0.0000001  EM
+             40 -0.24031611D+06    0.0213867    0.0000001  EM
+             41 -0.24031609D+06    0.0172062    0.0000001  EM
+             42 -0.24031607D+06    0.0141458    0.0000001  EM
+             43 -0.24031606D+06    0.0117767    0.0000000  EM
+             44 -0.24031605D+06    0.0098922    0.0000000  EM
+             45 -0.24031604D+06    0.0083657    0.0000000  EM
+             46 -0.24031604D+06    0.0071117    0.0000000  EM
+             47 -0.24031603D+06    0.0060702    0.0000000  EM
+             48 -0.24031603D+06    0.0051983    0.0000000  EM
+             49 -0.24031602D+06    0.0044636    0.0000000  EM
+             50 -0.24031602D+06    0.0038415    0.0000000  EM
+             51 -0.24031601D+06    0.0033117    0.0000000  EM
+             52 -0.24031601D+06    0.0028600    0.0000000  EM
+             53 -0.24031601D+06    0.0024731    0.0000000  EM
+             54 -0.24031601D+06    0.0021417    0.0000000  EM
+             55 -0.24031601D+06    0.0018567    0.0000000  EM
+             56 -0.24031600D+06    0.0016115    0.0000000  EM
+             57 -0.24031600D+06    0.0013996    0.0000000  EM
+             58 -0.24031600D+06    0.0012169    0.0000000  EM
+             59 -0.24031600D+06    0.0010588    0.0000000  EM
+             60 -0.24031600D+06    0.0009220    0.0000000  EM
+             61 -0.24031600D+06    0.0008035    0.0000000  EM
+             62 -0.24031600D+06    0.0007007    0.0000000  EM
+             63 -0.24031600D+06    0.0006114    0.0000000  EM
+             64 -0.24031600D+06    0.0005338    0.0000000  EM
+             65 -0.24031600D+06    0.0004666    0.0000000  EM
+             66 -0.24031600D+06    0.0004077    0.0000000  EM
+             67 -0.24031600D+06    0.0003566    0.0000000  EM
+             68 -0.24031600D+06    0.0003121    0.0000000  EM
+             69 -0.24031599D+06    0.0002732    0.0000000  EM
+             70 -0.24031599D+06    0.0002393    0.0000000  EM
+             71 -0.24031599D+06    0.0002097    0.0000000  EM
+             72 -0.24031599D+06    0.0001838    0.0000000  EM
+             73 -0.24031599D+06    0.0001612    0.0000000  EM
+             74 -0.24031599D+06    0.0001415    0.0000000  EM
+             75 -0.24031599D+06    0.0010283    0.0000000  QN
+             76 -0.24031599D+06    0.0000050    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE H1 MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.24083123D+06    0.0000000    0.0000000  EM
+              2 -0.24025969D+06  571.5332346    0.0023732  EM
+              3 -0.24012031D+06  139.3781039    0.0005801  EM
+              4 -0.24004565D+06   74.6654566    0.0003110  EM
+              5 -0.23999904D+06   46.6109894    0.0001942  EM
+              6 -0.23996811D+06   30.9256702    0.0001289  EM
+              7 -0.23994670D+06   21.4110155    0.0000892  EM
+              8 -0.23993137D+06   15.3305860    0.0000639  EM
+              9 -0.23992009D+06   11.2843944    0.0000470  EM
+             10 -0.23991159D+06    8.5006469    0.0000354  EM
+             11 -0.23990506D+06    6.5308884    0.0000272  EM
+             12 -0.23989995D+06    5.1031291    0.0000213  EM
+             13 -0.23989591D+06    4.0463075    0.0000169  EM
+             14 -0.23989266D+06    3.2495841    0.0000135  EM
+             15 -0.23989002D+06    2.6391419    0.0000110  EM
+             16 -0.23988785D+06    2.1646527    0.0000090  EM
+             17 -0.23988606D+06    1.7911512    0.0000075  EM
+             18 -0.23988457D+06    1.4936890    0.0000062  EM
+             19 -0.23988331D+06    1.2543342    0.0000052  EM
+             20 -0.23988225D+06    1.0599696    0.0000044  EM
+             21 -0.23988135D+06    0.9007790    0.0000038  EM
+             22 -0.23988058D+06    0.7694178    0.0000032  EM
+             23 -0.23987992D+06    0.6602492    0.0000028  EM
+             24 -0.23987935D+06    0.5689677    0.0000024  EM
+             25 -0.23987886D+06    0.4921869    0.0000021  EM
+             26 -0.23987843D+06    0.4272648    0.0000018  EM
+             27 -0.23987806D+06    0.3721040    0.0000016  EM
+             28 -0.23987774D+06    0.3250263    0.0000014  EM
+             29 -0.23987745D+06    0.2846824    0.0000012  EM
+             30 -0.23987720D+06    0.2499832    0.0000010  EM
+             31 -0.23987698D+06    0.2200134    0.0000009  EM
+             32 -0.23987679D+06    0.1940670    0.0000008  EM
+             33 -0.23987662D+06    0.1715261    0.0000007  EM
+             34 -0.23987647D+06    0.1518870    0.0000006  EM
+             35 -0.23987633D+06    0.1347356    0.0000006  EM
+             36 -0.23987621D+06    0.1197184    0.0000005  EM
+             37 -0.23987610D+06    0.1065356    0.0000004  EM
+             38 -0.23987601D+06    0.0949454    0.0000004  EM
+             39 -0.23987592D+06    0.0847331    0.0000004  EM
+             40 -0.23987585D+06    0.0757115    0.0000003  EM
+             41 -0.23987578D+06    0.0677346    0.0000003  EM
+             42 -0.23987572D+06    0.0606678    0.0000003  EM
+             43 -0.23987567D+06    0.0543953    0.0000002  EM
+             44 -0.23987562D+06    0.0488219    0.0000002  EM
+             45 -0.23987557D+06    0.0438622    0.0000002  EM
+             46 -0.23987553D+06    0.0394425    0.0000002  EM
+             47 -0.23987550D+06    0.0354992    0.0000001  EM
+             48 -0.23987547D+06    0.0319725    0.0000001  EM
+             49 -0.23987544D+06    0.0288262    0.0000001  EM
+             50 -0.23987541D+06    0.0260062    0.0000001  EM
+             51 -0.23987539D+06    0.0234786    0.0000001  EM
+             52 -0.23987537D+06    0.0212109    0.0000001  EM
+             53 -0.23987535D+06    0.0191754    0.0000001  EM
+             54 -0.23987533D+06    0.0173459    0.0000001  EM
+             55 -0.23987531D+06    0.0157003    0.0000001  EM
+             56 -0.23987530D+06    0.0142189    0.0000001  EM
+             57 -0.23987529D+06    0.0128845    0.0000001  EM
+             58 -0.23987528D+06    0.0116814    0.0000000  EM
+             59 -0.23987527D+06    0.0105960    0.0000000  EM
+             60 -0.23987526D+06    0.0096162    0.0000000  EM
+             61 -0.23987525D+06    0.0087311    0.0000000  EM
+             62 -0.23987524D+06    0.0079310    0.0000000  EM
+             63 -0.23987523D+06    0.0072073    0.0000000  EM
+             64 -0.23987523D+06    0.0065525    0.0000000  EM
+             65 -0.23987522D+06    0.0059595    0.0000000  EM
+             66 -0.23987521D+06    0.0054223    0.0000000  EM
+             67 -0.23987521D+06    0.0049354    0.0000000  EM
+             68 -0.23987520D+06    0.0044938    0.0000000  EM
+             69 -0.23987520D+06    0.0040931    0.0000000  EM
+             70 -0.23987520D+06    0.0037293    0.0000000  EM
+             71 -0.23987519D+06    0.0033991    0.0000000  EM
+             72 -0.23987519D+06    0.0030991    0.0000000  EM
+             73 -0.23987519D+06    0.0028264    0.0000000  EM
+             74 -0.23987518D+06    0.0025784    0.0000000  EM
+             75 -0.23987518D+06    0.0023529    0.0000000  EM
+             76 -0.23987518D+06    0.0021461    0.0000000  EM
+             77 -0.23987518D+06    0.0019596    0.0000000  EM
+             78 -0.23987518D+06    0.0017897    0.0000000  EM
+             79 -0.23987517D+06    0.0016350    0.0000000  EM
+             80 -0.23987517D+06    0.0014940    0.0000000  EM
+             81 -0.23987517D+06    0.0013655    0.0000000  EM
+             82 -0.23987517D+06    0.0012483    0.0000000  EM
+             83 -0.23987517D+06    0.0011414    0.0000000  EM
+             84 -0.23987517D+06    0.0010439    0.0000000  EM
+             85 -0.23987517D+06    0.0009549    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE BASELINE MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.25314200D+06    0.0000000    0.0000000  EM
+              2 -0.25301091D+06  131.0895996    0.0005179  EM
+              3 -0.25295857D+06   52.3430836    0.0002069  EM
+              4 -0.25293299D+06   25.5741839    0.0001011  EM
+              5 -0.25291974D+06   13.2564719    0.0000524  EM
+              6 -0.25291263D+06    7.1061828    0.0000281  EM
+              7 -0.25290873D+06    3.9008068    0.0000154  EM
+              8 -0.25290655D+06    2.1794654    0.0000086  EM
+              9 -0.25290532D+06    1.2342627    0.0000049  EM
+             10 -0.25290461D+06    0.7063678    0.0000028  EM
+             11 -0.25290420D+06    0.4076409    0.0000016  EM
+             12 -0.25290396D+06    0.2368227    0.0000009  EM
+             13 -0.25290383D+06    0.1383438    0.0000005  EM
+             14 -0.25290375D+06    0.0811924    0.0000003  EM
+             15 -0.25290370D+06    0.0478208    0.0000002  EM
+             16 -0.25290367D+06    0.0282599    0.0000001  EM
+             17 -0.25290365D+06    0.0167507    0.0000001  EM
+             18 -0.25290364D+06    0.0099530    0.0000000  EM
+             19 -0.25290364D+06    0.0059267    0.0000000  EM
+             20 -0.25290363D+06    0.0035359    0.0000000  EM
+             21 -0.25290363D+06    0.0021133    0.0000000  EM
+             22 -0.25290363D+06    0.0012650    0.0000000  EM
+             23 -0.25290363D+06    0.0007583    0.0000000  EM
+
+
+     Beginning Time:  10:28:01
+        Ending Time:  10:29:03
+       Elapsed Time:  00:01:02
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

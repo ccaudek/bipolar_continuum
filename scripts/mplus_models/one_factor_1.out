@@ -1,0 +1,67 @@
+Mplus VERSION 8.6 (Mac)
+MUTHEN & MUTHEN
+09/19/2024   6:21 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Multilevel One-Factor Model;
+
+  DATA:
+    FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat";
+
+  VARIABLE:
+    NAMES = user_id day time pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+    USEVARIABLES = pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+    CLUSTER = user_id;  ! Clustering at the subject level
+
+  MISSING = .;
+
+  CATEGORICAL ARE pos_1 pos_2 pos_3 pos_4 neg_1 neg_2 neg_3 neg_4;
+
+  ANALYSIS:
+    TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+    ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+
+  MODEL:
+    %WITHIN%  ! Level 1: Variation within subjects
+      SelfCompassion_w BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+    %BETWEEN%  ! Level 2: Between-subject variation
+      SelfCompassion_b BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+  OUTPUT:
+    TECH1 TECH8 STANDARDIZED MODINDICES;
+
+
+
+
+
+
+
+
+
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      POS_1       3 156 316 169 163 273 485 71
+      NEG_1       341 352 3 156 316 6 485 294 28 285
+      POS_2       313 58 3 405 390 171 97 258 398 206 106 105 273 6 184 492 166 14 274 473 475
+                  89 165 277 471 372 45 284 145 122 148 414 292 29 123
+      NEG_2       3 156 316 169 184 89 28 375
+      NEG_3       224 341 3 156 125 273 197 137 285
+      POS_3       156 169 237 191
+      POS_4       224 3 156 316 375 252
+      NEG_4       325 352
+
+*** WARNING in OUTPUT command
+  MODINDICES option is not available for ALGORITHM=INTEGRATION.
+  Request for MODINDICES is ignored.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Multilevel One-Factor Model;
+

@@ -1,0 +1,72 @@
+TITLE: Multilevel One-Factor and Two-Factor Models Comparison;
+
+DATA:
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE:
+  NAMES = userid day timewin scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 
+    nafMom nafDay nafPer;
+  USEVARIABLES = scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 
+    nafMom nafDay nafPer;
+  CLUSTER = userid;
+  WITHIN = nafMom nafDay;
+  BETWEEN = nafPer;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;
+  ESTIMATOR = MLR;
+
+MODEL:
+  ! One-Factor Model
+  %WITHIN%
+    fw BY scp1* scp3 scp6 scp7 scn2 scn4 scn5 scn8;
+    fw ON nafMom nafDay;
+
+  %BETWEEN%
+    fb BY scp1* scp3 scp6 scp7 scn2 scn4 scn5 scn8;
+    fb ON nafPer;
+
+MODEL TWO:
+  ! Two-Factor Model
+  %WITHIN%
+    fw1 BY scp1* scp3 scp6 scp7;
+    fw2 BY scn2* scn4 scn5 scn8;
+    fw1 fw2 ON nafMom nafDay;
+    fw1 WITH fw2;
+
+  %BETWEEN%
+    fb1 BY scp1* scp3 scp6 scp7;
+    fb2 BY scn2* scn4 scn5 scn8;
+    fb1 fb2 ON nafPer;
+    fb1 WITH fb2;
+
+MODEL THREE:
+  ! Bifactor Model
+  %WITHIN%
+    fwg BY scp1* scp3 scp6 scp7 scn2 scn4 scn5 scn8;
+    fws1 BY scp1* scp3 scp6 scp7;
+    fws2 BY scn2* scn4 scn5 scn8;
+    fwg fws1 fws2 ON nafMom nafDay;
+    fwg WITH fws1@0 fws2@0;
+    fws1 WITH fws2@0;
+
+  %BETWEEN%
+    fbg BY scp1* scp3 scp6 scp7 scn2 scn4 scn5 scn8;
+    fbs1 BY scp1* scp3 scp6 scp7;
+    fbs2 BY scn2* scn4 scn5 scn8;
+    fbg fbs1 fbs2 ON nafPer;
+    fbg WITH fbs1@0 fbs2@0;
+    fbs1 WITH fbs2@0;
+
+OUTPUT:
+  STDYX TECH1 TECH4 MODINDICES(ALL);
+  TECH8;
+
+SAVEDATA:
+  FILE IS factor_scores.dat;
+  SAVE = FSCORES;
+
+PLOT:
+  TYPE = PLOT2;
+
+  

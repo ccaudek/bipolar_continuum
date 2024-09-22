@@ -1,0 +1,29 @@
+TITLE: Multilevel Two-Factor Model;
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat";
+
+VARIABLE: 
+  NAMES = user_id day time pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+  USEVARIABLES = pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+  CLUSTER = user_id;  ! Clustering at the subject level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+
+MODEL:
+  %WITHIN%  ! Level 1: Variation within subjects
+    Positive_w BY pos_1 pos_2 pos_3 pos_4;  ! First factor (positive items)
+    Negative_w BY neg_1 neg_2 neg_3 neg_4;  ! Second factor (negative items)
+    Positive_w WITH Negative_w;  ! Correlate the factors within subjects
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    Positive_b BY pos_1 pos_2 pos_3 pos_4;  ! First factor (positive items)
+    Negative_b BY neg_1 neg_2 neg_3 neg_4;  ! Second factor (negative items)
+    Positive_b WITH Negative_b;  ! Correlate the factors between subjects
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;

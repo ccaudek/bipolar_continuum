@@ -1,0 +1,31 @@
+TITLE: Multilevel One-Factor Model;
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat";
+
+VARIABLE: 
+  NAMES = user_id day time pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+  USEVARIABLES = pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+  CLUSTER = user_id;  ! Clustering at the subject level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+
+MODEL:
+  %WITHIN%  ! Level 1: Variation within subjects
+    SelfCompassion_w BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    SelfCompassion_b BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;
+  
+
+
+
+
+

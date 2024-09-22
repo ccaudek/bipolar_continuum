@@ -1,0 +1,1007 @@
+Mplus VERSION 8.6 (Mac)
+MUTHEN & MUTHEN
+09/20/2024  11:33 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Multilevel One-Factor Model with covariates at moment, day, and person level;
+
+  DATA:
+    FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+  VARIABLE:
+    NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4
+      scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+    USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6
+      scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+    CLUSTER = user_id;  ! Clustering at the subject level
+    WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+    BETWEEN = neg_aff_Person;  ! Covariate at the person level
+
+  MISSING = .;
+
+  ANALYSIS:
+    TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+    ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+
+  MODEL:
+    %WITHIN%  ! Level 1: Within-subject and within-day variation
+      SelfCompassion_w BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5
+        scs_pos_6 scs_pos_7 scs_neg_8;
+      SelfCompassion_w ON neg_aff_Moment neg_aff_Day;
+      ! Regress self-compassion factor on momentary and daily negative affect
+
+    %BETWEEN%  ! Level 2: Between-subject variation
+      SelfCompassion_b BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5
+        scs_pos_6 scs_pos_7 scs_neg_8;
+      SelfCompassion_b ON neg_aff_Person;
+      ! Regress between-level self-compassion factor on person-level negative affect
+
+  OUTPUT:
+    TECH1 TECH8 STANDARDIZED MODINDICES;
+
+
+
+
+
+
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      SCS_POS_    341 3 156 273 316 169 163 485 71
+      SCS_NEG_    341 352 3 156 316 6 485 294 28 285
+      SCS_POS_    313 405 58 3 390 171 273 97 258 398 206 106 105 6 184 166 492 274 14 473 475
+                  414 471 372 45 284 145 89 165 277 148 122 292 168 29 123
+      SCS_NEG_    3 156 316 169 184 89 28 375
+      SCS_NEG_    224 341 3 156 273 125 197 137 285
+      SCS_POS_    156 169 237 191
+      SCS_POS_    224 3 156 316 375 252
+      SCS_NEG_    325 352
+      NEG_AFF_    224 270 314 431 156
+      NEG_AFF_    325 156
+
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Multilevel One-Factor Model with covariates at moment, day, and person level;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       18842
+
+Number of dependent variables                                    8
+Number of independent variables                                  3
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Continuous
+   SCS_POS_1   SCS_NEG_2   SCS_POS_3   SCS_NEG_4   SCS_NEG_5   SCS_POS_6
+   SCS_POS_7   SCS_NEG_8
+
+Observed independent variables
+   NEG_AFF_    NEG_AFF_    NEG_AFF_
+
+Continuous latent variables
+   SELFCOMP    SELFCOMP
+
+Variables with special functions
+
+  Cluster variable      USER_ID
+
+  Within variables
+   NEG_AFF_    NEG_AFF_
+
+  Between variables
+   NEG_AFF_
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  /Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        495
+
+     Average cluster size       38.065
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     SCS_POS_     0.425      SCS_NEG_     0.516      SCS_POS_     0.568
+     SCS_NEG_     0.505      SCS_NEG_     0.523      SCS_POS_     0.428
+     SCS_POS_     0.451      SCS_NEG_     0.409
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+ SCS_POS_       1.000
+ SCS_NEG_       1.000         1.000
+ SCS_POS_       1.000         1.000         1.000
+ SCS_NEG_       1.000         1.000         1.000         1.000
+ SCS_NEG_       1.000         1.000         1.000         1.000         1.000
+ SCS_POS_       1.000         1.000         1.000         1.000         1.000
+ SCS_POS_       1.000         1.000         1.000         1.000         1.000
+ SCS_NEG_       1.000         1.000         1.000         1.000         1.000
+ NEG_AFF_       1.000         1.000         1.000         1.000         1.000
+ NEG_AFF_       1.000         1.000         1.000         1.000         1.000
+ NEG_AFF_       1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_      NEG_AFF_
+              ________      ________      ________      ________      ________
+ SCS_POS_       1.000
+ SCS_POS_       1.000         1.000
+ SCS_NEG_       1.000         1.000         1.000
+ NEG_AFF_       1.000         1.000         1.000         1.000
+ NEG_AFF_       1.000         1.000         1.000         1.000         1.000
+ NEG_AFF_       1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              NEG_AFF_
+              ________
+ NEG_AFF_       1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     SCS_POS_1             0.887      -0.778      -3.000    2.39%      -1.000      1.000      1.000
+           18842.000       2.322      -0.275       3.000   10.01%       2.000      2.000
+     SCS_NEG_2             0.835      -0.488      -3.000    3.94%      -1.000      1.000      1.000
+           18842.000       3.377      -1.058       3.000   21.73%       2.000      3.000
+     SCS_POS_3             1.287      -1.025      -3.000    3.66%      -1.000      1.000      2.000
+           18842.000       2.866       0.078       3.000   27.08%       2.000      3.000
+     SCS_NEG_4             0.051       0.063      -3.000    7.77%      -2.000     -1.000     -1.000
+           18842.000       3.547      -1.323       3.000   10.94%       1.000      2.000
+     SCS_NEG_5             0.749      -0.416      -3.000    4.26%      -1.000      1.000      1.000
+           18842.000       3.431      -1.138       3.000   20.55%       2.000      3.000
+     SCS_POS_6             0.956      -0.856      -3.000    1.85%      -1.000      1.000      1.000
+           18842.000       2.192      -0.099       3.000    9.74%       2.000      2.000
+     SCS_POS_7             0.662      -0.601      -3.000    3.77%      -1.000      1.000      1.000
+           18842.000       2.675      -0.728       3.000    8.61%       1.000      2.000
+     SCS_NEG_8            -0.474       0.549      -3.000    6.96%      -2.000     -1.000     -1.000
+           18842.000       2.778      -0.810       3.000    5.19%      -1.000      1.000
+     NEG_AFF_MOMENT        0.000       0.755    -278.400    0.01%      -3.000     -0.600      0.000
+           18842.000     875.786      13.846     292.200    0.01%       0.330      2.800
+     NEG_AFF_DAY           0.113       0.708    -306.485    0.01%      -2.930     -0.800     -0.200
+           18842.000    1102.296       9.827     258.197    0.01%       0.470      2.790
+     NEG_AFF_PERSON        0.000       0.621    -150.438    0.20%      -3.600     -0.920     -0.110
+             495.000    1406.734       8.239     217.108    0.20%       0.790      3.650
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       43
+
+Loglikelihood
+
+          H0 Value                     -236280.291
+          H0 Scaling Correction Factor      3.9030
+            for MLR
+          H1 Value                     -235201.154
+          H1 Scaling Correction Factor      2.8059
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  472646.582
+          Bayesian (BIC)                472983.868
+          Sample-Size Adjusted BIC      472847.216
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                           1061.812*
+          Degrees of Freedom                    61
+          P-Value                           0.0000
+          Scaling Correction Factor         2.0326
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.030
+
+CFI/TLI
+
+          CFI                                0.926
+          TLI                                0.902
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          13528.950
+          Degrees of Freedom                    80
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.030
+          Value for Between                  0.054
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ SELFCOMP BY
+    SCS_POS_1          1.000      0.000    999.000    999.000
+    SCS_NEG_2          1.300      0.045     29.046      0.000
+    SCS_POS_3          0.454      0.042     10.708      0.000
+    SCS_NEG_4          1.120      0.036     31.127      0.000
+    SCS_NEG_5          1.258      0.040     31.369      0.000
+    SCS_POS_6          0.922      0.028     32.566      0.000
+    SCS_POS_7          1.069      0.023     45.537      0.000
+    SCS_NEG_8          0.536      0.044     12.248      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_MO        -0.006      0.000    -16.231      0.000
+    NEG_AFF_DA        -0.007      0.001    -13.753      0.000
+
+ Residual Variances
+    SCS_POS_1          0.895      0.032     27.653      0.000
+    SCS_NEG_2          0.922      0.029     31.780      0.000
+    SCS_POS_3          1.148      0.056     20.677      0.000
+    SCS_NEG_4          1.193      0.034     34.765      0.000
+    SCS_NEG_5          0.962      0.033     29.511      0.000
+    SCS_POS_6          0.883      0.032     27.379      0.000
+    SCS_POS_7          0.977      0.036     27.251      0.000
+    SCS_NEG_8          1.527      0.044     34.794      0.000
+    SELFCOMPAS         0.362      0.023     15.710      0.000
+
+Between Level
+
+ SELFCOMP BY
+    SCS_POS_1          1.000      0.000    999.000    999.000
+    SCS_NEG_2          1.599      0.112     14.286      0.000
+    SCS_POS_3          0.599      0.089      6.752      0.000
+    SCS_NEG_4          1.372      0.091     15.118      0.000
+    SCS_NEG_5          1.633      0.107     15.334      0.000
+    SCS_POS_6          0.926      0.057     16.112      0.000
+    SCS_POS_7          1.196      0.042     28.357      0.000
+    SCS_NEG_8          0.361      0.088      4.117      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_PE        -0.010      0.001     -9.453      0.000
+
+ Intercepts
+    SCS_POS_1          0.869      0.042     20.555      0.000
+    SCS_NEG_2          0.784      0.055     14.270      0.000
+    SCS_POS_3          1.273      0.057     22.202      0.000
+    SCS_NEG_4          0.026      0.057      0.460      0.645
+    SCS_NEG_5          0.702      0.056     12.457      0.000
+    SCS_POS_6          0.942      0.042     22.539      0.000
+    SCS_POS_7          0.634      0.047     13.466      0.000
+    SCS_NEG_8         -0.506      0.048    -10.473      0.000
+
+ Residual Variances
+    SCS_POS_1          0.392      0.052      7.604      0.000
+    SCS_NEG_2          0.260      0.049      5.253      0.000
+    SCS_POS_3          1.415      0.104     13.593      0.000
+    SCS_NEG_4          0.658      0.064     10.346      0.000
+    SCS_NEG_5          0.234      0.041      5.670      0.000
+    SCS_POS_6          0.430      0.044      9.873      0.000
+    SCS_POS_7          0.372      0.058      6.362      0.000
+    SCS_NEG_8          1.065      0.071     14.950      0.000
+    SELFCOMPAS         0.470      0.061      7.668      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.170E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ SELFCOMP BY
+    SCS_POS_1          0.579      0.015     38.847      0.000
+    SCS_NEG_2          0.673      0.011     63.142      0.000
+    SCS_POS_3          0.274      0.022     12.169      0.000
+    SCS_NEG_4          0.567      0.013     45.301      0.000
+    SCS_NEG_5          0.652      0.012     55.643      0.000
+    SCS_POS_6          0.550      0.014     39.814      0.000
+    SCS_POS_7          0.587      0.016     37.866      0.000
+    SCS_NEG_8          0.279      0.020     13.877      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_MO        -0.272      0.013    -20.324      0.000
+    NEG_AFF_DA        -0.350      0.020    -17.280      0.000
+
+ Residual Variances
+    SCS_POS_1          0.665      0.017     38.582      0.000
+    SCS_NEG_2          0.548      0.014     38.222      0.000
+    SCS_POS_3          0.925      0.012     75.229      0.000
+    SCS_NEG_4          0.678      0.014     47.793      0.000
+    SCS_NEG_5          0.574      0.015     37.548      0.000
+    SCS_POS_6          0.697      0.015     45.871      0.000
+    SCS_POS_7          0.655      0.018     35.948      0.000
+    SCS_NEG_8          0.922      0.011     81.982      0.000
+    SELFCOMPAS         0.804      0.019     43.192      0.000
+
+Between Level
+
+ SELFCOMP BY
+    SCS_POS_1          0.778      0.033     23.226      0.000
+    SCS_NEG_2          0.925      0.015     60.065      0.000
+    SCS_POS_3          0.363      0.049      7.357      0.000
+    SCS_NEG_4          0.795      0.023     34.549      0.000
+    SCS_NEG_5          0.934      0.012     75.213      0.000
+    SCS_POS_6          0.738      0.032     23.028      0.000
+    SCS_POS_7          0.835      0.029     28.797      0.000
+    SCS_NEG_8          0.262      0.056      4.648      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_PE        -0.466      0.038    -12.321      0.000
+
+ Intercepts
+    SCS_POS_1          0.873      0.063     13.944      0.000
+    SCS_NEG_2          0.585      0.048     12.315      0.000
+    SCS_POS_3          0.997      0.067     14.931      0.000
+    SCS_NEG_4          0.019      0.042      0.461      0.645
+    SCS_NEG_5          0.518      0.045     11.449      0.000
+    SCS_POS_6          0.969      0.064     15.048      0.000
+    SCS_POS_7          0.572      0.053     10.889      0.000
+    SCS_NEG_8         -0.474      0.053     -8.880      0.000
+
+ Residual Variances
+    SCS_POS_1          0.395      0.052      7.578      0.000
+    SCS_NEG_2          0.145      0.028      5.083      0.000
+    SCS_POS_3          0.868      0.036     24.171      0.000
+    SCS_NEG_4          0.368      0.037     10.052      0.000
+    SCS_NEG_5          0.128      0.023      5.496      0.000
+    SCS_POS_6          0.455      0.047      9.608      0.000
+    SCS_POS_7          0.302      0.048      6.231      0.000
+    SCS_NEG_8          0.932      0.029     31.623      0.000
+    SELFCOMPAS         0.783      0.035     22.202      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ SELFCOMP BY
+    SCS_POS_1          0.579      0.015     38.847      0.000
+    SCS_NEG_2          0.673      0.011     63.142      0.000
+    SCS_POS_3          0.274      0.022     12.169      0.000
+    SCS_NEG_4          0.567      0.013     45.301      0.000
+    SCS_NEG_5          0.652      0.012     55.643      0.000
+    SCS_POS_6          0.550      0.014     39.814      0.000
+    SCS_POS_7          0.587      0.016     37.866      0.000
+    SCS_NEG_8          0.279      0.020     13.877      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_MO        -0.009      0.000    -20.419      0.000
+    NEG_AFF_DA        -0.011      0.001    -17.331      0.000
+
+ Residual Variances
+    SCS_POS_1          0.665      0.017     38.582      0.000
+    SCS_NEG_2          0.548      0.014     38.222      0.000
+    SCS_POS_3          0.925      0.012     75.229      0.000
+    SCS_NEG_4          0.678      0.014     47.793      0.000
+    SCS_NEG_5          0.574      0.015     37.548      0.000
+    SCS_POS_6          0.697      0.015     45.871      0.000
+    SCS_POS_7          0.655      0.018     35.948      0.000
+    SCS_NEG_8          0.922      0.011     81.982      0.000
+    SELFCOMPAS         0.804      0.019     43.192      0.000
+
+Between Level
+
+ SELFCOMP BY
+    SCS_POS_1          0.778      0.033     23.226      0.000
+    SCS_NEG_2          0.925      0.015     60.065      0.000
+    SCS_POS_3          0.363      0.049      7.357      0.000
+    SCS_NEG_4          0.795      0.023     34.549      0.000
+    SCS_NEG_5          0.934      0.012     75.213      0.000
+    SCS_POS_6          0.738      0.032     23.028      0.000
+    SCS_POS_7          0.835      0.029     28.797      0.000
+    SCS_NEG_8          0.262      0.056      4.648      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_PE        -0.012      0.001    -12.892      0.000
+
+ Intercepts
+    SCS_POS_1          0.873      0.063     13.944      0.000
+    SCS_NEG_2          0.585      0.048     12.315      0.000
+    SCS_POS_3          0.997      0.067     14.931      0.000
+    SCS_NEG_4          0.019      0.042      0.461      0.645
+    SCS_NEG_5          0.518      0.045     11.449      0.000
+    SCS_POS_6          0.969      0.064     15.048      0.000
+    SCS_POS_7          0.572      0.053     10.889      0.000
+    SCS_NEG_8         -0.474      0.053     -8.880      0.000
+
+ Residual Variances
+    SCS_POS_1          0.395      0.052      7.578      0.000
+    SCS_NEG_2          0.145      0.028      5.083      0.000
+    SCS_POS_3          0.868      0.036     24.171      0.000
+    SCS_NEG_4          0.368      0.037     10.052      0.000
+    SCS_NEG_5          0.128      0.023      5.496      0.000
+    SCS_POS_6          0.455      0.047      9.608      0.000
+    SCS_POS_7          0.302      0.048      6.231      0.000
+    SCS_NEG_8          0.932      0.029     31.623      0.000
+    SELFCOMPAS         0.783      0.035     22.202      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ SELFCOMP BY
+    SCS_POS_1          0.671      0.022     30.842      0.000
+    SCS_NEG_2          0.873      0.021     40.974      0.000
+    SCS_POS_3          0.305      0.027     11.316      0.000
+    SCS_NEG_4          0.752      0.022     33.493      0.000
+    SCS_NEG_5          0.844      0.022     38.579      0.000
+    SCS_POS_6          0.619      0.020     31.440      0.000
+    SCS_POS_7          0.717      0.023     31.303      0.000
+    SCS_NEG_8          0.359      0.028     13.039      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_MO        -0.009      0.000    -20.419      0.000
+    NEG_AFF_DA        -0.011      0.001    -17.331      0.000
+
+ Residual Variances
+    SCS_POS_1          0.895      0.032     27.653      0.000
+    SCS_NEG_2          0.922      0.029     31.780      0.000
+    SCS_POS_3          1.148      0.056     20.677      0.000
+    SCS_NEG_4          1.193      0.034     34.765      0.000
+    SCS_NEG_5          0.962      0.033     29.511      0.000
+    SCS_POS_6          0.883      0.032     27.379      0.000
+    SCS_POS_7          0.977      0.036     27.251      0.000
+    SCS_NEG_8          1.527      0.044     34.794      0.000
+    SELFCOMPAS         0.804      0.019     43.192      0.000
+
+Between Level
+
+ SELFCOMP BY
+    SCS_POS_1          0.775      0.050     15.521      0.000
+    SCS_NEG_2          1.239      0.045     27.796      0.000
+    SCS_POS_3          0.464      0.066      7.021      0.000
+    SCS_NEG_4          1.063      0.049     21.923      0.000
+    SCS_NEG_5          1.266      0.041     30.976      0.000
+    SCS_POS_6          0.718      0.048     15.008      0.000
+    SCS_POS_7          0.927      0.050     18.359      0.000
+    SCS_NEG_8          0.280      0.063      4.473      0.000
+
+ SELFCOMPAS ON
+    NEG_AFF_PE        -0.012      0.001    -12.892      0.000
+
+ Intercepts
+    SCS_POS_1          0.869      0.042     20.555      0.000
+    SCS_NEG_2          0.784      0.055     14.270      0.000
+    SCS_POS_3          1.273      0.057     22.202      0.000
+    SCS_NEG_4          0.026      0.057      0.460      0.645
+    SCS_NEG_5          0.702      0.056     12.457      0.000
+    SCS_POS_6          0.942      0.042     22.539      0.000
+    SCS_POS_7          0.634      0.047     13.466      0.000
+    SCS_NEG_8         -0.506      0.048    -10.473      0.000
+
+ Residual Variances
+    SCS_POS_1          0.392      0.052      7.604      0.000
+    SCS_NEG_2          0.260      0.049      5.253      0.000
+    SCS_POS_3          1.415      0.104     13.593      0.000
+    SCS_NEG_4          0.658      0.064     10.346      0.000
+    SCS_NEG_5          0.234      0.041      5.670      0.000
+    SCS_POS_6          0.430      0.044      9.873      0.000
+    SCS_POS_7          0.372      0.058      6.362      0.000
+    SCS_NEG_8          1.065      0.071     14.950      0.000
+    SELFCOMPAS         0.783      0.035     22.202      0.000
+
+
+R-SQUARE
+
+Within Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCS_POS_           0.335      0.017     19.423      0.000
+    SCS_NEG_           0.452      0.014     31.571      0.000
+    SCS_POS_           0.075      0.012      6.085      0.000
+    SCS_NEG_           0.322      0.014     22.651      0.000
+    SCS_NEG_           0.426      0.015     27.822      0.000
+    SCS_POS_           0.303      0.015     19.907      0.000
+    SCS_POS_           0.345      0.018     18.933      0.000
+    SCS_NEG_           0.078      0.011      6.938      0.000
+
+     Latent                                         Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SELFCOMP           0.196      0.019     10.551      0.000
+
+Between Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCS_POS_           0.605      0.052     11.613      0.000
+    SCS_NEG_           0.855      0.028     30.032      0.000
+    SCS_POS_           0.132      0.036      3.679      0.000
+    SCS_NEG_           0.632      0.037     17.275      0.000
+    SCS_NEG_           0.872      0.023     37.607      0.000
+    SCS_POS_           0.545      0.047     11.514      0.000
+    SCS_POS_           0.698      0.048     14.398      0.000
+    SCS_NEG_           0.068      0.029      2.324      0.020
+
+     Latent                                         Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SELFCOMP           0.217      0.035      6.160      0.000
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+Within Level
+
+WITH Statements
+
+SCS_NEG_ WITH SCS_POS_           127.850    -0.140     -0.140       -0.154
+SCS_POS_ WITH SCS_POS_            12.513    -0.041     -0.041       -0.041
+SCS_POS_ WITH SCS_NEG_            11.115     0.041      0.041        0.040
+SCS_NEG_ WITH SCS_NEG_            58.466     0.108      0.108        0.103
+SCS_NEG_ WITH SCS_POS_            33.399    -0.077     -0.077       -0.066
+SCS_NEG_ WITH SCS_POS_            13.285    -0.045     -0.045       -0.049
+SCS_NEG_ WITH SCS_NEG_           114.529     0.148      0.148        0.157
+SCS_NEG_ WITH SCS_POS_            16.932     0.052      0.052        0.049
+SCS_POS_ WITH SCS_POS_            53.402     0.080      0.080        0.090
+SCS_POS_ WITH SCS_POS_            28.618     0.061      0.061        0.061
+SCS_POS_ WITH SCS_NEG_            41.355    -0.081     -0.081       -0.079
+SCS_POS_ WITH SCS_NEG_            47.031    -0.083     -0.083       -0.089
+SCS_POS_ WITH SCS_POS_           278.932     0.197      0.197        0.211
+SCS_POS_ WITH SCS_NEG_            83.833    -0.119     -0.119       -0.125
+SCS_POS_ WITH SCS_POS_            20.899    -0.056     -0.056       -0.053
+SCS_POS_ WITH SCS_POS_            25.407     0.058      0.058        0.063
+SCS_NEG_ WITH SCS_POS_            94.112    -0.130     -0.130       -0.111
+SCS_NEG_ WITH SCS_NEG_            29.801     0.078      0.078        0.066
+SCS_NEG_ WITH SCS_POS_            23.201    -0.068     -0.068       -0.055
+
+Between Level
+
+WITH Statements
+
+SCS_NEG_ WITH SCS_POS_            47.566    -0.206     -0.206       -0.645
+SCS_NEG_ WITH SCS_NEG_            13.183     0.142      0.142        0.344
+SCS_NEG_ WITH SCS_NEG_            62.124     0.295      0.295        1.197
+SCS_POS_ WITH SCS_NEG_            23.374    -0.146     -0.146       -0.459
+SCS_POS_ WITH SCS_POS_           114.135     0.319      0.319        0.837
+SCS_POS_ WITH SCS_NEG_            43.735    -0.207     -0.207       -0.666
+SCS_POS_ WITH SCS_POS_            15.171     0.120      0.120        0.300
+SCS_NEG_ WITH SCS_POS_            15.749    -0.182     -0.182       -0.281
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_      NEG_AFF_
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           LAMBDA
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+ SCS_POS_           0             0             0
+ SCS_NEG_           1             0             0
+ SCS_POS_           2             0             0
+ SCS_NEG_           3             0             0
+ SCS_NEG_           4             0             0
+ SCS_POS_           5             0             0
+ SCS_POS_           6             0             0
+ SCS_NEG_           7             0             0
+ NEG_AFF_           0             0             0
+ NEG_AFF_           0             0             0
+
+
+           THETA
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+ SCS_POS_           8
+ SCS_NEG_           0             9
+ SCS_POS_           0             0            10
+ SCS_NEG_           0             0             0            11
+ SCS_NEG_           0             0             0             0            12
+ SCS_POS_           0             0             0             0             0
+ SCS_POS_           0             0             0             0             0
+ SCS_NEG_           0             0             0             0             0
+ NEG_AFF_           0             0             0             0             0
+ NEG_AFF_           0             0             0             0             0
+
+
+           THETA
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_      NEG_AFF_
+              ________      ________      ________      ________      ________
+ SCS_POS_          13
+ SCS_POS_           0            14
+ SCS_NEG_           0             0            15
+ NEG_AFF_           0             0             0             0
+ NEG_AFF_           0             0             0             0             0
+
+
+           ALPHA
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+                    0             0             0
+
+
+           BETA
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+ SELFCOMP           0            16            17
+ NEG_AFF_           0             0             0
+ NEG_AFF_           0             0             0
+
+
+           PSI
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+ SELFCOMP          18
+ NEG_AFF_           0             0
+ NEG_AFF_           0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+                   19            20            21            22            23
+
+
+           NU
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_
+              ________      ________      ________      ________
+                   24            25            26             0
+
+
+           LAMBDA
+              SELFCOMP      NEG_AFF_
+              ________      ________
+ SCS_POS_           0             0
+ SCS_NEG_          27             0
+ SCS_POS_          28             0
+ SCS_NEG_          29             0
+ SCS_NEG_          30             0
+ SCS_POS_          31             0
+ SCS_POS_          32             0
+ SCS_NEG_          33             0
+ NEG_AFF_           0             0
+
+
+           THETA
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+ SCS_POS_          34
+ SCS_NEG_           0            35
+ SCS_POS_           0             0            36
+ SCS_NEG_           0             0             0            37
+ SCS_NEG_           0             0             0             0            38
+ SCS_POS_           0             0             0             0             0
+ SCS_POS_           0             0             0             0             0
+ SCS_NEG_           0             0             0             0             0
+ NEG_AFF_           0             0             0             0             0
+
+
+           THETA
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_
+              ________      ________      ________      ________
+ SCS_POS_          39
+ SCS_POS_           0            40
+ SCS_NEG_           0             0            41
+ NEG_AFF_           0             0             0             0
+
+
+           ALPHA
+              SELFCOMP      NEG_AFF_
+              ________      ________
+                    0             0
+
+
+           BETA
+              SELFCOMP      NEG_AFF_
+              ________      ________
+ SELFCOMP           0            42
+ NEG_AFF_           0             0
+
+
+           PSI
+              SELFCOMP      NEG_AFF_
+              ________      ________
+ SELFCOMP          43
+ NEG_AFF_           0             0
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_      NEG_AFF_
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+ SCS_POS_       1.000         0.000         0.000
+ SCS_NEG_       1.000         0.000         0.000
+ SCS_POS_       1.000         0.000         0.000
+ SCS_NEG_       1.000         0.000         0.000
+ SCS_NEG_       1.000         0.000         0.000
+ SCS_POS_       1.000         0.000         0.000
+ SCS_POS_       1.000         0.000         0.000
+ SCS_NEG_       1.000         0.000         0.000
+ NEG_AFF_       0.000         1.000         0.000
+ NEG_AFF_       0.000         0.000         1.000
+
+
+           THETA
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+ SCS_POS_       1.161
+ SCS_NEG_       0.000         1.689
+ SCS_POS_       0.000         0.000         1.433
+ SCS_NEG_       0.000         0.000         0.000         1.773
+ SCS_NEG_       0.000         0.000         0.000         0.000         1.716
+ SCS_POS_       0.000         0.000         0.000         0.000         0.000
+ SCS_POS_       0.000         0.000         0.000         0.000         0.000
+ SCS_NEG_       0.000         0.000         0.000         0.000         0.000
+ NEG_AFF_       0.000         0.000         0.000         0.000         0.000
+ NEG_AFF_       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_      NEG_AFF_
+              ________      ________      ________      ________      ________
+ SCS_POS_       1.096
+ SCS_POS_       0.000         1.337
+ SCS_NEG_       0.000         0.000         1.389
+ NEG_AFF_       0.000         0.000         0.000         0.000
+ NEG_AFF_       0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           BETA
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+ SELFCOMP       0.000         0.000         0.000
+ NEG_AFF_       0.000         0.000         0.000
+ NEG_AFF_       0.000         0.000         0.000
+
+
+           PSI
+              SELFCOMP      NEG_AFF_      NEG_AFF_
+              ________      ________      ________
+ SELFCOMP       0.050
+ NEG_AFF_       0.000       437.893
+ NEG_AFF_       0.000         0.000       551.148
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+                0.887         0.835         1.287         0.051         0.749
+
+
+           NU
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_
+              ________      ________      ________      ________
+                0.956         0.662        -0.474         0.000
+
+
+           LAMBDA
+              SELFCOMP      NEG_AFF_
+              ________      ________
+ SCS_POS_       1.000         0.000
+ SCS_NEG_       1.000         0.000
+ SCS_POS_       1.000         0.000
+ SCS_NEG_       1.000         0.000
+ SCS_NEG_       1.000         0.000
+ SCS_POS_       1.000         0.000
+ SCS_POS_       1.000         0.000
+ SCS_NEG_       1.000         0.000
+ NEG_AFF_       0.000         1.000
+
+
+           THETA
+              SCS_POS_      SCS_NEG_      SCS_POS_      SCS_NEG_      SCS_NEG_
+              ________      ________      ________      ________      ________
+ SCS_POS_       1.161
+ SCS_NEG_       0.000         1.689
+ SCS_POS_       0.000         0.000         1.433
+ SCS_NEG_       0.000         0.000         0.000         1.773
+ SCS_NEG_       0.000         0.000         0.000         0.000         1.716
+ SCS_POS_       0.000         0.000         0.000         0.000         0.000
+ SCS_POS_       0.000         0.000         0.000         0.000         0.000
+ SCS_NEG_       0.000         0.000         0.000         0.000         0.000
+ NEG_AFF_       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              SCS_POS_      SCS_POS_      SCS_NEG_      NEG_AFF_
+              ________      ________      ________      ________
+ SCS_POS_       1.096
+ SCS_POS_       0.000         1.337
+ SCS_NEG_       0.000         0.000         1.389
+ NEG_AFF_       0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              SELFCOMP      NEG_AFF_
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              SELFCOMP      NEG_AFF_
+              ________      ________
+ SELFCOMP       0.000         0.000
+ NEG_AFF_       0.000         0.000
+
+
+           PSI
+              SELFCOMP      NEG_AFF_
+              ________      ________
+ SELFCOMP       0.050
+ NEG_AFF_       0.000       604.649
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.24810352D+06    0.0000000    0.0000000  EM
+              2 -0.23629704D+06 ************    0.0475869  EM
+              3 -0.23628065D+06   16.3841355    0.0000693  EM
+              4 -0.23628031D+06    0.3451303    0.0000015  EM
+              5 -0.23628029D+06    0.0167469    0.0000001  EM
+              6 -0.23628029D+06    0.0010463    0.0000000  EM
+              7 -0.23628029D+06    0.0000740    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE H1 MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.25012744D+06    0.0000000    0.0000000  EM
+              2 -0.23520796D+06 ************    0.0596475  EM
+              3 -0.23520117D+06    6.7903630    0.0000289  EM
+              4 -0.23520116D+06    0.0147834    0.0000001  EM
+              5 -0.23520115D+06    0.0007162    0.0000000  EM
+              6 -0.23520115D+06    0.0000634    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE BASELINE MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.25157906D+06    0.0000000    0.0000000  EM
+              2 -0.25157898D+06    0.0838488    0.0000003  EM
+              3 -0.25157898D+06    0.0001632    0.0000000  EM
+              4 -0.25157898D+06    0.0000007    0.0000000  EM
+
+
+     Beginning Time:  11:33:49
+        Ending Time:  11:33:50
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

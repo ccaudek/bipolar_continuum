@@ -1,0 +1,35 @@
+TITLE: Multilevel One-Factor Model with Day and Occasion Clustering;
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat";
+
+VARIABLE: 
+  NAMES = user_id day occasion pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+  USEVARIABLES = pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+  CLUSTER = user_id day;  ! Clustering at participant and day levels
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = THREELEVEL;  ! Multilevel model with three levels
+  ESTIMATOR = MLR;    ! Maximum likelihood estimation with robust standard errors
+
+MODEL:
+  %WITHIN%  ! Level 1: Occasion-level variation (within days)
+    SelfCompassion_w BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+  %BETWEEN day%  ! Level 2: Day-level variation (within participants)
+    SelfCompassion_d BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+  %BETWEEN user_id%  ! Level 3: Between-participant variation
+    SelfCompassion_b BY pos_1 neg_1 pos_2 neg_2 neg_3 pos_3 pos_4 neg_4;
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;
+
+  
+
+
+
+
+
