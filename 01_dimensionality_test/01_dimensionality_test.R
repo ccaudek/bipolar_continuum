@@ -1,58 +1,34 @@
-
-suppressPackageStartupMessages({
-  library(here)
-  library(rio)
-  library(tidyverse)
-  library(lavaan)
-  library("MplusAutomation")
-})
+# Bipolar continuum project
 
 
-study_1_df <- rio::import(here::here("data", "study_1_data.csv")) |>
-  dplyr::select(
-    "user_id", "day", "time_window", "scs_pos_1",
-    "scs_neg_2", "scs_pos_3", "scs_neg_4", "scs_neg_5",
-    "scs_pos_6", "scs_pos_7", "scs_neg_8"
-  )
+# Setup -------------------------------------------------------------------
 
-study_2_df <- rio::import(here::here("data", "study_2_data.csv")) |>
-  dplyr::select(
-    "user_id", "day", "time_window", "scs_pos_1",
-    "scs_neg_2", "scs_pos_3", "scs_neg_4", "scs_neg_5",
-    "scs_pos_6", "scs_pos_7", "scs_neg_8"
-  )
+# Load packages 
+if(!requireNamespace("pacman")) install.packages("pacman")
+pacman::p_load(here, tictoc, rio, tidyverse, lavaan, MplusAutomation)
 
-df <- bind_rows(study_1_df, study_2_df)
+# Set seed
+set.seed(42)
+
+# Load helper functions
+source(here::here("R", "importing_cleaning_data.R"))
+
+
+# Import and clean data ---------------------------------------------------
+
+df <- get_data()
 length(unique(df$user_id))
+# [1] 495
 
-# Identify the columns that contain "scs_neg_" in their names
-neg_items <- grep("scs_neg_", colnames(df), value = TRUE)
-
-# Invert the values for all "scs_neg_" columns (assuming the maximum score is 3)
-df[neg_items] <- 3 - df[neg_items]
-
+# Clean data
+df <- data_cleaning(df)
+# Check that all correlations are positive after coding reversal of UCS
 cor(df[, 4:11]) |> round(2)
 
-# Renaming the "scs_pos_" and "scs_neg_" columns in the desired sequence
-colnames(df)[colnames(df) == "scs_pos_1"] <- "scs_pos_1"
-colnames(df)[colnames(df) == "scs_pos_3"] <- "scs_pos_2"
-colnames(df)[colnames(df) == "scs_pos_6"] <- "scs_pos_3"
-colnames(df)[colnames(df) == "scs_pos_7"] <- "scs_pos_4"
 
-colnames(df)[colnames(df) == "scs_neg_2"] <- "scs_neg_1"
-colnames(df)[colnames(df) == "scs_neg_4"] <- "scs_neg_2"
-colnames(df)[colnames(df) == "scs_neg_5"] <- "scs_neg_3"
-colnames(df)[colnames(df) == "scs_neg_8"] <- "scs_neg_4"
+# Data dictionary ---------------------------------------------------------
 
-# Check the updated column names
-names(df)
-
-df$scs_neg_1 <- df$scs_neg_1 - 3
-df$scs_neg_2 <- df$scs_neg_2 - 3
-df$scs_neg_3 <- df$scs_neg_3 - 3
-df$scs_neg_4 <- df$scs_neg_4 - 3
-
-cor(df[, 4:11])
+# TODO
 
 
 # Consider only the first occasion in the first day -----------------------
@@ -61,15 +37,15 @@ df_first_day_first_measurement <- df %>%
   group_by(user_id) %>%                 # Group by user_id
   filter(day == min(day)) %>%           # Select the first day for each user_id
   filter(time_window == min(time_window)) %>%   # Select the first measurement for that day
-  ungroup() |>                             # Ungroup the data for further operations
+  ungroup() |>                           # Ungroup the data for further operations
   distinct(user_id, .keep_all = TRUE)    # Keep only the first occurrence of each user_id
 
 df_first_day_first_measurement <- df %>%
-  group_by(user_id) %>%                 # Group by user_id
+  group_by(user_id) %>%          # Group by user_id
   filter(day == 1) %>%           # Select the first day for each user_id
   filter(time_window == 3) %>%   # Select the first measurement for that day
-  ungroup() |>                             # Ungroup the data for further operations
-  distinct(user_id, .keep_all = TRUE)    # Keep only the first occurrence of each user_id
+  ungroup() |>                   # Ungroup the data for further operations
+  distinct(user_id, .keep_all = TRUE)  # Keep only the first occurrence of each user_id
 
 
 length(unique(df_first_day_first_measurement$user_id))
@@ -169,7 +145,6 @@ print(df_no_variation)
 
 # Include Negative Affect -------------------------------------------------
 
-
 study_1_df <- rio::import(here::here("data", "study_1_data.csv")) |>
   dplyr::select(
     "user_id", "day", "time_window", "scs_pos_1",
@@ -178,7 +153,17 @@ study_1_df <- rio::import(here::here("data", "study_1_data.csv")) |>
     "neg_aff_Moment", "neg_aff_Day", "neg_aff_Person"
   )
 
-study_2_df <- rio::import(here::here("data", "study_2_data.csv")) |>
+
+study_2_temp <- rio::import(here::here("data", "study_2_data.csv"))
+# Add negative affect scaled by occasion, day, person
+study_2_temp <- center3L(
+  dataname = study_2_temp,
+  varname = neg_aff, 
+  idname = user_id, 
+  dayname = day
+)
+
+study_2_df <- study_2_temp |>
   dplyr::select(
     "user_id", "day", "time_window", "scs_pos_1",
     "scs_neg_2", "scs_pos_3", "scs_neg_4", "scs_neg_5",
@@ -186,7 +171,8 @@ study_2_df <- rio::import(here::here("data", "study_2_data.csv")) |>
     "neg_aff_Moment", "neg_aff_Day", "neg_aff_Person"
   )
 
-df <- bind_rows(study_1_df)
+# Combine the two studies
+df <- bind_rows(study_1_df, study_2_df)
 length(unique(df$user_id))
 
 # Identify the columns that contain "scs_neg_" in their names
@@ -216,6 +202,36 @@ df$scs_neg_2 <- df$scs_neg_2 - 3
 df$scs_neg_3 <- df$scs_neg_3 - 3
 df$scs_neg_4 <- df$scs_neg_4 - 3
 
+hist(df$neg_aff_Person)
+hist(df$neg_aff_Day)
+hist(df$neg_aff_Moment)
+
+# Assuming df is your data frame
+
+# Function to vincentize a variable (cap at 5th and 95th percentiles)
+vincentize <- function(x) {
+  lower <- quantile(x, 0.005, na.rm = TRUE)  # 5th percentile
+  upper <- quantile(x, 0.995, na.rm = TRUE)  # 95th percentile
+  x <- ifelse(x < lower, lower, x)  # Cap at the lower bound
+  x <- ifelse(x > upper, upper, x)  # Cap at the upper bound
+  return(x)
+}
+
+# Apply vincentizing to the relevant columns
+df$neg_aff_Moment <- vincentize(df$neg_aff_Moment)
+df$neg_aff_Day <- vincentize(df$neg_aff_Day)
+df$neg_aff_Person <- vincentize(df$neg_aff_Person)
+
+df$neg_aff_Moment <- scale(df$neg_aff_Moment) |> as.numeric()
+df$neg_aff_Day <- scale(df$neg_aff_Day) |> as.numeric()
+df$neg_aff_Person <- scale(df$neg_aff_Person) |> as.numeric()
+
+hist(df$neg_aff_Person)
+hist(df$neg_aff_Day)
+hist(df$neg_aff_Moment)
+
+
+# Generate a tab-delimited file -------------------------------------------
 
 # Converts an R data.frame into a tab-delimited file (without header) to be 
 # used in an Mplus input file. 
@@ -227,15 +243,27 @@ MplusAutomation::prepareMplusData(
 )
 
 
+# MplusAutomation::runModels(
+#   here::here("scripts", "mplus_models", "one_factor_3.inp"), 
+#   showOutput = TRUE
+# )
+# 
+# 
+# MplusAutomation::runModels(
+#   here::here("scripts", "mplus_models", "two_factor_3.inp"), 
+#   showOutput = TRUE
+# )
+
+
+# Models comparison -------------------------------------------------------
+
 MplusAutomation::runModels(
-  here::here("scripts", "mplus_models", "one_factor_3.inp"), 
+  here::here("scripts", "mplus_models", "models_comparison.inp"),
   showOutput = TRUE
 )
 
 
-MplusAutomation::runModels(
-  here::here("scripts", "mplus_models", "two_factor_3.inp"), 
-  showOutput = TRUE
-)
+
+
 
 
