@@ -1,9 +1,9 @@
-------Begin Mplus Model Run: 20Sep2024 14:19:05------
+------Begin Mplus Model Run: 23Sep2024 12:44:08------
 Run options:
 	Recursive (run models in subdirectories): FALSE
 	Show output on console: TRUE
 	Replace existing outfile: always
 ------
-Currently running model: two_factor_4.inp
+Currently running model: bifactor_model.inp
 
-------End Mplus Model Run: 20Sep2024 14:19:06------
+------End Mplus Model Run: 23Sep2024 12:44:11------

@@ -1,0 +1,61 @@
+TITLE: Multilevel Bifactor Model with covariates at moment, day, and person level;
+
+DATA:
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE:
+  NAMES = uid day tw scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  USEVARIABLES = scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  CLUSTER = uid;
+  WITHIN = na_mom na_day;
+  BETWEEN = na_per;
+
+  MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;
+  ESTIMATOR = MLR;
+
+MODEL:
+  %WITHIN%
+    Gen_w BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    Pos_w BY scp1* scp3 scp6 scp7;
+    Neg_w BY scn2* scn4 scn5 scn8;
+
+    ! Fix variances to help with model identification
+    Gen_w@1;  ! Fix variance of the general factor
+    Pos_w@1;  ! Constrain variance of the positive factor
+    Neg_w@1;  ! Constrain variance of the negative factor
+
+    ! Ensure no covariance between factors
+    Pos_w WITH Gen_w@0;
+    Neg_w WITH Gen_w@0;
+    Pos_w WITH Neg_w@0;
+
+    ! Regress factors on covariates
+    Gen_w ON na_mom na_day;
+    Pos_w ON na_mom na_day;
+    Neg_w ON na_mom na_day;
+
+  %BETWEEN%
+    Gen_b BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    Pos_b BY scp1* scp3 scp6 scp7;
+    Neg_b BY scn2* scn4 scn5 scn8;
+
+    ! Fix variances on the between level as well
+    Gen_b@1;  ! Fix variance of the general factor
+    Pos_b@1;  ! Constrain variance of the positive factor
+    Neg_b@1;  ! Constrain variance of the negative factor
+
+    ! Ensure no covariance between factors
+    Pos_b WITH Gen_b@0;
+    Neg_b WITH Gen_b@0;
+    Pos_b WITH Neg_b@0;
+
+    ! Regress factors on covariates
+    Gen_b ON na_per;
+    Pos_b ON na_per;
+    Neg_b ON na_per;
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES(ALL);
