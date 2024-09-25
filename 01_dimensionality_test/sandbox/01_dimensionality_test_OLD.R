@@ -5,10 +5,7 @@
 
 # Load packages 
 if(!requireNamespace("pacman")) install.packages("pacman")
-pacman::p_load(
-  here, tictoc, rio, tidyverse, lavaan, MplusAutomation, tibble, knitr,
-  semPlot
-)
+pacman::p_load(here, tictoc, rio, tidyverse, lavaan, MplusAutomation)
 
 # Set seed
 set.seed(42)
@@ -18,6 +15,141 @@ source(here::here("R", "importing_cleaning_data.R"))
 
 
 # Import and clean data ---------------------------------------------------
+
+df <- get_data()
+length(unique(df$user_id))
+# [1] 495
+
+# Clean data
+df <- data_cleaning(df)
+# Check that all correlations are positive after coding reversal of UCS
+cor(df[, 4:11]) |> round(2)
+
+
+# Data dictionary ---------------------------------------------------------
+
+# TODO
+
+
+# Consider only the first occasion in the first day -----------------------
+
+df_first_day_first_measurement <- df %>%
+  group_by(user_id) %>%                 # Group by user_id
+  filter(day == min(day)) %>%           # Select the first day for each user_id
+  filter(time_window == min(time_window)) %>%   # Select the first measurement for that day
+  ungroup() |>                           # Ungroup the data for further operations
+  distinct(user_id, .keep_all = TRUE)    # Keep only the first occurrence of each user_id
+
+df_first_day_first_measurement <- df %>%
+  group_by(user_id) %>%          # Group by user_id
+  filter(day == 1) %>%           # Select the first day for each user_id
+  filter(time_window == 3) %>%   # Select the first measurement for that day
+  ungroup() |>                   # Ungroup the data for further operations
+  distinct(user_id, .keep_all = TRUE)  # Keep only the first occurrence of each user_id
+
+
+length(unique(df_first_day_first_measurement$user_id))
+# 494
+
+
+# One-factor model
+model_1 <- '
+  SC =~ scs_pos_1 + scs_pos_2 + scs_pos_3 + scs_pos_4 + 
+     scs_neg_1 + scs_neg_2 + scs_neg_3 + scs_neg_4
+'
+
+# Two factor model
+model_2 <- '
+  CS =~ scs_pos_1 + scs_pos_2 + scs_pos_3 + scs_pos_4 
+  UCS =~ scs_neg_1 + scs_neg_2 + scs_neg_3 + scs_neg_4
+
+  CS ~~ UCS
+'
+
+
+fit_1 <- cfa(
+  model_1, 
+  data = df_first_day_first_measurement
+)
+
+fit_2 <- cfa(
+  model_2, 
+  data = df_first_day_first_measurement
+)
+
+summary(fit_2, fit.measures = TRUE, standardized = TRUE)
+
+anova(fit_1, fit_2)
+
+
+# All data ----------------------------------------------------------------
+
+
+# One-factor model
+model_onefactor <- '
+  # Within level (Level 1)
+  SelfCompassion_w =~ scs_pos_1 + scs_pos_2 + scs_pos_3 + scs_pos_4 + 
+     scs_neg_1 + scs_neg_2 + scs_neg_3 + scs_neg_4
+  
+  # Between level (Level 2)
+  SelfCompassion_b =~ scs_pos_1 + scs_pos_2 + scs_pos_3 + scs_pos_4 + 
+     scs_neg_1 + scs_neg_2 + scs_neg_3 + scs_neg_4
+'
+
+fit_onefactor <- cfa(
+  model_onefactor, 
+  data = df, 
+  cluster = "user_id", 
+  estimator = "MLR"
+)
+
+summary(fit_onefactor, fit.measures = TRUE, standardized = TRUE)
+
+
+# Generate data for Mplus -------------------------------------------------
+
+# Converts an R data.frame into a tab-delimited file (without header) to be 
+# used in an Mplus input file. 
+MplusAutomation::prepareMplusData(
+  df,
+  file = here::here(
+    "data", "mplus_data", "neff.dat"
+  )
+)
+
+# TITLE: Your title goes here
+# DATA: FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff.dat";
+# VARIABLE:
+#   NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5
+# scs_pos_6 scs_pos_7 scs_neg_8;
+# MISSING=.;
+
+MplusAutomation::runModels(
+  here::here("scripts", "mplus_models", "one_factor_2.inp"), showOutput = TRUE
+  )
+
+MplusAutomation::runModels(
+  here::here("scripts", "mplus_models", "two_factor_2.inp"), showOutput = TRUE
+)
+# LRT = 274.61, df = 3.
+
+
+df_no_variation <- df %>%
+  group_by(user_id, day) %>%            # Group by user_id and day
+  summarize(var_scs_pos_1 = var(scs_pos_1, na.rm = TRUE)) %>%  # Calculate variance for scs_pos_1 within each day
+  filter(var_scs_pos_1 == 0 | is.na(var_scs_pos_1))  # Filter rows where variance is zero or NA (if all values are NA)
+
+# View the result
+print(df_no_variation)
+
+
+
+
+
+
+
+
+# Include Negative Affect -------------------------------------------------
 
 study_1_df <- rio::import(here::here("data", "study_1_data.csv")) |>
   dplyr::select(
@@ -118,6 +250,19 @@ MplusAutomation::prepareMplusData(
   )
 )
 
+
+# MplusAutomation::runModels(
+#   here::here("scripts", "mplus_models", "one_factor_3.inp"), 
+#   showOutput = TRUE
+# )
+# 
+# 
+# MplusAutomation::runModels(
+#   here::here("scripts", "mplus_models", "two_factor_3.inp"), 
+#   showOutput = TRUE
+# )
+
+
 # Models comparison -------------------------------------------------------
 
 MplusAutomation::runModels(
@@ -126,7 +271,7 @@ MplusAutomation::runModels(
 )
 
 MplusAutomation::runModels(
-  here::here("01_dimensionality_test", "mplus_models", "two_factor_3.inp"),
+  here::here("01_dimensionality_test", "mplus_models", "two_factor_4.inp"),
   showOutput = TRUE
 )
 
@@ -227,123 +372,5 @@ cat("LRT between Two-Factor and Bifactor models:\n")
 cat("Chi-square statistic:", LL_diff_2_vs_bifactor, "\n")
 cat("Degrees of freedom difference:", df_diff_2_vs_bifactor, "\n")
 cat("p-value:", p_value_2_vs_bifactor, "\n")
-
-
-# Create table ------------------------------------------------------------
-
-# Define paths to the .out files
-model_files <- c(
-  here("01_dimensionality_test", "mplus_models", "one_factor_3.out"),
-  here("01_dimensionality_test", "mplus_models", "two_factor_4.out"),
-  here("01_dimensionality_test", "mplus_models", "bifactor_model.out")
-)
-
-# Initialize an empty list to store standardized parameter estimates
-standardized_list <- list()
-
-# Loop over each model file and extract the stdyx.standardized parameters
-for (model_file in model_files) {
-  model_output <- readModels(model_file)
-  
-  if (!is.null(model_output$parameters$stdyx.standardized)) {
-    standardized_list[[model_file]] <- model_output$parameters$stdyx.standardized
-  } else {
-    warning(paste("No standardized parameters found for", model_file))
-  }
-}
-
-# Optionally, name the list items for easier identification
-names(standardized_list) <- c("One-Factor", "Two-Factor", "Bifactor")
-
-# Inspect the standardized_list to ensure the parameters are stored
-str(standardized_list)
-
-# Combine all standardized parameters into a single data frame
-standardized_df <- bind_rows(
-  tibble(Model = "One-Factor", standardized_list[[1]]),
-  tibble(Model = "Two-Factor", standardized_list[[2]]),
-  tibble(Model = "Bifactor", standardized_list[[3]])
-)
-
-# Select only key columns such as parameter header, parameter, estimate, and standard error
-standardized_df <- standardized_df %>%
-  select(Model, paramHeader, param, est, se) %>%
-  arrange(Model, paramHeader, param)
-
-# View the resulting combined data frame
-print(standardized_df)
-
-# Create a table with key parameters for reporting
-kable(standardized_df, format = "markdown", 
-      col.names = c("Model", "Parameter Type", "Parameter", "Estimate", "SE"),
-      caption = "Standardized Parameter Estimates for One-Factor, Two-Factor, and Bifactor Models")
-
-
-# Save as CSV
-# write.csv(standardized_df, "standardized_parameters.csv", row.names = FALSE)
-
-# library(flextable)
-# library(officer)
-# 
-# # Create a flextable and save to a Word document
-# ft <- flextable(standardized_df)
-# doc <- read_docx() %>% 
-#   body_add_flextable(ft) %>% 
-#   print(target = "standardized_parameters.docx")
-
-
-# Create a table for the One-Factor model
-kable(standardized_list[[1]], format = "markdown", 
-      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
-      caption = "Standardized Parameter Estimates for One-Factor Model")
-
-# Create a table for the Two-Factor model
-kable(standardized_list[[2]], format = "markdown", 
-      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
-      caption = "Standardized Parameter Estimates for Two-Factor Model")
-
-# Create a table for the Bifactor model
-kable(standardized_list[[3]], format = "markdown", 
-      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
-      caption = "Standardized Parameter Estimates for Bifactor Model")
-
-
-# semPlot -----------------------------------------------------------------
-
-# Load the models directly from the Mplus output files
-one_factor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", "one_factor_3.out"))
-two_factor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", "two_factor_3.out"))
-bifactor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", "bifactor_model.out"))
-
-# Now you can plot the path diagrams
-# One-Factor Model
-semPaths(one_factor_model, 
-         what = "est",  # Use estimates for path diagram
-         style = "ram",  # RAM (reticular action model) style
-         layout = "tree",  # Tree layout
-         title = TRUE,  # Display the title
-         title.text = "One-Factor Model",  # Title text
-         edge.label.cex = 0.8)  # Customize text size for edges
-
-
-# Two-Factor Model
-semPaths(two_factor_model, 
-         what = "est", 
-         style = "ram", 
-         layout = "tree", 
-         title = TRUE,
-         title.text = "Two-Factor Model", 
-         edge.label.cex = 0.8)
-
-
-# Bifactor Model
-semPaths(bifactor_model, 
-         what = "est", 
-         style = "ram", 
-         layout = "tree", 
-         title = TRUE,
-         title.text = "Bifactor Model", 
-         edge.label.cex = 0.8)
-
 
 
