@@ -1,6 +1,6 @@
 Mplus VERSION 8.6 (Mac)
 MUTHEN & MUTHEN
-09/23/2024  11:22 AM
+09/25/2024   3:22 PM
 
 INPUT INSTRUCTIONS
 
@@ -22,7 +22,7 @@ INPUT INSTRUCTIONS
 
   ANALYSIS:
     TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
-    ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+    ESTIMATOR = ML;  ! Maximum likelihood estimation
 
   MODEL:
     %WITHIN%  ! Level 1: Within-subject and within-day variation
@@ -108,7 +108,7 @@ Variables with special functions
    NEG_AFF_
 
 
-Estimator                                                      MLR
+Estimator                                                       ML
 Information matrix                                        OBSERVED
 Maximum number of iterations                                   100
 Convergence criterion                                    0.100D-05
@@ -231,11 +231,7 @@ Number of Free Parameters                       43
 Loglikelihood
 
           H0 Value                     -236280.291
-          H0 Scaling Correction Factor      3.9030
-            for MLR
           H1 Value                     -235201.154
-          H1 Scaling Correction Factor      2.8059
-            for MLR
 
 Information Criteria
 
@@ -246,29 +242,22 @@ Information Criteria
 
 Chi-Square Test of Model Fit
 
-          Value                           1061.812*
+          Value                           2158.273
           Degrees of Freedom                    61
           P-Value                           0.0000
-          Scaling Correction Factor         2.0326
-            for MLR
-
-*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
-    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
-    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
-    and ULSMV difference testing is done using the DIFFTEST option.
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.030
+          Estimate                           0.043
 
 CFI/TLI
 
-          CFI                                0.926
-          TLI                                0.902
+          CFI                                0.936
+          TLI                                0.916
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                          13528.950
+          Value                          32755.642
           Degrees of Freedom                    80
           P-Value                           0.0000
 
@@ -288,64 +277,64 @@ Within Level
 
  SELFCOMP BY
     SCS_POS_1          1.000      0.000    999.000    999.000
-    SCS_NEG_2          1.300      0.045     29.046      0.000
-    SCS_POS_3          0.454      0.042     10.708      0.000
-    SCS_NEG_4          1.120      0.036     31.127      0.000
-    SCS_NEG_5          1.258      0.040     31.369      0.000
-    SCS_POS_6          0.922      0.028     32.566      0.000
-    SCS_POS_7          1.069      0.023     45.537      0.000
-    SCS_NEG_8          0.536      0.044     12.248      0.000
+    SCS_NEG_2          1.300      0.021     62.410      0.000
+    SCS_POS_3          0.454      0.014     31.490      0.000
+    SCS_NEG_4          1.120      0.020     57.380      0.000
+    SCS_NEG_5          1.258      0.020     62.410      0.000
+    SCS_POS_6          0.922      0.016     57.373      0.000
+    SCS_POS_7          1.069      0.017     61.195      0.000
+    SCS_NEG_8          0.536      0.017     31.818      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_MO        -0.006      0.000    -16.231      0.000
-    NEG_AFF_DA        -0.007      0.001    -13.753      0.000
+    NEG_AFF_MO        -0.006      0.000    -33.314      0.000
+    NEG_AFF_DA        -0.007      0.000    -40.751      0.000
 
  Residual Variances
-    SCS_POS_1          0.895      0.032     27.653      0.000
-    SCS_NEG_2          0.922      0.029     31.780      0.000
-    SCS_POS_3          1.148      0.056     20.677      0.000
-    SCS_NEG_4          1.193      0.034     34.765      0.000
-    SCS_NEG_5          0.962      0.033     29.511      0.000
-    SCS_POS_6          0.883      0.032     27.379      0.000
-    SCS_POS_7          0.977      0.036     27.251      0.000
-    SCS_NEG_8          1.527      0.044     34.794      0.000
-    SELFCOMPAS         0.362      0.023     15.710      0.000
+    SCS_POS_1          0.895      0.011     82.544      0.000
+    SCS_NEG_2          0.922      0.012     74.523      0.000
+    SCS_POS_3          1.148      0.012     93.776      0.000
+    SCS_NEG_4          1.193      0.014     83.986      0.000
+    SCS_NEG_5          0.962      0.012     77.133      0.000
+    SCS_POS_6          0.883      0.010     84.779      0.000
+    SCS_POS_7          0.977      0.012     82.087      0.000
+    SCS_NEG_8          1.527      0.016     93.660      0.000
+    SELFCOMPAS         0.362      0.010     37.634      0.000
 
 Between Level
 
  SELFCOMP BY
     SCS_POS_1          1.000      0.000    999.000    999.000
-    SCS_NEG_2          1.599      0.112     14.286      0.000
-    SCS_POS_3          0.599      0.089      6.752      0.000
-    SCS_NEG_4          1.372      0.091     15.118      0.000
-    SCS_NEG_5          1.633      0.107     15.334      0.000
-    SCS_POS_6          0.926      0.057     16.112      0.000
-    SCS_POS_7          1.196      0.042     28.357      0.000
-    SCS_NEG_8          0.361      0.088      4.117      0.000
+    SCS_NEG_2          1.599      0.075     21.262      0.000
+    SCS_POS_3          0.599      0.076      7.841      0.000
+    SCS_NEG_4          1.372      0.075     18.183      0.000
+    SCS_NEG_5          1.633      0.075     21.915      0.000
+    SCS_POS_6          0.926      0.055     16.983      0.000
+    SCS_POS_7          1.196      0.059     20.183      0.000
+    SCS_NEG_8          0.361      0.066      5.486      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_PE        -0.010      0.001     -9.453      0.000
+    NEG_AFF_PE        -0.010      0.001    -10.200      0.000
 
  Intercepts
-    SCS_POS_1          0.869      0.042     20.555      0.000
-    SCS_NEG_2          0.784      0.055     14.270      0.000
-    SCS_POS_3          1.273      0.057     22.202      0.000
-    SCS_NEG_4          0.026      0.057      0.460      0.645
-    SCS_NEG_5          0.702      0.056     12.457      0.000
-    SCS_POS_6          0.942      0.042     22.539      0.000
-    SCS_POS_7          0.634      0.047     13.466      0.000
-    SCS_NEG_8         -0.506      0.048    -10.473      0.000
+    SCS_POS_1          0.869      0.043     20.365      0.000
+    SCS_NEG_2          0.784      0.055     14.188      0.000
+    SCS_POS_3          1.273      0.057     22.228      0.000
+    SCS_NEG_4          0.026      0.057      0.459      0.646
+    SCS_NEG_5          0.702      0.056     12.599      0.000
+    SCS_POS_6          0.942      0.042     22.463      0.000
+    SCS_POS_7          0.634      0.047     13.527      0.000
+    SCS_NEG_8         -0.506      0.049    -10.376      0.000
 
  Residual Variances
-    SCS_POS_1          0.392      0.052      7.604      0.000
-    SCS_NEG_2          0.260      0.049      5.253      0.000
-    SCS_POS_3          1.415      0.104     13.593      0.000
-    SCS_NEG_4          0.658      0.064     10.346      0.000
-    SCS_NEG_5          0.234      0.041      5.670      0.000
-    SCS_POS_6          0.430      0.044      9.873      0.000
-    SCS_POS_7          0.372      0.058      6.362      0.000
-    SCS_NEG_8          1.065      0.071     14.950      0.000
-    SELFCOMPAS         0.470      0.061      7.668      0.000
+    SCS_POS_1          0.392      0.031     12.646      0.000
+    SCS_NEG_2          0.260      0.029      8.987      0.000
+    SCS_POS_3          1.415      0.093     15.197      0.000
+    SCS_NEG_4          0.658      0.049     13.406      0.000
+    SCS_NEG_5          0.234      0.027      8.679      0.000
+    SCS_POS_6          0.430      0.032     13.492      0.000
+    SCS_POS_7          0.372      0.032     11.680      0.000
+    SCS_NEG_8          1.065      0.071     14.938      0.000
+    SELFCOMPAS         0.470      0.049      9.631      0.000
 
 
 QUALITY OF NUMERICAL RESULTS
@@ -365,65 +354,65 @@ STDYX Standardization
 Within Level
 
  SELFCOMP BY
-    SCS_POS_1          0.579      0.015     38.847      0.000
-    SCS_NEG_2          0.673      0.011     63.142      0.000
-    SCS_POS_3          0.274      0.022     12.169      0.000
-    SCS_NEG_4          0.567      0.013     45.301      0.000
-    SCS_NEG_5          0.652      0.012     55.643      0.000
-    SCS_POS_6          0.550      0.014     39.814      0.000
-    SCS_POS_7          0.587      0.016     37.866      0.000
-    SCS_NEG_8          0.279      0.020     13.877      0.000
+    SCS_POS_1          0.579      0.006     95.877      0.000
+    SCS_NEG_2          0.673      0.005    127.069      0.000
+    SCS_POS_3          0.274      0.008     35.373      0.000
+    SCS_NEG_4          0.567      0.006     93.670      0.000
+    SCS_NEG_5          0.652      0.005    120.498      0.000
+    SCS_POS_6          0.550      0.006     88.752      0.000
+    SCS_POS_7          0.587      0.006     98.611      0.000
+    SCS_NEG_8          0.279      0.008     36.188      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_MO        -0.272      0.013    -20.324      0.000
-    NEG_AFF_DA        -0.350      0.020    -17.280      0.000
+    NEG_AFF_MO        -0.272      0.007    -37.163      0.000
+    NEG_AFF_DA        -0.350      0.007    -48.733      0.000
 
  Residual Variances
-    SCS_POS_1          0.665      0.017     38.582      0.000
-    SCS_NEG_2          0.548      0.014     38.222      0.000
-    SCS_POS_3          0.925      0.012     75.229      0.000
-    SCS_NEG_4          0.678      0.014     47.793      0.000
-    SCS_NEG_5          0.574      0.015     37.548      0.000
-    SCS_POS_6          0.697      0.015     45.871      0.000
-    SCS_POS_7          0.655      0.018     35.948      0.000
-    SCS_NEG_8          0.922      0.011     81.982      0.000
-    SELFCOMPAS         0.804      0.019     43.192      0.000
+    SCS_POS_1          0.665      0.007     95.224      0.000
+    SCS_NEG_2          0.548      0.007     76.919      0.000
+    SCS_POS_3          0.925      0.004    218.671      0.000
+    SCS_NEG_4          0.678      0.007     98.822      0.000
+    SCS_NEG_5          0.574      0.007     81.312      0.000
+    SCS_POS_6          0.697      0.007    102.253      0.000
+    SCS_POS_7          0.655      0.007     93.617      0.000
+    SCS_NEG_8          0.922      0.004    213.796      0.000
+    SELFCOMPAS         0.804      0.006    132.495      0.000
 
 Between Level
 
  SELFCOMP BY
-    SCS_POS_1          0.778      0.033     23.226      0.000
-    SCS_NEG_2          0.925      0.015     60.065      0.000
-    SCS_POS_3          0.363      0.049      7.357      0.000
-    SCS_NEG_4          0.795      0.023     34.549      0.000
-    SCS_NEG_5          0.934      0.012     75.213      0.000
-    SCS_POS_6          0.738      0.032     23.028      0.000
-    SCS_POS_7          0.835      0.029     28.797      0.000
-    SCS_NEG_8          0.262      0.056      4.648      0.000
+    SCS_POS_1          0.778      0.021     36.679      0.000
+    SCS_NEG_2          0.925      0.010     95.855      0.000
+    SCS_POS_3          0.363      0.041      8.839      0.000
+    SCS_NEG_4          0.795      0.019     42.401      0.000
+    SCS_NEG_5          0.934      0.009    107.380      0.000
+    SCS_POS_6          0.738      0.023     31.839      0.000
+    SCS_POS_7          0.835      0.017     49.309      0.000
+    SCS_NEG_8          0.262      0.045      5.861      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_PE        -0.466      0.038    -12.321      0.000
+    NEG_AFF_PE        -0.466      0.037    -12.604      0.000
 
  Intercepts
-    SCS_POS_1          0.873      0.063     13.944      0.000
-    SCS_NEG_2          0.585      0.048     12.315      0.000
-    SCS_POS_3          0.997      0.067     14.931      0.000
-    SCS_NEG_4          0.019      0.042      0.461      0.645
-    SCS_NEG_5          0.518      0.045     11.449      0.000
-    SCS_POS_6          0.969      0.064     15.048      0.000
-    SCS_POS_7          0.572      0.053     10.889      0.000
-    SCS_NEG_8         -0.474      0.053     -8.880      0.000
+    SCS_POS_1          0.873      0.052     16.873      0.000
+    SCS_NEG_2          0.585      0.046     12.838      0.000
+    SCS_POS_3          0.997      0.055     17.989      0.000
+    SCS_NEG_4          0.019      0.042      0.459      0.646
+    SCS_NEG_5          0.518      0.045     11.625      0.000
+    SCS_POS_6          0.969      0.054     17.978      0.000
+    SCS_POS_7          0.572      0.046     12.327      0.000
+    SCS_NEG_8         -0.474      0.048     -9.814      0.000
 
  Residual Variances
-    SCS_POS_1          0.395      0.052      7.578      0.000
-    SCS_NEG_2          0.145      0.028      5.083      0.000
-    SCS_POS_3          0.868      0.036     24.171      0.000
-    SCS_NEG_4          0.368      0.037     10.052      0.000
-    SCS_NEG_5          0.128      0.023      5.496      0.000
-    SCS_POS_6          0.455      0.047      9.608      0.000
-    SCS_POS_7          0.302      0.048      6.231      0.000
-    SCS_NEG_8          0.932      0.029     31.623      0.000
-    SELFCOMPAS         0.783      0.035     22.202      0.000
+    SCS_POS_1          0.395      0.033     11.968      0.000
+    SCS_NEG_2          0.145      0.018      8.112      0.000
+    SCS_POS_3          0.868      0.030     29.039      0.000
+    SCS_NEG_4          0.368      0.030     12.337      0.000
+    SCS_NEG_5          0.128      0.016      7.847      0.000
+    SCS_POS_6          0.455      0.034     13.283      0.000
+    SCS_POS_7          0.302      0.028     10.669      0.000
+    SCS_NEG_8          0.932      0.023     39.875      0.000
+    SELFCOMPAS         0.783      0.034     22.711      0.000
 
 
 STDY Standardization
@@ -434,65 +423,65 @@ STDY Standardization
 Within Level
 
  SELFCOMP BY
-    SCS_POS_1          0.579      0.015     38.847      0.000
-    SCS_NEG_2          0.673      0.011     63.142      0.000
-    SCS_POS_3          0.274      0.022     12.169      0.000
-    SCS_NEG_4          0.567      0.013     45.301      0.000
-    SCS_NEG_5          0.652      0.012     55.643      0.000
-    SCS_POS_6          0.550      0.014     39.814      0.000
-    SCS_POS_7          0.587      0.016     37.866      0.000
-    SCS_NEG_8          0.279      0.020     13.877      0.000
+    SCS_POS_1          0.579      0.006     95.877      0.000
+    SCS_NEG_2          0.673      0.005    127.069      0.000
+    SCS_POS_3          0.274      0.008     35.373      0.000
+    SCS_NEG_4          0.567      0.006     93.670      0.000
+    SCS_NEG_5          0.652      0.005    120.498      0.000
+    SCS_POS_6          0.550      0.006     88.752      0.000
+    SCS_POS_7          0.587      0.006     98.611      0.000
+    SCS_NEG_8          0.279      0.008     36.188      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_MO        -0.009      0.000    -20.419      0.000
-    NEG_AFF_DA        -0.011      0.001    -17.331      0.000
+    NEG_AFF_MO        -0.009      0.000    -37.757      0.000
+    NEG_AFF_DA        -0.011      0.000    -49.936      0.000
 
  Residual Variances
-    SCS_POS_1          0.665      0.017     38.582      0.000
-    SCS_NEG_2          0.548      0.014     38.222      0.000
-    SCS_POS_3          0.925      0.012     75.229      0.000
-    SCS_NEG_4          0.678      0.014     47.793      0.000
-    SCS_NEG_5          0.574      0.015     37.548      0.000
-    SCS_POS_6          0.697      0.015     45.871      0.000
-    SCS_POS_7          0.655      0.018     35.948      0.000
-    SCS_NEG_8          0.922      0.011     81.982      0.000
-    SELFCOMPAS         0.804      0.019     43.192      0.000
+    SCS_POS_1          0.665      0.007     95.224      0.000
+    SCS_NEG_2          0.548      0.007     76.919      0.000
+    SCS_POS_3          0.925      0.004    218.671      0.000
+    SCS_NEG_4          0.678      0.007     98.822      0.000
+    SCS_NEG_5          0.574      0.007     81.312      0.000
+    SCS_POS_6          0.697      0.007    102.253      0.000
+    SCS_POS_7          0.655      0.007     93.617      0.000
+    SCS_NEG_8          0.922      0.004    213.796      0.000
+    SELFCOMPAS         0.804      0.006    132.495      0.000
 
 Between Level
 
  SELFCOMP BY
-    SCS_POS_1          0.778      0.033     23.226      0.000
-    SCS_NEG_2          0.925      0.015     60.065      0.000
-    SCS_POS_3          0.363      0.049      7.357      0.000
-    SCS_NEG_4          0.795      0.023     34.549      0.000
-    SCS_NEG_5          0.934      0.012     75.213      0.000
-    SCS_POS_6          0.738      0.032     23.028      0.000
-    SCS_POS_7          0.835      0.029     28.797      0.000
-    SCS_NEG_8          0.262      0.056      4.648      0.000
+    SCS_POS_1          0.778      0.021     36.679      0.000
+    SCS_NEG_2          0.925      0.010     95.855      0.000
+    SCS_POS_3          0.363      0.041      8.839      0.000
+    SCS_NEG_4          0.795      0.019     42.401      0.000
+    SCS_NEG_5          0.934      0.009    107.380      0.000
+    SCS_POS_6          0.738      0.023     31.839      0.000
+    SCS_POS_7          0.835      0.017     49.309      0.000
+    SCS_NEG_8          0.262      0.045      5.861      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_PE        -0.012      0.001    -12.892      0.000
+    NEG_AFF_PE        -0.012      0.001    -13.218      0.000
 
  Intercepts
-    SCS_POS_1          0.873      0.063     13.944      0.000
-    SCS_NEG_2          0.585      0.048     12.315      0.000
-    SCS_POS_3          0.997      0.067     14.931      0.000
-    SCS_NEG_4          0.019      0.042      0.461      0.645
-    SCS_NEG_5          0.518      0.045     11.449      0.000
-    SCS_POS_6          0.969      0.064     15.048      0.000
-    SCS_POS_7          0.572      0.053     10.889      0.000
-    SCS_NEG_8         -0.474      0.053     -8.880      0.000
+    SCS_POS_1          0.873      0.052     16.873      0.000
+    SCS_NEG_2          0.585      0.046     12.838      0.000
+    SCS_POS_3          0.997      0.055     17.989      0.000
+    SCS_NEG_4          0.019      0.042      0.459      0.646
+    SCS_NEG_5          0.518      0.045     11.625      0.000
+    SCS_POS_6          0.969      0.054     17.978      0.000
+    SCS_POS_7          0.572      0.046     12.327      0.000
+    SCS_NEG_8         -0.474      0.048     -9.814      0.000
 
  Residual Variances
-    SCS_POS_1          0.395      0.052      7.578      0.000
-    SCS_NEG_2          0.145      0.028      5.083      0.000
-    SCS_POS_3          0.868      0.036     24.171      0.000
-    SCS_NEG_4          0.368      0.037     10.052      0.000
-    SCS_NEG_5          0.128      0.023      5.496      0.000
-    SCS_POS_6          0.455      0.047      9.608      0.000
-    SCS_POS_7          0.302      0.048      6.231      0.000
-    SCS_NEG_8          0.932      0.029     31.623      0.000
-    SELFCOMPAS         0.783      0.035     22.202      0.000
+    SCS_POS_1          0.395      0.033     11.968      0.000
+    SCS_NEG_2          0.145      0.018      8.112      0.000
+    SCS_POS_3          0.868      0.030     29.039      0.000
+    SCS_NEG_4          0.368      0.030     12.337      0.000
+    SCS_NEG_5          0.128      0.016      7.847      0.000
+    SCS_POS_6          0.455      0.034     13.283      0.000
+    SCS_POS_7          0.302      0.028     10.669      0.000
+    SCS_NEG_8          0.932      0.023     39.875      0.000
+    SELFCOMPAS         0.783      0.034     22.711      0.000
 
 
 STD Standardization
@@ -503,65 +492,65 @@ STD Standardization
 Within Level
 
  SELFCOMP BY
-    SCS_POS_1          0.671      0.022     30.842      0.000
-    SCS_NEG_2          0.873      0.021     40.974      0.000
-    SCS_POS_3          0.305      0.027     11.316      0.000
-    SCS_NEG_4          0.752      0.022     33.493      0.000
-    SCS_NEG_5          0.844      0.022     38.579      0.000
-    SCS_POS_6          0.619      0.020     31.440      0.000
-    SCS_POS_7          0.717      0.023     31.303      0.000
-    SCS_NEG_8          0.359      0.028     13.039      0.000
+    SCS_POS_1          0.671      0.009     76.285      0.000
+    SCS_NEG_2          0.873      0.010     91.817      0.000
+    SCS_POS_3          0.305      0.009     33.781      0.000
+    SCS_NEG_4          0.752      0.010     75.007      0.000
+    SCS_NEG_5          0.844      0.010     88.731      0.000
+    SCS_POS_6          0.619      0.009     72.215      0.000
+    SCS_POS_7          0.717      0.009     77.767      0.000
+    SCS_NEG_8          0.359      0.010     34.492      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_MO        -0.009      0.000    -20.419      0.000
-    NEG_AFF_DA        -0.011      0.001    -17.331      0.000
+    NEG_AFF_MO        -0.009      0.000    -37.757      0.000
+    NEG_AFF_DA        -0.011      0.000    -49.936      0.000
 
  Residual Variances
-    SCS_POS_1          0.895      0.032     27.653      0.000
-    SCS_NEG_2          0.922      0.029     31.780      0.000
-    SCS_POS_3          1.148      0.056     20.677      0.000
-    SCS_NEG_4          1.193      0.034     34.765      0.000
-    SCS_NEG_5          0.962      0.033     29.511      0.000
-    SCS_POS_6          0.883      0.032     27.379      0.000
-    SCS_POS_7          0.977      0.036     27.251      0.000
-    SCS_NEG_8          1.527      0.044     34.794      0.000
-    SELFCOMPAS         0.804      0.019     43.192      0.000
+    SCS_POS_1          0.895      0.011     82.544      0.000
+    SCS_NEG_2          0.922      0.012     74.523      0.000
+    SCS_POS_3          1.148      0.012     93.776      0.000
+    SCS_NEG_4          1.193      0.014     83.986      0.000
+    SCS_NEG_5          0.962      0.012     77.133      0.000
+    SCS_POS_6          0.883      0.010     84.779      0.000
+    SCS_POS_7          0.977      0.012     82.087      0.000
+    SCS_NEG_8          1.527      0.016     93.660      0.000
+    SELFCOMPAS         0.804      0.006    132.495      0.000
 
 Between Level
 
  SELFCOMP BY
-    SCS_POS_1          0.775      0.050     15.521      0.000
-    SCS_NEG_2          1.239      0.045     27.796      0.000
-    SCS_POS_3          0.464      0.066      7.021      0.000
-    SCS_NEG_4          1.063      0.049     21.923      0.000
-    SCS_NEG_5          1.266      0.041     30.976      0.000
-    SCS_POS_6          0.718      0.048     15.008      0.000
-    SCS_POS_7          0.927      0.050     18.359      0.000
-    SCS_NEG_8          0.280      0.063      4.473      0.000
+    SCS_POS_1          0.775      0.040     19.352      0.000
+    SCS_NEG_2          1.239      0.048     25.962      0.000
+    SCS_POS_3          0.464      0.058      7.989      0.000
+    SCS_NEG_4          1.063      0.052     20.443      0.000
+    SCS_NEG_5          1.266      0.048     26.496      0.000
+    SCS_POS_6          0.718      0.040     18.138      0.000
+    SCS_POS_7          0.927      0.043     21.632      0.000
+    SCS_NEG_8          0.280      0.050      5.571      0.000
 
  SELFCOMPAS ON
-    NEG_AFF_PE        -0.012      0.001    -12.892      0.000
+    NEG_AFF_PE        -0.012      0.001    -13.218      0.000
 
  Intercepts
-    SCS_POS_1          0.869      0.042     20.555      0.000
-    SCS_NEG_2          0.784      0.055     14.270      0.000
-    SCS_POS_3          1.273      0.057     22.202      0.000
-    SCS_NEG_4          0.026      0.057      0.460      0.645
-    SCS_NEG_5          0.702      0.056     12.457      0.000
-    SCS_POS_6          0.942      0.042     22.539      0.000
-    SCS_POS_7          0.634      0.047     13.466      0.000
-    SCS_NEG_8         -0.506      0.048    -10.473      0.000
+    SCS_POS_1          0.869      0.043     20.365      0.000
+    SCS_NEG_2          0.784      0.055     14.188      0.000
+    SCS_POS_3          1.273      0.057     22.228      0.000
+    SCS_NEG_4          0.026      0.057      0.459      0.646
+    SCS_NEG_5          0.702      0.056     12.599      0.000
+    SCS_POS_6          0.942      0.042     22.463      0.000
+    SCS_POS_7          0.634      0.047     13.527      0.000
+    SCS_NEG_8         -0.506      0.049    -10.376      0.000
 
  Residual Variances
-    SCS_POS_1          0.392      0.052      7.604      0.000
-    SCS_NEG_2          0.260      0.049      5.253      0.000
-    SCS_POS_3          1.415      0.104     13.593      0.000
-    SCS_NEG_4          0.658      0.064     10.346      0.000
-    SCS_NEG_5          0.234      0.041      5.670      0.000
-    SCS_POS_6          0.430      0.044      9.873      0.000
-    SCS_POS_7          0.372      0.058      6.362      0.000
-    SCS_NEG_8          1.065      0.071     14.950      0.000
-    SELFCOMPAS         0.783      0.035     22.202      0.000
+    SCS_POS_1          0.392      0.031     12.646      0.000
+    SCS_NEG_2          0.260      0.029      8.987      0.000
+    SCS_POS_3          1.415      0.093     15.197      0.000
+    SCS_NEG_4          0.658      0.049     13.406      0.000
+    SCS_NEG_5          0.234      0.027      8.679      0.000
+    SCS_POS_6          0.430      0.032     13.492      0.000
+    SCS_POS_7          0.372      0.032     11.680      0.000
+    SCS_NEG_8          1.065      0.071     14.938      0.000
+    SELFCOMPAS         0.783      0.034     22.711      0.000
 
 
 R-SQUARE
@@ -571,38 +560,38 @@ Within Level
     Observed                                        Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    SCS_POS_           0.335      0.017     19.423      0.000
-    SCS_NEG_           0.452      0.014     31.571      0.000
-    SCS_POS_           0.075      0.012      6.085      0.000
-    SCS_NEG_           0.322      0.014     22.651      0.000
-    SCS_NEG_           0.426      0.015     27.822      0.000
-    SCS_POS_           0.303      0.015     19.907      0.000
-    SCS_POS_           0.345      0.018     18.933      0.000
-    SCS_NEG_           0.078      0.011      6.938      0.000
+    SCS_POS_           0.335      0.007     47.938      0.000
+    SCS_NEG_           0.452      0.007     63.534      0.000
+    SCS_POS_           0.075      0.004     17.686      0.000
+    SCS_NEG_           0.322      0.007     46.835      0.000
+    SCS_NEG_           0.426      0.007     60.249      0.000
+    SCS_POS_           0.303      0.007     44.376      0.000
+    SCS_POS_           0.345      0.007     49.306      0.000
+    SCS_NEG_           0.078      0.004     18.094      0.000
 
      Latent                                         Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    SELFCOMP           0.196      0.019     10.551      0.000
+    SELFCOMP           0.196      0.006     32.365      0.000
 
 Between Level
 
     Observed                                        Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    SCS_POS_           0.605      0.052     11.613      0.000
-    SCS_NEG_           0.855      0.028     30.032      0.000
-    SCS_POS_           0.132      0.036      3.679      0.000
-    SCS_NEG_           0.632      0.037     17.275      0.000
-    SCS_NEG_           0.872      0.023     37.607      0.000
-    SCS_POS_           0.545      0.047     11.514      0.000
-    SCS_POS_           0.698      0.048     14.398      0.000
-    SCS_NEG_           0.068      0.029      2.324      0.020
+    SCS_POS_           0.605      0.033     18.339      0.000
+    SCS_NEG_           0.855      0.018     47.928      0.000
+    SCS_POS_           0.132      0.030      4.420      0.000
+    SCS_NEG_           0.632      0.030     21.201      0.000
+    SCS_NEG_           0.872      0.016     53.690      0.000
+    SCS_POS_           0.545      0.034     15.919      0.000
+    SCS_POS_           0.698      0.028     24.654      0.000
+    SCS_NEG_           0.068      0.023      2.931      0.003
 
      Latent                                         Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    SELFCOMP           0.217      0.035      6.160      0.000
+    SELFCOMP           0.217      0.034      6.302      0.000
 
 
 MODEL MODIFICATION INDICES
@@ -619,38 +608,44 @@ Within Level
 
 WITH Statements
 
-SCS_NEG_ WITH SCS_POS_           127.850    -0.140     -0.140       -0.154
-SCS_POS_ WITH SCS_POS_            12.513    -0.041     -0.041       -0.041
-SCS_POS_ WITH SCS_NEG_            11.115     0.041      0.041        0.040
-SCS_NEG_ WITH SCS_NEG_            58.466     0.108      0.108        0.103
-SCS_NEG_ WITH SCS_POS_            33.399    -0.077     -0.077       -0.066
-SCS_NEG_ WITH SCS_POS_            13.285    -0.045     -0.045       -0.049
-SCS_NEG_ WITH SCS_NEG_           114.529     0.148      0.148        0.157
-SCS_NEG_ WITH SCS_POS_            16.932     0.052      0.052        0.049
-SCS_POS_ WITH SCS_POS_            53.402     0.080      0.080        0.090
-SCS_POS_ WITH SCS_POS_            28.618     0.061      0.061        0.061
-SCS_POS_ WITH SCS_NEG_            41.355    -0.081     -0.081       -0.079
-SCS_POS_ WITH SCS_NEG_            47.031    -0.083     -0.083       -0.089
-SCS_POS_ WITH SCS_POS_           278.932     0.197      0.197        0.211
-SCS_POS_ WITH SCS_NEG_            83.833    -0.119     -0.119       -0.125
-SCS_POS_ WITH SCS_POS_            20.899    -0.056     -0.056       -0.053
-SCS_POS_ WITH SCS_POS_            25.407     0.058      0.058        0.063
-SCS_NEG_ WITH SCS_POS_            94.112    -0.130     -0.130       -0.111
-SCS_NEG_ WITH SCS_NEG_            29.801     0.078      0.078        0.066
-SCS_NEG_ WITH SCS_POS_            23.201    -0.068     -0.068       -0.055
+SCS_NEG_ WITH SCS_POS_           259.872    -0.140     -0.140       -0.154
+SCS_POS_ WITH SCS_POS_            25.435    -0.041     -0.041       -0.041
+SCS_POS_ WITH SCS_NEG_            22.593     0.041      0.041        0.040
+SCS_NEG_ WITH SCS_NEG_           118.840     0.108      0.108        0.103
+SCS_NEG_ WITH SCS_POS_            67.887    -0.077     -0.077       -0.066
+SCS_NEG_ WITH SCS_POS_            27.003    -0.045     -0.045       -0.049
+SCS_NEG_ WITH SCS_NEG_           232.796     0.148      0.148        0.157
+SCS_NEG_ WITH SCS_POS_            34.416     0.052      0.052        0.049
+SCS_POS_ WITH SCS_POS_           108.547     0.080      0.080        0.090
+SCS_POS_ WITH SCS_NEG_            10.680    -0.028     -0.028       -0.031
+SCS_POS_ WITH SCS_POS_            58.169     0.061      0.061        0.061
+SCS_POS_ WITH SCS_NEG_            84.059    -0.081     -0.081       -0.079
+SCS_POS_ WITH SCS_NEG_            95.597    -0.083     -0.083       -0.089
+SCS_POS_ WITH SCS_POS_           566.966     0.197      0.197        0.211
+SCS_POS_ WITH SCS_NEG_           170.402    -0.119     -0.119       -0.125
+SCS_POS_ WITH SCS_POS_            42.479    -0.056     -0.056       -0.053
+SCS_POS_ WITH SCS_NEG_            10.680    -0.031     -0.031       -0.029
+SCS_POS_ WITH SCS_NEG_            13.984    -0.034     -0.034       -0.035
+SCS_POS_ WITH SCS_POS_            51.644     0.058      0.058        0.063
+SCS_NEG_ WITH SCS_POS_           191.295    -0.130     -0.130       -0.111
+SCS_NEG_ WITH SCS_NEG_            60.575     0.078      0.078        0.066
+SCS_NEG_ WITH SCS_POS_            47.160    -0.068     -0.068       -0.055
 
 Between Level
 
 WITH Statements
 
-SCS_NEG_ WITH SCS_POS_            47.566    -0.206     -0.206       -0.645
-SCS_NEG_ WITH SCS_NEG_            13.183     0.142      0.142        0.344
-SCS_NEG_ WITH SCS_NEG_            62.124     0.295      0.295        1.197
-SCS_POS_ WITH SCS_NEG_            23.374    -0.146     -0.146       -0.459
-SCS_POS_ WITH SCS_POS_           114.135     0.319      0.319        0.837
-SCS_POS_ WITH SCS_NEG_            43.735    -0.207     -0.207       -0.666
-SCS_POS_ WITH SCS_POS_            15.171     0.120      0.120        0.300
-SCS_NEG_ WITH SCS_POS_            15.749    -0.182     -0.182       -0.281
+SCS_NEG_ WITH SCS_POS_            96.684    -0.206     -0.206       -0.645
+SCS_NEG_ WITH SCS_NEG_            26.796     0.142      0.142        0.344
+SCS_NEG_ WITH SCS_NEG_           126.274     0.295      0.295        1.197
+SCS_POS_ WITH SCS_POS_            19.539     0.095      0.095        0.231
+SCS_POS_ WITH SCS_NEG_            47.511    -0.146     -0.146       -0.459
+SCS_POS_ WITH SCS_POS_           231.994     0.319      0.319        0.837
+SCS_POS_ WITH SCS_NEG_            88.896    -0.207     -0.207       -0.666
+SCS_POS_ WITH SCS_POS_            30.837     0.120      0.120        0.300
+SCS_NEG_ WITH SCS_POS_            32.012    -0.182     -0.182       -0.281
+SCS_NEG_ WITH SCS_NEG_            11.297     0.102      0.102        0.194
+SCS_NEG_ WITH SCS_POS_            20.008    -0.144     -0.144       -0.228
 
 
 TECHNICAL 1 OUTPUT
@@ -989,9 +984,9 @@ TECHNICAL 8 OUTPUT
               4 -0.25157898D+06    0.0000007    0.0000000  EM
 
 
-     Beginning Time:  11:22:45
-        Ending Time:  11:22:46
-       Elapsed Time:  00:00:01
+     Beginning Time:  15:22:13
+        Ending Time:  15:22:13
+       Elapsed Time:  00:00:00
 
 
 

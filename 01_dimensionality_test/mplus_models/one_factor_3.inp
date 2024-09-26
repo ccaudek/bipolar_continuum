@@ -16,7 +16,7 @@ MISSING = .;
 
 ANALYSIS:
   TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
-  ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+  ESTIMATOR = ML;  ! Maximum likelihood estimation 
 
 MODEL:
   %WITHIN%  ! Level 1: Within-subject and within-day variation

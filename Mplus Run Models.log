@@ -1,4 +1,4 @@
-------Begin Mplus Model Run: 23Sep2024 12:44:08------
+------Begin Mplus Model Run: 25Sep2024 15:22:19------
 Run options:
 	Recursive (run models in subdirectories): FALSE
 	Show output on console: TRUE
@@ -6,4 +6,4 @@ Run options:
 ------
 Currently running model: bifactor_model.inp
 
-------End Mplus Model Run: 23Sep2024 12:44:11------
+------End Mplus Model Run: 25Sep2024 15:22:22------

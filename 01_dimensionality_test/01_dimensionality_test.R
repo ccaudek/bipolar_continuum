@@ -157,76 +157,37 @@ model_summaries <- bind_rows(model_summaries_list)
 print(model_summaries)
 
 
-# Extract key indices for comparison
-aic_values <- model_summaries$AIC
-bic_values <- model_summaries$BIC
-rmsea_values <- model_summaries$RMSEA_Estimate
-cfi_values <- model_summaries$CFI
-tli_values <- model_summaries$TLI
+# Extract log-likelihoods and number of parameters
+LL_one_factor <- model_summaries$LL[1]
+LL_two_factor <- model_summaries$LL[2]
+LL_bifactor <- model_summaries$LL[3]
 
-LL_values <- model_summaries$LL  # Uncorrected Log-likelihood values
-LL_correction_factors <- model_summaries$LLCorrectionFactor  # Correction factors
-df_values <- model_summaries$Parameters  # Degrees of freedom (number of parameters)
-# Apply the correction to the log-likelihood values
-corrected_LL_values <- LL_values / LL_correction_factors
+nparam_one_factor <- model_summaries$Parameters[1]
+nparam_two_factor <- model_summaries$Parameters[2]
+nparam_bifactor <- model_summaries$Parameters[3]
 
-RMSEA_Estimate <- model_summaries$RMSEA_Estimate
-SRMR.Within <- model_summaries$SRMR.Within
-SRMR.Between <- model_summaries$SRMR.Between
-ChiSqM_Value <- model_summaries$ChiSqM_Value
-ChiSqM_DF <- model_summaries$ChiSqM_DF
+# Perform LRT for one-factor vs two-factor
+LRT_one_vs_two <- 2 * (LL_two_factor - LL_one_factor)
+df_one_vs_two <- nparam_two_factor - nparam_one_factor
+p_value_one_vs_two <- pchisq(LRT_one_vs_two, df=df_one_vs_two, lower.tail=FALSE)
 
+# Print the result for one-factor vs two-factor
+cat("LRT for One-Factor vs Two-Factor Model:\n")
+cat("LRT statistic:", LRT_one_vs_two, "\n")
+cat("Degrees of freedom:", df_one_vs_two, "\n")
+cat("p-value:", p_value_one_vs_two, "\n\n")
 
-# Combine results into a data frame for easy comparison
-comparison_table <- data.frame(
-  Model = c("One-Factor", "Two-Factor", "Bifactor"),
-  AIC = aic_values,
-  BIC = bic_values,
-  RMSEA = rmsea_values,
-  CFI = cfi_values,
-  TLI = tli_values,
-  LL = corrected_LL_values,
-  df = df_values,
-  RSMSEA = RMSEA_Estimate, 
-  SRMR_Within = SRMR.Within,
-  SRMR_Between = SRMR.Between,
-  ChiSqM_Value = ChiSqM_Value,
-  ChiSqM_DF = ChiSqM_DF
-)
+# Perform LRT for two-factor vs bifactor
+LRT_two_vs_bifactor <- 2 * (LL_bifactor - LL_two_factor)
+df_two_vs_bifactor <- nparam_bifactor - nparam_two_factor
+p_value_two_vs_bifactor <- pchisq(LRT_two_vs_bifactor, df=df_two_vs_bifactor, lower.tail=FALSE)
 
-# Display the comparison table
-print(comparison_table)
+# Print the result for two-factor vs bifactor
+cat("LRT for Two-Factor vs Bifactor Model:\n")
+cat("LRT statistic:", LRT_two_vs_bifactor, "\n")
+cat("Degrees of freedom:", df_two_vs_bifactor, "\n")
+cat("p-value:", p_value_two_vs_bifactor, "\n")
 
-
-# Log-likelihoods and number of parameters from model summaries
-LL_one_factor <- comparison_table[1, 7]  # Log-likelihood of One-Factor model
-df_one_factor <- comparison_table[1, 8]          # Number of parameters in One-Factor model
-
-LL_two_factor <- comparison_table[2, 7] # Log-likelihood of Two-Factor model
-df_two_factor <- comparison_table[2, 8]         # Number of parameters in Two-Factor model
-
-LL_bifactor <- comparison_table[3, 7]    # Log-likelihood of Bifactor model
-df_bifactor <- comparison_table[3, 8]           # Number of parameters in Bifactor model
-
-# LRT between One-Factor and Two-Factor models
-LL_diff_1_vs_2 <- 2 * (LL_two_factor - LL_one_factor)  # Calculate chi-square statistic
-df_diff_1_vs_2 <- df_two_factor - df_one_factor        # Difference in degrees of freedom
-p_value_1_vs_2 <- pchisq(LL_diff_1_vs_2, df_diff_1_vs_2, lower.tail = FALSE)  # Calculate p-value
-
-cat("LRT between One-Factor and Two-Factor models:\n")
-cat("Chi-square statistic:", LL_diff_1_vs_2, "\n")
-cat("Degrees of freedom difference:", df_diff_1_vs_2, "\n")
-cat("p-value:", p_value_1_vs_2, "\n\n")
-
-# LRT between Two-Factor and Bifactor models
-LL_diff_2_vs_bifactor <- 2 * (LL_bifactor - LL_two_factor)  # Calculate chi-square statistic
-df_diff_2_vs_bifactor <- df_bifactor - df_two_factor        # Difference in degrees of freedom
-p_value_2_vs_bifactor <- pchisq(LL_diff_2_vs_bifactor, df_diff_2_vs_bifactor, lower.tail = FALSE)  # Calculate p-value
-
-cat("LRT between Two-Factor and Bifactor models:\n")
-cat("Chi-square statistic:", LL_diff_2_vs_bifactor, "\n")
-cat("Degrees of freedom difference:", df_diff_2_vs_bifactor, "\n")
-cat("p-value:", p_value_2_vs_bifactor, "\n")
 
 
 # Create table ------------------------------------------------------------
@@ -234,7 +195,7 @@ cat("p-value:", p_value_2_vs_bifactor, "\n")
 # Define paths to the .out files
 model_files <- c(
   here("01_dimensionality_test", "mplus_models", "one_factor_3.out"),
-  here("01_dimensionality_test", "mplus_models", "two_factor_4.out"),
+  here("01_dimensionality_test", "mplus_models", "two_factor_3.out"),
   here("01_dimensionality_test", "mplus_models", "bifactor_model.out")
 )
 
@@ -306,6 +267,7 @@ kable(standardized_list[[2]], format = "markdown",
 kable(standardized_list[[3]], format = "markdown", 
       col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
       caption = "Standardized Parameter Estimates for Bifactor Model")
+
 
 
 # semPlot -----------------------------------------------------------------

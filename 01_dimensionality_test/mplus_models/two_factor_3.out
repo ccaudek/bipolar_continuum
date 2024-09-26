@@ -1,6 +1,6 @@
 Mplus VERSION 8.6 (Mac)
 MUTHEN & MUTHEN
-09/20/2024  11:33 AM
+09/25/2024   3:22 PM
 
 INPUT INSTRUCTIONS
 
@@ -22,7 +22,7 @@ INPUT INSTRUCTIONS
 
   ANALYSIS:
     TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
-    ESTIMATOR = MLR;  ! Maximum likelihood estimation with robust standard errors
+    ESTIMATOR = ML;  ! Maximum likelihood estimation
 
   MODEL:
     %WITHIN%  ! Level 1: Within-subject and within-day variation
@@ -109,7 +109,7 @@ Variables with special functions
    NEG_AFF_
 
 
-Estimator                                                      MLR
+Estimator                                                       ML
 Information matrix                                        OBSERVED
 Maximum number of iterations                                   100
 Convergence criterion                                    0.100D-05
@@ -232,11 +232,7 @@ Number of Free Parameters                       48
 Loglikelihood
 
           H0 Value                     -235745.895
-          H0 Scaling Correction Factor      3.8142
-            for MLR
           H1 Value                     -235201.154
-          H1 Scaling Correction Factor      2.8059
-            for MLR
 
 Information Criteria
 
@@ -247,29 +243,22 @@ Information Criteria
 
 Chi-Square Test of Model Fit
 
-          Value                            561.078*
+          Value                           1089.481
           Degrees of Freedom                    56
           P-Value                           0.0000
-          Scaling Correction Factor         1.9418
-            for MLR
-
-*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
-    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
-    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
-    and ULSMV difference testing is done using the DIFFTEST option.
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.022
+          Estimate                           0.031
 
 CFI/TLI
 
-          CFI                                0.962
-          TLI                                0.946
+          CFI                                0.968
+          TLI                                0.955
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                          13528.950
+          Value                          32755.642
           Degrees of Freedom                    80
           P-Value                           0.0000
 
@@ -289,83 +278,83 @@ Within Level
 
  POSITIVE BY
     SCS_POS_1          1.000      0.000    999.000    999.000
-    SCS_POS_3          0.411      0.040     10.343      0.000
-    SCS_POS_6          0.897      0.029     31.359      0.000
-    SCS_POS_7          1.059      0.024     44.119      0.000
+    SCS_POS_3          0.411      0.014     30.178      0.000
+    SCS_POS_6          0.897      0.015     58.340      0.000
+    SCS_POS_7          1.059      0.017     63.615      0.000
 
  NEGATIVE BY
     SCS_NEG_2          1.000      0.000    999.000    999.000
-    SCS_NEG_4          0.843      0.025     33.638      0.000
-    SCS_NEG_5          0.950      0.021     45.385      0.000
-    SCS_NEG_8          0.407      0.029     13.918      0.000
+    SCS_NEG_4          0.843      0.013     64.845      0.000
+    SCS_NEG_5          0.950      0.013     72.165      0.000
+    SCS_NEG_8          0.407      0.012     34.229      0.000
 
  POSITIVESE ON
-    NEG_AFF_MO        -0.006      0.000    -16.443      0.000
-    NEG_AFF_DA        -0.007      0.001    -13.895      0.000
+    NEG_AFF_MO        -0.006      0.000    -28.996      0.000
+    NEG_AFF_DA        -0.007      0.000    -36.688      0.000
 
  NEGATIVESE ON
-    NEG_AFF_MO        -0.008      0.000    -16.232      0.000
-    NEG_AFF_DA        -0.009      0.001    -14.256      0.000
+    NEG_AFF_MO        -0.008      0.000    -31.424      0.000
+    NEG_AFF_DA        -0.009      0.000    -39.226      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.437      0.022     19.781      0.000
+    POSITIVESE         0.437      0.009     50.633      0.000
 
  Residual Variances
-    SCS_POS_1          0.809      0.029     28.122      0.000
-    SCS_NEG_2          0.839      0.028     29.679      0.000
-    SCS_POS_3          1.150      0.056     20.469      0.000
-    SCS_NEG_4          1.157      0.034     33.724      0.000
-    SCS_NEG_5          0.912      0.032     28.742      0.000
-    SCS_POS_6          0.835      0.031     27.087      0.000
-    SCS_POS_7          0.891      0.032     27.831      0.000
-    SCS_NEG_8          1.516      0.044     34.631      0.000
-    POSITIVESE         0.443      0.026     17.134      0.000
-    NEGATIVESE         0.695      0.034     20.573      0.000
+    SCS_POS_1          0.809      0.011     72.945      0.000
+    SCS_NEG_2          0.839      0.013     65.760      0.000
+    SCS_POS_3          1.150      0.012     93.178      0.000
+    SCS_NEG_4          1.157      0.014     80.792      0.000
+    SCS_NEG_5          0.912      0.013     71.290      0.000
+    SCS_POS_6          0.835      0.011     78.573      0.000
+    SCS_POS_7          0.891      0.012     72.722      0.000
+    SCS_NEG_8          1.516      0.016     93.147      0.000
+    POSITIVESE         0.443      0.011     38.790      0.000
+    NEGATIVESE         0.695      0.015     45.492      0.000
 
 Between Level
 
  POSITIVE BY
     SCS_POS_1          1.000      0.000    999.000    999.000
-    SCS_POS_3          0.459      0.074      6.211      0.000
-    SCS_POS_6          0.810      0.054     14.881      0.000
-    SCS_POS_7          1.178      0.038     30.714      0.000
+    SCS_POS_3          0.459      0.065      7.081      0.000
+    SCS_POS_6          0.810      0.040     20.127      0.000
+    SCS_POS_7          1.178      0.036     32.552      0.000
 
  NEGATIVE BY
     SCS_NEG_2          1.000      0.000    999.000    999.000
-    SCS_NEG_4          0.836      0.033     25.600      0.000
-    SCS_NEG_5          1.004      0.024     42.201      0.000
-    SCS_NEG_8          0.236      0.047      5.027      0.000
+    SCS_NEG_4          0.836      0.034     24.834      0.000
+    SCS_NEG_5          1.004      0.027     37.854      0.000
+    SCS_NEG_8          0.236      0.039      6.126      0.000
 
  POSITIVESE ON
-    NEG_AFF_PE        -0.010      0.001     -9.324      0.000
+    NEG_AFF_PE        -0.010      0.001     -9.361      0.000
 
  NEGATIVESE ON
-    NEG_AFF_PE        -0.015      0.001    -10.794      0.000
+    NEG_AFF_PE        -0.015      0.001    -10.677      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.720      0.061     11.883      0.000
+    POSITIVESE         0.720      0.059     12.210      0.000
 
  Intercepts
-    SCS_POS_1          0.869      0.042     20.569      0.000
-    SCS_NEG_2          0.784      0.055     14.271      0.000
-    SCS_POS_3          1.273      0.057     22.208      0.000
-    SCS_NEG_4          0.026      0.057      0.461      0.645
-    SCS_NEG_5          0.702      0.056     12.446      0.000
-    SCS_POS_6          0.944      0.042     22.569      0.000
-    SCS_POS_7          0.636      0.047     13.538      0.000
-    SCS_NEG_8         -0.506      0.048    -10.474      0.000
+    SCS_POS_1          0.869      0.043     20.426      0.000
+    SCS_NEG_2          0.784      0.055     14.211      0.000
+    SCS_POS_3          1.273      0.058     22.122      0.000
+    SCS_NEG_4          0.026      0.057      0.459      0.647
+    SCS_NEG_5          0.702      0.056     12.551      0.000
+    SCS_POS_6          0.944      0.042     22.242      0.000
+    SCS_POS_7          0.636      0.047     13.645      0.000
+    SCS_NEG_8         -0.506      0.049    -10.389      0.000
 
  Residual Variances
-    SCS_POS_1          0.185      0.032      5.848      0.000
-    SCS_NEG_2          0.171      0.036      4.754      0.000
-    SCS_POS_3          1.459      0.104     13.990      0.000
-    SCS_NEG_4          0.653      0.064     10.275      0.000
-    SCS_NEG_5          0.202      0.039      5.127      0.000
-    SCS_POS_6          0.412      0.045      9.255      0.000
-    SCS_POS_7          0.101      0.035      2.868      0.004
-    SCS_NEG_8          1.052      0.071     14.796      0.000
-    POSITIVESE         0.671      0.062     10.758      0.000
-    NEGATIVESE         1.286      0.090     14.282      0.000
+    SCS_POS_1          0.185      0.018     10.044      0.000
+    SCS_NEG_2          0.171      0.026      6.647      0.000
+    SCS_POS_3          1.459      0.096     15.203      0.000
+    SCS_NEG_4          0.653      0.049     13.335      0.000
+    SCS_NEG_5          0.202      0.027      7.489      0.000
+    SCS_POS_6          0.412      0.031     13.279      0.000
+    SCS_POS_7          0.101      0.020      4.995      0.000
+    SCS_NEG_8          1.052      0.070     14.927      0.000
+    POSITIVESE         0.671      0.055     12.228      0.000
+    NEGATIVESE         1.286      0.095     13.491      0.000
 
 
 QUALITY OF NUMERICAL RESULTS
@@ -385,84 +374,84 @@ STDYX Standardization
 Within Level
 
  POSITIVE BY
-    SCS_POS_1          0.631      0.013     48.974      0.000
-    SCS_POS_3          0.270      0.023     11.513      0.000
-    SCS_POS_6          0.584      0.013     43.604      0.000
-    SCS_POS_7          0.635      0.013     47.789      0.000
+    SCS_POS_1          0.631      0.006    103.097      0.000
+    SCS_POS_3          0.270      0.008     33.602      0.000
+    SCS_POS_6          0.584      0.006     91.909      0.000
+    SCS_POS_7          0.635      0.006    104.279      0.000
 
  NEGATIVE BY
-    SCS_NEG_2          0.708      0.010     70.152      0.000
-    SCS_NEG_4          0.585      0.012     46.808      0.000
-    SCS_NEG_5          0.675      0.011     59.259      0.000
-    SCS_NEG_8          0.291      0.020     14.462      0.000
+    SCS_NEG_2          0.708      0.005    132.607      0.000
+    SCS_NEG_4          0.585      0.006     95.549      0.000
+    SCS_NEG_5          0.675      0.006    122.575      0.000
+    SCS_NEG_8          0.291      0.008     37.234      0.000
 
  POSITIVESE ON
-    NEG_AFF_MO        -0.254      0.014    -18.517      0.000
-    NEG_AFF_DA        -0.330      0.021    -16.016      0.000
+    NEG_AFF_MO        -0.254      0.008    -30.818      0.000
+    NEG_AFF_DA        -0.330      0.008    -40.690      0.000
 
  NEGATIVESE ON
-    NEG_AFF_MO        -0.261      0.015    -17.790      0.000
-    NEG_AFF_DA        -0.331      0.021    -15.645      0.000
+    NEG_AFF_MO        -0.261      0.008    -33.120      0.000
+    NEG_AFF_DA        -0.331      0.008    -42.733      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.788      0.022     36.355      0.000
+    POSITIVESE         0.788      0.008     97.257      0.000
 
  Residual Variances
-    SCS_POS_1          0.601      0.016     36.953      0.000
-    SCS_NEG_2          0.498      0.014     34.810      0.000
-    SCS_POS_3          0.927      0.013     73.071      0.000
-    SCS_NEG_4          0.658      0.015     45.050      0.000
-    SCS_NEG_5          0.544      0.015     35.403      0.000
-    SCS_POS_6          0.659      0.016     42.137      0.000
-    SCS_POS_7          0.597      0.017     35.435      0.000
-    SCS_NEG_8          0.916      0.012     78.428      0.000
-    POSITIVESE         0.826      0.018     47.145      0.000
-    NEGATIVESE         0.822      0.019     44.124      0.000
+    SCS_POS_1          0.601      0.008     77.792      0.000
+    SCS_NEG_2          0.498      0.008     65.801      0.000
+    SCS_POS_3          0.927      0.004    213.263      0.000
+    SCS_NEG_4          0.658      0.007     91.961      0.000
+    SCS_NEG_5          0.544      0.007     73.231      0.000
+    SCS_POS_6          0.659      0.007     88.817      0.000
+    SCS_POS_7          0.597      0.008     77.321      0.000
+    SCS_NEG_8          0.916      0.005    201.926      0.000
+    POSITIVESE         0.826      0.007    126.481      0.000
+    NEGATIVESE         0.822      0.006    130.804      0.000
 
 Between Level
 
  POSITIVE BY
-    SCS_POS_1          0.903      0.017     52.274      0.000
-    SCS_POS_3          0.324      0.051      6.322      0.000
-    SCS_POS_6          0.751      0.033     22.938      0.000
-    SCS_POS_7          0.958      0.015     65.638      0.000
+    SCS_POS_1          0.903      0.011     79.019      0.000
+    SCS_POS_3          0.324      0.043      7.563      0.000
+    SCS_POS_6          0.751      0.023     33.366      0.000
+    SCS_POS_7          0.958      0.009    107.769      0.000
 
  NEGATIVE BY
-    SCS_NEG_2          0.951      0.011     87.311      0.000
-    SCS_NEG_4          0.797      0.023     34.359      0.000
-    SCS_NEG_5          0.943      0.012     81.504      0.000
-    SCS_NEG_8          0.282      0.055      5.163      0.000
+    SCS_NEG_2          0.951      0.008    118.214      0.000
+    SCS_NEG_4          0.797      0.019     42.567      0.000
+    SCS_NEG_5          0.943      0.008    111.630      0.000
+    SCS_NEG_8          0.282      0.044      6.394      0.000
 
  POSITIVESE ON
-    NEG_AFF_PE        -0.416      0.040    -10.314      0.000
+    NEG_AFF_PE        -0.416      0.040    -10.529      0.000
 
  NEGATIVESE ON
-    NEG_AFF_PE        -0.455      0.039    -11.800      0.000
+    NEG_AFF_PE        -0.455      0.037    -12.144      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.775      0.032     24.041      0.000
+    POSITIVESE         0.775      0.023     33.438      0.000
 
  Intercepts
-    SCS_POS_1          0.870      0.062     13.999      0.000
-    SCS_NEG_2          0.585      0.048     12.315      0.000
-    SCS_POS_3          0.997      0.067     14.907      0.000
-    SCS_NEG_4          0.020      0.042      0.462      0.644
-    SCS_NEG_5          0.518      0.045     11.438      0.000
-    SCS_POS_6          0.971      0.065     15.033      0.000
-    SCS_POS_7          0.574      0.052     10.974      0.000
-    SCS_NEG_8         -0.474      0.053     -8.883      0.000
+    SCS_POS_1          0.870      0.051     16.908      0.000
+    SCS_NEG_2          0.585      0.046     12.855      0.000
+    SCS_POS_3          0.997      0.056     17.932      0.000
+    SCS_NEG_4          0.020      0.043      0.458      0.647
+    SCS_NEG_5          0.518      0.045     11.587      0.000
+    SCS_POS_6          0.971      0.054     17.868      0.000
+    SCS_POS_7          0.574      0.046     12.420      0.000
+    SCS_NEG_8         -0.474      0.048     -9.825      0.000
 
  Residual Variances
-    SCS_POS_1          0.185      0.031      5.942      0.000
-    SCS_NEG_2          0.095      0.021      4.594      0.000
-    SCS_POS_3          0.895      0.033     26.980      0.000
-    SCS_NEG_4          0.365      0.037      9.893      0.000
-    SCS_NEG_5          0.110      0.022      5.045      0.000
-    SCS_POS_6          0.436      0.049      8.873      0.000
-    SCS_POS_7          0.082      0.028      2.928      0.003
-    SCS_NEG_8          0.921      0.031     29.984      0.000
-    POSITIVESE         0.827      0.034     24.586      0.000
-    NEGATIVESE         0.793      0.035     22.549      0.000
+    SCS_POS_1          0.185      0.021      8.982      0.000
+    SCS_NEG_2          0.095      0.015      6.220      0.000
+    SCS_POS_3          0.895      0.028     32.276      0.000
+    SCS_NEG_4          0.365      0.030     12.256      0.000
+    SCS_NEG_5          0.110      0.016      6.910      0.000
+    SCS_POS_6          0.436      0.034     12.907      0.000
+    SCS_POS_7          0.082      0.017      4.808      0.000
+    SCS_NEG_8          0.921      0.025     37.134      0.000
+    POSITIVESE         0.827      0.033     25.098      0.000
+    NEGATIVESE         0.793      0.034     23.207      0.000
 
 
 STDY Standardization
@@ -473,84 +462,84 @@ STDY Standardization
 Within Level
 
  POSITIVE BY
-    SCS_POS_1          0.631      0.013     48.974      0.000
-    SCS_POS_3          0.270      0.023     11.513      0.000
-    SCS_POS_6          0.584      0.013     43.604      0.000
-    SCS_POS_7          0.635      0.013     47.789      0.000
+    SCS_POS_1          0.631      0.006    103.097      0.000
+    SCS_POS_3          0.270      0.008     33.602      0.000
+    SCS_POS_6          0.584      0.006     91.909      0.000
+    SCS_POS_7          0.635      0.006    104.279      0.000
 
  NEGATIVE BY
-    SCS_NEG_2          0.708      0.010     70.152      0.000
-    SCS_NEG_4          0.585      0.012     46.808      0.000
-    SCS_NEG_5          0.675      0.011     59.259      0.000
-    SCS_NEG_8          0.291      0.020     14.462      0.000
+    SCS_NEG_2          0.708      0.005    132.607      0.000
+    SCS_NEG_4          0.585      0.006     95.549      0.000
+    SCS_NEG_5          0.675      0.006    122.575      0.000
+    SCS_NEG_8          0.291      0.008     37.234      0.000
 
  POSITIVESE ON
-    NEG_AFF_MO        -0.009      0.000    -18.591      0.000
-    NEG_AFF_DA        -0.010      0.001    -16.059      0.000
+    NEG_AFF_MO        -0.009      0.000    -31.162      0.000
+    NEG_AFF_DA        -0.010      0.000    -41.407      0.000
 
  NEGATIVESE ON
-    NEG_AFF_MO        -0.009      0.000    -17.855      0.000
-    NEG_AFF_DA        -0.010      0.001    -15.685      0.000
+    NEG_AFF_MO        -0.009      0.000    -33.545      0.000
+    NEG_AFF_DA        -0.010      0.000    -43.565      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.788      0.022     36.355      0.000
+    POSITIVESE         0.788      0.008     97.257      0.000
 
  Residual Variances
-    SCS_POS_1          0.601      0.016     36.953      0.000
-    SCS_NEG_2          0.498      0.014     34.810      0.000
-    SCS_POS_3          0.927      0.013     73.071      0.000
-    SCS_NEG_4          0.658      0.015     45.050      0.000
-    SCS_NEG_5          0.544      0.015     35.403      0.000
-    SCS_POS_6          0.659      0.016     42.137      0.000
-    SCS_POS_7          0.597      0.017     35.435      0.000
-    SCS_NEG_8          0.916      0.012     78.428      0.000
-    POSITIVESE         0.826      0.018     47.145      0.000
-    NEGATIVESE         0.822      0.019     44.124      0.000
+    SCS_POS_1          0.601      0.008     77.792      0.000
+    SCS_NEG_2          0.498      0.008     65.801      0.000
+    SCS_POS_3          0.927      0.004    213.263      0.000
+    SCS_NEG_4          0.658      0.007     91.961      0.000
+    SCS_NEG_5          0.544      0.007     73.231      0.000
+    SCS_POS_6          0.659      0.007     88.817      0.000
+    SCS_POS_7          0.597      0.008     77.321      0.000
+    SCS_NEG_8          0.916      0.005    201.926      0.000
+    POSITIVESE         0.826      0.007    126.481      0.000
+    NEGATIVESE         0.822      0.006    130.804      0.000
 
 Between Level
 
  POSITIVE BY
-    SCS_POS_1          0.903      0.017     52.274      0.000
-    SCS_POS_3          0.324      0.051      6.322      0.000
-    SCS_POS_6          0.751      0.033     22.938      0.000
-    SCS_POS_7          0.958      0.015     65.638      0.000
+    SCS_POS_1          0.903      0.011     79.019      0.000
+    SCS_POS_3          0.324      0.043      7.563      0.000
+    SCS_POS_6          0.751      0.023     33.366      0.000
+    SCS_POS_7          0.958      0.009    107.769      0.000
 
  NEGATIVE BY
-    SCS_NEG_2          0.951      0.011     87.311      0.000
-    SCS_NEG_4          0.797      0.023     34.359      0.000
-    SCS_NEG_5          0.943      0.012     81.504      0.000
-    SCS_NEG_8          0.282      0.055      5.163      0.000
+    SCS_NEG_2          0.951      0.008    118.214      0.000
+    SCS_NEG_4          0.797      0.019     42.567      0.000
+    SCS_NEG_5          0.943      0.008    111.630      0.000
+    SCS_NEG_8          0.282      0.044      6.394      0.000
 
  POSITIVESE ON
-    NEG_AFF_PE        -0.011      0.001    -10.696      0.000
+    NEG_AFF_PE        -0.011      0.001    -10.936      0.000
 
  NEGATIVESE ON
-    NEG_AFF_PE        -0.012      0.001    -12.318      0.000
+    NEG_AFF_PE        -0.012      0.001    -12.711      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.775      0.032     24.041      0.000
+    POSITIVESE         0.775      0.023     33.438      0.000
 
  Intercepts
-    SCS_POS_1          0.870      0.062     13.999      0.000
-    SCS_NEG_2          0.585      0.048     12.315      0.000
-    SCS_POS_3          0.997      0.067     14.907      0.000
-    SCS_NEG_4          0.020      0.042      0.462      0.644
-    SCS_NEG_5          0.518      0.045     11.438      0.000
-    SCS_POS_6          0.971      0.065     15.033      0.000
-    SCS_POS_7          0.574      0.052     10.974      0.000
-    SCS_NEG_8         -0.474      0.053     -8.883      0.000
+    SCS_POS_1          0.870      0.051     16.908      0.000
+    SCS_NEG_2          0.585      0.046     12.855      0.000
+    SCS_POS_3          0.997      0.056     17.932      0.000
+    SCS_NEG_4          0.020      0.043      0.458      0.647
+    SCS_NEG_5          0.518      0.045     11.587      0.000
+    SCS_POS_6          0.971      0.054     17.868      0.000
+    SCS_POS_7          0.574      0.046     12.420      0.000
+    SCS_NEG_8         -0.474      0.048     -9.825      0.000
 
  Residual Variances
-    SCS_POS_1          0.185      0.031      5.942      0.000
-    SCS_NEG_2          0.095      0.021      4.594      0.000
-    SCS_POS_3          0.895      0.033     26.980      0.000
-    SCS_NEG_4          0.365      0.037      9.893      0.000
-    SCS_NEG_5          0.110      0.022      5.045      0.000
-    SCS_POS_6          0.436      0.049      8.873      0.000
-    SCS_POS_7          0.082      0.028      2.928      0.003
-    SCS_NEG_8          0.921      0.031     29.984      0.000
-    POSITIVESE         0.827      0.034     24.586      0.000
-    NEGATIVESE         0.793      0.035     22.549      0.000
+    SCS_POS_1          0.185      0.021      8.982      0.000
+    SCS_NEG_2          0.095      0.015      6.220      0.000
+    SCS_POS_3          0.895      0.028     32.276      0.000
+    SCS_NEG_4          0.365      0.030     12.256      0.000
+    SCS_NEG_5          0.110      0.016      6.910      0.000
+    SCS_POS_6          0.436      0.034     12.907      0.000
+    SCS_POS_7          0.082      0.017      4.808      0.000
+    SCS_NEG_8          0.921      0.025     37.134      0.000
+    POSITIVESE         0.827      0.033     25.098      0.000
+    NEGATIVESE         0.793      0.034     23.207      0.000
 
 
 STD Standardization
@@ -561,84 +550,84 @@ STD Standardization
 Within Level
 
  POSITIVE BY
-    SCS_POS_1          0.732      0.021     35.216      0.000
-    SCS_POS_3          0.301      0.028     10.837      0.000
-    SCS_POS_6          0.657      0.020     33.031      0.000
-    SCS_POS_7          0.775      0.021     36.202      0.000
+    SCS_POS_1          0.732      0.009     80.660      0.000
+    SCS_POS_3          0.301      0.009     32.226      0.000
+    SCS_POS_6          0.657      0.009     74.305      0.000
+    SCS_POS_7          0.775      0.010     81.281      0.000
 
  NEGATIVE BY
-    SCS_NEG_2          0.919      0.021     43.838      0.000
-    SCS_NEG_4          0.775      0.023     34.408      0.000
-    SCS_NEG_5          0.874      0.022     39.946      0.000
-    SCS_NEG_8          0.374      0.028     13.547      0.000
+    SCS_NEG_2          0.919      0.010     94.953      0.000
+    SCS_NEG_4          0.775      0.010     76.198      0.000
+    SCS_NEG_5          0.874      0.010     90.128      0.000
+    SCS_NEG_8          0.374      0.011     35.401      0.000
 
  POSITIVESE ON
-    NEG_AFF_MO        -0.009      0.000    -18.591      0.000
-    NEG_AFF_DA        -0.010      0.001    -16.059      0.000
+    NEG_AFF_MO        -0.009      0.000    -31.162      0.000
+    NEG_AFF_DA        -0.010      0.000    -41.407      0.000
 
  NEGATIVESE ON
-    NEG_AFF_MO        -0.009      0.000    -17.855      0.000
-    NEG_AFF_DA        -0.010      0.001    -15.685      0.000
+    NEG_AFF_MO        -0.009      0.000    -33.545      0.000
+    NEG_AFF_DA        -0.010      0.000    -43.565      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.788      0.022     36.355      0.000
+    POSITIVESE         0.788      0.008     97.257      0.000
 
  Residual Variances
-    SCS_POS_1          0.809      0.029     28.122      0.000
-    SCS_NEG_2          0.839      0.028     29.679      0.000
-    SCS_POS_3          1.150      0.056     20.469      0.000
-    SCS_NEG_4          1.157      0.034     33.724      0.000
-    SCS_NEG_5          0.912      0.032     28.742      0.000
-    SCS_POS_6          0.835      0.031     27.087      0.000
-    SCS_POS_7          0.891      0.032     27.831      0.000
-    SCS_NEG_8          1.516      0.044     34.631      0.000
-    POSITIVESE         0.826      0.018     47.145      0.000
-    NEGATIVESE         0.822      0.019     44.124      0.000
+    SCS_POS_1          0.809      0.011     72.945      0.000
+    SCS_NEG_2          0.839      0.013     65.760      0.000
+    SCS_POS_3          1.150      0.012     93.178      0.000
+    SCS_NEG_4          1.157      0.014     80.792      0.000
+    SCS_NEG_5          0.912      0.013     71.290      0.000
+    SCS_POS_6          0.835      0.011     78.573      0.000
+    SCS_POS_7          0.891      0.012     72.722      0.000
+    SCS_NEG_8          1.516      0.016     93.147      0.000
+    POSITIVESE         0.826      0.007    126.481      0.000
+    NEGATIVESE         0.822      0.006    130.804      0.000
 
 Between Level
 
  POSITIVE BY
-    SCS_POS_1          0.901      0.040     22.454      0.000
-    SCS_POS_3          0.413      0.068      6.081      0.000
-    SCS_POS_6          0.730      0.049     15.018      0.000
-    SCS_POS_7          1.062      0.039     27.225      0.000
+    SCS_POS_1          0.901      0.037     24.666      0.000
+    SCS_POS_3          0.413      0.059      6.999      0.000
+    SCS_POS_6          0.730      0.039     18.531      0.000
+    SCS_POS_7          1.062      0.039     27.251      0.000
 
  NEGATIVE BY
-    SCS_NEG_2          1.274      0.042     30.403      0.000
-    SCS_NEG_4          1.065      0.049     21.789      0.000
-    SCS_NEG_5          1.278      0.040     32.251      0.000
-    SCS_NEG_8          0.301      0.061      4.946      0.000
+    SCS_NEG_2          1.274      0.047     27.285      0.000
+    SCS_NEG_4          1.065      0.052     20.477      0.000
+    SCS_NEG_5          1.278      0.048     26.896      0.000
+    SCS_NEG_8          0.301      0.050      6.026      0.000
 
  POSITIVESE ON
-    NEG_AFF_PE        -0.011      0.001    -10.696      0.000
+    NEG_AFF_PE        -0.011      0.001    -10.936      0.000
 
  NEGATIVESE ON
-    NEG_AFF_PE        -0.012      0.001    -12.318      0.000
+    NEG_AFF_PE        -0.012      0.001    -12.711      0.000
 
  NEGATIVE WITH
-    POSITIVESE         0.775      0.032     24.041      0.000
+    POSITIVESE         0.775      0.023     33.438      0.000
 
  Intercepts
-    SCS_POS_1          0.869      0.042     20.569      0.000
-    SCS_NEG_2          0.784      0.055     14.271      0.000
-    SCS_POS_3          1.273      0.057     22.208      0.000
-    SCS_NEG_4          0.026      0.057      0.461      0.645
-    SCS_NEG_5          0.702      0.056     12.446      0.000
-    SCS_POS_6          0.944      0.042     22.569      0.000
-    SCS_POS_7          0.636      0.047     13.538      0.000
-    SCS_NEG_8         -0.506      0.048    -10.474      0.000
+    SCS_POS_1          0.869      0.043     20.426      0.000
+    SCS_NEG_2          0.784      0.055     14.211      0.000
+    SCS_POS_3          1.273      0.058     22.122      0.000
+    SCS_NEG_4          0.026      0.057      0.459      0.647
+    SCS_NEG_5          0.702      0.056     12.551      0.000
+    SCS_POS_6          0.944      0.042     22.242      0.000
+    SCS_POS_7          0.636      0.047     13.645      0.000
+    SCS_NEG_8         -0.506      0.049    -10.389      0.000
 
  Residual Variances
-    SCS_POS_1          0.185      0.032      5.848      0.000
-    SCS_NEG_2          0.171      0.036      4.754      0.000
-    SCS_POS_3          1.459      0.104     13.990      0.000
-    SCS_NEG_4          0.653      0.064     10.275      0.000
-    SCS_NEG_5          0.202      0.039      5.127      0.000
-    SCS_POS_6          0.412      0.045      9.255      0.000
-    SCS_POS_7          0.101      0.035      2.868      0.004
-    SCS_NEG_8          1.052      0.071     14.796      0.000
-    POSITIVESE         0.827      0.034     24.586      0.000
-    NEGATIVESE         0.793      0.035     22.549      0.000
+    SCS_POS_1          0.185      0.018     10.044      0.000
+    SCS_NEG_2          0.171      0.026      6.647      0.000
+    SCS_POS_3          1.459      0.096     15.203      0.000
+    SCS_NEG_4          0.653      0.049     13.335      0.000
+    SCS_NEG_5          0.202      0.027      7.489      0.000
+    SCS_POS_6          0.412      0.031     13.279      0.000
+    SCS_POS_7          0.101      0.020      4.995      0.000
+    SCS_NEG_8          1.052      0.070     14.927      0.000
+    POSITIVESE         0.827      0.033     25.098      0.000
+    NEGATIVESE         0.793      0.034     23.207      0.000
 
 
 R-SQUARE
@@ -648,40 +637,40 @@ Within Level
     Observed                                        Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    SCS_POS_           0.399      0.016     24.487      0.000
-    SCS_NEG_           0.502      0.014     35.076      0.000
-    SCS_POS_           0.073      0.013      5.757      0.000
-    SCS_NEG_           0.342      0.015     23.404      0.000
-    SCS_NEG_           0.456      0.015     29.629      0.000
-    SCS_POS_           0.341      0.016     21.802      0.000
-    SCS_POS_           0.403      0.017     23.895      0.000
-    SCS_NEG_           0.084      0.012      7.231      0.000
+    SCS_POS_           0.399      0.008     51.549      0.000
+    SCS_NEG_           0.502      0.008     66.304      0.000
+    SCS_POS_           0.073      0.004     16.801      0.000
+    SCS_NEG_           0.342      0.007     47.775      0.000
+    SCS_NEG_           0.456      0.007     61.288      0.000
+    SCS_POS_           0.341      0.007     45.954      0.000
+    SCS_POS_           0.403      0.008     52.139      0.000
+    SCS_NEG_           0.084      0.005     18.617      0.000
 
      Latent                                         Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    POSITIVE           0.174      0.018      9.902      0.000
-    NEGATIVE           0.178      0.019      9.524      0.000
+    POSITIVE           0.174      0.007     26.565      0.000
+    NEGATIVE           0.178      0.006     28.234      0.000
 
 Between Level
 
     Observed                                        Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    SCS_POS_           0.815      0.031     26.137      0.000
-    SCS_NEG_           0.905      0.021     43.656      0.000
-    SCS_POS_           0.105      0.033      3.161      0.002
-    SCS_NEG_           0.635      0.037     17.179      0.000
-    SCS_NEG_           0.890      0.022     40.752      0.000
-    SCS_POS_           0.564      0.049     11.469      0.000
-    SCS_POS_           0.918      0.028     32.819      0.000
-    SCS_NEG_           0.079      0.031      2.581      0.010
+    SCS_POS_           0.815      0.021     39.509      0.000
+    SCS_NEG_           0.905      0.015     59.107      0.000
+    SCS_POS_           0.105      0.028      3.782      0.000
+    SCS_NEG_           0.635      0.030     21.284      0.000
+    SCS_NEG_           0.890      0.016     55.815      0.000
+    SCS_POS_           0.564      0.034     16.683      0.000
+    SCS_POS_           0.918      0.017     53.884      0.000
+    SCS_NEG_           0.079      0.025      3.197      0.001
 
      Latent                                         Two-Tailed
     Variable        Estimate       S.E.  Est./S.E.    P-Value
 
-    POSITIVE           0.173      0.034      5.157      0.000
-    NEGATIVE           0.207      0.035      5.900      0.000
+    POSITIVE           0.173      0.033      5.264      0.000
+    NEGATIVE           0.207      0.034      6.072      0.000
 
 
 MODEL MODIFICATION INDICES
@@ -698,42 +687,60 @@ Within Level
 
 BY Statements
 
-POSITIVE BY SCS_NEG_              21.560    -0.330     -0.242       -0.186
-POSITIVE BY SCS_NEG_              18.192     0.289      0.211        0.163
-NEGATIVE BY SCS_POS_              27.958    -0.271     -0.249       -0.215
-NEGATIVE BY SCS_POS_              58.459     0.311      0.286        0.257
+POSITIVE BY SCS_NEG_              41.865    -0.330     -0.242       -0.186
+POSITIVE BY SCS_NEG_              35.324     0.289      0.211        0.163
+POSITIVE BY SCS_NEG_              18.236    -0.181     -0.133       -0.103
+NEGATIVE BY SCS_POS_              54.288    -0.271     -0.249       -0.215
+NEGATIVE BY SCS_POS_             113.514     0.311      0.286        0.257
+NEGATIVE BY SCS_POS_              10.611     0.109      0.100        0.089
 
 WITH Statements
 
-SCS_NEG_ WITH SCS_POS_            39.083    -0.073     -0.073       -0.088
-SCS_POS_ WITH SCS_POS_            35.369    -0.069     -0.069       -0.071
-SCS_POS_ WITH SCS_NEG_            31.935     0.067      0.067        0.068
-SCS_NEG_ WITH SCS_POS_            11.644     0.042      0.042        0.043
-SCS_NEG_ WITH SCS_POS_            20.845    -0.059     -0.059       -0.051
-SCS_NEG_ WITH SCS_POS_            37.301     0.073      0.073        0.072
-SCS_NEG_ WITH SCS_NEG_            11.682    -0.052     -0.052       -0.050
-SCS_POS_ WITH SCS_NEG_            15.568     0.045      0.045        0.053
-SCS_POS_ WITH SCS_POS_            23.753     0.055      0.055        0.057
-SCS_POS_ WITH SCS_POS_            83.067     0.127      0.127        0.150
-SCS_POS_ WITH SCS_NEG_            14.045    -0.046     -0.046       -0.053
-SCS_POS_ WITH SCS_POS_            47.785    -0.084     -0.084       -0.083
-SCS_POS_ WITH SCS_POS_            15.745    -0.051     -0.051       -0.059
-SCS_NEG_ WITH SCS_POS_            65.576    -0.103     -0.103       -0.093
-SCS_NEG_ WITH SCS_POS_            14.972     0.049      0.049        0.044
+SCS_NEG_ WITH SCS_POS_            75.890    -0.073     -0.073       -0.088
+SCS_POS_ WITH SCS_POS_            68.678    -0.069     -0.069       -0.071
+SCS_POS_ WITH SCS_NEG_            62.010     0.067      0.067        0.068
+SCS_NEG_ WITH SCS_POS_            22.609     0.042      0.042        0.043
+SCS_NEG_ WITH SCS_POS_            40.476    -0.059     -0.059       -0.051
+SCS_NEG_ WITH SCS_POS_            72.429     0.073      0.073        0.072
+SCS_NEG_ WITH SCS_NEG_            22.683    -0.052     -0.052       -0.050
+SCS_POS_ WITH SCS_NEG_            30.229     0.045      0.045        0.053
+SCS_POS_ WITH SCS_POS_            46.122     0.055      0.055        0.057
+SCS_POS_ WITH SCS_NEG_            12.441    -0.030     -0.030       -0.031
+SCS_POS_ WITH SCS_POS_           161.297     0.127      0.127        0.150
+SCS_POS_ WITH SCS_NEG_            27.272    -0.046     -0.046       -0.053
+SCS_POS_ WITH SCS_POS_            92.787    -0.084     -0.084       -0.083
+SCS_POS_ WITH SCS_NEG_            18.043     0.037      0.037        0.041
+SCS_POS_ WITH SCS_POS_            30.573    -0.051     -0.051       -0.059
+SCS_NEG_ WITH SCS_POS_           127.333    -0.103     -0.103       -0.093
+SCS_NEG_ WITH SCS_NEG_            18.929     0.045      0.045        0.040
+SCS_NEG_ WITH SCS_POS_            29.073     0.049      0.049        0.044
+SCS_NEG_ WITH SCS_POS_            13.837    -0.036     -0.036       -0.031
 
 Between Level
 
 BY Statements
 
-POSITIVE BY SCS_NEG_              20.498    -0.499     -0.450       -0.336
-POSITIVE BY SCS_NEG_              15.114     0.431      0.388        0.287
-NEGATIVE BY SCS_POS_              12.828     0.253      0.323        0.332
+POSITIVE BY SCS_NEG_              39.803    -0.499     -0.450       -0.336
+POSITIVE BY SCS_NEG_              29.348     0.431      0.388        0.287
+POSITIVE BY SCS_NEG_              17.118    -0.437     -0.394       -0.369
+NEGATIVE BY SCS_POS_              12.523    -0.176     -0.224       -0.224
+NEGATIVE BY SCS_POS_              13.140     0.315      0.402        0.315
+NEGATIVE BY SCS_POS_              24.910     0.253      0.323        0.332
 
 WITH Statements
 
-SCS_NEG_ WITH SCS_NEG_            16.703    -0.175     -0.175       -0.483
-SCS_POS_ WITH SCS_NEG_            18.189     0.107      0.107        0.404
-SCS_POS_ WITH SCS_POS_            24.406     0.223      0.223        1.638
+SCS_NEG_ WITH SCS_POS_            17.744    -0.059     -0.059       -0.333
+SCS_NEG_ WITH SCS_NEG_            14.543     0.117      0.117        0.350
+SCS_NEG_ WITH SCS_POS_            12.594     0.051      0.051        0.265
+SCS_NEG_ WITH SCS_NEG_            32.433    -0.175     -0.175       -0.483
+SCS_POS_ WITH SCS_NEG_            35.318     0.107      0.107        0.404
+SCS_POS_ WITH SCS_POS_            12.401     0.134      0.134        0.173
+SCS_POS_ WITH SCS_NEG_            18.335    -0.080     -0.080       -0.276
+SCS_POS_ WITH SCS_POS_            47.392     0.223      0.223        1.638
+SCS_POS_ WITH SCS_NEG_            13.669    -0.054     -0.054       -0.410
+SCS_POS_ WITH SCS_POS_            13.763    -0.113     -0.113       -0.294
+SCS_NEG_ WITH SCS_POS_            15.663    -0.098     -0.098       -0.222
+SCS_NEG_ WITH SCS_POS_            16.863     0.133      0.133        0.203
 
 
 TECHNICAL 1 OUTPUT
@@ -1080,8 +1087,8 @@ TECHNICAL 8 OUTPUT
               4 -0.25157898D+06    0.0000007    0.0000000  EM
 
 
-     Beginning Time:  11:33:52
-        Ending Time:  11:33:53
+     Beginning Time:  15:22:16
+        Ending Time:  15:22:17
        Elapsed Time:  00:00:01
 
 
