@@ -1,0 +1,29 @@
+TITLE: Multilevel One-Factor Model (No Regressions on Negative Affect);
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE: 
+  NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8;
+  USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
+    scs_pos_7 scs_neg_8;
+  CLUSTER = user_id;  ! Clustering at the subject level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = ML;  ! Maximum likelihood estimation 
+
+MODEL:
+  %WITHIN%  ! Level 1: Within-subject and within-day variation
+    SelfCompassion_w BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
+      scs_pos_6 scs_pos_7 scs_neg_8;
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    SelfCompassion_b BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
+      scs_pos_6 scs_pos_7 scs_neg_8;
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;

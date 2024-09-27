@@ -1,6 +1,6 @@
 Mplus VERSION 8.6 (Mac)
 MUTHEN & MUTHEN
-09/25/2024   3:22 PM
+09/26/2024   9:46 AM
 
 INPUT INSTRUCTIONS
 
@@ -39,13 +39,6 @@ INPUT INSTRUCTIONS
 
   OUTPUT:
     TECH1 TECH8 STANDARDIZED MODINDICES;
-
-
-
-
-
-
-
 
 
 
@@ -984,9 +977,9 @@ TECHNICAL 8 OUTPUT
               4 -0.25157898D+06    0.0000007    0.0000000  EM
 
 
-     Beginning Time:  15:22:13
-        Ending Time:  15:22:13
-       Elapsed Time:  00:00:00
+     Beginning Time:  09:46:20
+        Ending Time:  09:46:21
+       Elapsed Time:  00:00:01
 
 
 

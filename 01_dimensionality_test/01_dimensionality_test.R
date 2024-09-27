@@ -19,92 +19,23 @@ source(here::here("R", "importing_cleaning_data.R"))
 
 # Import and clean data ---------------------------------------------------
 
-study_1_df <- rio::import(here::here("data", "study_1_data.csv")) |>
-  dplyr::select(
-    "user_id", "day", "time_window", "scs_pos_1",
-    "scs_neg_2", "scs_pos_3", "scs_neg_4", "scs_neg_5",
-    "scs_pos_6", "scs_pos_7", "scs_neg_8",
-    "neg_aff_Moment", "neg_aff_Day", "neg_aff_Person"
-  )
+df <- get_data(reverse_coding_ucs = 1)
 
-
-study_2_temp <- rio::import(here::here("data", "study_2_data.csv"))
-# Add negative affect scaled by occasion, day, person
-study_2_temp <- center3L(
-  dataname = study_2_temp,
-  varname = neg_aff, 
-  idname = user_id, 
-  dayname = day
-)
-
-study_2_df <- study_2_temp |>
-  dplyr::select(
-    "user_id", "day", "time_window", "scs_pos_1",
-    "scs_neg_2", "scs_pos_3", "scs_neg_4", "scs_neg_5",
-    "scs_pos_6", "scs_pos_7", "scs_neg_8",
-    "neg_aff_Moment", "neg_aff_Day", "neg_aff_Person"
-  )
-
-# Combine the two studies
-df <- bind_rows(study_1_df, study_2_df)
 length(unique(df$user_id))
 # [1] 495
 
-# Identify the columns that contain "scs_neg_" in their names
-neg_items <- grep("scs_neg_", colnames(df), value = TRUE)
+df |> 
+  dplyr::select(starts_with("scs_")) |> 
+  cor() |> 
+  round(2)
 
-# Invert the values for all "scs_neg_" columns (assuming the maximum score is 3)
-df[neg_items] <- 3 - df[neg_items]
-
-cor(df[, 4:11]) |> round(2)
-
-# Renaming the "scs_pos_" and "scs_neg_" columns in the desired sequence
-colnames(df)[colnames(df) == "scs_pos_1"] <- "scs_pos_1"
-colnames(df)[colnames(df) == "scs_pos_3"] <- "scs_pos_2"
-colnames(df)[colnames(df) == "scs_pos_6"] <- "scs_pos_3"
-colnames(df)[colnames(df) == "scs_pos_7"] <- "scs_pos_4"
-
-colnames(df)[colnames(df) == "scs_neg_2"] <- "scs_neg_1"
-colnames(df)[colnames(df) == "scs_neg_4"] <- "scs_neg_2"
-colnames(df)[colnames(df) == "scs_neg_5"] <- "scs_neg_3"
-colnames(df)[colnames(df) == "scs_neg_8"] <- "scs_neg_4"
-
-# Check the updated column names
-names(df)
-
-df$scs_neg_1 <- df$scs_neg_1 - 3
-df$scs_neg_2 <- df$scs_neg_2 - 3
-df$scs_neg_3 <- df$scs_neg_3 - 3
-df$scs_neg_4 <- df$scs_neg_4 - 3
-
-hist(df$neg_aff_Person)
-hist(df$neg_aff_Day)
-hist(df$neg_aff_Moment)
-
-# Assuming df is your data frame
-
-# Function to vincentize a variable (cap at 5th and 95th percentiles)
-vincentize <- function(x) {
-  lower <- quantile(x, 0.01, na.rm = TRUE)  # 5th percentile
-  upper <- quantile(x, 0.99, na.rm = TRUE)  # 95th percentile
-  x <- ifelse(x < lower, lower, x)  # Cap at the lower bound
-  x <- ifelse(x > upper, upper, x)  # Cap at the upper bound
-  return(x)
-}
-
-# Apply vincentizing to the relevant columns
-df$neg_aff_Moment <- vincentize(df$neg_aff_Moment)
-df$neg_aff_Day <- vincentize(df$neg_aff_Day)
-df$neg_aff_Person <- vincentize(df$neg_aff_Person)
-
-# Scale negative affect components
-df$neg_aff_Moment <- scale(df$neg_aff_Moment) |> as.numeric()
-df$neg_aff_Day <- scale(df$neg_aff_Day) |> as.numeric()
-df$neg_aff_Person <- scale(df$neg_aff_Person) |> as.numeric()
-
-hist(df$neg_aff_Person)
-hist(df$neg_aff_Day)
-hist(df$neg_aff_Moment)
+# hist(df$neg_aff_Person)
+# hist(df$neg_aff_Day)
+# hist(df$neg_aff_Moment)
+# 
+# hist(df$context_Person)
+# hist(df$context_Day)
+# hist(df$context_Moment)
 
 
 # Generate a tab-delimited file -------------------------------------------
@@ -121,25 +52,25 @@ MplusAutomation::prepareMplusData(
 # Models comparison -------------------------------------------------------
 
 MplusAutomation::runModels(
-  here::here("01_dimensionality_test", "mplus_models", "one_factor_3.inp"),
+  here::here("01_dimensionality_test", "mplus_models", "one_factor_0.inp"),
   showOutput = TRUE
 )
 
 MplusAutomation::runModels(
-  here::here("01_dimensionality_test", "mplus_models", "two_factor_3.inp"),
+  here::here("01_dimensionality_test", "mplus_models", "two_factor_0.inp"),
   showOutput = TRUE
 )
 
 MplusAutomation::runModels(
-  here::here("01_dimensionality_test", "mplus_models", "bifactor_model.inp"),
+  here::here("01_dimensionality_test", "mplus_models", "bifactor_model_0.inp"),
   showOutput = TRUE
 )
 
 # Define paths to the .out files
 model_files <- c(
-  here("01_dimensionality_test", "mplus_models", "one_factor_3.out"),
-  here("01_dimensionality_test", "mplus_models", "two_factor_3.out"),
-  here("01_dimensionality_test", "mplus_models", "bifactor_model.out")
+  here("01_dimensionality_test", "mplus_models", "one_factor_0.out"),
+  here("01_dimensionality_test", "mplus_models", "two_factor_0.out"),
+  here("01_dimensionality_test", "mplus_models", "bifactor_model_0.out")
 )
 
 # Initialize an empty list to store model summaries
@@ -194,8 +125,8 @@ cat("p-value:", p_value_two_vs_bifactor, "\n")
 
 # Define paths to the .out files
 model_files <- c(
-  here("01_dimensionality_test", "mplus_models", "one_factor_3.out"),
-  here("01_dimensionality_test", "mplus_models", "two_factor_3.out"),
+  here("01_dimensionality_test", "mplus_models", "one_factor.out"),
+  here("01_dimensionality_test", "mplus_models", "two_factor.out"),
   here("01_dimensionality_test", "mplus_models", "bifactor_model.out")
 )
 
@@ -237,7 +168,8 @@ print(standardized_df)
 # Create a table with key parameters for reporting
 kable(standardized_df, format = "markdown", 
       col.names = c("Model", "Parameter Type", "Parameter", "Estimate", "SE"),
-      caption = "Standardized Parameter Estimates for One-Factor, Two-Factor, and Bifactor Models")
+      caption = "Standardized Parameter Estimates for One-Factor, 
+      Two-Factor, and Bifactor Models")
 
 
 # Save as CSV
@@ -255,17 +187,20 @@ kable(standardized_df, format = "markdown",
 
 # Create a table for the One-Factor model
 kable(standardized_list[[1]], format = "markdown", 
-      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
+      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", 
+                    "Estimate/SE", "p-value", "Between/Within"),
       caption = "Standardized Parameter Estimates for One-Factor Model")
 
 # Create a table for the Two-Factor model
 kable(standardized_list[[2]], format = "markdown", 
-      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
+      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", 
+                    "Estimate/SE", "p-value", "Between/Within"),
       caption = "Standardized Parameter Estimates for Two-Factor Model")
 
 # Create a table for the Bifactor model
 kable(standardized_list[[3]], format = "markdown", 
-      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", "Estimate/SE", "p-value", "Between/Within"),
+      col.names = c("Parameter Type", "Parameter", "Estimate", "SE", 
+                    "Estimate/SE", "p-value", "Between/Within"),
       caption = "Standardized Parameter Estimates for Bifactor Model")
 
 
@@ -273,9 +208,12 @@ kable(standardized_list[[3]], format = "markdown",
 # semPlot -----------------------------------------------------------------
 
 # Load the models directly from the Mplus output files
-one_factor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", "one_factor_3.out"))
-two_factor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", "two_factor_3.out"))
-bifactor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", "bifactor_model.out"))
+one_factor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", 
+                                      "one_factor.out"))
+two_factor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", 
+                                      "two_factor.out"))
+bifactor_model <- semPlotModel(here("01_dimensionality_test", "mplus_models", 
+                                    "bifactor_model.out"))
 
 # Now you can plot the path diagrams
 # One-Factor Model

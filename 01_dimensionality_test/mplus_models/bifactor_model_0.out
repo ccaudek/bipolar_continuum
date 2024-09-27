@@ -1,0 +1,1584 @@
+Mplus VERSION 8.6 (Mac)
+MUTHEN & MUTHEN
+09/26/2024  11:10 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Multilevel Bifactor Model (No Regressions on Negative Affect);
+
+  DATA:
+    FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+  VARIABLE:
+    NAMES = uid day tw scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    USEVARIABLES = scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    CLUSTER = uid;
+
+    MISSING = .;
+
+  ANALYSIS:
+    TYPE = TWOLEVEL;
+    ESTIMATOR = ML;
+
+  MODEL:
+    %WITHIN%
+      Gen_w BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+      Pos_w BY scp1* scp3 scp6 scp7;
+      Neg_w BY scn2* scn4 scn5 scn8;
+
+      ! Fix variances to help with model identification
+      Gen_w@1;  ! Fix variance of the general factor
+      Pos_w@1;  ! Constrain variance of the positive factor
+      Neg_w@1;  ! Constrain variance of the negative factor
+
+      ! Ensure no covariance between factors
+      Pos_w WITH Gen_w@0;
+      Neg_w WITH Gen_w@0;
+      Pos_w WITH Neg_w@0;
+
+    %BETWEEN%
+      Gen_b BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+      Pos_b BY scp1* scp3 scp6 scp7;
+      Neg_b BY scn2* scn4 scn5 scn8;
+
+      ! Fix variances on the between level as well
+      Gen_b@1;  ! Fix variance of the general factor
+      Pos_b@1;  ! Constrain variance of the positive factor
+      Neg_b@1;  ! Constrain variance of the negative factor
+
+      ! Ensure no covariance between factors
+      Pos_b WITH Gen_b@0;
+      Neg_b WITH Gen_b@0;
+      Pos_b WITH Neg_b@0;
+
+  OUTPUT:
+    TECH1 TECH8 STANDARDIZED MODINDICES(ALL);
+
+
+
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      SCP1        341 3 156 273 316 169 163 485 71
+      SCN2        341 352 3 156 316 6 485 294 28 285
+      SCP3        313 405 58 3 390 171 273 97 258 398 206 106 105 6 184 166 492 274 14 473 475
+                  414 471 372 45 284 145 89 165 277 148 122 292 168 29 123
+      SCN4        3 156 316 169 184 89 28 375
+      SCN5        224 341 3 156 273 125 197 137 285
+      SCP6        156 169 237 191
+      SCP7        224 3 156 316 375 252
+      SCN8        325 352
+
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Multilevel Bifactor Model (No Regressions on Negative Affect);
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       18842
+
+Number of dependent variables                                    8
+Number of independent variables                                  0
+Number of continuous latent variables                            6
+
+Observed dependent variables
+
+  Continuous
+   SCP1        SCN2        SCP3        SCN4        SCN5        SCP6
+   SCP7        SCN8
+
+Continuous latent variables
+   GEN_W       POS_W       NEG_W       GEN_B       POS_B       NEG_B
+
+Variables with special functions
+
+  Cluster variable      UID
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  /Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        495
+
+     Average cluster size       38.065
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     SCP1         0.424      SCN2         0.514      SCP3         0.567
+     SCN4         0.504      SCN5         0.522      SCP6         0.426
+     SCP7         0.449      SCN8         0.408
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+ SCP1           1.000
+ SCN2           1.000         1.000
+ SCP3           1.000         1.000         1.000
+ SCN4           1.000         1.000         1.000         1.000
+ SCN5           1.000         1.000         1.000         1.000         1.000
+ SCP6           1.000         1.000         1.000         1.000         1.000
+ SCP7           1.000         1.000         1.000         1.000         1.000
+ SCN8           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+ SCP6           1.000
+ SCP7           1.000         1.000
+ SCN8           1.000         1.000         1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     SCP1                  0.887      -0.778      -3.000    2.39%      -1.000      1.000      1.000
+           18842.000       2.322      -0.275       3.000   10.01%       2.000      2.000
+     SCN2                  0.835      -0.488      -3.000    3.94%      -1.000      1.000      1.000
+           18842.000       3.377      -1.058       3.000   21.73%       2.000      3.000
+     SCP3                  1.287      -1.025      -3.000    3.66%      -1.000      1.000      2.000
+           18842.000       2.866       0.078       3.000   27.08%       2.000      3.000
+     SCN4                  0.051       0.063      -3.000    7.77%      -2.000     -1.000     -1.000
+           18842.000       3.547      -1.323       3.000   10.94%       1.000      2.000
+     SCN5                  0.749      -0.416      -3.000    4.26%      -1.000      1.000      1.000
+           18842.000       3.431      -1.138       3.000   20.55%       2.000      3.000
+     SCP6                  0.956      -0.856      -3.000    1.85%      -1.000      1.000      1.000
+           18842.000       2.192      -0.099       3.000    9.74%       2.000      2.000
+     SCP7                  0.662      -0.601      -3.000    3.77%      -1.000      1.000      1.000
+           18842.000       2.675      -0.728       3.000    8.61%       1.000      2.000
+     SCN8                 -0.474       0.549      -3.000    6.96%      -2.000     -1.000     -1.000
+           18842.000       2.778      -0.810       3.000    5.19%      -1.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       56
+
+Loglikelihood
+
+          H0 Value                     -237132.358
+          H1 Value                     -236936.284
+
+Information Criteria
+
+          Akaike (AIC)                  474376.716
+          Bayesian (BIC)                474815.971
+          Sample-Size Adjusted BIC      474638.006
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            392.148
+          Degrees of Freedom                    24
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.029
+
+CFI/TLI
+
+          CFI                                0.987
+          TLI                                0.971
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          29285.383
+          Degrees of Freedom                    56
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.016
+          Value for Between                  0.031
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ GEN_W    BY
+    SCP1               0.713      0.011     66.362      0.000
+    SCN2               0.752      0.011     65.432      0.000
+    SCP3               0.364      0.011     33.298      0.000
+    SCN4               0.650      0.012     56.089      0.000
+    SCN5               0.758      0.011     67.530      0.000
+    SCP6               0.656      0.009     70.469      0.000
+    SCP7               0.761      0.011     66.997      0.000
+    SCN8               0.271      0.012     23.031      0.000
+
+ POS_W    BY
+    SCP1               0.255      0.024     10.428      0.000
+    SCP3              -0.348      0.040     -8.606      0.000
+    SCP6              -0.010      0.020     -0.482      0.630
+    SCP7               0.300      0.028     10.888      0.000
+
+ NEG_W    BY
+    SCN2               0.615      0.021     29.615      0.000
+    SCN4               0.386      0.018     21.765      0.000
+    SCN5               0.402      0.018     22.761      0.000
+    SCN8               0.267      0.017     15.583      0.000
+
+ POS_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+    NEG_W              0.000      0.000    999.000    999.000
+
+ NEG_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+
+ Variances
+    GEN_W              1.000      0.000    999.000    999.000
+    POS_W              1.000      0.000    999.000    999.000
+    NEG_W              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.774      0.014     56.911      0.000
+    SCN2               0.744      0.022     33.770      0.000
+    SCP3               0.987      0.032     31.049      0.000
+    SCN4               1.189      0.015     78.335      0.000
+    SCN5               0.942      0.014     69.230      0.000
+    SCP6               0.838      0.011     73.732      0.000
+    SCP7               0.825      0.017     49.151      0.000
+    SCN8               1.512      0.017     89.798      0.000
+
+Between Level
+
+ GEN_B    BY
+    SCP1               0.857      0.041     20.850      0.000
+    SCN2               1.035      0.056     18.443      0.000
+    SCP3               0.523      0.065      8.040      0.000
+    SCN4               0.933      0.057     16.410      0.000
+    SCN5               1.108      0.054     20.493      0.000
+    SCP6               0.757      0.042     18.160      0.000
+    SCP7               1.032      0.044     23.607      0.000
+    SCN8               0.153      0.053      2.865      0.004
+
+ POS_B    BY
+    SCP1               0.214      0.062      3.461      0.001
+    SCP3              -0.420      0.147     -2.863      0.004
+    SCP6              -0.071      0.074     -0.960      0.337
+    SCP7               0.356      0.094      3.794      0.000
+
+ NEG_B    BY
+    SCN2               0.837      0.048     17.420      0.000
+    SCN4               0.505      0.054      9.369      0.000
+    SCN5               0.571      0.048     11.892      0.000
+    SCN8               0.308      0.058      5.347      0.000
+
+ POS_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+    NEG_B              0.000      0.000    999.000    999.000
+
+ NEG_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+
+ Intercepts
+    SCP1               0.870      0.046     19.015      0.000
+    SCN2               0.784      0.061     12.866      0.000
+    SCP3               1.273      0.058     21.936      0.000
+    SCN4               0.027      0.061      0.435      0.664
+    SCN5               0.702      0.062     11.382      0.000
+    SCP6               0.943      0.044     21.203      0.000
+    SCP7               0.637      0.051     12.590      0.000
+    SCN8              -0.506      0.049    -10.310      0.000
+
+ Variances
+    GEN_B              1.000      0.000    999.000    999.000
+    POS_B              1.000      0.000    999.000    999.000
+    NEG_B              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.212      0.028      7.538      0.000
+    SCN2               0.015      0.047      0.320      0.749
+    SCP3               1.178      0.154      7.647      0.000
+    SCN4               0.664      0.048     13.933      0.000
+    SCN5               0.277      0.030      9.230      0.000
+    SCP6               0.361      0.041      8.713      0.000
+    SCP7               0.028      0.051      0.543      0.587
+    SCN8               1.023      0.070     14.612      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.279E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ GEN_W    BY
+    SCP1               0.614      0.008     77.645      0.000
+    SCN2               0.579      0.008     76.689      0.000
+    SCP3               0.327      0.009     34.795      0.000
+    SCN4               0.490      0.008     63.348      0.000
+    SCN5               0.585      0.007     80.012      0.000
+    SCP6               0.583      0.007     85.100      0.000
+    SCP7               0.623      0.008     78.531      0.000
+    SCN8               0.210      0.009     23.532      0.000
+
+ POS_W    BY
+    SCP1               0.219      0.021     10.449      0.000
+    SCP3              -0.313      0.036     -8.627      0.000
+    SCP6              -0.009      0.018     -0.482      0.630
+    SCP7               0.246      0.023     10.912      0.000
+
+ NEG_W    BY
+    SCN2               0.473      0.016     30.053      0.000
+    SCN4               0.291      0.013     22.033      0.000
+    SCN5               0.310      0.013     22.996      0.000
+    SCN8               0.208      0.013     15.726      0.000
+
+ POS_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+    NEG_W              0.000      0.000    999.000    999.000
+
+ NEG_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+
+ Variances
+    GEN_W              1.000      0.000    999.000    999.000
+    POS_W              1.000      0.000    999.000    999.000
+    NEG_W              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.575      0.010     58.474      0.000
+    SCN2               0.441      0.013     33.526      0.000
+    SCP3               0.795      0.025     32.061      0.000
+    SCN4               0.675      0.008     89.535      0.000
+    SCN5               0.561      0.008     71.557      0.000
+    SCP6               0.661      0.008     81.945      0.000
+    SCP7               0.552      0.011     49.838      0.000
+    SCN8               0.913      0.005    171.426      0.000
+
+Between Level
+
+ GEN_B    BY
+    SCP1               0.860      0.022     39.090      0.000
+    SCN2               0.774      0.025     31.376      0.000
+    SCP3               0.410      0.046      8.886      0.000
+    SCN4               0.697      0.028     25.297      0.000
+    SCN5               0.819      0.020     40.372      0.000
+    SCP6               0.781      0.026     30.058      0.000
+    SCP7               0.935      0.020     47.839      0.000
+    SCN8               0.143      0.049      2.905      0.004
+
+ POS_B    BY
+    SCP1               0.215      0.062      3.462      0.001
+    SCP3              -0.329      0.114     -2.889      0.004
+    SCP6              -0.073      0.076     -0.960      0.337
+    SCP7               0.322      0.085      3.776      0.000
+
+ NEG_B    BY
+    SCN2               0.626      0.037     16.976      0.000
+    SCN4               0.378      0.039      9.730      0.000
+    SCN5               0.422      0.036     11.879      0.000
+    SCN8               0.288      0.052      5.587      0.000
+
+ POS_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+    NEG_B              0.000      0.000    999.000    999.000
+
+ NEG_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+
+ Intercepts
+    SCP1               0.873      0.054     16.071      0.000
+    SCN2               0.587      0.050     11.828      0.000
+    SCP3               0.998      0.056     17.832      0.000
+    SCN4               0.020      0.046      0.435      0.664
+    SCN5               0.519      0.049     10.644      0.000
+    SCP6               0.973      0.056     17.303      0.000
+    SCP7               0.577      0.050     11.605      0.000
+    SCN8              -0.474      0.049     -9.758      0.000
+
+ Variances
+    GEN_B              1.000      0.000    999.000    999.000
+    POS_B              1.000      0.000    999.000    999.000
+    NEG_B              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.214      0.030      7.099      0.000
+    SCN2               0.008      0.026      0.320      0.749
+    SCP3               0.724      0.089      8.120      0.000
+    SCN4               0.371      0.029     12.761      0.000
+    SCN5               0.151      0.018      8.304      0.000
+    SCP6               0.385      0.045      8.472      0.000
+    SCP7               0.023      0.042      0.543      0.587
+    SCN8               0.896      0.030     29.902      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ GEN_W    BY
+    SCP1               0.614      0.008     77.645      0.000
+    SCN2               0.579      0.008     76.689      0.000
+    SCP3               0.327      0.009     34.795      0.000
+    SCN4               0.490      0.008     63.348      0.000
+    SCN5               0.585      0.007     80.012      0.000
+    SCP6               0.583      0.007     85.100      0.000
+    SCP7               0.623      0.008     78.531      0.000
+    SCN8               0.210      0.009     23.532      0.000
+
+ POS_W    BY
+    SCP1               0.219      0.021     10.449      0.000
+    SCP3              -0.313      0.036     -8.627      0.000
+    SCP6              -0.009      0.018     -0.482      0.630
+    SCP7               0.246      0.023     10.912      0.000
+
+ NEG_W    BY
+    SCN2               0.473      0.016     30.053      0.000
+    SCN4               0.291      0.013     22.033      0.000
+    SCN5               0.310      0.013     22.996      0.000
+    SCN8               0.208      0.013     15.726      0.000
+
+ POS_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+    NEG_W              0.000      0.000    999.000    999.000
+
+ NEG_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+
+ Variances
+    GEN_W              1.000      0.000    999.000    999.000
+    POS_W              1.000      0.000    999.000    999.000
+    NEG_W              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.575      0.010     58.474      0.000
+    SCN2               0.441      0.013     33.526      0.000
+    SCP3               0.795      0.025     32.061      0.000
+    SCN4               0.675      0.008     89.535      0.000
+    SCN5               0.561      0.008     71.557      0.000
+    SCP6               0.661      0.008     81.945      0.000
+    SCP7               0.552      0.011     49.838      0.000
+    SCN8               0.913      0.005    171.426      0.000
+
+Between Level
+
+ GEN_B    BY
+    SCP1               0.860      0.022     39.090      0.000
+    SCN2               0.774      0.025     31.376      0.000
+    SCP3               0.410      0.046      8.886      0.000
+    SCN4               0.697      0.028     25.297      0.000
+    SCN5               0.819      0.020     40.372      0.000
+    SCP6               0.781      0.026     30.058      0.000
+    SCP7               0.935      0.020     47.839      0.000
+    SCN8               0.143      0.049      2.905      0.004
+
+ POS_B    BY
+    SCP1               0.215      0.062      3.462      0.001
+    SCP3              -0.329      0.114     -2.889      0.004
+    SCP6              -0.073      0.076     -0.960      0.337
+    SCP7               0.322      0.085      3.776      0.000
+
+ NEG_B    BY
+    SCN2               0.626      0.037     16.976      0.000
+    SCN4               0.378      0.039      9.730      0.000
+    SCN5               0.422      0.036     11.879      0.000
+    SCN8               0.288      0.052      5.587      0.000
+
+ POS_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+    NEG_B              0.000      0.000    999.000    999.000
+
+ NEG_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+
+ Intercepts
+    SCP1               0.873      0.054     16.071      0.000
+    SCN2               0.587      0.050     11.828      0.000
+    SCP3               0.998      0.056     17.832      0.000
+    SCN4               0.020      0.046      0.435      0.664
+    SCN5               0.519      0.049     10.644      0.000
+    SCP6               0.973      0.056     17.303      0.000
+    SCP7               0.577      0.050     11.605      0.000
+    SCN8              -0.474      0.049     -9.758      0.000
+
+ Variances
+    GEN_B              1.000      0.000    999.000    999.000
+    POS_B              1.000      0.000    999.000    999.000
+    NEG_B              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.214      0.030      7.099      0.000
+    SCN2               0.008      0.026      0.320      0.749
+    SCP3               0.724      0.089      8.120      0.000
+    SCN4               0.371      0.029     12.761      0.000
+    SCN5               0.151      0.018      8.304      0.000
+    SCP6               0.385      0.045      8.472      0.000
+    SCP7               0.023      0.042      0.543      0.587
+    SCN8               0.896      0.030     29.902      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ GEN_W    BY
+    SCP1               0.713      0.011     66.362      0.000
+    SCN2               0.752      0.011     65.432      0.000
+    SCP3               0.364      0.011     33.298      0.000
+    SCN4               0.650      0.012     56.089      0.000
+    SCN5               0.758      0.011     67.530      0.000
+    SCP6               0.656      0.009     70.469      0.000
+    SCP7               0.761      0.011     66.997      0.000
+    SCN8               0.271      0.012     23.031      0.000
+
+ POS_W    BY
+    SCP1               0.255      0.024     10.428      0.000
+    SCP3              -0.348      0.040     -8.606      0.000
+    SCP6              -0.010      0.020     -0.482      0.630
+    SCP7               0.300      0.028     10.888      0.000
+
+ NEG_W    BY
+    SCN2               0.615      0.021     29.615      0.000
+    SCN4               0.386      0.018     21.765      0.000
+    SCN5               0.402      0.018     22.761      0.000
+    SCN8               0.267      0.017     15.583      0.000
+
+ POS_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+    NEG_W              0.000      0.000    999.000    999.000
+
+ NEG_W    WITH
+    GEN_W              0.000      0.000    999.000    999.000
+
+ Variances
+    GEN_W              1.000      0.000    999.000    999.000
+    POS_W              1.000      0.000    999.000    999.000
+    NEG_W              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.774      0.014     56.911      0.000
+    SCN2               0.744      0.022     33.770      0.000
+    SCP3               0.987      0.032     31.049      0.000
+    SCN4               1.189      0.015     78.335      0.000
+    SCN5               0.942      0.014     69.230      0.000
+    SCP6               0.838      0.011     73.732      0.000
+    SCP7               0.825      0.017     49.151      0.000
+    SCN8               1.512      0.017     89.798      0.000
+
+Between Level
+
+ GEN_B    BY
+    SCP1               0.857      0.041     20.850      0.000
+    SCN2               1.035      0.056     18.443      0.000
+    SCP3               0.523      0.065      8.040      0.000
+    SCN4               0.933      0.057     16.410      0.000
+    SCN5               1.108      0.054     20.493      0.000
+    SCP6               0.757      0.042     18.160      0.000
+    SCP7               1.032      0.044     23.607      0.000
+    SCN8               0.153      0.053      2.865      0.004
+
+ POS_B    BY
+    SCP1               0.214      0.062      3.461      0.001
+    SCP3              -0.420      0.147     -2.863      0.004
+    SCP6              -0.071      0.074     -0.960      0.337
+    SCP7               0.356      0.094      3.794      0.000
+
+ NEG_B    BY
+    SCN2               0.837      0.048     17.420      0.000
+    SCN4               0.505      0.054      9.369      0.000
+    SCN5               0.571      0.048     11.892      0.000
+    SCN8               0.308      0.058      5.347      0.000
+
+ POS_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+    NEG_B              0.000      0.000    999.000    999.000
+
+ NEG_B    WITH
+    GEN_B              0.000      0.000    999.000    999.000
+
+ Intercepts
+    SCP1               0.870      0.046     19.015      0.000
+    SCN2               0.784      0.061     12.866      0.000
+    SCP3               1.273      0.058     21.936      0.000
+    SCN4               0.027      0.061      0.435      0.664
+    SCN5               0.702      0.062     11.382      0.000
+    SCP6               0.943      0.044     21.203      0.000
+    SCP7               0.637      0.051     12.590      0.000
+    SCN8              -0.506      0.049    -10.310      0.000
+
+ Variances
+    GEN_B              1.000      0.000    999.000    999.000
+    POS_B              1.000      0.000    999.000    999.000
+    NEG_B              1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCP1               0.212      0.028      7.538      0.000
+    SCN2               0.015      0.047      0.320      0.749
+    SCP3               1.178      0.154      7.647      0.000
+    SCN4               0.664      0.048     13.933      0.000
+    SCN5               0.277      0.030      9.230      0.000
+    SCP6               0.361      0.041      8.713      0.000
+    SCP7               0.028      0.051      0.543      0.587
+    SCN8               1.023      0.070     14.612      0.000
+
+
+R-SQUARE
+
+Within Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCP1               0.425      0.010     43.286      0.000
+    SCN2               0.559      0.013     42.493      0.000
+    SCP3               0.205      0.025      8.247      0.000
+    SCN4               0.325      0.008     43.051      0.000
+    SCN5               0.439      0.008     55.962      0.000
+    SCP6               0.339      0.008     42.109      0.000
+    SCP7               0.448      0.011     40.498      0.000
+    SCN8               0.087      0.005     16.399      0.000
+
+Between Level
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCP1               0.786      0.030     26.125      0.000
+    SCN2               0.992      0.026     37.766      0.000
+    SCP3               0.276      0.089      3.097      0.002
+    SCN4               0.629      0.029     21.622      0.000
+    SCN5               0.849      0.018     46.597      0.000
+    SCP6               0.615      0.045     13.549      0.000
+    SCP7               0.977      0.042     23.263      0.000
+    SCN8               0.104      0.030      3.453      0.001
+
+
+MODEL MODIFICATION INDICES
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+Within Level
+
+ON/BY Statements
+
+SCP1     ON NEG_W    /
+NEG_W    BY SCP1                  39.198    -0.130     -0.130       -0.112
+SCN2     ON POS_W    /
+POS_W    BY SCN2                  53.087    -0.140     -0.140       -0.108
+SCN4     ON POS_W    /
+POS_W    BY SCN4                 127.696     0.229      0.229        0.173
+SCP6     ON NEG_W    /
+NEG_W    BY SCP6                 109.192     0.446      0.446        0.396
+SCN8     ON POS_W    /
+POS_W    BY SCN8                  23.495    -0.100     -0.100       -0.078
+POS_W    ON NEG_W    /
+NEG_W    BY POS_W                 61.984    -0.705     -0.705       -0.705
+NEG_W    ON POS_W    /
+POS_W    BY NEG_W                 61.984    -0.705     -0.705       -0.705
+
+ON Statements
+
+POS_W    ON SCN2                  56.551    -0.168     -0.168       -0.218
+POS_W    ON SCN4                 119.509     0.190      0.190        0.252
+POS_W    ON SCN8                  25.904    -0.069     -0.069       -0.088
+NEG_W    ON SCP1                  45.775    -0.179     -0.179       -0.208
+NEG_W    ON SCP3                  12.655     0.139      0.139        0.154
+NEG_W    ON SCP6                 109.719     0.533      0.533        0.600
+SCP1     ON SCN2                  35.249    -0.057     -0.057       -0.063
+SCP1     ON SCN4                  17.800     0.033      0.033        0.038
+SCP1     ON SCN8                  70.177    -0.054     -0.054       -0.060
+SCN2     ON SCP1                  36.102    -0.065     -0.065       -0.058
+SCN2     ON SCP3                  20.150     0.038      0.038        0.032
+SCN2     ON SCP6                  48.144     0.076      0.076        0.066
+SCN2     ON SCP7                  12.474    -0.037     -0.037       -0.035
+SCP3     ON SCN2                  14.409     0.042      0.042        0.049
+SCP3     ON SCN4                  93.606    -0.083     -0.083       -0.099
+SCP3     ON SCN5                  20.464     0.051      0.051        0.060
+SCN4     ON SCP1                  43.509     0.077      0.077        0.067
+SCN4     ON SCP3                 102.703    -0.090     -0.090       -0.075
+SCN4     ON SCP6                  16.370    -0.046     -0.046       -0.039
+SCN4     ON SCP7                  18.608     0.049      0.049        0.045
+SCN5     ON SCP3                  12.113     0.030      0.030        0.026
+SCN5     ON SCP6                  46.027    -0.077     -0.077       -0.067
+SCP6     ON SCN2                  57.698     0.081      0.081        0.093
+SCP6     ON SCN4                  10.792    -0.027     -0.027       -0.032
+SCP6     ON SCN5                  38.820    -0.068     -0.068       -0.078
+SCP6     ON SCN8                  74.376     0.055      0.055        0.063
+SCN8     ON SCP1                  68.789    -0.101     -0.101       -0.091
+SCN8     ON SCP6                  69.557     0.098      0.098        0.086
+
+WITH Statements
+
+NEG_W    WITH POS_W               61.984    -0.705     -0.705       -0.705
+SCP1     WITH NEG_W               39.198    -0.130     -0.130       -0.148
+SCN2     WITH POS_W               53.087    -0.140     -0.140       -0.162
+SCN2     WITH SCP1                27.363    -0.046     -0.046       -0.061
+SCP3     WITH SCN2                15.185     0.037      0.037        0.043
+SCN4     WITH POS_W              127.696     0.229      0.229        0.210
+SCN4     WITH SCP1                27.307     0.050      0.050        0.052
+SCN4     WITH SCP3                93.993    -0.097     -0.097       -0.090
+SCN5     WITH SCP3                15.580     0.039      0.039        0.041
+SCP6     WITH NEG_W              109.192     0.446      0.446        0.487
+SCP6     WITH SCN2                47.753     0.063      0.063        0.080
+SCP6     WITH SCN4                15.929    -0.038     -0.038       -0.039
+SCP6     WITH SCN5                46.207    -0.065     -0.065       -0.073
+SCN8     WITH POS_W               23.495    -0.100     -0.100       -0.082
+SCN8     WITH SCP1                64.395    -0.080     -0.080       -0.074
+SCN8     WITH SCP6                69.344     0.082      0.082        0.073
+
+Between Level
+
+ON/BY Statements
+
+SCN2     ON POS_B    /
+POS_B    BY SCN2                  19.577    -0.189     -0.189       -0.141
+SCP6     ON NEG_B    /
+NEG_B    BY SCP6                  45.782     0.392      0.392        0.405
+POS_B    ON NEG_B    /
+NEG_B    BY POS_B                 23.411    -0.676     -0.676       -0.676
+NEG_B    ON POS_B    /
+POS_B    BY NEG_B                 23.411    -0.676     -0.676       -0.676
+
+ON Statements
+
+POS_B    ON SCN2                  23.427    -0.767     -0.767       -1.026
+NEG_B    ON SCP1                  10.927    -0.531     -0.531       -0.529
+NEG_B    ON SCP6                  46.602     1.045      1.045        1.013
+NEG_B    ON SCP7                  20.222    -1.522     -1.522       -1.681
+SCN2     ON SCP6                  24.190     0.231      0.231        0.168
+SCN2     ON SCP7                  17.691    -0.439     -0.439       -0.362
+SCP3     ON SCN4                  11.988    -0.258     -0.258       -0.271
+SCN4     ON SCP3                  12.663    -0.123     -0.123       -0.117
+SCN5     ON SCP1                  14.297     0.258      0.258        0.190
+SCN5     ON SCP6                  33.523    -0.315     -0.315       -0.226
+SCP6     ON SCN2                  44.810     0.441      0.441        0.608
+SCP6     ON SCN4                  12.009     0.151      0.151        0.208
+SCP6     ON SCN8                  23.360     0.147      0.147        0.162
+SCN8     ON SCP1                  10.175    -0.359     -0.359       -0.334
+SCN8     ON SCP6                  15.033     0.335      0.335        0.304
+
+WITH Statements
+
+NEG_B    WITH POS_B               23.411    -0.676     -0.676       -0.676
+SCN2     WITH POS_B               19.577    -0.189     -0.189       -1.541
+SCN4     WITH SCP3                11.487    -0.162     -0.162       -0.183
+SCP6     WITH NEG_B               45.782     0.392      0.392        0.653
+SCP6     WITH SCN2                23.005     0.085      0.085        1.158
+SCP6     WITH SCN5                33.923    -0.120     -0.120       -0.379
+SCN8     WITH SCP6                15.492     0.129      0.129        0.212
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ SCP1               0             0             0             0             0
+ SCN2               0             0             0             0             0
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           LAMBDA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP1               0             0             0             0             0
+ SCN2               0             0             0             0             0
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           LAMBDA
+              SCN8
+              ________
+ SCP1               0
+ SCN2               0
+ SCP3               0
+ SCN4               0
+ SCN5               0
+ SCP6               0
+ SCP7               0
+ SCN8               0
+
+
+           THETA
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+ SCP1               0
+ SCN2               0             0
+ SCP3               0             0             0
+ SCN4               0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           THETA
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+ SCP6               0
+ SCP7               0             0
+ SCN8               0             0             0
+
+
+           ALPHA
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           ALPHA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           ALPHA
+              SCN8
+              ________
+                    0
+
+
+           BETA
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_W              0             0             0             0             0
+ POS_W              0             0             0             0             0
+ NEG_W              0             0             0             0             0
+ SCP1               1             2             0             0             0
+ SCN2               3             0             4             0             0
+ SCP3               5             6             0             0             0
+ SCN4               7             0             8             0             0
+ SCN5               9             0            10             0             0
+ SCP6              11            12             0             0             0
+ SCP7              13            14             0             0             0
+ SCN8              15             0            16             0             0
+
+
+           BETA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ GEN_W              0             0             0             0             0
+ POS_W              0             0             0             0             0
+ NEG_W              0             0             0             0             0
+ SCP1               0             0             0             0             0
+ SCN2               0             0             0             0             0
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           BETA
+              SCN8
+              ________
+ GEN_W              0
+ POS_W              0
+ NEG_W              0
+ SCP1               0
+ SCN2               0
+ SCP3               0
+ SCN4               0
+ SCN5               0
+ SCP6               0
+ SCP7               0
+ SCN8               0
+
+
+           PSI
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_W              0
+ POS_W              0             0
+ NEG_W              0             0             0
+ SCP1               0             0             0            17
+ SCN2               0             0             0             0            18
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           PSI
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP3              19
+ SCN4               0            20
+ SCN5               0             0            21
+ SCP6               0             0             0            22
+ SCP7               0             0             0             0            23
+ SCN8               0             0             0             0             0
+
+
+           PSI
+              SCN8
+              ________
+ SCN8              24
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ SCP1               0             0             0             0             0
+ SCN2               0             0             0             0             0
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           LAMBDA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP1               0             0             0             0             0
+ SCN2               0             0             0             0             0
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           LAMBDA
+              SCN8
+              ________
+ SCP1               0
+ SCN2               0
+ SCP3               0
+ SCN4               0
+ SCN5               0
+ SCP6               0
+ SCP7               0
+ SCN8               0
+
+
+           THETA
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+ SCP1               0
+ SCN2               0             0
+ SCP3               0             0             0
+ SCN4               0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           THETA
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+ SCP6               0
+ SCP7               0             0
+ SCN8               0             0             0
+
+
+           ALPHA
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+                    0             0             0            25            26
+
+
+           ALPHA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+                   27            28            29            30            31
+
+
+           ALPHA
+              SCN8
+              ________
+                   32
+
+
+           BETA
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_B              0             0             0             0             0
+ POS_B              0             0             0             0             0
+ NEG_B              0             0             0             0             0
+ SCP1              33            34             0             0             0
+ SCN2              35             0            36             0             0
+ SCP3              37            38             0             0             0
+ SCN4              39             0            40             0             0
+ SCN5              41             0            42             0             0
+ SCP6              43            44             0             0             0
+ SCP7              45            46             0             0             0
+ SCN8              47             0            48             0             0
+
+
+           BETA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ GEN_B              0             0             0             0             0
+ POS_B              0             0             0             0             0
+ NEG_B              0             0             0             0             0
+ SCP1               0             0             0             0             0
+ SCN2               0             0             0             0             0
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           BETA
+              SCN8
+              ________
+ GEN_B              0
+ POS_B              0
+ NEG_B              0
+ SCP1               0
+ SCN2               0
+ SCP3               0
+ SCN4               0
+ SCN5               0
+ SCP6               0
+ SCP7               0
+ SCN8               0
+
+
+           PSI
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_B              0
+ POS_B              0             0
+ NEG_B              0             0             0
+ SCP1               0             0             0            49
+ SCN2               0             0             0             0            50
+ SCP3               0             0             0             0             0
+ SCN4               0             0             0             0             0
+ SCN5               0             0             0             0             0
+ SCP6               0             0             0             0             0
+ SCP7               0             0             0             0             0
+ SCN8               0             0             0             0             0
+
+
+           PSI
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP3              51
+ SCN4               0            52
+ SCN5               0             0            53
+ SCP6               0             0             0            54
+ SCP7               0             0             0             0            55
+ SCN8               0             0             0             0             0
+
+
+           PSI
+              SCN8
+              ________
+ SCN8              56
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ SCP1           0.000         0.000         0.000         1.000         0.000
+ SCN2           0.000         0.000         0.000         0.000         1.000
+ SCP3           0.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP1           0.000         0.000         0.000         0.000         0.000
+ SCN2           0.000         0.000         0.000         0.000         0.000
+ SCP3           1.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         1.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         1.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         1.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         1.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              SCN8
+              ________
+ SCP1           0.000
+ SCN2           0.000
+ SCP3           0.000
+ SCN4           0.000
+ SCN5           0.000
+ SCP6           0.000
+ SCP7           0.000
+ SCN8           1.000
+
+
+           THETA
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+ SCP1           0.000
+ SCN2           0.000         0.000
+ SCP3           0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+ SCP6           0.000
+ SCP7           0.000         0.000
+ SCN8           0.000         0.000         0.000
+
+
+           ALPHA
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              SCN8
+              ________
+                0.000
+
+
+           BETA
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_W          0.000         0.000         0.000         0.000         0.000
+ POS_W          0.000         0.000         0.000         0.000         0.000
+ NEG_W          0.000         0.000         0.000         0.000         0.000
+ SCP1           1.000         1.000         0.000         0.000         0.000
+ SCN2           1.000         0.000         1.000         0.000         0.000
+ SCP3           1.000         1.000         0.000         0.000         0.000
+ SCN4           1.000         0.000         1.000         0.000         0.000
+ SCN5           1.000         0.000         1.000         0.000         0.000
+ SCP6           1.000         1.000         0.000         0.000         0.000
+ SCP7           1.000         1.000         0.000         0.000         0.000
+ SCN8           1.000         0.000         1.000         0.000         0.000
+
+
+           BETA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ GEN_W          0.000         0.000         0.000         0.000         0.000
+ POS_W          0.000         0.000         0.000         0.000         0.000
+ NEG_W          0.000         0.000         0.000         0.000         0.000
+ SCP1           0.000         0.000         0.000         0.000         0.000
+ SCN2           0.000         0.000         0.000         0.000         0.000
+ SCP3           0.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              SCN8
+              ________
+ GEN_W          0.000
+ POS_W          0.000
+ NEG_W          0.000
+ SCP1           0.000
+ SCN2           0.000
+ SCP3           0.000
+ SCN4           0.000
+ SCN5           0.000
+ SCP6           0.000
+ SCP7           0.000
+ SCN8           0.000
+
+
+           PSI
+              GEN_W         POS_W         NEG_W         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_W          1.000
+ POS_W          0.000         1.000
+ NEG_W          0.000         0.000         1.000
+ SCP1           0.000         0.000         0.000         1.161
+ SCN2           0.000         0.000         0.000         0.000         1.689
+ SCP3           0.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP3           1.433
+ SCN4           0.000         1.773
+ SCN5           0.000         0.000         1.716
+ SCP6           0.000         0.000         0.000         1.096
+ SCP7           0.000         0.000         0.000         0.000         1.337
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              SCN8
+              ________
+ SCN8           1.389
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ SCP1           0.000         0.000         0.000         1.000         0.000
+ SCN2           0.000         0.000         0.000         0.000         1.000
+ SCP3           0.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP1           0.000         0.000         0.000         0.000         0.000
+ SCN2           0.000         0.000         0.000         0.000         0.000
+ SCP3           1.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         1.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         1.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         1.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         1.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              SCN8
+              ________
+ SCP1           0.000
+ SCN2           0.000
+ SCP3           0.000
+ SCN4           0.000
+ SCN5           0.000
+ SCP6           0.000
+ SCP7           0.000
+ SCN8           1.000
+
+
+           THETA
+              SCP1          SCN2          SCP3          SCN4          SCN5
+              ________      ________      ________      ________      ________
+ SCP1           0.000
+ SCN2           0.000         0.000
+ SCP3           0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              SCP6          SCP7          SCN8
+              ________      ________      ________
+ SCP6           0.000
+ SCP7           0.000         0.000
+ SCN8           0.000         0.000         0.000
+
+
+           ALPHA
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.887         0.835
+
+
+           ALPHA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+                1.287         0.051         0.749         0.956         0.662
+
+
+           ALPHA
+              SCN8
+              ________
+               -0.474
+
+
+           BETA
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_B          0.000         0.000         0.000         0.000         0.000
+ POS_B          0.000         0.000         0.000         0.000         0.000
+ NEG_B          0.000         0.000         0.000         0.000         0.000
+ SCP1           1.000         1.000         0.000         0.000         0.000
+ SCN2           1.000         0.000         1.000         0.000         0.000
+ SCP3           1.000         1.000         0.000         0.000         0.000
+ SCN4           1.000         0.000         1.000         0.000         0.000
+ SCN5           1.000         0.000         1.000         0.000         0.000
+ SCP6           1.000         1.000         0.000         0.000         0.000
+ SCP7           1.000         1.000         0.000         0.000         0.000
+ SCN8           1.000         0.000         1.000         0.000         0.000
+
+
+           BETA
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ GEN_B          0.000         0.000         0.000         0.000         0.000
+ POS_B          0.000         0.000         0.000         0.000         0.000
+ NEG_B          0.000         0.000         0.000         0.000         0.000
+ SCP1           0.000         0.000         0.000         0.000         0.000
+ SCN2           0.000         0.000         0.000         0.000         0.000
+ SCP3           0.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              SCN8
+              ________
+ GEN_B          0.000
+ POS_B          0.000
+ NEG_B          0.000
+ SCP1           0.000
+ SCN2           0.000
+ SCP3           0.000
+ SCN4           0.000
+ SCN5           0.000
+ SCP6           0.000
+ SCP7           0.000
+ SCN8           0.000
+
+
+           PSI
+              GEN_B         POS_B         NEG_B         SCP1          SCN2
+              ________      ________      ________      ________      ________
+ GEN_B          1.000
+ POS_B          0.000         1.000
+ NEG_B          0.000         0.000         1.000
+ SCP1           0.000         0.000         0.000         1.161
+ SCN2           0.000         0.000         0.000         0.000         1.689
+ SCP3           0.000         0.000         0.000         0.000         0.000
+ SCN4           0.000         0.000         0.000         0.000         0.000
+ SCN5           0.000         0.000         0.000         0.000         0.000
+ SCP6           0.000         0.000         0.000         0.000         0.000
+ SCP7           0.000         0.000         0.000         0.000         0.000
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              SCP3          SCN4          SCN5          SCP6          SCP7
+              ________      ________      ________      ________      ________
+ SCP3           1.433
+ SCN4           0.000         1.773
+ SCN5           0.000         0.000         1.716
+ SCP6           0.000         0.000         0.000         1.096
+ SCP7           0.000         0.000         0.000         0.000         1.337
+ SCN8           0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              SCN8
+              ________
+ SCN8           1.389
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.25371518D+06    0.0000000    0.0000000  EM
+              2 -0.23721914D+06 ************    0.0650179  EM
+              3 -0.23713403D+06   85.1082021    0.0003588  EM
+              4 -0.23713249D+06    1.5372005    0.0000065  EM
+              5 -0.23713237D+06    0.1201495    0.0000005  EM
+              6 -0.23713236D+06    0.0106818    0.0000000  EM
+              7 -0.23713236D+06    0.0009964    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE H1 MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.23697554D+06    0.0000000    0.0000000  EM
+              2 -0.23693735D+06   38.1918065    0.0001612  EM
+              3 -0.23693638D+06    0.9651190    0.0000041  EM
+              4 -0.23693629D+06    0.0887769    0.0000004  EM
+              5 -0.23693629D+06    0.0090625    0.0000000  EM
+              6 -0.23693628D+06    0.0009554    0.0000000  EM
+              7 -0.23693628D+06    0.0001024    0.0000000  EM
+              8 -0.23693628D+06    0.0000111    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE BASELINE MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.25157899D+06    0.0000000    0.0000000  EM
+              2 -0.25157898D+06    0.0161990    0.0000001  EM
+              3 -0.25157898D+06    0.0000698    0.0000000  EM
+
+
+     Beginning Time:  11:10:05
+        Ending Time:  11:10:06
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen
