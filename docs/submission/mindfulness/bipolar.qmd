@@ -1,0 +1,551 @@
+---
+title: "Revision of the Mindfulness Manuscript"
+format: pdf
+editor: source
+bibliography: references.bib
+---
+
+
+### Dimensionality Test 
+
+To examine the dimensionality of state self-compassion, we fitted a series of multilevel CFA models to account for the hierarchical structure of the data, where repeated measurements were nested within days, and days were nested within individuals. Three models were specified: a One-Factor Model, a Two-Factor Model, and a Bifactor Model. 
+
+- In the **One-Factor Model**, we hypothesized that state self-compassion could be represented by a single latent factor, capturing variance both within and between individuals. 
+  
+- The **Two-Factor Model** allowed for a conceptualization where state self-compassion is represented by two distinct latent factors—Compassionate Self (CS) and Uncompassionate Self (UCS)—operating at both the within-person and between-person levels.
+
+- The **Bifactor Model** tested whether state self-compassion is best represented by a general self-compassion factor alongside orthogonal specific factors (CS and UCS), separating variance attributable to the general factor from variance explained by the specific factors.
+
+The goodness-of-fit indices for each model are presented in Table 1.
+
+**Table 1. Goodness-of-Fit Indices for the One-Factor, Two-Factor, and Bifactor Models**
+
+| Model       | CFI   | TLI   | RMSEA | SRMR (Within) | SRMR (Between) | AIC       | BIC       |
+|-------------|-------|-------|-------|---------------|----------------|-----------|-----------|
+| One-Factor  | 0.935 | 0.910 | 0.050 | 0.033         | 0.058          | 475881.5  | 476195.3  |
+| Two-Factor  | 0.972 | 0.959 | 0.034 | 0.024         | 0.050          | 474810.2  | 475139.6  |
+| Bifactor    | 0.987 | 0.971 | 0.029 | 0.016         | 0.031          | 474376.7  | 474816.0  |
+
+As shown in Table 1, the goodness-of-fit indices progressively improve from the One-Factor Model to the Two-Factor Model, with the Bifactor Model demonstrating the best overall fit. The Comparative Fit Index (CFI) and Tucker-Lewis Index (TLI) both exceed the commonly accepted threshold of 0.95 for the Two-Factor and Bifactor Models, indicating strong model fit. Additionally, the Root Mean Square Error of Approximation (RMSEA) and Standardized Root Mean Square Residual (SRMR) values decrease across models, further supporting improved fit with more complex structures.
+
+We conducted a series of Likelihood Ratio Tests (LRTs) to formally assess improvements in model fit:
+
+- Comparing the One-Factor Model with the Two-Factor Model yielded an LRT statistic of 1068.792 with 5 degrees of freedom ($p < 0.001$), indicating that the Two-Factor Model significantly improves fit. This suggests that conceptualizing state self-compassion as two distinct components (CS and UCS) better represents the data.
+  
+- The comparison between the Two-Factor Model and the Bifactor Model resulted in an LRT statistic of 506.656 with 17 degrees of freedom ($p < 0.001$), demonstrating that the Bifactor Model offers further improvement in fit. This suggests that, beyond distinct compassionate and uncompassionate components, a general self-compassion factor provides additional explanatory power.
+
+In summary, from a psychometric standpoint, both the Two-Factor and Bifactor Models provide better fit than the One-Factor Model, with the Bifactor Model yielding the best statistical fit. These results suggest that self-compassion is best conceptualized as comprising both a general factor and specific components (CS and UCS). However, while the Bifactor Model offers superior statistical fit, its added complexity raises questions about the practical significance of modeling both general and specific factors.
+
+### Practical Importance
+
+Dimensionality assessments should not rely exclusively on statistical fit indices but should also consider the substantive contributions of each factor [@rodriguez2016evaluating; @ferrando2018assessing]. While more complex models typically achieve better fit, they may overfit the data, particularly when too many factors are specified [@ferrando2019external]. A balance between model complexity and interpretability is essential for drawing meaningful conclusions.
+
+To evaluate whether the data supports a unidimensional or multifactorial structure, we applied the following criteria:
+
+1. **Factor Correlation**:  
+   In the Bifactor Model, correlations between the general factor and specific factors are constrained to zero, theoretically separating them. The lack of correlation between general and specific factors implies a distinct role for each factor, negating the need to interpret correlations in this case.
+
+2. **Explained Common Variance (ECV)**:  
+   ECV estimates how much common variance is explained by the general versus specific factors. The general factor in the Bifactor Model (Gen_w) has high standardized loadings on items (e.g., SCP1 = 0.614, SCN2 = 0.579 at the within-level), suggesting it accounts for most of the variance. Specific factors (POS_w and NEG_w) show weaker loadings, indicating that the general factor dominates the variance explanation.
+
+3. **Omega Hierarchical (ωH)**:  
+   ωH measures how much variance in the total score is due to the general factor. In the Bifactor Model, the general factor explains a large proportion of the variance (e.g., SCP1 = 0.614, SCN2 = 0.579), while specific factors contribute much less, supporting the predominance of the general factor.
+
+4. **Bifactor Model Analysis**:  
+   The Bifactor Model confirms the dominance of the general factor, as specific factor loadings are consistently lower (e.g., POS_w on SCP3 = -0.313, NEG_b on SCN8 = 0.288), indicating that the specific factors add limited explanatory value beyond the general factor.
+
+5. **Change in R-squared**:  
+   The general factor in the Bifactor Model explains a substantial portion of variance (e.g., R-squared for SCP1 = 0.425 within-level, 0.786 between-level). In contrast, the specific factors provide only marginal additional explanation, suggesting that a unidimensional solution may be more parsimonious without significant loss of explanatory power.
+
+In summary, the results from the multilevel CFA analysis support Neff’s hypothesis that CS and UCS are related at the trait or global level, as indicated by the superior fit of the Two-Factor and Bifactor Models. The strong correlation between CS and UCS at the latent level suggests that, across participants, individuals with high levels of CS tend to have lower levels of UCS, and vice versa.
+
+However, it is important to emphasize that multilevel CFA examines *latent, person-level relationships*, which capture general trends over time and context. The present analysis demonstrates that CS and UCS are correlated at a global level. In contrast, other analyses focused on *momentary dynamics* may suggest that CS and UCS operate more independently within individuals over short time periods. This distinction clarifies that Neff’s hypothesis may hold at a trait level but requires further exploration at the momentary level.
+
+
+<!-- Specifically, it is important to consider whether the distinction between factors meaningfully enhances the model’s utility in real-world applications. The next section addresses this issue by examining the practical importance of using two factors versus one. -->
+
+## External Criteria
+
+While the preceding statistical analyses rely solely on internal item data, a comprehensive assessment of the bipolar continuum hypothesis should also incorporate external criteria [@ferrando2019external]. This involves examining the validity of relationships between scale scores and relevant external variables. 
+
+\pagebreak
+
+
+## Modeling the Dynamic Relationship Between Compassionate and Uncompassionate Self: An Idiographic Approach
+
+In our earlier analyses, we found evidence supporting the "essential unidimensionality" [@reise2013scoring] of the augmented State Self-Compassion scale, employing a multilevel framework that accounted for repeated measurements within individuals over several days across a three-month period. These analyses provided compelling support for the idea that compassionate and uncompassionate self-responding (CS and UCS) are inversely related at the *nomothetic level* -- that is, when examined across the entire sample.
+
+In our psychometric evaluation using *internal criteria* (fit indices), we observed that more complex models, while improving statistical fit, did not fundamentally challenge the consistency of the results with Neff's hypothesis of a bipolar continuum. Minor deviations, such as differences in the variances for CS and UCS, were present, but the overall pattern of findings still aligned with the notion of CS and UCS as opposing dimensions. This conclusion was further validated when considering *external criteria*, including covariates like momentary negative affect and context evaluation, indicating that these situational factors did not significantly alter the core relationship between CS and UCS.
+
+However, *nomothetic analyses* -- focused on group-level patterns -- may obscure important individual differences in how self-compassion operates in everyday life. The variability in how individuals experience and express self-compassion across different contexts might not be fully captured in these broad, averaged analyses. To delve deeper into these person-specific dynamics, we conducted an *idiographic analysis* to explore how CS and UCS interact at the individual level [@ferrari2022embracing].
+
+
+### Bayesian Hierarchical Model
+
+To investigate the momentary relationship between CS and UCS more precisely, we combined data from both experiments and applied a Bayesian hierarchical model. This approach allows us to account for moment-to-moment, daily, and individual differences in self-compassion, providing a detailed view of how CS and UCS interact dynamically over time. The model specifically examines whether the relationship between CS and UCS varies across individuals depending on momentary negative affect and context evaluation, offering a nuanced exploration of these constructs in real-world contexts.
+
+The model assumes a linear relationship between CS and UCS to maintain consistency with Neff’s hypothesis, which posits that CS and UCS are opposing ends of a continuum. By doing so, we avoid overfitting (which could occur if we assumed complete independence between CS and UCS) while testing the robustness of the hypothesized inverse relationship at the momentary level.
+
+For each participant, the model estimates a random regression slope, reflecting how changes in CS influence UCS at the individual level. This slope is central to determining whether Neff’s hypothesis holds across participants:
+
+- If the *slope is negative*, it suggests that for that individual, higher momentary levels of CS are associated with lower levels of UCS, in line with Neff’s hypothesis.
+- If the *slope is flat*, it indicates that momentary changes in CS and UCS are unrelated for that participant, challenging the bipolar continuum hypothesis.
+- If the *slope is positive*, it implies that CS and UCS may increase or decrease together, which directly contradicts Neff’s hypothesis that these dimensions should be inversely related.
+
+By incorporating individual-specific slopes, the model not only tests the hypothesis at the group level but also accommodates the possibility of individual-level deviations from the expected pattern. This provides a more comprehensive understanding of how CS and UCS operate in real-time across varying emotional and contextual states. The model's structure enables the inclusion of individual-specific slopes while accounting for momentary and day-level predictors, as well as random effects associated with participants, days, and measurements.
+
+$$
+\begin{aligned}
+\text{UCS}_n &\sim \text{Student-t}(\nu, \mu_n, \sigma_{\text{UCS}}) \\
+\mu_n &= \alpha_{\text{UCS}} + \sigma_{\text{participant}} z_{\text{participant}, n} + \sigma_{\text{day}} z_{\text{day}, n} + \sigma_{\text{measurement}} z_{\text{measurement}, n} \\
+&\quad + (\beta_{\text{CS}} + \sigma_{\text{participant, slope\_cs}} z_{\text{participant, slope\_cs}, n}) \text{CS}_n \\
+&\quad + (\beta_{\text{neg\_aff, Moment}} + \sigma_{\text{participant, slope\_na}} z_{\text{participant, slope\_na}, n}) \text{neg\_aff\_Moment}_n \\
+&\quad + \beta_{\text{neg\_aff, Day}} \text{neg\_aff\_Day}_n + \beta_{\text{neg\_aff, Person}} \text{neg\_aff\_Person}_n \\
+&\quad + \beta_{\text{interaction}} \text{CS}_n \times \text{neg\_aff\_Moment}_n \\
+&\quad + \beta_{\text{context\_eval, Moment}} \text{context\_eval\_Moment}_n \\
+&\quad + \beta_{\text{context\_eval, Day}} \text{context\_eval\_Day}_n + \beta_{\text{context\_eval, Person}} \text{context\_eval\_Person}_n
+\end{aligned}
+$$
+
+This model allows for a flexible investigation of how CS and UCS interact dynamically at the *momentary level*, accounting for random effects and external influences. The Student-t distribution accounts for potential outliers or non-normality in the data, while weakly informative priors are employed to avoid overfitting (see Supplementary Information for the full model specification).
+
+### Results
+
+Key parameters of interest in this Bayesian hierarchical model include the random slopes of CS on UCS ($\beta_{\text{CS}}$ and $\sigma_{\text{participant\_slope\_cs}}$) and the interaction between CS and momentary negative affect ($\beta_{\text{interaction}}$). 
+
+The posterior mean of the fixed effect of CS on UCS ($\beta_{\text{CS}}$) was -0.380 (89% CI: [-0.406, -0.352]), indicating a general negative association between CS and UCS at the group level, consistent with Neff’s hypothesis. However, the random slope ($\sigma_{\text{participant\_slope\_cs}} = 0.324$, 89% CI: [0.304, 0.345]) suggests substantial individual variability in this relationship. Specifically, only 67% of participants demonstrated the expected negative association, while a significant minority showed weaker or even *positive associations* between CS and UCS (see Figure XX).
+
+This variability challenges the assumption that CS and UCS are universally inversely related for all individuals at the momentary level. Furthermore, the interaction term ($\beta_{\text{interaction}} = -0.0304$, 89% CI: [-0.0380, -0.0230]) suggests that higher negative affect amplifies the inverse relationship between CS and UCS. That is, during moments of emotional distress, the opposition between CS and UCS becomes more pronounced.
+
+### Discussion
+
+The results of this idiographic analysis reveal that, while Neff’s hypothesis generally holds at the group level, there is considerable individual variation in the relationship between CS and UCS at the momentary level. For a subset of participants, CS and UCS are not inversely related, and in some cases, they even fluctuate together—an observation incompatible with the bipolar continuum hypothesis [@ferrari2023gender; @ullrich2020use].
+
+Moreover, the interaction between momentary negative affect and the CS-UCS relationship highlights the contextual sensitivity of these constructs. When individuals experience higher negative affects, the inverse relationship between CS and UCS intensifies, suggesting that emotional states can moderate this dynamic [@dejonckheere2021relation].
+
+In summary, this idiographic analysis offers a nuanced view of the relationship between CS and UCS. While the nomothetic analyses support Neff's hypothesis at the global level, the idiographic findings emphasize the importance of individual differences. For most individuals, increases in CS lead to reductions in UCS, but for some, the relationship may be more complex or even contradictory. This highlights the need to consider both nomothetic and idiographic perspectives when investigating the dynamic nature of self-compassion.
+
+
+
+\pagebreak
+
+# Supplementary Material Description
+
+## Dimensionality Test
+
+### Mplus script for the One-Factor Model
+
+```code
+TITLE: Multilevel One-Factor Model with covariates at moment, day, and person level;
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE: 
+  NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
+    scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  CLUSTER = user_id;  ! Clustering at the subject level
+  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  BETWEEN = neg_aff_Person;  ! Covariate at the person level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = ML;  ! Maximum likelihood estimation 
+
+MODEL:
+  %WITHIN%  ! Level 1: Within-subject and within-day variation
+    SelfCompassion_w BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
+      scs_pos_6 scs_pos_7 scs_neg_8;
+    SelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress self-compassion factor on momentary and daily negative affect
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    SelfCompassion_b BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
+      scs_pos_6 scs_pos_7 scs_neg_8;
+    SelfCompassion_b ON neg_aff_Person;  
+    ! Regress between-level self-compassion factor on person-level negative affect
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;
+```
+
+### Mplus script for the Two-Factor Model
+
+```code
+TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person level;
+
+DATA: 
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE: 
+  NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
+    scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  CLUSTER = user_id;  ! Clustering at the subject level
+  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  BETWEEN = neg_aff_Person;  ! Covariate at the person level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = ML;  ! Maximum likelihood estimation 
+
+MODEL:
+  %WITHIN%  ! Level 1: Within-subject and within-day variation
+    PositiveSelfCompassion_w BY scs_pos_1 scs_pos_3 scs_pos_6 scs_pos_7;  
+    ! Positive self-compassion factor on within level
+    NegativeSelfCompassion_w BY scs_neg_2 scs_neg_4 scs_neg_5 scs_neg_8;  
+    ! Negative self-compassion factor on within level
+    PositiveSelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress positive factor on momentary and daily negative affect
+    NegativeSelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress negative factor on momentary and daily negative affect
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    PositiveSelfCompassion_b BY scs_pos_1 scs_pos_3 scs_pos_6 scs_pos_7;  
+    ! Positive self-compassion factor on between level
+    NegativeSelfCompassion_b BY scs_neg_2 scs_neg_4 scs_neg_5 scs_neg_8;  
+    ! Negative self-compassion factor on between level
+    PositiveSelfCompassion_b ON neg_aff_Person;  
+    ! Regress positive factor on person-level negative affect
+    NegativeSelfCompassion_b ON neg_aff_Person;  
+    ! Regress negative factor on person-level negative affect
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;
+```
+
+### Mplus script for the Bifactor Model
+
+
+```code
+TITLE: Multilevel Bifactor Model with covariates at moment, day, and person level;
+
+DATA:
+  FILE = "/Users/corrado/Documents/bipolar_continuum/data/mplus_data/neff_2.dat";
+
+VARIABLE:
+  NAMES = uid day tw scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  USEVARIABLES = scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  CLUSTER = uid;
+  WITHIN = na_mom na_day;
+  BETWEEN = na_per;
+
+  MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;
+  ESTIMATOR = ML;
+
+MODEL:
+  %WITHIN%
+    Gen_w BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    Pos_w BY scp1* scp3 scp6 scp7;
+    Neg_w BY scn2* scn4 scn5 scn8;
+
+    ! Fix variances to help with model identification
+    Gen_w@1;  ! Fix variance of the general factor
+    Pos_w@1;  ! Constrain variance of the positive factor
+    Neg_w@1;  ! Constrain variance of the negative factor
+
+    ! Ensure no covariance between factors
+    Pos_w WITH Gen_w@0;
+    Neg_w WITH Gen_w@0;
+    Pos_w WITH Neg_w@0;
+
+    ! Regress factors on covariates
+    Gen_w ON na_mom na_day;
+    Pos_w ON na_mom na_day;
+    Neg_w ON na_mom na_day;
+
+  %BETWEEN%
+    Gen_b BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    Pos_b BY scp1* scp3 scp6 scp7;
+    Neg_b BY scn2* scn4 scn5 scn8;
+
+    ! Fix variances on the between level as well
+    Gen_b@1;  ! Fix variance of the general factor
+    Pos_b@1;  ! Constrain variance of the positive factor
+    Neg_b@1;  ! Constrain variance of the negative factor
+
+    ! Ensure no covariance between factors
+    Pos_b WITH Gen_b@0;
+    Neg_b WITH Gen_b@0;
+    Pos_b WITH Neg_b@0;
+
+    ! Regress factors on covariates
+    Gen_b ON na_per;
+    Pos_b ON na_per;
+    Neg_b ON na_per;
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES(ALL);
+```
+
+\newpage
+
+## Bayesian hierarchical model
+
+Here we provide a detailed description of the Bayesian hierarchical model used to test the relationship between compassionate (CS) and uncompassionate (UCS) self-responding in the context of Neff’s bipolar hypothesis. The model's structure incorporates multiple levels of variation, capturing momentary and daily changes in emotional and contextual factors, as well as individual differences in baseline CS and UCS levels.
+
+The core structure of the model can be described as follows:
+
+1. **Data Structure**:
+    - *CS and UCS* are measured repeatedly over time via Ecological Momentary Assessment (EMA), with participants reporting their CS and UCS scores multiple times a day.
+    - The model also includes momentary and day-level predictors such as negative affect (`neg_aff`) and context evaluation (`context_eval`).
+
+2. **Model Parameters**:
+    - **Fixed Effects**: The model includes an overall effect of CS on UCS (`beta_cs`), reflecting the hypothesized inverse relationship between these two constructs. A negative `beta_cs` would support Neff’s hypothesis that higher CS predicts lower UCS.
+    - **Random Effects**: The model allows for individual-level deviations in this relationship, captured by the random slopes for CS (`z_participant_slope_cs`), as well as individual differences in baseline UCS levels (`z_participant`).
+    - **Interaction Terms**: The model includes an interaction between CS and momentary negative affect (`beta_interaction`), allowing us to test whether the inverse CS-UCS relationship is modulated by emotional states.
+    - **Contextual Effects**: To account for fluctuations across time and context, the model includes three levels of predictors for negative affect and context evaluation:
+        - *Momentary (within-day)*: Measures the effect of immediate negative affect and context on UCS.
+        - *Daily (between-days)*: Measures the effect of average negative affect and context across a given day.
+        - *Person-level (between-participants)*: Captures individual differences in baseline negative affect and context evaluations.
+
+3. **Bayesian Structure**:
+    - The model is implemented using Bayesian inference, which allows for posterior distributions of all parameters to be computed. This provides a full probabilistic representation of uncertainty around the estimated effects.
+    - *Hierarchical Priors*: The hierarchical structure of the model allows for individual-specific estimates of the relationship between CS and UCS. Random slopes are modeled with normal distributions centered on the group-level fixed effects, capturing the variability across participants.
+
+4. **Generated Quantities**:
+    - The model includes a *generated quantities* block to compute posterior predictions for UCS (`pred_UCS`) at each measurement occasion, based on the estimated relationships between CS, negative affect, and context.
+    - *Log-likelihoods* (`log_lik`) for each observation are computed, enabling posterior predictive checks and model comparison using *leave-one-out cross-validation* (LOO)   .
+
+5. **Sampling**:
+    - The model was estimated using Markov Chain Monte Carlo (MCMC) sampling. Four chains were run with 2000 iterations each for burn-in and 2000 iterations for sampling. This approach provided efficient approximation of the posterior distribution.
+
+#### Key Parameters and Interpretation
+
+- **`beta_cs`**: Represents the overall effect of CS on UCS. A negative value would indicate that, on average, increases in CS are associated with decreases in UCS, supporting Neff’s hypothesis.
+- **`beta_interaction`**: Tests the interaction between CS and negative affect, indicating whether the CS-UCS relationship becomes stronger or weaker depending on momentary emotional states.
+- **`sigma_participant_slope_cs`**: The standard deviation of the random slopes for CS, indicating how much the effect of CS on UCS varies across individuals.
+- **Random Intercepts**: Variability in UCS across participants (`sigma_participant`), days (`sigma_day`), and measurement occasions (`sigma_measurement`), capturing how uncompassionate responses fluctuate due to time or context.
+
+**Posterior Predictive Checks and Model Fit Assessment.** To evaluate model fit, we employed posterior predictive checks and leave-one-out cross-validation (LOO). Pareto $k$ statistics were calculated to quantify how well each data point was predicted by the model. There were no divergent transitions. Maximum Rhat: 1.0150; mean Rhat: 1.0006.
+
+The full Stan code for the model is provided below.
+
+```stan
+data {
+  int<lower=0> N; // Total number of observations
+  int<lower=0> P; // Number of participants
+  int<lower=0> D; // Number of days
+  int<lower=0> M; // Number of measurements per day per participant
+  array[N] int<lower=1, upper=P> participant; // Participant index for each observation
+  array[N] int<lower=1, upper=D> day; // Day index for each observation
+  array[N] int<lower=1, upper=M> measurement; // Measurement index for each observation
+  array[N] real CS; // Compassionate Self measures
+  array[N] real UCS; // Uncompassionate Self measures
+
+  // Scaled and centered negative affect variables
+  array[N] real neg_aff_Moment; // Negative affect moment-centered
+  array[N] real neg_aff_Day; // Negative affect day-centered
+  array[N] real neg_aff_Person; // Negative affect person-centered
+
+  // Scaled and centered context evaluation variables
+  array[N] real context_eval_Moment; // Context evaluation moment-centered
+  array[N] real context_eval_Day; // Context evaluation day-centered
+  array[N] real context_eval_Person; // Context evaluation person-centered
+}
+
+parameters {
+  // Fixed effects
+  real alpha_ucs; // Intercept for UCS
+  real beta_cs; // Overall effect of CS on UCS
+  real beta_interaction; // Effect of interaction between CS and NA
+
+  // Coefficients for the three negative affect components
+  real beta_neg_aff_Moment;
+  real beta_neg_aff_Day;
+  real beta_neg_aff_Person;
+
+  // Coefficients for the three context evaluation components
+  real beta_context_eval_Moment;
+  real beta_context_eval_Day;
+  real beta_context_eval_Person;
+
+  // Random intercepts
+  vector[P] z_participant; // Random intercept for participants
+  vector[D] z_day; // Random intercept for days
+  vector[M] z_measurement; // Random intercept for measurements
+
+  // Random slopes for CS at the participant level
+  vector[P] z_participant_slope_cs;
+
+  // Random slopes for NA at the participant level
+  vector[P] z_participant_slope_na;
+
+  // Variance parameters
+  real<lower=0> sigma_participant; // SD of participant intercepts
+  real<lower=0> sigma_day; // SD of day intercepts
+  real<lower=0> sigma_measurement; // SD of measurement intercepts
+  real<lower=0> sigma_participant_slope_cs; // SD of participant slopes for CS
+  real<lower=0> sigma_participant_slope_na; // SD of participant slopes for NA
+  real<lower=0> sigma_ucs; // Error term for UCS model
+
+  real<lower=0> nu; // Degrees of freedom for t-distribution
+}
+
+model {
+  // Priors for fixed effects
+  alpha_ucs ~ normal(0, 1);
+  beta_cs ~ normal(0, 1);
+  beta_interaction ~ normal(0, 1); // Prior for interaction term
+  beta_neg_aff_Moment ~ normal(0, 1);
+  beta_neg_aff_Day ~ normal(0, 1);
+  beta_neg_aff_Person ~ normal(0, 1);
+  beta_context_eval_Moment ~ normal(0, 1);
+  beta_context_eval_Day ~ normal(0, 1);
+  beta_context_eval_Person ~ normal(0, 1);
+
+  // Priors for random effects (latent variables)
+  z_participant ~ normal(0, 1);
+  z_day ~ normal(0, 1);
+  z_measurement ~ normal(0, 1);
+  z_participant_slope_cs ~ normal(0, 1);
+  z_participant_slope_na ~ normal(0, 1);
+
+  // Priors for variances
+  sigma_participant ~ exponential(1);
+  sigma_day ~ exponential(1);
+  sigma_measurement ~ exponential(1);
+  sigma_participant_slope_cs ~ exponential(1);
+  sigma_participant_slope_na ~ exponential(1);
+  sigma_ucs ~ exponential(1);
+  nu ~ gamma(2, 0.1);
+
+  // Likelihood for UCS using a t-distribution
+  for (n in 1:N) {
+    UCS[n] ~ student_t(
+      nu,
+      // Random intercepts
+      alpha_ucs +
+      sigma_participant * z_participant[participant[n]] +
+      sigma_day * z_day[day[n]] +
+      sigma_measurement * z_measurement[measurement[n]] +
+      
+      // Main effect of CS with individual random slope
+      (beta_cs + sigma_participant_slope_cs * 
+        z_participant_slope_cs[participant[n]]) * CS[n] +
+      
+      // Main effect of NA (including random slope for NA)
+      (beta_neg_aff_Moment + sigma_participant_slope_na * 
+        z_participant_slope_na[participant[n]]) * neg_aff_Moment[n] +
+      beta_neg_aff_Day * neg_aff_Day[n] +
+      beta_neg_aff_Person * neg_aff_Person[n] +
+      
+      // Interaction term between CS and NA (Moment-level)
+      beta_interaction * CS[n] * neg_aff_Moment[n] +
+      
+      // Main effect of context evaluation components
+      beta_context_eval_Moment * context_eval_Moment[n] +
+      beta_context_eval_Day * context_eval_Day[n] +
+      beta_context_eval_Person * context_eval_Person[n],
+      
+      // Error term
+      sigma_ucs
+    );
+  }
+}
+
+generated quantities {
+  array[N] real pred_UCS; // Posterior predictions for UCS
+  array[N] real log_lik; // Log-likelihood for UCS
+
+  for (n in 1:N) {
+    pred_UCS[n] = student_t_rng(
+      nu,
+      alpha_ucs +
+      sigma_participant * z_participant[participant[n]] +
+      sigma_day * z_day[day[n]] +
+      sigma_measurement * z_measurement[measurement[n]] +
+      (beta_cs + sigma_participant_slope_cs * 
+        z_participant_slope_cs[participant[n]]) * CS[n] +
+      (beta_neg_aff_Moment + sigma_participant_slope_na * 
+        z_participant_slope_na[participant[n]]) * neg_aff_Moment[n] +
+      beta_neg_aff_Day * neg_aff_Day[n] +
+      beta_neg_aff_Person * neg_aff_Person[n] +
+      beta_interaction * CS[n] * neg_aff_Moment[n] +
+      beta_context_eval_Moment * context_eval_Moment[n] +
+      beta_context_eval_Day * context_eval_Day[n] +
+      beta_context_eval_Person * context_eval_Person[n],
+      sigma_ucs
+    );
+
+    log_lik[n] = student_t_lpdf(
+      UCS[n] |
+      nu,
+      alpha_ucs +
+      sigma_participant * z_participant[participant[n]] +
+      sigma_day * z_day[day[n]] +
+      sigma_measurement * z_measurement[measurement[n]] +
+      (beta_cs + sigma_participant_slope_cs * 
+        z_participant_slope_cs[participant[n]]) * CS[n] +
+      (beta_neg_aff_Moment + sigma_participant_slope_na * 
+        z_participant_slope_na[participant[n]]) * neg_aff_Moment[n] +
+      beta_neg_aff_Day * neg_aff_Day[n] +
+      beta_neg_aff_Person * neg_aff_Person[n] +
+      beta_interaction * CS[n] * neg_aff_Moment[n] +
+      beta_context_eval_Moment * context_eval_Moment[n] +
+      beta_context_eval_Day * context_eval_Day[n] +
+      beta_context_eval_Person * context_eval_Person[n],
+      sigma_ucs
+    );
+  }
+}
+```
+
+In summary, the idiographic approach enabled by this model allows for a deeper exploration of Neff’s bipolar hypothesis, testing whether the CS-UCS relationship holds not only at the group level but also at the individual level, across different time frames and contexts.
+
+## Additional Model Results
+
+In this section, we provide a comprehensive overview of the additional results from the Bayesian hierarchical model.
+
+
+### Posterior Estimates of Fixed Effects
+
+The core fixed effects in the model include $\beta_{\text{CS}}$ and $\beta_{\text{interaction}}$, which have been discussed in the main manuscript. 
+
+### Random Effects and Variability Across Individuals
+
+One of the strengths of this hierarchical model is its ability to capture individual variability in the relationship between CS and UCS. 
+
+- **$\sigma_{\text{participant\_slope\_cs}}$**: This parameter has been discussed in the main text. 
+
+- **Random Intercepts**: 
+  - **$\sigma_{\text{participant}}$**: The posterior mean of this parameter is 0.458, with an 89% CI of [0.437, 0.480], indicating substantial variation in baseline UCS levels across individuals.
+  - **$\sigma_{\text{day}}$**: The posterior mean of this parameter is 0.089, with an 89% CI of [0.076, 0.102], capturing daily fluctuations in UCS.
+  - **$\sigma_{\text{measurement}}$**: The posterior mean of this parameter is 0.067, with an 89% CI of [0.059, 0.075], capturing within-day, moment-to-moment variability in UCS.
+
+### Contextual Effects: Negative Affect and Context Evaluation
+
+To account for contextual variability, the model includes momentary, daily, and person-level predictors for both negative affect and context evaluation.
+
+- **Negative Affect (NA)**:
+  - **$\beta_{\text{neg\_aff\_Moment}}$**: The momentary effect of negative affect on UCS was estimated to have a posterior mean of 0.092, with an 89% CI of [0.071, 0.113], indicating that higher momentary negative affect is associated with increased levels of UCS.
+  - **$\beta_{\text{neg\_aff\_Day}}$**: The day-level effect of negative affect on UCS was estimated to have a posterior mean of 0.047, with an 89% CI of [0.026, 0.068], indicating that higher average negative affect across the day contributes to increased UCS.
+  - **$\beta_{\text{neg\_aff\_Person}}$**: The person-level effect of negative affect was estimated to have a posterior mean of 0.067, with an 89% CI of [0.045, 0.089], capturing how individuals with higher baseline levels of negative affect tend to have higher levels of UCS.
+
+- **Context Evaluation**:
+  - **$\beta_{\text{context\_eval\_Moment}}$**: The momentary effect of context evaluation on UCS was estimated to have a posterior mean of -0.061, with an 89% CI of [-0.082, -0.040], suggesting that more positive context evaluations at a given moment are associated with lower levels of UCS.
+  - **$\beta_{\text{context\_eval\_Day}}$**: The day-level effect of context evaluation on UCS was estimated to have a posterior mean of -0.042, with an 89% CI of [-0.064, -0.021], indicating that days characterized by more positive evaluations tend to be associated with lower levels of UCS.
+  - **$\beta_{\text{context\_eval\_Person}}$**: The person-level effect of context evaluation was estimated to have a posterior mean of -0.056, with an 89% CI of [-0.078, -0.034], indicating that individuals with more positive overall evaluations of their context tend to experience lower levels of UCS.
+
+### Posterior Predictive Checks and Model Fit
+
+To assess the fit of the model, we performed *posterior predictive checks* using density overlays and histogram comparisons between the observed data and the posterior predictions. The results indicated that the model accurately captures the distribution of UCS scores, providing confidence in the model’s predictive performance. The MCMC sampling did not produce any divergent transitions.
+
+We also computed *leave-one-out cross-validation (LOO)* for model comparison and fit assessment. The Pareto $k$ statistics indicated that all observations were well predicted, with no problematic points (i.e., $k < 0.5$ for all data points). The maximum $\hat{R}$ value across all parameters was 1.0150, with a mean $\hat{R}$ value of 1.0006, suggesting good convergence.
+
+\pagebreak
+
+# Bibliography
+
+
+

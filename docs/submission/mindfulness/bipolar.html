@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Corrado Caudek">
+<meta name="description" content="A qmd quarto template document.">
+
+<title>Title</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="bipolar_files/libs/clipboard/clipboard.min.js"></script>
+<script src="bipolar_files/libs/quarto-html/quarto.js"></script>
+<script src="bipolar_files/libs/quarto-html/popper.min.js"></script>
+<script src="bipolar_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="bipolar_files/libs/quarto-html/anchor.min.js"></script>
+<link href="bipolar_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="bipolar_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="bipolar_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="bipolar_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="bipolar_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="bipolar_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script src="bipolar_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link href="bipolar_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+<link href="bipolar_files/libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="bipolar_files/libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="citation_title" content="Title">
+<meta name="citation_abstract" content="Document abstract may be somewhat long.
+">
+<meta name="citation_author" content="Corrado Caudek">
+<meta name="citation_publication_date" content="NaN-NaN-NaN">
+<meta name="citation_cover_date" content="NaN-NaN-NaN">
+<meta name="citation_year" content="NaN">
+<meta name="citation_online_date" content="NaN-NaN-NaN">
+<meta name="citation_fulltext_html_url" content="https://StatAcumen.com">
+<meta name="citation_language" content="en">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content page-columns page-full column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Title</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<p class="subtitle lead">Subtitle</p>
+</div>
+
+<div>
+  <div class="description">
+    <p>A qmd quarto template document.</p>
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <a href="https://StatAcumen.com/about">Corrado Caudek</a> <a href="https://orcid.org/0000-0002-9817-4011" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.math.unm.edu/people/academic-personnel/erik-erhardt">
+            University of New Mexico
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">09/25/2024 &nbsp;06:45:12 AM +0200</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <p>Document abstract may be somewhat long.</p>
+  </div>
+</div>
+
+</header>
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#sec-Executive_summary" id="toc-sec-Executive_summary"><span class="toc-section-number">1</span>  Executive summary</a></li>
+  <li><a href="#sec-Introduction" id="toc-sec-Introduction"><span class="toc-section-number">2</span>  Introduction</a>
+  <ul>
+  <li><a href="#backgroundrationale" id="toc-backgroundrationale"><span class="toc-section-number">2.1</span>  Background/rationale</a></li>
+  <li><a href="#objectives" id="toc-objectives"><span class="toc-section-number">2.2</span>  Objectives</a></li>
+  <li><a href="#literature-review" id="toc-literature-review"><span class="toc-section-number">2.3</span>  Literature Review:</a></li>
+  </ul></li>
+  <li><a href="#sec-Methods" id="toc-sec-Methods"><span class="toc-section-number">3</span>  Methods</a>
+  <ul>
+  <li><a href="#study-design" id="toc-study-design"><span class="toc-section-number">3.1</span>  Study design</a></li>
+  <li><a href="#setting" id="toc-setting"><span class="toc-section-number">3.2</span>  Setting</a></li>
+  <li><a href="#participants" id="toc-participants"><span class="toc-section-number">3.3</span>  Participants</a></li>
+  <li><a href="#variables" id="toc-variables"><span class="toc-section-number">3.4</span>  Variables</a></li>
+  <li><a href="#data-sourcesmeasurement" id="toc-data-sourcesmeasurement"><span class="toc-section-number">3.5</span>  Data sources/measurement</a></li>
+  <li><a href="#bias" id="toc-bias"><span class="toc-section-number">3.6</span>  Bias</a></li>
+  <li><a href="#study-size" id="toc-study-size"><span class="toc-section-number">3.7</span>  Study size</a></li>
+  <li><a href="#quantitative-variables" id="toc-quantitative-variables"><span class="toc-section-number">3.8</span>  Quantitative variables</a></li>
+  <li><a href="#statistical-methods" id="toc-statistical-methods"><span class="toc-section-number">3.9</span>  Statistical methods</a></li>
+  </ul></li>
+  <li><a href="#sec-Results" id="toc-sec-Results"><span class="toc-section-number">4</span>  Results</a>
+  <ul>
+  <li><a href="#participants-1" id="toc-participants-1"><span class="toc-section-number">4.1</span>  Participants</a></li>
+  <li><a href="#descriptive-data" id="toc-descriptive-data"><span class="toc-section-number">4.2</span>  Descriptive data</a></li>
+  <li><a href="#outcome-data" id="toc-outcome-data"><span class="toc-section-number">4.3</span>  Outcome data</a></li>
+  <li><a href="#main-results" id="toc-main-results"><span class="toc-section-number">4.4</span>  Main results</a></li>
+  <li><a href="#other-analyses" id="toc-other-analyses"><span class="toc-section-number">4.5</span>  Other analyses</a></li>
+  </ul></li>
+  <li><a href="#sec-Discussion" id="toc-sec-Discussion"><span class="toc-section-number">5</span>  Discussion</a>
+  <ul>
+  <li><a href="#key-results" id="toc-key-results"><span class="toc-section-number">5.1</span>  Key results</a></li>
+  <li><a href="#limitations" id="toc-limitations"><span class="toc-section-number">5.2</span>  Limitations</a></li>
+  <li><a href="#interpretation" id="toc-interpretation"><span class="toc-section-number">5.3</span>  Interpretation</a></li>
+  <li><a href="#generalisability" id="toc-generalisability"><span class="toc-section-number">5.4</span>  Generalisability</a></li>
+  </ul></li>
+  <li><a href="#sec-Conclusion" id="toc-sec-Conclusion"><span class="toc-section-number">6</span>  Conclusion</a>
+  <ul>
+  <li><a href="#summary-of-the-main-findings." id="toc-summary-of-the-main-findings."><span class="toc-section-number">6.1</span>  Summary of the main findings.</a></li>
+  <li><a href="#implications-of-the-study." id="toc-implications-of-the-study."><span class="toc-section-number">6.2</span>  Implications of the study.</a></li>
+  <li><a href="#suggestions-for-future-research." id="toc-suggestions-for-future-research."><span class="toc-section-number">6.3</span>  Suggestions for future research.</a></li>
+  </ul></li>
+  <li><a href="#sec-References" id="toc-sec-References"><span class="toc-section-number">7</span>  References</a>
+  <ul>
+  <li><a href="#list-of-all-sources-cited-in-the-report-following-a-specific-citation-style-e.g.-apa-mla-chicago." id="toc-list-of-all-sources-cited-in-the-report-following-a-specific-citation-style-e.g.-apa-mla-chicago."><span class="toc-section-number">7.1</span>  List of all sources cited in the report, following a specific citation style (e.g., APA, MLA, Chicago).</a></li>
+  </ul></li>
+  <li><a href="#sec-Appendices" id="toc-sec-Appendices"><span class="toc-section-number">8</span>  Appendices</a>
+  <ul>
+  <li><a href="#supplementary-materials-such-as-raw-data-additional-tables-or-figures-questionnaires-etc." id="toc-supplementary-materials-such-as-raw-data-additional-tables-or-figures-questionnaires-etc."><span class="toc-section-number">8.1</span>  Supplementary materials such as raw data, additional tables or figures, questionnaires, etc.</a></li>
+  </ul></li>
+  <li><a href="#sec-Other_information" id="toc-sec-Other_information"><span class="toc-section-number">9</span>  Other information</a>
+  <ul>
+  <li><a href="#funding" id="toc-funding"><span class="toc-section-number">9.1</span>  Funding</a></li>
+  </ul></li>
+  <li><a href="#report-sections" id="toc-report-sections"><span class="toc-section-number">10</span>  Report sections</a></li>
+  <li><a href="#templates" id="toc-templates"><span class="toc-section-number">11</span>  Templates</a>
+  <ul>
+  <li><a href="#figures" id="toc-figures"><span class="toc-section-number">11.1</span>  Figures</a></li>
+  <li><a href="#tables" id="toc-tables"><span class="toc-section-number">11.2</span>  Tables</a></li>
+  <li><a href="#equations" id="toc-equations"><span class="toc-section-number">11.3</span>  Equations</a></li>
+  <li><a href="#block-layout" id="toc-block-layout"><span class="toc-section-number">11.4</span>  Block layout</a></li>
+  <li><a href="#diagrams" id="toc-diagrams"><span class="toc-section-number">11.5</span>  Diagrams</a></li>
+  <li><a href="#margins-and-layout" id="toc-margins-and-layout"><span class="toc-section-number">11.6</span>  Margins and layout</a>
+  <ul>
+  <li><a href="#dynamic-heading-1" id="toc-dynamic-heading-1"><span class="toc-section-number">11.6.1</span>  Dynamic Heading 1</a></li>
+  <li><a href="#dynamic-heading-2" id="toc-dynamic-heading-2"><span class="toc-section-number">11.6.2</span>  Dynamic Heading 2</a></li>
+  <li><a href="#dynamic-heading-3" id="toc-dynamic-heading-3"><span class="toc-section-number">11.6.3</span>  Dynamic Heading 3</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sectionshort-version-heading" id="toc-sectionshort-version-heading"><span class="toc-section-number">12</span>  section[short version ]{heading }</a>
+  <ul>
+  <li><a href="#subsectionshort-version-heading" id="toc-subsectionshort-version-heading"><span class="toc-section-number">12.1</span>  subsection[short version ]{heading }</a>
+  <ul>
+  <li><a href="#subsubsectionshort-version-heading" id="toc-subsubsectionshort-version-heading"><span class="toc-section-number">12.1.1</span>  subsubsection[short version ]{heading }</a>
+  <ul>
+  <li><a href="#paragraphshort-version-heading" id="toc-paragraphshort-version-heading"><span class="toc-section-number">12.1.1.1</span>  paragraph[short version ]{heading }</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix"><span class="toc-section-number">13</span>  Appendix</a>
+  <ul>
+  <li><a href="#acknowledgments" id="toc-acknowledgments"><span class="toc-section-number">13.1</span>  Acknowledgments</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<!---
+# Erik's compile commands in R:
+  setwd("D:/Dropbox/StatAcumen/consult/Rpackages/erikmisc/data-raw/qmd_template")
+  fn_qmd <- "erik_qmd_template.qmd"
+  quarto::quarto_render(input = fn_qmd)
+-->
+<div class="cell">
+
+</div>
+<div style="page-break-after: always;"></div>
+<section id="sec-Executive_summary" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Executive summary</h1>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="sec-Introduction" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Introduction</h1>
+<section id="backgroundrationale" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="backgroundrationale"><span class="header-section-number">2.1</span> Background/rationale</h2>
+<ul>
+<li>Explain the scientific background and rationale for the investigation being reported</li>
+</ul>
+</section>
+<section id="objectives" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">2.2</span> Objectives</h2>
+<ul>
+<li>State specific objectives, including any prespecified hypotheses</li>
+</ul>
+</section>
+<section id="literature-review" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="literature-review"><span class="header-section-number">2.3</span> Literature Review:</h2>
+<ul>
+<li>Review of relevant prior research and theories.</li>
+<li>Identification of gaps in existing knowledge.</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-Methods" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Methods</h1>
+<section id="study-design" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="study-design"><span class="header-section-number">3.1</span> Study design</h2>
+<ul>
+<li>Present key elements of study design early in the paper</li>
+</ul>
+</section>
+<section id="setting" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="setting"><span class="header-section-number">3.2</span> Setting</h2>
+<ul>
+<li>Describe the setting, locations, and relevant dates, including periods of recruitment, exposure, follow-up, and data collection</li>
+</ul>
+</section>
+<section id="participants" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="participants"><span class="header-section-number">3.3</span> Participants</h2>
+<ul>
+<li>Cohort study — Give the eligibility criteria, and the sources and methods of selection of participants. Describe methods of follow-up</li>
+<li>Case-control study — Give the eligibility criteria, and the sources and methods of case ascertainment and control selection. Give the rationale for the choice of cases and controls</li>
+<li>Cross-sectional study — Give the eligibility criteria, and the sources and methods of selection of participants</li>
+<li>Cohort study — For matched studies, give matching criteria and number of exposed and unexposed</li>
+<li>Case-control study — For matched studies, give matching criteria and the number of controls per case</li>
+</ul>
+</section>
+<section id="variables" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="variables"><span class="header-section-number">3.4</span> Variables</h2>
+<ul>
+<li>Clearly define all outcomes, exposures, predictors, potential confounders, and effect modifiers. Give diagnostic criteria, if applicable</li>
+</ul>
+</section>
+<section id="data-sourcesmeasurement" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="data-sourcesmeasurement"><span class="header-section-number">3.5</span> Data sources/measurement</h2>
+<ul>
+<li>Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li>For each variable of interest, give sources of data and details of methods of assessment (measurement). Describe comparability of assessment methods if there is more than one group</li>
+</ul>
+</section>
+<section id="bias" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="bias"><span class="header-section-number">3.6</span> Bias</h2>
+<ul>
+<li>Describe any efforts to address potential sources of bias</li>
+</ul>
+</section>
+<section id="study-size" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="study-size"><span class="header-section-number">3.7</span> Study size</h2>
+<ul>
+<li>Explain how the study size was arrived at</li>
+</ul>
+</section>
+<section id="quantitative-variables" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="quantitative-variables"><span class="header-section-number">3.8</span> Quantitative variables</h2>
+<ul>
+<li>Explain how quantitative variables were handled in the analyses. If applicable, describe which groupings were chosen and why</li>
+</ul>
+</section>
+<section id="statistical-methods" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="statistical-methods"><span class="header-section-number">3.9</span> Statistical methods</h2>
+<ul>
+<li>Describe all statistical methods, including those used to control for confounding</li>
+<li>Describe any methods used to examine subgroups and interactions</li>
+<li>Explain how missing data were addressed</li>
+<li>Cohort study — If applicable, explain how loss to follow-up was addressed</li>
+<li>Case-control study — If applicable, explain how matching of cases and controls was addressed</li>
+<li>Cross-sectional study — If applicable, describe analytical methods taking account of sampling strategy</li>
+<li>Describe any sensitivity analyses</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-Results" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Results</h1>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dplyr.print_min         =</span> <span class="dv">6</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>, <span class="at">dplyr.print_max         =</span> <span class="dv">6</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>, <span class="at">pillar.max_footer_lines =</span> <span class="dv">2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>, <span class="at">pillar.min_chars        =</span> <span class="dv">15</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>, <span class="at">stringr.view_n          =</span> <span class="dv">6</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>, <span class="at">cli.num_colors          =</span> <span class="dv">0</span>       <span class="co"># Temporarily deactivate cli output for quarto</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>, <span class="at">cli.hyperlink           =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>, <span class="at">pillar.bold             =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>, <span class="at">width                   =</span> <span class="dv">77</span>      <span class="co"># 80 - 3 for #&gt; comment</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>, <span class="at">readr.show_col_types    =</span> <span class="cn">FALSE</span>   <span class="co"># readr::read_csv(), do not show column types</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>, <span class="at">str                     =</span> <span class="fu">strOptions</span>(<span class="at">list.len =</span> <span class="fl">1e3</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>, <span class="at">knitr.kable.NA          =</span> <span class="st">''</span>      <span class="co"># Display NAs as blanks</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>my_seed <span class="ot">&lt;-</span> <span class="dv">76543</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(my_seed)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># library(erikmisc)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Parallel processing</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">rf.cores =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">2</span>) <span class="co"># OpenMP Parallel Processing</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">2</span>) <span class="co"># R-side Parallel Processing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Read data</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat_sheet <span class="ot">&lt;-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"../data/.csv"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#dplyr::select(</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#) |&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error: '../data/.csv' does not exist in current working directory ('/Users/corrado/_repositories/bipolar_continuum/docs/submission/mindfulness').</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dat_sheet <span class="sc">|&gt;</span> <span class="fu">str</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'dat_sheet' not found</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat_sheet <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'dat_sheet' not found</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dat_sheet <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  erikmisc<span class="sc">::</span><span class="fu">e_plot_missing</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  , <span class="at">var_group           =</span> <span class="cn">NULL</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  , <span class="at">sw_group_sort       =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  , <span class="at">var2_sort           =</span> <span class="cn">NULL</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  , <span class="at">sw_title_data_name  =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  , <span class="at">sw_text_pct_miss    =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in loadNamespace(x): there is no package called 'erikmisc'</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Scatterplot matrix</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggpairs</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    dat_sheet <span class="sc">%&gt;%</span> <span class="fu">select</span>()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  , <span class="at">title =</span> <span class="st">"Title"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#, mapping = ggplot2::aes(colour = , alpha = 0.5)</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  , <span class="at">diag  =</span> <span class="fu">list</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">continuous =</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                GGally<span class="sc">::</span><span class="fu">wrap</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">c</span>(<span class="st">"densityDiag"</span>, <span class="st">"barDiag"</span>, <span class="st">"blankDiag"</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                , <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            , <span class="at">discrete =</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"barDiag"</span>, <span class="st">"blankDiag"</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scatterplots on top so response as first variable has y on vertical axis</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  , <span class="at">upper =</span> <span class="fu">list</span>(</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">continuous =</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                GGally<span class="sc">::</span><span class="fu">wrap</span>(</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">c</span>(<span class="st">"points"</span>, <span class="st">"smooth"</span>, <span class="st">"smooth_loess"</span>, <span class="st">"density"</span>, <span class="st">"cor"</span>, <span class="st">"blank"</span>)[<span class="dv">2</span>]</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                , <span class="at">se =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                , <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                , <span class="at">size =</span> <span class="dv">1</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            , <span class="at">discrete =</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"ratio"</span>, <span class="st">"facetbar"</span>, <span class="st">"blank"</span>)[<span class="dv">2</span>]</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>            , <span class="at">combo =</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                <span class="fu">wrap</span>(</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">c</span>(<span class="st">"box"</span>, <span class="st">"box_no_facet"</span>, <span class="st">"dot"</span>, <span class="st">"dot_no_facet"</span>, <span class="st">"facethist"</span>, <span class="st">"facetdensity"</span>, <span class="st">"denstrip"</span>, <span class="st">"blank"</span>)[<span class="dv">2</span>]</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                <span class="co">#, bins = 10  # for facethist</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  , <span class="at">lower =</span> <span class="fu">list</span>(</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>              <span class="at">continuous =</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>                GGally<span class="sc">::</span><span class="fu">wrap</span>(</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">c</span>(<span class="st">"points"</span>, <span class="st">"smooth"</span>, <span class="st">"smooth_loess"</span>, <span class="st">"density"</span>, <span class="st">"cor"</span>, <span class="st">"blank"</span>)[<span class="dv">5</span>]</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>                <span class="co">#, se = FALSE</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                <span class="co">#, alpha = 1/2</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                <span class="co">#, size = 1</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>            , <span class="at">discrete =</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"ratio"</span>, <span class="st">"facetbar"</span>, <span class="st">"blank"</span>)[<span class="dv">2</span>]</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>            , <span class="at">combo =</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                <span class="fu">wrap</span>(</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">c</span>(<span class="st">"box"</span>, <span class="st">"box_no_facet"</span>, <span class="st">"dot"</span>, <span class="st">"dot_no_facet"</span>, <span class="st">"facethist"</span>, <span class="st">"facetdensity"</span>, <span class="st">"denstrip"</span>, <span class="st">"blank"</span>)[<span class="dv">5</span>]</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>                , <span class="at">bins =</span> <span class="dv">10</span>  <span class="co"># for facethist</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  , <span class="at">progress =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  , <span class="at">legend =</span> <span class="dv">1</span>        <span class="co"># create legend</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from   
+  +.gg   ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'dat_sheet' not found</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'p' not found</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">labs</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">title     =</span> <span class="st">"title"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>              , <span class="at">subtitle  =</span> <span class="st">"subtitle"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              , <span class="at">x         =</span> <span class="st">"x"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>              , <span class="at">y         =</span> <span class="st">"y"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>              , <span class="at">caption =</span> <span class="fu">paste0</span>(  <span class="st">"Caption 1"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                                , <span class="st">"</span><span class="sc">\n</span><span class="st">Caption 2"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                                )</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>              , <span class="at">colour    =</span> <span class="st">"Class"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>              <span class="co">#, shape     = "Class"</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>              <span class="co">#, linetype  = "General Health"  #"Diagnosis"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>              <span class="co">#, fill      = "Diagnosis"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>              <span class="co">#, tag = "A"</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>              )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'p' not found</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'p' not found</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'p' not found</code></pre>
+</div>
+</div>
+<section id="participants-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="participants-1"><span class="header-section-number">4.1</span> Participants</h2>
+<ul>
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li>Report numbers of individuals at each stage of study — eg numbers potentially eligible, examined for eligibility, confirmed eligible, included in the study, completing follow-up, and analysed</li>
+<li>Give reasons for non-participation at each stage</li>
+<li>Consider use of a flow diagram</li>
+</ul>
+</section>
+<section id="descriptive-data" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="descriptive-data"><span class="header-section-number">4.2</span> Descriptive data</h2>
+<ul>
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li><ol type="a">
+<li>Give characteristics of study participants (eg demographic, clinical, social) and information on exposures and potential confounders</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>Indicate number of participants with missing data for each variable of interest</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>Cohort study — Summarise follow-up time (eg, average and total amount)</li>
+</ol></li>
+</ul>
+</section>
+<section id="outcome-data" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="outcome-data"><span class="header-section-number">4.3</span> Outcome data</h2>
+<ul>
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li>Cohort study — Report numbers of outcome events or summary measures over time</li>
+<li>Case-control study — Report numbers in each exposure category, or summary measures of exposure</li>
+<li>Cross-sectional study — Report numbers of outcome events or summary measures</li>
+</ul>
+</section>
+<section id="main-results" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="main-results"><span class="header-section-number">4.4</span> Main results</h2>
+<ul>
+<li>Give unadjusted estimates and, if applicable, confounder-adjusted estimates and their precision (eg, 95% confidence interval). Make clear which confounders were adjusted for and why they were included</li>
+<li>Report category boundaries when continuous variables were categorized</li>
+<li>If relevant, consider translating estimates of relative risk into absolute risk for a meaningful time period</li>
+</ul>
+</section>
+<section id="other-analyses" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="other-analyses"><span class="header-section-number">4.5</span> Other analyses</h2>
+<ul>
+<li>Report other analyses done — eg analyses of subgroups and interactions, and sensitivity analyses</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-Discussion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Discussion</h1>
+<section id="key-results" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="key-results"><span class="header-section-number">5.1</span> Key results</h2>
+<ul>
+<li>Summarise key results with reference to study objectives</li>
+</ul>
+</section>
+<section id="limitations" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">5.2</span> Limitations</h2>
+<ul>
+<li>Discuss limitations of the study, taking into account sources of potential bias or imprecision. Discuss both direction and magnitude of any potential bias</li>
+</ul>
+</section>
+<section id="interpretation" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">5.3</span> Interpretation</h2>
+<ul>
+<li>Give a cautious overall interpretation of results considering objectives, limitations, multiplicity of analyses, results from similar studies, and other relevant evidence</li>
+</ul>
+</section>
+<section id="generalisability" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="generalisability"><span class="header-section-number">5.4</span> Generalisability</h2>
+<ul>
+<li>Discuss the generalisability (external validity) of the study results</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-Conclusion" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Conclusion</h1>
+<section id="summary-of-the-main-findings." class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="summary-of-the-main-findings."><span class="header-section-number">6.1</span> Summary of the main findings.</h2>
+</section>
+<section id="implications-of-the-study." class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="implications-of-the-study."><span class="header-section-number">6.2</span> Implications of the study.</h2>
+</section>
+<section id="suggestions-for-future-research." class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="suggestions-for-future-research."><span class="header-section-number">6.3</span> Suggestions for future research.</h2>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-References" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> References</h1>
+<section id="list-of-all-sources-cited-in-the-report-following-a-specific-citation-style-e.g.-apa-mla-chicago." class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="list-of-all-sources-cited-in-the-report-following-a-specific-citation-style-e.g.-apa-mla-chicago."><span class="header-section-number">7.1</span> List of all sources cited in the report, following a specific citation style (e.g., APA, MLA, Chicago).</h2>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-Appendices" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Appendices</h1>
+<section id="supplementary-materials-such-as-raw-data-additional-tables-or-figures-questionnaires-etc." class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="supplementary-materials-such-as-raw-data-additional-tables-or-figures-questionnaires-etc."><span class="header-section-number">8.1</span> Supplementary materials such as raw data, additional tables or figures, questionnaires, etc.</h2>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="sec-Other_information" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Other information</h1>
+<section id="funding" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="funding"><span class="header-section-number">9.1</span> Funding</h2>
+<ul>
+<li>Give the source of funding and the role of the funders for the present study and, if applicable, for the original study on which the present article is based</li>
+</ul>
+<p>Note: An Explanation and Elaboration article discusses each checklist item and gives methodological background and published examples of transparent reporting. The STROBE checklist is best used in conjunction with this article (freely available on the Web sites of PLoS Medicine at http://www.plosmedicine.org/, Annals of Internal Medicine at http://www.annals.org/, and Epidemiology at http://www.epidem.com/). Information on the STROBE Initiative is available at www.strobe-statement.org.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="report-sections" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Report sections</h1>
+<p>STROBE <a href="https://www.strobe-statement.org/index.php?id=available-checklists" class="uri">https://www.strobe-statement.org/index.php?id=available-checklists</a></p>
+<p>STROBE Statement — checklist of items that should be included in reports of observational studies</p>
+<p>Added some additional items.</p>
+<ol type="1">
+<li>Title Page:
+<ol type="1">
+<li>Title of the Report</li>
+<li>Author(s) Name(s)</li>
+<li>Affiliation(s)</li>
+<li>Date</li>
+</ol></li>
+<li>Title and abstract/Executive summary
+<ol type="1">
+<li>Indicate the study’s design with a commonly used term in the title or the abstract</li>
+<li>Provide in the abstract an informative and balanced summary of what was done and what was found</li>
+</ol></li>
+<li>Abstract:
+<ol type="1">
+<li>A brief summary of the report, typically around 150-250 words, highlighting the purpose, methods, results, and conclusions.</li>
+</ol></li>
+<li>Table of Contents (optional):
+<ol type="1">
+<li>List of sections and subsections with page numbers for easy navigation.</li>
+</ol></li>
+<li>List of Figures and Tables (optional):
+<ol type="1">
+<li>If your report contains numerous figures and tables, provide a list with their titles and page numbers.</li>
+</ol></li>
+<li>List of Abbreviations (optional):
+<ol type="1">
+<li>Define any acronyms or abbreviations used in the report.</li>
+</ol></li>
+<li>Introduction
+<ol type="1">
+<li>Background/rationale</li>
+<li>Explain the scientific background and rationale for the investigation being reported</li>
+<li>Objectives</li>
+<li>State specific objectives, including any prespecified hypotheses</li>
+<li>Literature Review:
+<ol type="1">
+<li>Review of relevant prior research and theories.</li>
+<li>Identification of gaps in existing knowledge.</li>
+</ol></li>
+</ol></li>
+<li>Methods
+<ol type="1">
+<li>Study design
+<ol type="1">
+<li>Present key elements of study design early in the paper</li>
+</ol></li>
+<li>Setting
+<ol type="1">
+<li>Describe the setting, locations, and relevant dates, including periods of recruitment, exposure, follow-up, and data collection</li>
+</ol></li>
+<li>Participants
+<ol type="1">
+<li>Cohort study — Give the eligibility criteria, and the sources and methods of selection of participants. Describe methods of follow-up</li>
+<li>Case-control study — Give the eligibility criteria, and the sources and methods of case ascertainment and control selection. Give the rationale for the choice of cases and controls</li>
+<li>Cross-sectional study — Give the eligibility criteria, and the sources and methods of selection of participants</li>
+<li>Cohort study — For matched studies, give matching criteria and number of exposed and unexposed</li>
+<li>Case-control study — For matched studies, give matching criteria and the number of controls per case</li>
+</ol></li>
+<li>Variables
+<ol type="1">
+<li>Clearly define all outcomes, exposures, predictors, potential confounders, and effect modifiers. Give diagnostic criteria, if applicable</li>
+</ol></li>
+<li>Data sources/ measurement
+<ol type="1">
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li>For each variable of interest, give sources of data and details of methods of assessment (measurement). Describe comparability of assessment methods if there is more than one group</li>
+</ol></li>
+<li>Bias
+<ol type="1">
+<li>Describe any efforts to address potential sources of bias</li>
+</ol></li>
+<li>Study size
+<ol type="1">
+<li>Explain how the study size was arrived at</li>
+</ol></li>
+<li>Quantitative variables
+<ol type="1">
+<li>Explain how quantitative variables were handled in the analyses. If applicable, describe which groupings were chosen and why</li>
+</ol></li>
+<li>Statistical methods
+<ol type="1">
+<li>Describe all statistical methods, including those used to control for confounding</li>
+<li>Describe any methods used to examine subgroups and interactions</li>
+<li>Explain how missing data were addressed</li>
+<li>Cohort study — If applicable, explain how loss to follow-up was addressed</li>
+<li>Case-control study — If applicable, explain how matching of cases and controls was addressed</li>
+<li>Cross-sectional study — If applicable, describe analytical methods taking account of sampling strategy</li>
+<li>Describe any sensitivity analyses</li>
+</ol></li>
+</ol></li>
+<li>Results
+<ol type="1">
+<li>Participants
+<ol type="1">
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li>Report numbers of individuals at each stage of study — eg numbers potentially eligible, examined for eligibility, confirmed eligible, included in the study, completing follow-up, and analysed</li>
+<li>Give reasons for non-participation at each stage</li>
+<li>Consider use of a flow diagram</li>
+</ol></li>
+<li>Descriptive data
+<ol type="1">
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li><ol type="a">
+<li>Give characteristics of study participants (eg demographic, clinical, social) and information on exposures and potential confounders</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>Indicate number of participants with missing data for each variable of interest</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>Cohort study — Summarise follow-up time (eg, average and total amount)</li>
+</ol></li>
+</ol></li>
+<li>Outcome data
+<ol type="1">
+<li>*Give information separately for cases and controls in case-control studies and, if applicable, for exposed and unexposed groups in cohort and cross-sectional studies.</li>
+<li>Cohort study — Report numbers of outcome events or summary measures over time</li>
+<li>Case-control study — Report numbers in each exposure category, or summary measures of exposure</li>
+<li>Cross-sectional study — Report numbers of outcome events or summary measures</li>
+</ol></li>
+<li>Main results
+<ol type="1">
+<li>Give unadjusted estimates and, if applicable, confounder-adjusted estimates and their precision (eg, 95% confidence interval). Make clear which confounders were adjusted for and why they were included</li>
+<li>Report category boundaries when continuous variables were categorized</li>
+<li>If relevant, consider translating estimates of relative risk into absolute risk for a meaningful time period</li>
+</ol></li>
+<li>Other analyses
+<ol type="1">
+<li>Report other analyses done — eg analyses of subgroups and interactions, and sensitivity analyses</li>
+</ol></li>
+</ol></li>
+<li>Discussion
+<ol type="1">
+<li>Key results
+<ol type="1">
+<li>Summarise key results with reference to study objectives</li>
+</ol></li>
+<li>Limitations
+<ol type="1">
+<li>Discuss limitations of the study, taking into account sources of potential bias or imprecision. Discuss both direction and magnitude of any potential bias</li>
+</ol></li>
+<li>Interpretation
+<ol type="1">
+<li>Give a cautious overall interpretation of results considering objectives, limitations, multiplicity of analyses, results from similar studies, and other relevant evidence</li>
+</ol></li>
+<li>Generalisability
+<ol type="1">
+<li>Discuss the generalisability (external validity) of the study results</li>
+</ol></li>
+</ol></li>
+<li>Conclusion:
+<ol type="1">
+<li>Summary of the main findings.</li>
+<li>Implications of the study.</li>
+<li>Suggestions for future research.</li>
+</ol></li>
+<li>References:
+<ol type="1">
+<li>List of all sources cited in the report, following a specific citation style (e.g., APA, MLA, Chicago).</li>
+</ol></li>
+<li>Appendices (if applicable):
+<ol type="1">
+<li>Supplementary materials such as raw data, additional tables or figures, questionnaires, etc.</li>
+</ol></li>
+<li>Other information
+<ol type="1">
+<li>Funding
+<ol type="1">
+<li>Give the source of funding and the role of the funders for the present study and, if applicable, for the original study on which the present article is based</li>
+</ol></li>
+</ol></li>
+</ol>
+<p>Note: An Explanation and Elaboration article discusses each checklist item and gives methodological background and published examples of transparent reporting. The STROBE checklist is best used in conjunction with this article (freely available on the Web sites of PLoS Medicine at http://www.plosmedicine.org/, Annals of Internal Medicine at http://www.annals.org/, and Epidemiology at http://www.epidem.com/). Information on the STROBE Initiative is available at www.strobe-statement.org.</p>
+<hr>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="templates" class="level1 page-columns page-full" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Templates</h1>
+<section id="figures" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="figures"><span class="header-section-number">11.1</span> Figures</h2>
+<p>Here I crossreference the subfigures of the figure. The main figure is <a href="#fig-charts">Figure&nbsp;11.1</a>, with the subpanels being called <a href="#fig-charts-1">Figure&nbsp;11.1 (a)</a> and <a href="#fig-charts-2">Figure&nbsp;11.1 (b)</a>, automatically.</p>
+<div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-charts" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-charts-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="bipolar_files/figure-html/fig-charts-1.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="576"></p>
+<p></p><figcaption class="figure-caption">(a) Speed and Stopping Distances of Cars</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-charts-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="bipolar_files/figure-html/fig-charts-2.png" class="img-fluid figure-img" data-ref-parent="fig-charts" width="576"></p>
+<p></p><figcaption class="figure-caption">(b) Vapor Pressure of Mercury as a Function of Temperature</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;11.1: Two charts</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>Here I crossreference the subfigures of the figure. The main figure is <a href="#fig-charts2">Figure&nbsp;11.2</a>, with the subpanels being called <a href="#fig-charts2-1">Figure&nbsp;11.2 (a)</a>, <a href="#fig-charts2-2">Figure&nbsp;11.2 (b)</a>, and <a href="#fig-charts2-3">Figure&nbsp;11.2 (c)</a>, automatically.</p>
+<div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-charts2" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 45.0%;justify-content: center;">
+<div id="fig-charts2-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="bipolar_files/figure-html/fig-charts2-1.png" class="img-fluid figure-img" data-ref-parent="fig-charts2" width="768"></p>
+<p></p><figcaption class="figure-caption">(a) Speed and Stopping Distances of Cars</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 10.0%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 45.0%;justify-content: center;">
+<div id="fig-charts2-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="bipolar_files/figure-html/fig-charts2-2.png" class="img-fluid figure-img" data-ref-parent="fig-charts2" width="768"></p>
+<p></p><figcaption class="figure-caption">(b) Vapor Pressure of Mercury as a Function of Temperature</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 100.0%;justify-content: center;">
+<div id="fig-charts2-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="bipolar_files/figure-html/fig-charts2-3.png" class="img-fluid figure-img" data-ref-parent="fig-charts2" width="768"></p>
+<p></p><figcaption class="figure-caption">(c) Motor Trend Car Road Tests</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;11.2: Three charts</figcaption><p></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="tables" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="tables"><span class="header-section-number">11.2</span> Tables</h2>
+<p>Here I crossreference the subtables of the table. The main table is <a href="#tbl-example">Table&nbsp;11.1</a>, with the subpanels being called <a href="#tbl-example-1">Table&nbsp;11.1 (a)</a> and <a href="#tbl-example-2">Table&nbsp;11.1 (b)</a>, automatically.</p>
+<div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cars))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(pressure))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-example" class="cell tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;11.1: Example</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-example-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table table-sm table-striped">
+<caption>(a) Cars</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">speed</th>
+<th style="text-align: right;">dist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tbl-example-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table table-sm table-striped">
+<caption>(b) Pressure</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">temperature</th>
+<th style="text-align: right;">pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0002</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.0012</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.0060</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0.0300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">0.0900</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.2700</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="equations" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="equations"><span class="header-section-number">11.3</span> Equations</h2>
+<p>Black-Scholes (<a href="#eq-black-scholes">Equation&nbsp;11.1</a>) is a mathematical model that seeks to explain the behavior of financial derivatives, most commonly options:</p>
+<p><span id="eq-black-scholes"><span class="math display">\[
+\frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2}
+\frac{\partial^{2} \mathrm C}{\partial \mathrm C^2}
+  + \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ =
+  \mathrm r \mathrm C
+\tag{11.1}\]</span></span> ## Crossreference sections {#sec-crossref-sections} See <strong>?@sec-crossref-sections</strong> for additional context. ## Crossreference code To xref code <a href="https://quarto.org/docs/authoring/cross-references.html" class="uri">https://quarto.org/docs/authoring/cross-references.html</a>, it’s a bit strange. Create the label, then use .r, then a list caption. Note that the code is not executed! Then you can xref by the label (<a href="#lst-code-xref">Listing&nbsp;11.1</a>).</p>
+<div id="lst-code-xref" class="listing">
+<p>Listing&nbsp;11.1: Code xref</p>
+<div class="sourceCode" id="lst-code-xref" data-lst-cap="Code xref"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="lst-code-xref-1"><a href="#lst-code-xref-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="block-layout" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="block-layout"><span class="header-section-number">11.4</span> Block layout</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<section id="list-one" class="level3 quarto-layout-cell" data-number="11.4.1" style="flex-basis: 50.0%;justify-content: center;">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="list-one"><span class="header-section-number">11.4.1</span> List One</h3>
+<ul>
+<li>Item A</li>
+<li>Item B</li>
+<li>Item C ### List Two</li>
+<li>Item X</li>
+<li>Item Y</li>
+<li>Item Z</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li>Item X</li>
+<li>Item Y</li>
+<li>Item Z Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur gravida eu erat et fring. Morbi congue augue vel eros ullamcorper, eget convallis tortor sagittis. Fusce sodales viverra mauris a fringilla. Donec feugiat, justo eu blandit placerat, enim dui volutpat turpis, eu dictum lectus urna eu urna. Mauris sed massa ornare, interdum ipsum a, semper massa.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="diagrams" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="diagrams"><span class="header-section-number">11.5</span> Diagrams</h2>
+<p>See <a href="https://quarto.org/docs/authoring/diagrams.html" class="uri">https://quarto.org/docs/authoring/diagrams.html</a> and <a href="https://mermaid-js.github.io/mermaid/#/flowchart" class="uri">https://mermaid-js.github.io/mermaid/#/flowchart</a>.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  A[Hard edge] --&gt; B(Round edge)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  B --&gt; C{Decision}</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  C --&gt; D[Result one]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  C --&gt; E[Result two]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
+  A[Hard edge] --&gt; B(Round edge)
+  B --&gt; C{Decision}
+  C --&gt; D[Result one]
+  C --&gt; E[Result two]
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="margins-and-layout" class="level2 page-columns page-full" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="margins-and-layout"><span class="header-section-number">11.6</span> Margins and layout</h2>
+<div class="page-columns page-full"><p>See <a href="https://quarto.org/docs/authoring/article-layout.html" class="uri">https://quarto.org/docs/authoring/article-layout.html</a>. Here is an inline footnote.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>  ## Callouts :::{.callout-note} Note that there are five types of callouts, including: <code>note</code>, <code>tip</code>, <code>warning</code>, <code>caution</code>, and <code>important</code>. ::: :::{.callout-tip} Note that there are five types of callouts, including: <code>note</code>, <code>tip</code>, <code>warning</code>, <code>caution</code>, and <code>important</code>. ::: :::{.callout-warning} Note that there are five types of callouts, including: <code>note</code>, <code>tip</code>, <code>warning</code>, <code>caution</code>, and <code>important</code>. ::: :::{.callout-caution} Note that there are five types of callouts, including: <code>note</code>, <code>tip</code>, <code>warning</code>, <code>caution</code>, and <code>important</code>. ::: :::{.callout-important} Note that there are five types of callouts, including: <code>note</code>, <code>tip</code>, <code>warning</code>, <code>caution</code>, and <code>important</code>. ::: :::{.callout-caution collapse=“true”} ## Expand To Learn About Collapse This is an example of a ‘folded’ caution callout that can be expanded by the user. You can use <code>collapse="true"</code> to collapse it by default or <code>collapse="false"</code> to make a collapsible callout that is expanded by default. ::: ## Generate dynamic headers</p><div class="no-row-height column-margin column-container"><span class="">This is a span that has the class aside which places it in the margin without a footnote number.</span></div></div>
+<section id="dynamic-heading-1" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="dynamic-heading-1"><span class="header-section-number">11.6.1</span> Dynamic Heading 1</h3>
+</section>
+
+<section id="dynamic-heading-2" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="dynamic-heading-2"><span class="header-section-number">11.6.2</span> Dynamic Heading 2</h3>
+</section>
+<section id="dynamic-heading-3" class="level3" data-number="11.6.3">
+<h3 data-number="11.6.3" class="anchored" data-anchor-id="dynamic-heading-3"><span class="header-section-number">11.6.3</span> Dynamic Heading 3</h3>
+<!---
+# part[short version ]{heading }
+## chapter[short version ]{heading }
+-->
+</section>
+</section>
+</section>
+<section id="sectionshort-version-heading" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> section[short version ]{heading }</h1>
+<section id="subsectionshort-version-heading" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="subsectionshort-version-heading"><span class="header-section-number">12.1</span> subsection[short version ]{heading }</h2>
+<section id="subsubsectionshort-version-heading" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="subsubsectionshort-version-heading"><span class="header-section-number">12.1.1</span> subsubsection[short version ]{heading }</h3>
+<section id="paragraphshort-version-heading" class="level4" data-number="12.1.1.1">
+<h4 data-number="12.1.1.1" class="anchored" data-anchor-id="paragraphshort-version-heading"><span class="header-section-number">12.1.1.1</span> paragraph[short version ]{heading }</h4>
+<section id="subparagraphshort-version-heading" class="level5" data-number="12.1.1.1.1">
+<h5 data-number="12.1.1.1.1" class="anchored" data-anchor-id="subparagraphshort-version-heading"><span class="header-section-number">12.1.1.1.1</span> subparagraph[short version ]{heading }</h5>
+
+</section>
+</section>
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="appendix" class="level1 appendix" data-number="13"><h2 class="quarto-appendix-heading"><span class="header-section-number">13</span> Appendix</h2><div class="quarto-appendix-contents">
+
+
+</div></section><section id="acknowledgments" class="level2 appendix" data-number="13.1"><h2 class="quarto-appendix-heading"><span class="header-section-number">13.1</span> Acknowledgments</h2><div class="quarto-appendix-contents">
+
+<p>Sections of your document can be added to the Appendix that appears at the end of your article by adding the .appendix class to any header.</p>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-section" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Inlines notes are easy to write, since you don’t have to pick an identifier and move down to type the note.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{caudek2024,
+  author = {Corrado Caudek},
+  title = {Title},
+  date = {2024-09-25},
+  url = {https://StatAcumen.com},
+  langid = {en},
+  abstract = {Document abstract may be somewhat long.}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-caudek2024" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Corrado Caudek. 2024. <span>“Title.”</span> September 25, 2024. <a href="https://StatAcumen.com">https://StatAcumen.com</a>.
+</div></div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
