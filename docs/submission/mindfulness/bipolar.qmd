@@ -82,7 +82,7 @@ However, *nomothetic analyses* -- focused on group-level patterns -- may obscure
 
 ### Bayesian Hierarchical Model
 
-To investigate the momentary relationship between CS and UCS more precisely, we combined data from both experiments and applied a Bayesian hierarchical model. This approach allows us to account for moment-to-moment, daily, and individual differences in self-compassion, providing a detailed view of how CS and UCS interact dynamically over time. The model specifically examines whether the relationship between CS and UCS varies across individuals depending on momentary negative affect and context evaluation, offering a nuanced exploration of these constructs in real-world contexts.
+To investigate the momentary relationship between CS and UCS more precisely, we combined data from both experiments and applied a Bayesian hierarchical model. This approach allows us to account for moment-to-moment, daily, and individual differences in self-compassion, providing a detailed view of how CS and UCS interact dynamically over time. The model specifically examines whether the relationship between CS and UCS varies across individuals depending on momentary negative affect and context evaluation, offering a nuanced exploration of these constructs in real-world contexts. [^1]
 
 The model assumes a linear relationship between CS and UCS to maintain consistency with Neff’s hypothesis, which posits that CS and UCS are opposing ends of a continuum. By doing so, we avoid overfitting (which could occur if we assumed complete independence between CS and UCS) while testing the robustness of the hypothesized inverse relationship at the momentary level.
 
@@ -543,9 +543,28 @@ To assess the fit of the model, we performed *posterior predictive checks* using
 
 We also computed *leave-one-out cross-validation (LOO)* for model comparison and fit assessment. The Pareto $k$ statistics indicated that all observations were well predicted, with no problematic points (i.e., $k < 0.5$ for all data points). The maximum $\hat{R}$ value across all parameters was 1.0150, with a mean $\hat{R}$ value of 1.0006, suggesting good convergence.
 
+### Idiographic versus Nomothetic Approaches
+
+We believe that, for the purposes of testing Neff’s hypothesis, using a Bayesian multilevel model in the present study is both justified and appropriate. While more specialized idiographic approaches, such as the GIMME method [@wright2019focusing], offer specific advantages, these are not necessary for the current analysis. @wright2019focusing highlight two main strengths of GIMME over multilevel modeling: (1) it does not require assuming that all individuals follow the same functional form, and (2) it avoids assuming normally distributed random effects. However, in our case, assuming a linear relationship between UCS and CS aligns with the theoretical basis of our study and allows us to directly test the hypothesis that motivated our research.
+
+Regarding the assumption of normally distributed random effects, while it is true that all statistical analyses are conditional on the model assumptions, our results are strongly supported by the good fit of the model, as evidenced by posterior predictive checks, R-hat values, and the absence of convergence issues. Thus, these assumptions do not undermine the validity of our conclusions. Moreover, multilevel modeling provides an additional advantage over purely data-driven idiographic methods by greatly attenuating the risk of overfitting. GIMME, while excellent for uncovering individual-level variation without prior assumptions, can sometimes risk overfitting when dealing with complex, noisy data, as noted by @wright2019focusing. Given our specific research question—testing the hypothesized relationship between CS and UCS—a simpler multilevel model is better suited, as it effectively bridge nomothetic and idiographic approaches, because they simultaneously estimate within-person associations among variables (e.g., daily stress→negative affect) and between-person differences in those associations [@conner2009experience].
+
+
+\pagebreak
+
+# Response to Reviewer Comments
+
+## Reviewer 1
+
+- Point 2: "The introduction provides a reasonable rationale for testing the bipolar continuum hypothesis using EMA. However, I wonder if the authors could provide a brief review of recent self-compassion research using EMA (e.g., Mey et al., 2023; DOI: 10.1007/s12671-022-02050-y, which was in the reference list but was not cited) and explain how previous research might inform hypotheses."
+
+  - *Thank you for this helpful suggestion. We have added a brief review of recent work on self-compassion using EMA to the introduction of the manuscript, drawing particularly on @mey2023kind. This work highlights that, while self-compassion (SC) has traditionally been viewed as a stable trait, there is growing evidence that SC fluctuates within individuals over time and that these fluctuations impact well-being. For instance, individuals report healthier eating behaviors, better body image, less perceived stress, and a lower likelihood of clinical impairment due to eating habits on days when they report higher SC than usual.*
+  - @mey2023kind utilized EMA to investigate the implications of momentary self-compassion (SC) for affective dynamics and well-being in daily life, finding that higher recent SC was related to higher momentary positive affect and lower momentary negative affect.  Moreover, they found that higher recent SC was associated with lower stress reactivity to daily hassles. The study importantly shows that SC may not only be a beneficial trait but also a helpful state that can be cultivated in daily life to enhance well-being and mitigate the negative impact of stress. This is significant because it highlights the potential for individuals to experience the benefits of SC regardless of their general level of self-compassion.
+@mey2023kind also discovered that SC fluctuates over time within the same individual, challenging the traditional view of SC as a static trait. This dynamic nature of SC supports our present design, which uses EMA to examine how the CS and UCS covary across different contexts to evaluate the hypothesis of a bipolar continuum. Furthermore, the study's findings suggest that repeatedly increasing one's momentary SC could potentially lead to increases in trait levels of SC, offering more enduring well-being benefits. This aligns with research on mindfulness, which has shown that repeatedly increasing state mindfulness in brief meditations over several weeks led to heightened trait mindfulness at the end of the intervention.  The sources also note a "paradox" within the SC concept.  While SC aims to alleviate suffering, it also emphasizes acceptance of the current moment, creating a potential tension between these two aspects. The findings of @mey2023kind thus demonstrate the value of EMA as a method to explore the dynamic nature of SC and its implications for well-being. This method captures the fluctuation of SC within individuals, which might not be revealed by static, trait-based measures.
+
+
 \pagebreak
 
 # Bibliography
-
 
 
