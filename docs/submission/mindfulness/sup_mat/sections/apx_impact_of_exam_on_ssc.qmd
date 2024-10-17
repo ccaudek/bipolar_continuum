@@ -1,0 +1,147 @@
+Below, we present a detailed specification of the hierarchical, multilevel model that was used to analyze the effect of specific time points (`no_exam`), `exam_day_pre`, `exam_day_post`) on the CS and UCS components of State Self-Compassion, while accounting for the nested structure of the data.
+
+Given
+
+- $N$: Total number of observations
+- $J$: Number of subjects
+- $D$: Number of days
+- $M$: Number of measurements per day
+- $psc$: Dependent variable (array of size $N$)
+- $exam\_day\_pre$: Indicator variable for pre-exam day (array of size $N$)
+- $exam\_day\_post$: Indicator variable for post-exam day (array of size $N$)
+
+the model is defined as follows:
+
+**Priors:**
+
+\begin{align*}
+    \alpha & \sim \text{Normal}(0, 2.5) \\
+    \alpha_j & \sim \text{Normal}(0, \sigma_j) \\
+    \alpha_d & \sim \text{Normal}(0, \sigma_d) \\
+    \alpha_m & \sim \text{Normal}(0, \sigma_m) \\
+    \beta_{pre}, \beta_{post} & \sim \text{Normal}(0, 1) \\
+    \beta_{j\_pre}, \beta_{j\_post} & \sim \text{Normal}(0, \sigma_{\beta_j}) \\
+    \sigma, \sigma_j, \sigma_d, \sigma_m, \sigma_{\beta_{j\_pre}}, \sigma_{\beta_{j\_post}} & \sim \text{Exponential}(1) \\
+    \text{skewness} & \sim \text{Normal}(0, 1)
+\end{align*}
+
+**Likelihood:**
+For each observation $n = 1, \ldots, N$:
+
+\begin{align*}
+    psc[n] & \sim \text{SkewNormal}\left(\mu_n, \sigma, \text{skewness}\right) \\
+    \text{where } \mu_n & = \alpha + \alpha_j[\text{subj}[n]] + \alpha_d[\text{day}[n]] + \alpha_m[\text{meas}[n]] \\
+    & \quad + (\beta_{pre} + \beta_{j\_pre}[\text{subj}[n]]) \times \text{exam\_day\_pre}[n] \\
+    & \quad + (\beta_{post} + \beta_{j\_post}[\text{subj}[n]]) \times \text{exam\_day\_post}[n]
+\end{align*}
+
+The model employs a skew normal distribution to accommodate potential asymmetry in the response variable.
+
+### Model Description:
+
+1. **Observational Unit and Data Structure:** The model is built for $N$ observations, collected from $J$ subjects across $D$ days, with each day comprising $M$ measurements. The dependent variable, `CS` or `UCS`, represents the psychological measure of interest, and the primary predictors are binary indicators for pre-exam (`exam_day_pre`) and post-exam (`exam_day_post`) days.
+
+2. **Random Effects Structure:** 
+   - **Subject-level Random Intercepts ($\alpha_j$):** These capture the subject-specific deviations from the overall mean, allowing for individual baseline differences in `CS` or `UCS`.
+   - **Day-level Random Intercepts ($\alpha_d$):** These account for day-to-day variability within subjects, capturing fluctuations in `CS` or `UCS` that might be attributed to daily factors.
+   - **Measurement-level Random Intercepts ($\alpha_m$):** These intercepts address the variation within the same day, considering the potential impact of the time of measurement on `CS` or `UCS`.
+
+3. **Random Slopes:** 
+   - **Subject-specific Slopes for Exam Days ($\beta_{j\_pre}$ and $\beta_{j\_post}$):** These slopes allow the effect of pre- and post-exam days to vary across subjects, acknowledging that the impact of these specific days on `CS` or `UCS` might differ among individuals.
+
+4. **Fixed Effects:** 
+   - **Global Intercept ($\alpha$):** This represents the overall mean level of `CS` or `UCS` across all observations when other predictors are at their reference levels.
+   - **Main Effects for Exam Days ($\beta_{pre}$ and $\beta_{post}$):** These coefficients estimate the average effect of pre- and post-exam days on `CS` or `UCS`, relative to non-exam days.
+
+5. **Skewness Parameter:** The inclusion of a skewness parameter in the skew normal distribution allows the model to capture potential asymmetry in the distribution of `CS` or `UCS`.
+
+6. **Priors:** The model employs non-informative priors for most parameters, assuming normal distributions for intercepts and slopes, and exponential distributions for standard deviations, ensuring a broad range of plausible values.
+
+7. **Likelihood:** 
+   - **Likelihood:** The response variable `CS` or `UCS` for each observation is modeled using a skew normal distribution, with mean and variance parameters constructed from the fixed and random effects, and the skewness parameter to capture asymmetry.
+   
+### Stan Code
+
+```stan
+data {
+  int<lower=1> N; // Number of observations
+  int<lower=1> J; // Number of subjects
+  int<lower=1> D; // Number of days
+  int<lower=1> M; // Number of measurements per day
+  array[N] int<lower=1, upper=J> subj; // Subject index
+  array[N] int<lower=1, upper=D> day; // Day index
+  array[N] int<lower=1, upper=M> meas; // Measurement index
+  array[N] real nsc; // Dependent variable
+  array[N] real exam_day_pre; // 1 if exam day is 'pre', 0 otherwise
+  array[N] real exam_day_post; // 1 if exam day is 'post', 0 otherwise
+}
+
+parameters {
+  real alpha; // Global intercept
+  array[J] real alpha_j; // Random intercepts for subjects
+  array[D] real alpha_d; // Random intercepts for days
+  array[M] real alpha_m; // Random intercepts for measurements
+  real beta_pre; // Main effect of exam day 'pre'
+  real beta_post; // Main effect of exam day 'post'
+  array[J] real beta_j_pre; // Random slopes for exam_day_pre
+  array[J] real beta_j_post; // Random slopes for exam_day_post
+  real<lower=0> sigma; // Standard deviation for psc
+  real<lower=0> sigma_j; // SD for subject random intercepts
+  real<lower=0> sigma_d; // SD for day random intercepts
+  real<lower=0> sigma_m; // SD for measurement random intercepts
+  real<lower=0> sigma_beta_j_pre; // SD for random slopes (pre)
+  real<lower=0> sigma_beta_j_post; // SD for random slopes (post)
+  real skewness; // Skewness parameter for the skew normal distribution
+}
+
+model {
+  // Priors
+  alpha ~ normal(0, 2.5);
+  alpha_j ~ normal(0, sigma_j);
+  alpha_d ~ normal(0, sigma_d);
+  alpha_m ~ normal(0, sigma_m);
+  beta_pre ~ normal(0, 1);
+  beta_post ~ normal(0, 1);
+  beta_j_pre ~ normal(0, sigma_beta_j_pre);
+  beta_j_post ~ normal(0, sigma_beta_j_post);
+  sigma ~ exponential(1);
+  sigma_j ~ exponential(1);
+  sigma_d ~ exponential(1);
+  sigma_m ~ exponential(1);
+  sigma_beta_j_pre ~ exponential(1);
+  sigma_beta_j_post ~ exponential(1);
+  skewness ~ normal(0, 1);
+
+  // Likelihood
+  for (n in 1:N) {
+    nsc[n] ~ skew_normal(
+      alpha + alpha_j[subj[n]] + alpha_d[day[n]] + alpha_m[meas[n]] +
+      (beta_pre + beta_j_pre[subj[n]]) * exam_day_pre[n] +
+      (beta_post + beta_j_post[subj[n]]) * exam_day_post[n],
+      sigma, skewness
+    );
+  }
+}
+
+generated quantities {
+  array[N] real y_rep;
+  array[N] real log_lik;
+  
+  for (n in 1:N) {
+    y_rep[n] = skew_normal_rng(
+      alpha + alpha_j[subj[n]] + alpha_d[day[n]] + alpha_m[meas[n]] +
+      (beta_pre + beta_j_pre[subj[n]]) * exam_day_pre[n] +
+      (beta_post + beta_j_post[subj[n]]) * exam_day_post[n],
+      sigma, skewness
+    );
+    
+    log_lik[n] = skew_normal_lpdf(
+      nsc[n] |
+      alpha + alpha_j[subj[n]] + alpha_d[day[n]] + alpha_m[meas[n]] +
+      (beta_pre + beta_j_pre[subj[n]]) * exam_day_pre[n] +
+      (beta_post + beta_j_post[subj[n]]) * exam_day_post[n],
+      sigma, skewness
+    );
+  }
+}
+```

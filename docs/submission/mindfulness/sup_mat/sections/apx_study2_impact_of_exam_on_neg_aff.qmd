@@ -1,0 +1,18 @@
+
+```{r}
+#| echo: false
+#| include: false
+res_neg_aff_on_first_exam <-
+    readRDS("./rds/res_neg_aff_on_first_exam.rds")
+res_neg_aff_on_first_exam
+```
+
+```{r}
+#| echo: false
+#| include: false
+res_neg_aff_on_second_exam <-
+    readRDS("./rds/res_neg_aff_on_second_exam.rds")
+res_neg_aff_on_second_exam
+```
+
+In a separate analysis, we found a large effect of academic examinations on students' negative affect. Specifically, we observed a pronounced decrease in negative affect from the day before to the day after the exams. This pattern was consistent across two separate examinations. For the first exam, we found a substantial standardized decrease in negative affect on the day following the exam, relative to the day prior. The magnitude of this decrease was -0.92 (Standard Error, $SE = 0.10$), translating to a Cohen's $d$ value of -0.98, with an 89% CI of [-1.23, -0.78]. A parallel trend was observed for the second exam, where the standardized decrease in negative affect mirrored that of the first exam, being -0.39 ($SE = 0.08$). This yielded a Cohen's $d$ value of -0.54, with the 89% CI of [-0.75, -0.36].

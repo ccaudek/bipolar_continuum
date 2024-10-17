@@ -1,0 +1,60 @@
+
+```{r}
+#| echo: false
+#| include: false
+delta_neg_aff_sc <- 
+  readRDS(here::here("data/prep/ema/brms_fits/fit_psc_delta_neg_aff.rds"))
+```
+
+```{r}
+#| echo: false
+#| include: false
+delta_neg_aff_usc <- 
+  readRDS(here::here("data/prep/ema/brms_fits/fit_nsc_delta_neg_aff.rds"))
+```
+
+```{r}
+#| echo: false
+#| include: false
+brms::posterior_interval(
+  delta_neg_aff_sc, 
+  variable = "b_delta_neg_aff", 
+  prob = 0.89
+)
+```
+
+```{r}
+#| echo: false
+#| include: false
+brms::posterior_interval(
+  delta_neg_aff_usc, 
+  variable = "b_delta_neg_aff", 
+  prob = 0.89
+)
+```
+
+In a further statistical analysis, we considered how the fluctuations in negative affect can influence the CS and UCS components of SSC. We hypothesized that CS and UCS are dynamically affected by immediate affective states and their changes over time. To investigate this, we employed two Bayesian hierarchical models, each addressing one component of SSC and incorporating both current and preceding levels of negative affect.
+
+The models were formulated as follows: for the CS component, 
+
+```r
+sc ~ neg_aff + delta_neg_aff + time_window + 
+  (1 + neg_aff + delta_neg_aff | user_id) + 
+  (1 | bysubj_day) + 
+  (1 | bysubj_day:time_window) + 
+  ar(time = time_window, gr = user_id:bysubj_day, p = 1, cov = TRUE)
+```
+
+and similarly for the USC component. Here, `neg_aff` represents the level of negative affect at the measurement time, while `delta_neg_aff` quantifies the change in negative affect from the previous to the current time point within the same day. The inclusion of these predictors allowed us to assess the 'carry-over' effect of negative affect on SSC. The statistical model was fitted to the data utilizing the `brm()` function from the `brms` package in R. 
+
+We observed a inverse relationship in the CS component, where higher levels of negative affect were associated with lower CS scores ($\beta$ = -0.42, $SE$ = 0.03; 89% CI: [-0.47, -0.36]). This indicates that increased negative affect at the time of assessment corresponded with diminished CS.
+
+Further, the coefficient for `delta_neg_aff`-- representing the change in negative affect from the previous to the current assessment within the same day -- served as a measure of *negative affect inertia* [@mey2023kind]. Our findings revealed that an elevation in negative affect compared to the previous assessment within the same day was linked to a slight rise in CS ($\beta$ = 0.04, SE = 0.01; 89% CI: [0.02, 0.06]), suggesting an adaptive temporal dynamic in self-compassion. Additionally, the model indicated a moderate temporal autocorrelation in CS (ar[1] = 0.30), implying a degree of consistency in CS responses over short timeframes.
+
+In contrast, the USC component showed a direct relationship with negative affect, where increased negative affect was correlated with higher USC scores ($\beta$ = 0.43, SE = 0.03). Interestingly, a rise in negative affect over time (`delta_neg_aff`) was associated with a marginal reduction in USC ($\beta$ = -0.04, SE = 0.01; 89% CI: [-0.05, -0.02]), indicating a divergent adaptive response from CS. USC also demonstrated a stronger autoregressive effect (ar[1] = 0.34), pointing to a more prominent carry-over effect of affective states.
+
+These results underscore the dynamic interplay within the State Self-Compassion, wherein both CS and USC components are responsive to immediate affective contexts. The observed 'carry-over' effect of negative affect (*negative affect inertia*) underscores the fluid nature of SSC, highlighting how short-term affective changes can substantially influence expressions of self-compassion. The distinct responses of CS and USC to temporal affective shifts align with the Bipolar Continuum Hypothesis.
+
+The concept of emotional inertia, defined as the persistence of affective states from one moment to the next, is traditionally viewed as counterproductive to healthy emotional responses to adverse events. Typically, healthy responses are characterized by a rapid recovery and detachment from negative affective past events, rather than prolonged engagement. @mey2023kind suggest that momentary self-compassion might facilitate disengagement from past affective states. Our results, while not asserting causality, explore the predictive power of negative affect inertia on both SC and USC levels. In line with the Bipolar Continuum Hypothesis, we found that the relationship between negative affect inertia and the CS and USC components of SSC exhibit opposing trends.
+
+

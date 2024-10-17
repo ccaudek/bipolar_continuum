@@ -1,0 +1,7 @@
+
+## Measures
+
+*Decentering* is a core construct encompassing three metacognitive processes: meta-awareness, disidentification from internal experiences, and reduced reactivity to thought content [@bernstein2019metacognitive]. Its significance in mindfulness-based interventions (MBIs) research has persisted for more than two decades, owing to its therapeutic role in Mindfulness-Based Cognitive Therapy and its proposed role as a mediating mechanism across various MBIs. Decentering and self-compassion are both vital for psychological well-being and often mutually reinforce each other. The ability to observe one's thoughts and feelings from a distance (decentering) can facilitate a more compassionate approach to oneself, and conversely, self-compassion can make adopting a decentered perspective more accessible (see SI). In the present study, decentering was measured with the ?? scale.
+
+
+## Task Design

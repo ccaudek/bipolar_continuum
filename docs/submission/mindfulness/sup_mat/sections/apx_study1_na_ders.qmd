@@ -1,0 +1,85 @@
+To evaluate the impact of within-individual variations in negative affect on the CS and UCS components of state self-compassion, we employed a multilevel modeling approach. This analysis was designed to measure the effects of within-day ("moment") and between-day ("day") fluctuations of negative affect at the individual level while accounting for between-individual differences. 
+
+### CS Component of State Self-Compassion
+
+The model assessing the impact of within-individual variations of negative affect on the CS component was specified as follows:
+
+```R
+model <- brm(
+  sc ~ 1 + na_moment + na_day + (1 + na_moment + na_day | user_id),
+  data = d,
+  family = student(),
+  prior = c(
+    set_prior("normal(0, 2.5)", class = "b"),
+    set_prior("normal(0, 2.5)", class = "sigma")
+  ),
+  backend = "cmdstanr",
+  iter = 10000,
+  chains = 4,
+  cores = 8,
+  threads = threading(2)
+)
+```
+
+We extracted the random slopes for each participant, computed their absolute values to examine individual differences in the impact of negative affect variations on self-compassion, and ignored the sign of the effects.
+
+We then examined the associations of these individual differences in self-compassion dynamics (`na_moment_rand_slopes`) with the six subscales of the Difficulties in Emotion Regulation Scale (DERS: NER, DEGB, ICD, LEA, LAERS, LEC). A multivariate Bayesian regression model was constructed using the absolute values of the random slopes as predictors:
+
+```r
+bform1 <- bf(mvbind(NER, DEGB, ICD, LEA, LAERS, LEC) ~ 
+               na_moment_rand_slopes) +
+  set_rescor(FALSE) +
+  asym_laplace()
+
+mod <- brm(
+  bform1, 
+  data = d,
+  backend = "cmdstanr",
+  iter = 10000,
+  chains = 4,
+  cores = 8,
+  threads = threading(2)
+)
+```
+
+
+### UCS Component of State Self-Compassion
+
+The model evaluating the impact of within-individual variations of negative affect on the UCS component was specified as follows:
+
+```R
+model <- brm(
+  usc ~ 1 + na_moment + na_day + (1 + na_moment + na_day | user_id),
+  data = d,
+  family = student(),
+  prior = c(
+    set_prior("normal(0, 2.5)", class = "b"),
+    set_prior("normal(0, 2.5)", class = "sigma")
+  ),
+  backend = "cmdstanr",
+  iter = 10000,
+  chains = 4,
+  cores = 8,
+  threads = threading(2)
+)
+```
+
+We used the absolute values of these random slopes as predictors for the DERS subscales:
+
+```R
+bform2 <- bf(mvbind(ner, degb, icd, lea, laers, lec) ~ 
+               na_moment_rand_slopes) +
+  set_rescor(FALSE) +
+  asym_laplace()
+
+mod <- brm(
+  bform1, 
+  data = d,
+  backend = "cmdstanr",
+  iter = 10000,
+  chains = 4,
+  cores = 8,
+  threads = threading(2)
+)
+```
+

@@ -1,0 +1,8 @@
+A Bayesian hierarchical model provided a more direct test of the Bipolar Continuum Hypothesis, examining the relationship between Compassionate Self (CS) as a predictor and Uncompassionate Self (UCS) as a dependent variable within the framework of State Self-Compassion (SSC). This model included random effects for participants, days, and measurements, and fixed effects for negative affect, decentering, and context evaluation (detailed in Supplementary Information). The median effect of CS on UCS was -0.429, with an 89% confidence interval (CI) of [-0.470, -0.386], corroborating the hypothesis by indicating that higher CS levels correspond to lower UCS levels.
+
+In terms of covariates, negative affect demonstrated a modest positive influence on UCS (median estimate: 0.0722, 89% CI [0.0605, 0.0838]). Decentering was inversely related to UCS (median estimate: -0.0837, 89% CI [-0.0946, -0.0729]). The impact of context evaluation on UCS was slight and marginally negative (median estimate: -0.00534, 89% CI [-0.0160, 0.00472]).
+
+Analyzing random effects revealed substantial inter-participant variability (median estimate: 0.614, 89% CI [0.563, 0.672]). Day-to-day variations in UCS were also observed (median estimate: 0.0358, 89% CI [0.0199, 0.0580]). Measurement error appeared relatively minor (median estimate: 0.0110, 89% CI [0.00107, 0.0390]). Notably, the slope effect of CS varied significantly among participants (median estimate: 0.291, 89% CI [0.260, 0.325]). The model's error term for UCS (median estimate: 0.395, 89% CI [0.384, 0.406]) suggested moderate unexplained variability.
+
+
+

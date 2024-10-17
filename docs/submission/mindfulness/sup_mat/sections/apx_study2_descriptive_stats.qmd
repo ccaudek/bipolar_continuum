@@ -1,0 +1,17 @@
+## Baseline Maesures 
+
+| Variable            | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
+|---------------------|----------|------------|--------------|--------------|
+| $DASS-21_{Stress}$  | 7.24     | 0.73       | 6.10         | 9.37         |
+| $DASS-21_{Anxiety}$ | 3.43     | 1.55       | 0.95         | 6.32         |
+| $DASS-21_{Depression}$| 3.00    | 0.36      | 2.17         | 3.92         |
+| $RSES$                | 22.88    | 0.52       | 21.84        | 23.86        |
+| $SCS_{total-score}$        | 17.00    | 0.42       | 16.19        | 17.84   |
+| $SCS_{Self-Kindness}$      | 2.88     | 0.10       | 2.70         | 3.07    |
+| $SCS_{Common-Humanity}$    | 3.00     | 0.09       | 2.83         | 3.17    |
+| $SCS_{Mindfulness}$        | 3.07     | 0.09       | 2.89         | 3.23    |
+| $SCS_{Self-Judgment}$      | 2.69     | 0.09       | 2.51         | 2.87    |
+| $SCS_{Isolation}$          | 2.69     | 0.09       | 2.50         | 2.87    |
+| $SCS_{Over-Identification}$| 2.67     | 0.09       | 2.50         | 2.85    |
+
+There is no evidence of emotional disorders among the participants. The obtained scores are consistent with those reported in other studies utilizing the same measures within community samples [@bottesi2015; @neff2017examining; @sica2021health].

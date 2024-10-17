@@ -1,0 +1,68 @@
+
+In examining the effect of an academic exam on students' State Self-Compassion (SSC), our Bayesian hierarchical model revealed robust contextual influences. Specifically, the model included random effects to account for variability across subjects, days, and within-day measurements, focusing on days immediately before (`exam_day_pre`) and after (`exam_day_post`) the exam.
+
+On the day preceding the exam, there was a notable decrease in the CS component (posterior estimate for `beta_pre` contrast coefficient: -0.293; 89% CI: [-0.508, -0.080]; $p(\beta)$ < 0 = 0.983). This suggests that the upcoming exam substantially lowered students' compassionate self-responses. Conversely, the UCS component showed an increase before the exam (posterior estimate for `beta_pre`: 0.661; 89% CI: [0.380, 0.947]; $p(\beta)$ > 0 = 1), indicating heightened self-criticism or reduced self-kindness in this stressful period. The day after the exam, we observed an increase in the CS component (posterior estimate: 0.228; 89% CI: [0.0187, 0.446]; $p(\beta)$ > 0 = 0.959) and a decrease in the UCS component (posterior estimate: -0.666; 89% CI: [-0.946, -0.392]; $p(\beta)$ < 0 = 1), suggesting a rebound in self-compassion following the stressor.
+
+These results underline the dynamic nature of SSC in relation to situational stressors. The decrease in CS and increase in UCS components prior to the exam align with literature on the impact of stress on self-compassion. Interestingly, the post-exam period shows a reversal in these trends, indicating a recovery in self-compassion levels. This highlights the importance of temporal context in understanding the fluctuations in self-compassion among students. Overall, these insights are crucial for developing interventions aimed at enhancing resilience and self-compassion in academic settings, especially during periods of heightened stress.
+
+
+```{r}
+#| echo: false
+#| include: false
+source(here::here("workflows", "scripts", "ema", "functions", "funs_ema_mpath.R"))
+```
+
+
+```{r}
+#| echo: false
+#| include: false
+ci_89 <- summary_posterior_distribution(
+  "data/prep/ema/brms_fits/fit_mod_exam_sc_4.RDS",
+  "beta_pre"
+  )
+ci_89
+
+fit <- readRDS(here::here("data/prep/ema/brms_fits/fit_mod_exam_sc_4.RDS"))
+draws <- fit$draws(format="df")
+mean(draws$beta_pre < 0)
+```
+
+```{r}
+#| echo: false
+#| include: false
+ci_89 <- summary_posterior_distribution(
+  "data/prep/ema/brms_fits/fit_mod_exam_sc_4.RDS",
+  "beta_post"
+  )
+ci_89
+
+fit <- readRDS(here::here("data/prep/ema/brms_fits/fit_mod_exam_sc_4.RDS"))
+draws <- fit$draws(format="df")
+mean(draws$beta_post > 0)
+```
+
+```{r}
+#| echo: false
+#| include: false
+ci_89 <- summary_posterior_distribution(
+  "data/prep/ema/brms_fits/fit_mod_exam_usc_4.RDS",
+  "beta_pre"
+  )
+ci_89
+fit <- readRDS(here::here("data/prep/ema/brms_fits/fit_mod_exam_usc_4.RDS"))
+draws <- fit$draws(format="df")
+mean(draws$beta_pre > 0)
+```
+
+```{r}
+#| echo: false
+#| include: false
+ci_89 <- summary_posterior_distribution(
+  "data/prep/ema/brms_fits/fit_mod_exam_usc_4.RDS",
+  "beta_post"
+  )
+ci_89
+fit <- readRDS(here::here("data/prep/ema/brms_fits/fit_mod_exam_usc_4.RDS"))
+draws <- fit$draws(format="df")
+mean(draws$beta_post < 0)
+```

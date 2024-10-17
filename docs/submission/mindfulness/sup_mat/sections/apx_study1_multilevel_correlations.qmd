@@ -1,0 +1,58 @@
+We conducted a multilevel analysis to compute the correlation between the CS and the UCS components of state self-compassion, and each of the six subscales of the Self-Compassion Scale (Neff, 2003). 
+
+<!-- These correlations represent average effects across participants, while adjusting for random intercepts attributed to individual differences among participants. -->
+
+These correlations are an average effect across participants, adjusted for the random intercepts attributable to individual differences among participants in our hierarchical model. For both components of state self-compassion, the correlation with the State Self-Compassion scale were modest. For CS, the largest multilevel correlation was with self-kindness, r = 0.24, 89% CI[0.15, 0.32]; for UCS, the largest multilevel correlation was with isolation, r = 0.21, 89% CI[0.10, 0.31]. 
+
+**CS Component of SSC**
+
+```r
+fit_cs <- brm(
+  state_cs ~ self_kindness + common_humanity + mindfulness + 
+    self_judgment + isolation + over_identification +
+    (1 | user_id),
+  data = d,
+  family = student(),
+  backend = "cmdstanr",
+  iter = 10000,
+  chains = 4
+)
+```
+
+| Variable            | Estimate | Std. Error | 89% CI Lower | 89% CI Upper |
+|---------------------|----------|------------|--------------|--------------|
+| Intercept           | 0.06     | 0.04       | 0.00         | 0.12         |
+| Self-Kindness       | 0.23     | 0.06       | 0.13         | 0.32         |
+| Common Humanity     | 0.18     | 0.05       | 0.10         | 0.26         |
+| Mindfulness         | 0.06     | 0.05       | -0.03        | 0.14         |
+| Self-Judgment       | -0.04    | 0.05       | -0.13        | 0.04         |
+| Isolation           | -0.11    | 0.05       | -0.19        | -0.02        |
+| Over-Identification | -0.00    | 0.06       | -0.10        | 0.09         |
+
+
+**UCS Component of SSC**
+
+```r
+fit_ucs <- brm(
+  state_ucs ~ self_kindness + common_humanity + mindfulness + 
+    self_judgment + isolation + over_identification +
+    (1 | user_id),
+  data = d,
+  family = student(),
+  backend = "cmdstanr",
+  iter = 10000,
+  chains = 4
+)
+```
+
+| Variable            | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
+|---------------------|----------|------------|--------------|--------------|
+| Intercept           | -0.02    | 0.04       | -0.10        | 0.06         |
+| Self-Kindness       | -0.14    | 0.06       | -0.24        | -0.02        |
+| Common Humanity     | -0.03    | 0.05       | -0.14        | 0.07         |
+| Mindfulness         | -0.01    | 0.06       | -0.13        | 0.10         |
+| Self-Judgment       | 0.10     | 0.06       | -0.01        | 0.23         |
+| Isolation           | 0.21     | 0.05       | 0.10         | 0.31         |
+| Over-Identification | 0.12     | 0.06       | 0.00         | 0.25         |
+
+

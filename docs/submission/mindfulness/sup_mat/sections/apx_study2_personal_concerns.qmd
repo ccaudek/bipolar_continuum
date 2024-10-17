@@ -1,0 +1,20 @@
+This section details the script used to test the hypothesis that the correlation between the SC and USC components of state self-compassion is influenced by the level of personal concern. The same statistical model was applied to three distinct datasets, each representing different time points relative to an examination period:
+
+1. **Pre-Exam Dataset**: Data collected one day before the exam.
+2. **Post-Exam Dataset**: Data collected one day after the exam.
+3. **Baseline Dataset**: Data collected during a period unrelated to any exam.
+
+```r
+bform <- 
+  bf(mvbind(psc, nsc) ~ 1 + (1 | user_id)) +
+  set_rescor(TRUE)
+
+mod <- brm(
+  bform,
+  data = d,
+  backend = "cmdstanr",
+  chains = 4
+)
+```
+
+

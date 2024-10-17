@@ -1,0 +1,28 @@
+```{r}
+#| echo: false
+#| include: false
+ssc_reliabilities_results <- readRDS(
+  here::here("data", "prep", "ema", "ssc_reliabilities.rds")
+)
+```
+
+```{r}
+#| echo: false
+#| include: false
+# Positive State Self-Compassion
+ssc_reliabilities_results[[1]]
+```
+
+```{r}
+#| echo: false
+#| include: false
+# Negative State Self-Compassion
+ssc_reliabilities_results[[2]]
+```
+
+We conducted a multilevel reliability analysis of the State Self-Compassion (SSC) scale, focusing on both its positive and negative components, by using the framework proposed by @lai2021composite. For the *SC Component of SSC*, the Within-Subject Reliability ($\tilde{\omega}^w$) was equal to 0.626, indicating moderate consistency in responses across different measurement occasions. This level of reliability reflects the variability in individuals' self-compassionate responses over time. A higher reliability index of 0.820 was observed for the Between-Subject Reliability ($\tilde{\omega}^b$), highlighting the measure's effectiveness in distinguishing stable individual differences in self-compassion. Finally, the overall 
+Composite Reliability ($\omega^{2L}$) was 0.79, suggesting a reliable integration of both within and between-subject variabilities.
+
+For the *USC Component of SSC*, slightly higher than the positive component, the Within-Subject Reliability ($\tilde{\omega}^w$) was equal to 0.68. Markedly robust at 0.88, the Between-Subject Reliability ($\tilde{\omega}^b$) indicates strong individual differentiation in the negative component of SSC. Finally, the Composite Reliability ($\omega^{2L}$) for the negative component was 0.83, reinforcing the measure's overall reliability.
+
+In summary, the between-subject reliability indices for both components, particularly the negative one, surpass the benchmark of 0.8, suggesting the scale's effectiveness in capturing stable individual differences in SSC. The within-subject reliabilities, while lower, are reflective of SSC as a dynamic construct. These values capture the natural fluctuation in self-compassion levels due to changing circumstances and internal states, highlighting the scale's sensitivity to temporal variations within individuals. 

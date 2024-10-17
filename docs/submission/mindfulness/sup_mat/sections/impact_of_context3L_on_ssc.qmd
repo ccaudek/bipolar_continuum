@@ -1,0 +1,22 @@
+Next, we examined the influence of three contextual factors -- negative affect, decentering, and subjective evaluations of recent events (context) -- on both the compassionate (SC) and the uncompassionate (UCS) components of the State Self-Compassion. To investigate these effects, we applied three distinct centering techniques. *Person Centering* ({{varname}}_Person) accounted for individual differences by computing the mean of {{varname}} for each person across all days and moments, revealing how their experiences deviated from the group average. By focusing on {{varname}} variations within each day, with *Day Centering** ({{varname}}_Day) we centered the data by calculating the daily mean across all moments. This allowed us to explore how daily fluctuations in {{varname}} related to the outcomes. *Moment Centering* ({{varname}}_Moment) honed in on within-day variations, measuring {{varname}} deviations from the daily mean at each moment. It provided insights into the immediate impact of {{varname}} within daily contexts. 
+
+We employed a Bayesian multilevel model to predict the CS and UCS components of State Self-Compassion across participants, days, and moments within a day. The model incorporated the three contextual factors, negative affect, decentering, and context evaluation, each decomposed into its within-person, between-day, and between-person components. Various model iterations emphasized the significance of these components and different random-effect structures in contributing to model fit (see SI).
+
+```{r}
+#| echo: false
+#| include: false
+if (0) {
+  loo_psc_rand_eff_mod_comp <-
+  readRDS(here::here("data/prep/ema/brms_fits/loo_psc_fixed_eff_mod_comp.rds"))
+loo_psc_rand_eff_mod_comp
+}
+```
+
+The outcomes of our final model elucidate the dynamics between contextual elements and both compassionate and uncompassionate aspects of State Self-Compassion (SSC). It was observed that negative affect intensifies uncompassionate tendencies, while the ability to decenter plays a mitigating role, fostering a more self-compassionate perspective. The impact of subjective context evaluation further highlights the situational fluidity of self-compassion, shaped by the immediate environmental and emotional context.
+
+In terms of the compassionate dimension of SSC, we observed considerable inter-individual variability. The standard deviation for the intercept was estimated at 0.56 (89% CI [0.51, 0.61]), signifying varied baseline levels of compassionate self-view among participants. 'Negative Affect' was found to have a substantial negative correlation with SSC at multiple levels: person-level (β = -0.31, 89% CI [-0.40, -0.22]), day-level (β = -0.17, 89% CI [-0.18, -0.15]), and moment-level (β = -0.13, 89% CI [-0.14, -0.11]). 'Decentering' exhibited a positive correlation across these levels: person-level (β = 0.20, 89% CI [0.12, 0.27]), day-level (β = 0.12, 89% CI [0.11, 0.13]), and moment-level (β = 0.08, 89% CI [0.07, 0.09]). The subjective assessment of 'Context Valence' demonstrated a modest positive correlation at the person-level (β = 0.03, 89% CI [-0.05, 0.11]), with a slightly positive association at both day-level (β = 0.04, 89% CI [0.02, 0.05]) and moment-level (β = 0.02, 89% CI [0.01, 0.04]).
+
+Regarding the uncompassionate component of SSC, significant inter-individual differences were noted, with the standard deviation of the intercept for user_id being 0.47 (89% CI [0.43, 0.51]). This indicates notable variations in baseline levels of State Uncompassionate Self-Compassion among participants. 'Negative Affect' exhibited a significant positive correlation with SSC across person-level (β = 0.33, 89% CI [0.25, 0.41]), day-level (β = 0.16, 89% CI [0.15, 0.18]), and moment-level (β = 0.14, 89% CI [0.13, 0.15]). 'Decentering' showed a substantial negative correlation at the person-level (β = -0.36, 89% CI [-0.43, -0.30]), day-level (β = -0.22, 89% CI [-0.23, -0.21]), and moment-level (β = -0.15, 89% CI [-0.16, -0.13]). The subjective perception of 'Context Valence' indicated a minimal positive correlation at the person-level (β = 0.05, 89% CI [-0.02, 0.12]), a negligible association at the day-level (β = -0.00, 89% CI [-0.01, 0.01]), and a weak negative correlation at the moment-level (β = -0.03, 89% CI [-0.04, -0.01]).
+
+In summary, these results suggest that contextual factors exert an inverse effect on the compassionate and uncompassionate components of SSC, thereby lending support to the Bipolar Continuum hypothesis.
+
