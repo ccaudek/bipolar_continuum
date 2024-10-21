@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>apx_study1_direct_test</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="apx_study1_direct_test_files/libs/clipboard/clipboard.min.js"></script>
+<script src="apx_study1_direct_test_files/libs/quarto-html/quarto.js"></script>
+<script src="apx_study1_direct_test_files/libs/quarto-html/popper.min.js"></script>
+<script src="apx_study1_direct_test_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="apx_study1_direct_test_files/libs/quarto-html/anchor.min.js"></script>
+<link href="apx_study1_direct_test_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="apx_study1_direct_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="apx_study1_direct_test_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="apx_study1_direct_test_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="apx_study1_direct_test_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="direct-test-of-the-bch-for-state-self-compassion" class="level2">
+<h2 class="anchored" data-anchor-id="direct-test-of-the-bch-for-state-self-compassion">Direct Test of the BCH for State Self-Compassion</h2>
+<p>To directly test the BCH (rather than examining the separate effect of covariates on the CS and UCS, as in the two previous models), we employed a Bayesian hierarchical model in which UCS was the linear predictor of CS. This model also incorporated covariates such as within-day centered negative affect and context evaluation. Random effects were included to account for variability across participants, days, and measurements, which is crucial for capturing the inherent fluctuations in state self-compassion (see SI for details). The use of EMA data, enriched with relevant covariates, allowed for a thorough examination of the CS-UCS relationship under diverse conditions. The predictive outcomes from this model directly tested the BCH. A credible negative fixed-effect slope for CS would validate the hypothesis, showing that increases in CS are associated with decreases in UCS, thus supporting the bipolar nature of state self-compassion. Conversely, a non-credible or positive fixed-effect slope for CS would challenge the BCH, suggesting that CS and UCS might function independently or even synergistically, rather than as opposing elements on a single continuum (Figure 1). The central finding was a robust negative association between CS and UCS, with a median estimate of -0.44 (89% CI [-0.47, -0.42]). This result validates the BCH by demonstrating that higher levels of CS are associated with lower levels of UCS. After controlling for CS, negative affect showed a modest positive influence on UCS (β = 0.12, 89% CI [0.116, 0.13]), while the unpleasantness of the event had a minimal impact on UCS (β = 0.01, 89% CI [0.002, 0.02]). These findings indicate that contextual factors and negative affect play nuanced roles in shaping state self-compassion. Substantial variability was observed in the random-effect slopes for CS across participants, with a median estimate of 0.29 (89% CI [0.26, 0.32]). This variability suggests substantial individual differences in how CS impacts UCS, reflecting the complex interplay between personality, context, and self-compassion. Additionally, the analysis highlighted notable variability in UCS levels among participants (β = 0.63, 89% CI [0.59, 0.67]), underscoring considerable individual differences in state self-compassion responses. UCS also exhibited day-to-day variability (β = 0.04, 89% CI [0.02, 0.06]), albeit to a lesser extent than individual variability. This emphasizes the influence of daily emotional states and contextual stressors on self-compassion levels, reinforcing the state-dependent nature of self-compassion. Finally, the model reported minimal measurement error (median estimate: 0.01, 89% CI [0.001, 0.039]), attesting to the reliability of the assessment tools used. In summary, the robust variability in UCS across participants and the credible random slope effects for CS indicate that the relationship between CS and UCS is influenced by a variety of factors. The moderate level of unexplained variability in UCS (median estimate: 0.41, 89% CI [0.40, 0.414]) suggests that additional factors, potentially outside the scope of this model, influence UCS levels. These factors may include unmeasured psychological variables such as personal beliefs, coping mechanisms, or external social support.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="sections/figures/plot_bch_piel.pdf" class="img-fluid"></p>
+<figcaption class="figure-caption">The estimates are expressed in terms of inter-individual differences and intra-individual variations, both within a day and across different days. The bars represent 89% credibility intervals. β_(CS ) represents the beta coefficients for CS; β_(negative affect) and β_(context valence )denote the beta coefficients for NegAff and context valence, respectively; σ_measurement is the standard deviation of the distribution of random effects coefficients for the 5 daily observations; σ_(day )represents the standard deviation of the distribution of random effects coefficients across 10 days; σ_(participant )indicates the standard deviation of the distribution of random effects coefficients across participants (subjects); σ_(participant slope CS) is the standard deviation of the slopes describing the effect of CS on UCS for each participant; σ_UCS is the estimated standard deviation of the population residuals distribution.</figcaption>
+</figure>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

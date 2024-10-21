@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>apx_rev1_cfa_multilevel</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="apx_rev1_cfa_multilevel_files/libs/clipboard/clipboard.min.js"></script>
+<script src="apx_rev1_cfa_multilevel_files/libs/quarto-html/quarto.js"></script>
+<script src="apx_rev1_cfa_multilevel_files/libs/quarto-html/popper.min.js"></script>
+<script src="apx_rev1_cfa_multilevel_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="apx_rev1_cfa_multilevel_files/libs/quarto-html/anchor.min.js"></script>
+<link href="apx_rev1_cfa_multilevel_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="apx_rev1_cfa_multilevel_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<p>Previous research has extensively explored the bipolar continuum hypothesis by investigating the dimensionality of <em>trait</em> self-compassion using various psychometric approaches <span class="citation" data-cites="brenner2017two cleare2018investigation neff2016self neff2017examining neff2019examining petrocchi2014dimensionality">[@brenner2017two; @cleare2018investigation; @neff2016self; @neff2017examining; @neff2019examining; @petrocchi2014dimensionality]</span>. These studies consistently show that models including a general factor yield superior fit indices, offering strong empirical support for Neff’s hypothesis.</p>
+<p>The current study seeks to build upon this foundation by conducting a novel psychometric evaluation of the dimensionality of <em>state</em> self-compassion. Our analysis is unique in that it examines repeated measurements of <em>state</em> self-compassion within the same participants. To address the multilevel nature of the data, we applied a series of multilevel Confirmatory Factor Analysis (CFA) models to the combined datasets from both studies. This approach allows for a precise representation of the hierarchical structure, where repeated measurements are nested within days, which are further nested within individuals.</p>
+<p>We specified and compared three distinct models to determine the underlying structure of state self-compassion:</p>
+<ul>
+<li><p>The <strong>One-Factor Model</strong> hypothesizes that state self-compassion can be represented by a single latent factor, capturing variance at both the within-person and between-person levels.</p></li>
+<li><p>The <strong>Two-Factor Model</strong> conceptualizes state self-compassion as comprising two correlated but distinct latent factors—CS (compassionate self-responding) and UCS (uncompassionate self-responding)—functioning at both the within-person and between-person levels.</p></li>
+<li><p>The <strong>Bifactor Model</strong> examines whether state self-compassion is best characterized by a general self-compassion factor along with orthogonal specific factors (CS and UCS), isolating the variance explained by the general factor from that explained by the specific factors.</p></li>
+</ul>
+<section id="mplus-script-for-the-one-factor-model" class="level3">
+<h3 class="anchored" data-anchor-id="mplus-script-for-the-one-factor-model">Mplus script for the One-Factor Model</h3>
+<pre class="code"><code>TITLE: Multilevel One-Factor Model with covariates at moment, day, and person level;
+
+DATA: 
+  FILE = "data.dat";
+
+VARIABLE: 
+  NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
+    scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  CLUSTER = user_id;  ! Clustering at the subject level
+  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  BETWEEN = neg_aff_Person;  ! Covariate at the person level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = ML;  ! Maximum likelihood estimation 
+
+MODEL:
+  %WITHIN%  ! Level 1: Within-subject and within-day variation
+    SelfCompassion_w BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
+      scs_pos_6 scs_pos_7 scs_neg_8;
+    SelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress self-compassion factor on momentary and daily negative affect
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    SelfCompassion_b BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
+      scs_pos_6 scs_pos_7 scs_neg_8;
+    SelfCompassion_b ON neg_aff_Person;  
+    ! Regress between-level self-compassion factor on person-level negative affect
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;</code></pre>
+</section>
+<section id="table-standardized-factor-loadings-for-multilevel-one-factor-model" class="level3">
+<h3 class="anchored" data-anchor-id="table-standardized-factor-loadings-for-multilevel-one-factor-model">Table: Standardized Factor Loadings for Multilevel One-Factor Model</h3>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 40%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Item</strong></th>
+<th><strong>Within-Level Standardized Loadings</strong></th>
+<th><strong>Between-Level Standardized Loadings</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>SCS_POS_1</strong></td>
+<td>0.579</td>
+<td>0.778</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_NEG_2</strong></td>
+<td>0.673</td>
+<td>0.925</td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_POS_3</strong></td>
+<td>0.274</td>
+<td>0.363</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_NEG_4</strong></td>
+<td>0.567</td>
+<td>0.795</td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_NEG_5</strong></td>
+<td>0.652</td>
+<td>0.934</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_POS_6</strong></td>
+<td>0.550</td>
+<td>0.738</td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_POS_7</strong></td>
+<td>0.587</td>
+<td>0.835</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_NEG_8</strong></td>
+<td>0.279</td>
+<td>0.262</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="additional-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="additional-summary-statistics">Additional Summary Statistics</h3>
+<ul>
+<li><strong>Within-Level Explained Variance for SELFCOMP</strong>: 19.6%</li>
+<li><strong>Between-Level Explained Variance for SELFCOMP</strong>: 21.7%</li>
+<li><strong>Effect of Negative Affect on SELFCOMP (within level)</strong>:
+<ul>
+<li><strong>NEG_AFF_MOMENT</strong>: -0.272</li>
+<li><strong>NEG_AFF_DAY</strong>: -0.350</li>
+</ul></li>
+<li><strong>Effect of Negative Affect on SELFCOMP (between level)</strong>:
+<ul>
+<li><strong>NEG_AFF_PERSON</strong>: -0.466</li>
+</ul></li>
+</ul>
+</section>
+<section id="mplus-script-for-the-two-factor-model" class="level3">
+<h3 class="anchored" data-anchor-id="mplus-script-for-the-two-factor-model">Mplus script for the Two-Factor Model</h3>
+<pre class="code"><code>TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person level;
+
+DATA: 
+  FILE = "data.dat";
+
+VARIABLE: 
+  NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
+    scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+  CLUSTER = user_id;  ! Clustering at the subject level
+  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  BETWEEN = neg_aff_Person;  ! Covariate at the person level
+
+MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;  ! Multilevel model with user_id as the cluster
+  ESTIMATOR = ML;  ! Maximum likelihood estimation 
+
+MODEL:
+  %WITHIN%  ! Level 1: Within-subject and within-day variation
+    PositiveSelfCompassion_w BY scs_pos_1 scs_pos_3 scs_pos_6 scs_pos_7;  
+    ! Positive self-compassion factor on within level
+    NegativeSelfCompassion_w BY scs_neg_2 scs_neg_4 scs_neg_5 scs_neg_8;  
+    ! Negative self-compassion factor on within level
+    PositiveSelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress positive factor on momentary and daily negative affect
+    NegativeSelfCompassion_w ON neg_aff_Moment neg_aff_Day;  
+    ! Regress negative factor on momentary and daily negative affect
+
+  %BETWEEN%  ! Level 2: Between-subject variation
+    PositiveSelfCompassion_b BY scs_pos_1 scs_pos_3 scs_pos_6 scs_pos_7;  
+    ! Positive self-compassion factor on between level
+    NegativeSelfCompassion_b BY scs_neg_2 scs_neg_4 scs_neg_5 scs_neg_8;  
+    ! Negative self-compassion factor on between level
+    PositiveSelfCompassion_b ON neg_aff_Person;  
+    ! Regress positive factor on person-level negative affect
+    NegativeSelfCompassion_b ON neg_aff_Person;  
+    ! Regress negative factor on person-level negative affect
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES;</code></pre>
+</section>
+<section id="table-standardized-factor-loadings-for-multilevel-two-factor-model" class="level3">
+<h3 class="anchored" data-anchor-id="table-standardized-factor-loadings-for-multilevel-two-factor-model">Table: Standardized Factor Loadings for Multilevel Two-Factor Model</h3>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 41%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Item</strong></th>
+<th><strong>Within-Level Standardized Loadings</strong></th>
+<th><strong>Between-Level Standardized Loadings</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CS Factor</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>SCS_POS_1</strong></td>
+<td>0.632</td>
+<td>0.902</td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_POS_3</strong></td>
+<td>0.270</td>
+<td>0.321</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_POS_6</strong></td>
+<td>0.581</td>
+<td>0.749</td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_POS_7</strong></td>
+<td>0.639</td>
+<td>0.959</td>
+</tr>
+<tr class="even">
+<td><strong>UCS Factor</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_NEG_2</strong></td>
+<td>0.710</td>
+<td>0.949</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_NEG_4</strong></td>
+<td>0.582</td>
+<td>0.796</td>
+</tr>
+<tr class="odd">
+<td><strong>SCS_NEG_5</strong></td>
+<td>0.682</td>
+<td>0.945</td>
+</tr>
+<tr class="even">
+<td><strong>SCS_NEG_8</strong></td>
+<td>0.279</td>
+<td>0.278</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="additional-summary-statistics-1" class="level3">
+<h3 class="anchored" data-anchor-id="additional-summary-statistics-1">Additional Summary Statistics</h3>
+<ul>
+<li><strong>Within-Level Correlation between POSITIVE and NEGATIVE factors</strong>: 0.825</li>
+<li><strong>Between-Level Correlation between POSITIVE and NEGATIVE factors</strong>: 0.817</li>
+<li><strong>Residual Variances (Within Level)</strong>:
+<ul>
+<li><strong>SCS_POS_1</strong>: 0.601, <strong>SCS_NEG_2</strong>: 0.497, <strong>SCS_POS_3</strong>: 0.927, <strong>SCS_NEG_4</strong>: 0.661, <strong>SCS_NEG_5</strong>: 0.535, <strong>SCS_POS_6</strong>: 0.662, <strong>SCS_POS_7</strong>: 0.591, <strong>SCS_NEG_8</strong>: 0.922</li>
+</ul></li>
+<li><strong>Residual Variances (Between Level)</strong>:
+<ul>
+<li><strong>SCS_POS_1</strong>: 0.187, <strong>SCS_NEG_2</strong>: 0.100, <strong>SCS_POS_3</strong>: 0.897, <strong>SCS_NEG_4</strong>: 0.367, <strong>SCS_NEG_5</strong>: 0.106, <strong>SCS_POS_6</strong>: 0.439, <strong>SCS_POS_7</strong>: 0.080, <strong>SCS_NEG_8</strong>: 0.923</li>
+</ul></li>
+</ul>
+</section>
+<section id="mplus-script-for-the-bifactor-model" class="level3">
+<h3 class="anchored" data-anchor-id="mplus-script-for-the-bifactor-model">Mplus script for the Bifactor Model</h3>
+<pre class="code"><code>TITLE: Multilevel Bifactor Model with covariates at moment, day, and person level;
+
+DATA:
+  FILE = "data.dat";
+
+VARIABLE:
+  NAMES = uid day tw scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  USEVARIABLES = scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  CLUSTER = uid;
+  WITHIN = na_mom na_day;
+  BETWEEN = na_per;
+
+  MISSING = .;
+
+ANALYSIS:
+  TYPE = TWOLEVEL;
+  ESTIMATOR = ML;
+
+MODEL:
+  %WITHIN%
+    Gen_w BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    Pos_w BY scp1* scp3 scp6 scp7;
+    Neg_w BY scn2* scn4 scn5 scn8;
+
+    ! Fix variances to help with model identification
+    Gen_w@1;  ! Fix variance of the general factor
+    Pos_w@1;  ! Constrain variance of the positive factor
+    Neg_w@1;  ! Constrain variance of the negative factor
+
+    ! Ensure no covariance between factors
+    Pos_w WITH Gen_w@0;
+    Neg_w WITH Gen_w@0;
+    Pos_w WITH Neg_w@0;
+
+    ! Regress factors on covariates
+    Gen_w ON na_mom na_day;
+    Pos_w ON na_mom na_day;
+    Neg_w ON na_mom na_day;
+
+  %BETWEEN%
+    Gen_b BY scp1* scn2 scp3 scn4 scn5 scp6 scp7 scn8;
+    Pos_b BY scp1* scp3 scp6 scp7;
+    Neg_b BY scn2* scn4 scn5 scn8;
+
+    ! Fix variances on the between level as well
+    Gen_b@1;  ! Fix variance of the general factor
+    Pos_b@1;  ! Constrain variance of the positive factor
+    Neg_b@1;  ! Constrain variance of the negative factor
+
+    ! Ensure no covariance between factors
+    Pos_b WITH Gen_b@0;
+    Neg_b WITH Gen_b@0;
+    Pos_b WITH Neg_b@0;
+
+    ! Regress factors on covariates
+    Gen_b ON na_per;
+    Pos_b ON na_per;
+    Neg_b ON na_per;
+
+OUTPUT:
+  TECH1 TECH8 STANDARDIZED MODINDICES(ALL);</code></pre>
+</section>
+<section id="table-standardized-factor-loadings-for-multilevel-bifactor-model" class="level3">
+<h3 class="anchored" data-anchor-id="table-standardized-factor-loadings-for-multilevel-bifactor-model">Table: Standardized Factor Loadings for Multilevel Bifactor Model</h3>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 41%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Item</strong></th>
+<th><strong>Within-Level Standardized Loadings</strong></th>
+<th><strong>Between-Level Standardized Loadings</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>General Factor (GEN_W / GEN_B)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>SCP1</strong></td>
+<td>0.614</td>
+<td>0.860</td>
+</tr>
+<tr class="odd">
+<td><strong>SCN2</strong></td>
+<td>0.579</td>
+<td>0.774</td>
+</tr>
+<tr class="even">
+<td><strong>SCP3</strong></td>
+<td>0.327</td>
+<td>0.410</td>
+</tr>
+<tr class="odd">
+<td><strong>SCN4</strong></td>
+<td>0.490</td>
+<td>0.697</td>
+</tr>
+<tr class="even">
+<td><strong>SCN5</strong></td>
+<td>0.585</td>
+<td>0.819</td>
+</tr>
+<tr class="odd">
+<td><strong>SCP6</strong></td>
+<td>0.583</td>
+<td>0.781</td>
+</tr>
+<tr class="even">
+<td><strong>SCP7</strong></td>
+<td>0.623</td>
+<td>0.935</td>
+</tr>
+<tr class="odd">
+<td><strong>SCN8</strong></td>
+<td>0.210</td>
+<td>0.143</td>
+</tr>
+<tr class="even">
+<td><strong>Positive Factor (POS_W / POS_B)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>SCP1</strong></td>
+<td>0.219</td>
+<td>0.215</td>
+</tr>
+<tr class="even">
+<td><strong>SCP3</strong></td>
+<td>-0.313</td>
+<td>-0.329</td>
+</tr>
+<tr class="odd">
+<td><strong>SCP6</strong></td>
+<td>-0.009</td>
+<td>-0.073</td>
+</tr>
+<tr class="even">
+<td><strong>SCP7</strong></td>
+<td>0.246</td>
+<td>0.322</td>
+</tr>
+<tr class="odd">
+<td><strong>Negative Factor (NEG_W / NEG_B)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>SCN2</strong></td>
+<td>0.473</td>
+<td>0.626</td>
+</tr>
+<tr class="odd">
+<td><strong>SCN4</strong></td>
+<td>0.291</td>
+<td>0.378</td>
+</tr>
+<tr class="even">
+<td><strong>SCN5</strong></td>
+<td>0.310</td>
+<td>0.422</td>
+</tr>
+<tr class="odd">
+<td><strong>SCN8</strong></td>
+<td>0.208</td>
+<td>0.288</td>
+</tr>
+</tbody>
+</table>
+<p>The table presents standardized loadings for both the general factor and the specific positive and negative factors at the within and between levels. These loadings illustrate the bifactor structure and how each item loads onto the general and specific factors.</p>
+</section>
+<section id="goodness-of-fit-indices" class="level2">
+<h2 class="anchored" data-anchor-id="goodness-of-fit-indices">Goodness-of-fit indices</h2>
+<p>Goodness-of-fit indices for each model are presented in Table 1.</p>
+<p><strong>Table 1. Goodness-of-Fit Indices for the One-Factor, Two-Factor, and Bifactor Models</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 17%">
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>CFI</th>
+<th>TLI</th>
+<th>RMSEA</th>
+<th>SRMR (Within)</th>
+<th>SRMR (Between)</th>
+<th>AIC</th>
+<th>BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>One-Factor</td>
+<td>0.935</td>
+<td>0.910</td>
+<td>0.050</td>
+<td>0.033</td>
+<td>0.058</td>
+<td>475881.5</td>
+<td>476195.3</td>
+</tr>
+<tr class="even">
+<td>Two-Factor</td>
+<td>0.972</td>
+<td>0.959</td>
+<td>0.034</td>
+<td>0.024</td>
+<td>0.050</td>
+<td>474810.2</td>
+<td>475139.6</td>
+</tr>
+<tr class="odd">
+<td>Bifactor</td>
+<td>0.987</td>
+<td>0.971</td>
+<td>0.029</td>
+<td>0.016</td>
+<td>0.031</td>
+<td>474376.7</td>
+<td>474816.0</td>
+</tr>
+</tbody>
+</table>
+<p>As shown in Table 1, the goodness-of-fit indices progressively improve from the One-Factor Model to the Two-Factor Model, with the Bifactor Model demonstrating the best overall fit. The Comparative Fit Index (CFI) and Tucker-Lewis Index (TLI) both exceed the commonly accepted threshold of 0.95 for the Two-Factor and Bifactor Models, indicating strong model fit. Additionally, the Root Mean Square Error of Approximation (RMSEA) and Standardized Root Mean Square Residual (SRMR) values decrease across models, further supporting improved fit with more complex structures.</p>
+<p>We conducted a series of Likelihood Ratio Tests (LRTs) to formally assess improvements in model fit:</p>
+<ul>
+<li><p>Comparing the One-Factor Model with the Two-Factor Model yielded an LRT statistic of 1068.792 with 5 degrees of freedom (<span class="math inline">\(p &lt; 0.001\)</span>), indicating that the Two-Factor Model significantly improves fit. This suggests that conceptualizing state self-compassion as two distinct components (CS and UCS) better represents the data.</p></li>
+<li><p>The comparison between the Two-Factor Model and the Bifactor Model resulted in an LRT statistic of 506.656 with 17 degrees of freedom (<span class="math inline">\(p &lt; 0.001\)</span>), demonstrating that the Bifactor Model offers further improvement in fit. This suggests that, beyond distinct compassionate and uncompassionate components, a general self-compassion factor provides additional explanatory power.</p></li>
+</ul>
+<p>In summary, from a psychometric standpoint, both the Two-Factor and Bifactor Models provide better fit than the One-Factor Model, with the Bifactor Model yielding the best statistical fit. These results suggest that self-compassion is best conceptualized as comprising both a general factor and specific components (CS and UCS). However, while the Bifactor Model offers superior statistical fit, its added complexity raises questions about the practical significance of modeling both general and specific factors.</p>
+</section>
+<section id="practical-importance" class="level2">
+<h2 class="anchored" data-anchor-id="practical-importance">Practical Importance</h2>
+<p>Dimensionality assessments should not rely solely on statistical fit indices but should also incorporate the substantive significance of each factor <span class="citation" data-cites="rodriguez2016evaluating ferrando2018assessing">[@rodriguez2016evaluating; @ferrando2018assessing]</span>. Although more complex models often exhibit better statistical fit, they may overfit the data, especially when an excessive number of factors are included <span class="citation" data-cites="ferrando2019external">[@ferrando2019external]</span>. Therefore, achieving a balance between model complexity and interpretability is crucial for drawing meaningful conclusions.</p>
+<p>To determine whether the data support a unidimensional or multifactorial structure for <em>state</em> self-compassion, we applied several criteria:</p>
+<ol type="1">
+<li><p><strong>Factor Correlation</strong>:<br>
+In the Two-Factor Model, the within-level correlation between the Compassionate Self (CS) and Uncompassionate Self (UCS) factors was 0.825, while the between-level correlation was 0.817. These high correlations suggest a strong overlap between the two factors, which might indicate a common underlying construct at both the within- and between-person levels.</p></li>
+<li><p><strong>Explained Common Variance (ECV)</strong>:<br>
+ECV quantifies how much of the shared variance among items is explained by the general versus specific factors. In the Bifactor Model, the general factor (Gen_w) exhibited high standardized loadings on items (e.g., SCP1 = 0.614, SCN2 = 0.579 at the within-person level), indicating that it accounts for the majority of the common variance. By comparison, the loadings of the specific factors (POS_w and NEG_w) were notably lower, suggesting that they explain less variance. This finding underscores the dominance of the general factor in accounting for self-compassion.</p></li>
+<li><p><strong>Omega Hierarchical (ωH)</strong>:<br>
+<span class="math inline">\(\omega_H\)</span> estimates how much of the variance in total scores is attributable to the general factor. In the Bifactor Model, the general factor explained a substantial proportion of the variance (e.g., SCP1 = 0.614, SCN2 = 0.579), while the specific factors contributed relatively little. This suggests that the general factor plays a predominant role in explaining individual differences in self-compassion, further supporting the interpretation of a primarily unidimensional construct.</p></li>
+<li><p><strong>Bifactor Model Analysis</strong>:<br>
+The Bifactor Model highlights the predominance of the general factor, as the loadings of the specific factors were consistently lower (e.g., POS_w on SCP3 = -0.313, NEG_b on SCN8 = 0.288). This indicates that the specific factors (CS and UCS) provide limited explanatory power beyond the general self-compassion factor. Consequently, the Bifactor Model supports a conceptualization where a single general factor underlies the variance in self-compassion, with the specific factors adding relatively small additional value.</p></li>
+<li><p><strong>Change in R-squared</strong>:<br>
+The Bifactor Model shows that the general factor accounts for a large proportion of the variance (e.g., R-squared for SCP1 = 0.425 at the within-person level, 0.786 at the between-person level). The specific factors contribute only marginally to the overall variance explained, suggesting that a unidimensional structure may be more parsimonious without significantly compromising the model’s explanatory power.</p></li>
+</ol>
+<p>In summary, the results of the multilevel CFA analyses lend support to Neff’s hypothesis that CS and UCS are related at the trait or global level. The strong correlations between CS and UCS at the latent level indicate that individuals who exhibit high levels of CS tend to have lower levels of UCS, and vice versa, reinforcing the notion that these two aspects are inversely related at a general, trait-like level.</p>
+<p>However, it is important to emphasize that multilevel CFA focuses on <em>latent, person-level relationships</em>, which capture broader, long-term patterns. The present findings show that CS and UCS are correlated at a global, trait-like level across individuals. In contrast, analyses targeting <em>momentary dynamics</em> may reveal that CS and UCS operate more independently within individuals during short-term, context-specific situations. This distinction highlights that while Neff’s hypothesis may hold at the trait level, further investigation is necessary to explore the relationship between CS and UCS at the momentary, within-person level.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,3 +1,5 @@
+For each notification in the Ecological Momentary Assessment (EMA) protocol, participants were prompted to answer the following questions.
+
 1. Think about the most notable event that has occurred since you last received a notification. If this is your first notification of the day, consider the most significant event from the start of the day. How would you evaluate this event?
    1) Very unpleasant
    2) Unpleasant

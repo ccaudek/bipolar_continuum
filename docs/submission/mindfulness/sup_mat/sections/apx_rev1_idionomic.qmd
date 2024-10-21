@@ -1,0 +1,234 @@
+
+The analyses described in the previous section provided evidence supporting the "essential unidimensionality" [@reise2013scoring] of state self-compassion. Our multilevel framework, which accounted for repeated measurements within individuals over a three-month period, demonstrated that compassionate and uncompassionate self-responding (CS and UCS) are inversely related at the *nomothetic level* -- that is, when examined across the entire sample.
+
+Our psychometric evaluations, using purely *internal criteria* (fit indices for item scores), revealed that more complex models improved statistical fit. However, these improvements do not fundamentally challenge Neff's hypothesis of a bipolar continuum. While minor deviations and better fit indices were observed with more complex models, their practical importance was limited, and the overall pattern of findings remained aligned with the notion of CS and UCS as opposing dimensions. 
+
+This conclusion is further corroborated when considering *external criteria*, including covariates such as momentary negative affect and context evaluation, as described in our two studies. These situational factors did not substantially disrupt the core relationship between CS and UCS proposed by the bipolar continuum hypothesis.
+
+It is important to note, however, that all these previous analyses were conducted at a *nomothetic* level, focusing on group-level patterns. This approach, while valuable, may obscure important differences in how self-compassion operates in the everyday life of individuals. The variability in how individuals experience and express self-compassion across different contexts might not be fully captured in these broad, averaged analyses.
+
+To address this limitation and gain deeper insights into person-specific dynamics, we conducted an *idionomic analysis* to examine the relationship between UCS and CS at the individual level [@ciarrochi2024compassion; @ferrari2022embracing; @sahdra2024testing]. This approach allows us to explore potential heterogeneity in self-compassion processes that may be masked by nomothetic analyses, providing a more nuanced understanding of how the CS and UCS constructs interact within individuals over time.
+
+## Idionomic Analysis of the Relationship Between UCS and CS
+
+For the present purposes, an idionomic analysis was conducted in two stages. The first stage involved a strictly idiographic approach, focusing on the individual-level patterns. In the second stage, we applied a nomothetic approach to examine and describe group-level regularities as well as the variability in these effects across individuals  [e.g., @ciarrochi2024compassion; @sahdra2024testing].
+
+**Step 1: Fitting Individual-Level Hierarchical Bayesian Models.** For each participant separatedly, we implemented a hierarchical Bayesian model using Stan to estimate the relationship between UCS and CS. The model incorporated additional covariates, including negative affect and context evaluation, as well as lagged effects of CS from the previous measurement within the same day. The model for each participant was specified as follows:
+
+$$
+\begin{aligned}
+\text{UCS}_n \sim t_{\nu}\Big( & \alpha + \gamma_{\text{CS}} \cdot \text{CS}_n + \gamma_{\text{neg\_aff}} \cdot \text{neg\_aff}_n \\
+& + \gamma_{\text{context}} \cdot \text{context}_n + \phi \cdot \text{lag\_CS}_n \\
+& + \gamma_{\text{interaction}} \cdot \text{CS}_n \cdot \text{neg\_aff}_n, \sigma \Big),
+\end{aligned}
+$$
+
+
+where:
+
+- $\text{UCS}_n$ represents the CS score for observation $n$,
+- $\alpha$ denotes the intercept,
+- $\gamma_{\text{CS}}$ is the coefficient for the primary predictor, CS ($\text{CS}_n$),
+- $\gamma_{\text{neg\_aff}}$ and $\gamma_{\text{context}}$ are coefficients for negative affect ($\text{neg\_aff}_n$) and context evaluation ($\text{context}_n$), respectively,
+- $\phi$ represents the autoregressive coefficient for the lagged CS within the same day ($\text{lag\_CS}_n$),
+- $\sigma$ is the scale parameter (standard deviation) of the distribution,
+- $\nu$ denotes the degrees of freedom of the Student's t-distribution,
+- $\gamma_{\text{interaction}}$ is the coefficient for the interaction term between CS and negative affect. 
+
+This model allows for the examination of the association between UCS and CS while controlling for the effects of negative affect, context evaluation, lagged CS effects within the same day, and the CS $\times$ negative-affect interaction. We employed a Student's t-distribution ($t_{\nu}$) to account for potential outliers or heavy-tailed distributions in the data.
+
+For each participant, we examined the posterior distribution of the `gamma_CS` coefficient to estimate the proportion of posterior draws that were negative. This enabled us to evaluate whether there was evidence of a negative association between UCS and CS at the individual level, in line with Neff's bipolar continuum hypothesis. Additionally, we computed the mean posterior estimates for the `gamma_neg_aff`, `gamma_context`, and `gamma_interaction` parameters, which represent the effects of negative affect, context evaluation, and the interaction between CS and negative affect, respectively, on UCS for each participant.
+
+**Step 2: Aggregate Analysis Using a Hierarchical Model.** After the idiographic analysis, we used a hierarchical model [e.g., @ciarrochi2024compassion] in the `brms` package (R) to summarize the proportion of negative estimates for the `gamma_CS` parameter across participants. This model employed a binomial distribution, with the total number of posterior samples as the denominator and the proportion of negative estimates as the response. A random intercept for participants was included to account for individual variability.
+
+Hierarchical models were also applied to the mean posterior estimates of the `gamma_neg_aff`, `gamma_context`, and `gamma_interaction` parameters, representing the influences of negative affect, context evaluation, and the interaction between CS and negative affect on UCS. Each model included a fixed effect (intercept) and random intercepts for participants, capturing individual differences. A Student-t likelihood was used to account for potential outliers and accommodate the heavy-tailed nature of the effect distributions, providing robust aggregate estimates of each parameter and the heterogeneity of their relationships with UCS.
+
+### Results
+
+The analysis of the `gamma_CS` parameter across participants indicated that 81.0% (89% CI [0.796, 0.823]) of the posterior estimates for the association between uncompassionate self-responding (UCS) and compassionate self-responding (CS) were negative. This supports Neff's bipolar continuum hypothesis, which posits an inverse relationship between UCS and CS. However, the variability in individual effects (`sd(Intercept)` = 1.25, corresponding to 0.196 on the probability scale) suggests moderate heterogeneity in the strength of this relationship across participants.
+
+For the influence of negative affect on UCS, represented by the `gamma_neg_aff` parameter, the analysis revealed a positive overall effect (intercept = 0.38, 89% CI [0.34, 0.42]), indicating that higher levels of negative affect are generally associated with increased UCS. The variability between individuals (`sd(Intercept)` = 0.19, corresponding to 0.547 on the probability scale) suggests substantial heterogeneity in how strongly negative affect influences UCS.
+
+The analysis of context evaluation showed a small but credible negative effect on UCS (mean = -0.04, 95% CI [-0.07, -0.01]), suggesting that higher context evaluation scores are associated with a slight reduction in UCS. The variability in individual responses (`sd(Intercept)` = 0.17, corresponding to 0.543 on the probability scale) also indicates substantial heterogeneity in the relationship between context evaluation and UCS across participants.
+
+Finally, the interaction between CS and negative affect was negligible, with the 89% credible interval spanning zero (-0.03, 0.00), suggesting no meaningful interaction effect between these variables on UCS.
+
+### Discussion
+
+
+Our idionomic analysis provides insight into the complex, momentary relationship between CS and UCS. Although the group-level results generally support Neff's bipolar continuum hypothesis, substantial heterogeneity emerged in the strength and direction of the CS-UCS association across individuals. While most participants displayed the anticipated inverse relationship between CS and UCS, a notable proportion showed no clear association, and a smaller subset exhibited positive correlations—indicating that, for some individuals, CS and UCS may vary together rather than oppositely, which contradicts the bipolar continuum hypothesis [Ferrari et al., 2023; Ullrich et al., 2020]. This variability suggests that Neff's hypothesis may not be universally applicable and underscores the importance of idiographic approaches in revealing the nuanced patterns often obscured in aggregate, group-level analyses.
+
+Additionally, our analysis revealed that negative affect consistently increased UCS across participants, indicating that elevated negative emotional states tend to intensify uncompassionate self-responding. However, the variability observed across individuals highlights that the influence of negative affect on UCS is not uniform. Contrary to expectations, we found no credible evidence that negative affect moderated the CS-UCS relationship, suggesting that momentary emotional states do not substantially alter how CS influences UCS within individuals (Dejonckheere et al., 2021).
+
+
+
+## Idiographic Analysis
+
+This section details the specification of the model fitted separately to individual data from both experiments, constituting the first step of our idiographic analysis.
+
+### Model Structure
+
+We employed a hierarchical Bayesian model with the following characteristics:
+
+1. **Response Variable**: Uncompassionate Self-Responding (UCS).
+2. **Primary Predictor**: Compassionate Self-Responding (CS).
+3. **Covariates**:
+   - `neg_aff_Moment`: Momentary negative affect.
+   - `context_Moment`: Context evaluation.
+   - `lag_CS_same_day`: Lagged CS from the same day.
+4. **Distribution**: Student's t-distribution to account for potential outliers or heavy-tailed response distributions
+5. **Temporal Dependency**: Incorporated an AR(1) component to account for autoregressive effects of UCS.
+
+### Model Parameters
+
+- `gamma_CS`: Coefficient representing the association between CS and UCS.
+- `gamma_neg_aff`: Slope for negative affect (`neg_aff_Moment`).
+- `gamma_context`: Slope for context evaluation (`context_Moment`).
+- `phi`: Autoregressive coefficient for the lagged CS effect.
+- `nu`: Degrees of freedom for the Student's t-distribution (estimated by the model).
+- `alpha`: Intercept term.
+- `sigma`: Scale parameter of the Student's t-distribution.
+
+### Stan Model Specification
+
+```stan
+data {
+  int<lower=1> N;
+  vector[N] CS;
+  vector[N] UCS;
+  vector[N] neg_aff_Moment;
+  vector[N] context_Moment;
+  vector[N] lag_CS_same_day;
+}
+
+parameters {
+  real alpha_raw;
+  real gamma_CS_raw;
+  real gamma_neg_aff_raw;
+  real gamma_context_raw;
+  real phi_raw;
+  real<lower=0> sigma;
+  real<lower=2> nu;
+}
+
+transformed parameters {
+  real alpha = alpha_raw;
+  real gamma_CS = gamma_CS_raw;
+  real gamma_neg_aff = gamma_neg_aff_raw;
+  real gamma_context = gamma_context_raw;
+  real phi = phi_raw * 0.5;  // Constraining phi to [-0.5, 0.5] for stability
+}
+
+model {
+  // Priors
+  alpha_raw ~ normal(0, 1);
+  gamma_CS_raw ~ normal(0, 1);
+  gamma_neg_aff_raw ~ normal(0, 1);
+  gamma_context_raw ~ normal(0, 1);
+  phi_raw ~ normal(0, 1);
+  sigma ~ cauchy(0, 2.5);
+  nu ~ gamma(2, 0.1);
+  
+  // Likelihood
+  UCS ~ student_t(nu, alpha + gamma_CS * CS + gamma_neg_aff * neg_aff_Moment + 
+                  gamma_context * context_Moment + phi * lag_CS_same_day, sigma);
+}
+```
+
+This Stan code implements the hierarchical Bayesian model described above. The model uses weakly informative priors for all parameters and constrains the autoregressive coefficient `phi` to the interval [-0.5, 0.5] to ensure model stability. The degrees of freedom parameter `nu` is constrained to be greater than 2 to ensure finite variance of the Student's t-distribution.
+
+\newpage
+
+## Hierarchical Model Analysis
+
+In the second step of our idiographic analysis, we employed a hierarchical model approach, analogous to a meta-analysis [@ciarrochi2024compassion]. This method allowed us to synthesize the individual-level results across all participants, providing both an aggregate estimate of the effects and a measure of heterogeneity among participants.
+
+### Model Specification
+
+We fitted a hierarchical binomial model to the proportion of negative posterior draws for the `gamma_CS` parameter. In this framework, each participant was treated as a unique "study," enabling us to estimate:
+
+1. The aggregate proportion of negative effects across all participants.
+2. The degree of heterogeneity in these effects among participants.
+
+The model was implemented using the `brms` package in R.
+
+### R Code for Model Fitting
+
+```r
+fit_gamma_cs_binom <- brm(
+  bf(n_negative | trials(n_total) ~ 1 + (1 | id), family = "binomial"),
+  data = beta_cs_df,
+  prior = c(
+    prior(normal(0, 1), class = "Intercept"),
+    prior(normal(0, 1), class = "sd")  
+  ),
+  iter = 100000, warmup = 2000, chains = 4, cores = 4,
+  backend = "cmdstanr",
+  control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+```
+
+### Model Components
+
+- **Formula**: `n_negative | trials(n_total) ~ 1 + (1 | id)`
+  - `n_negative`: Count of negative posterior draws.
+  - `n_total`: Total number of posterior draws
+  - `(1 | id)`: Random intercept for each participant.
+
+- **Family**: Binomial, appropriate for modeling proportions.
+
+- **Priors**: 
+  - `normal(0, 1)` for the intercept and standard deviation of random effects.
+  - These priors are weakly informative, allowing the data to drive the results while providing some regularization.
+
+- **MCMC Settings**: 
+  - 100,000 iterations with 2,000 warmup.
+  - 4 chains run in parallel.
+  - Increased `adapt_delta` and `max_treedepth` for improved MCMC convergence.
+
+### Extension to Other Parameters
+
+We applied a similar hierarchical modeling approach to analyze the posterior distributions of other key parameters from the idiographic analyses:
+
+- `gamma_neg_aff`: Coefficient for negative affect.
+- `gamma_context`: Coefficient for context evaluation.
+- `gamma_interaction`: Coefficient for potential interaction effects.
+
+
+\pagebreak
+
+## Posterior Predictive Checks
+
+In the following sections, we present the results of the Posterior Predictive Checks for the four models used to assess the aggregate effects and heterogeneity in our idiographic analysis. These models evaluate the linear association between UCS and CS, the effect of negative affect, the influence of contextual evaluation, and the interaction between CS and negative affect.
+
+::: {#fig-ppcheck_idiographic_gamma_cs}
+![](../../../../02_idiographic_test/plots/ppcheck_idiographic_gamma_cs.png){width="80%"}
+
+Idiographic analysis. Posterior Predictive Check for the hierarchical model fitted to the proportion of posterior draws of the `gamma_CS`parameter that were negative. 
+:::
+
+\pagebreak
+
+::: {#fig-ppcheck_idiographic_gamma_neg_aff}
+![](../../../../02_idiographic_test/plots/ppcheck_idiographic_gamma_neg_aff.png){width="80%"}
+
+Idiographic analysis. Posterior Predictive Check for the hierarchical model fitted to the mean of the posterior draws of the `gamma_neg_aff` parameter. 
+:::
+
+\pagebreak
+
+::: {#fig-ppcheck_idiographic_gamma_cs}
+![](../../../../02_idiographic_test/plots/ppcheck_idiographic_gamma_context.png){width="80%"}
+
+Idiographic analysis. Posterior Predictive Check for the hierarchical model fitted to the mean of the posterior draws of the `gamma_context` parameter. 
+:::
+
+\pagebreak
+
+::: {#fig-ppcheck_idiographic_gamma_cs}
+![](../../../../02_idiographic_test/plots/ppcheck_idiographic_gamma_interaction.png){width="80%"}
+
+Idiographic analysis. Posterior Predictive Check for the hierarchical model fitted to the mean of the posterior draws of the `gamma_interaction` parameter. 
+:::
+
+

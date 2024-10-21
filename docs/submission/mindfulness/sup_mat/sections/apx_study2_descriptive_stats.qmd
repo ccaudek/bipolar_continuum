@@ -1,4 +1,3 @@
-## Baseline Maesures 
 
 | Variable            | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
 |---------------------|----------|------------|--------------|--------------|
@@ -14,4 +13,4 @@
 | $SCS_{Isolation}$          | 2.69     | 0.09       | 2.50         | 2.87    |
 | $SCS_{Over-Identification}$| 2.67     | 0.09       | 2.50         | 2.85    |
 
-There is no evidence of emotional disorders among the participants. The obtained scores are consistent with those reported in other studies utilizing the same measures within community samples [@bottesi2015; @neff2017examining; @sica2021health].
+There was no indication of emotional disorders among the participants. The obtained scores aligned with those found in previous studies that used the same assessment tools in community samples  [@bottesi2015; @neff2017examining; @sica2021health].

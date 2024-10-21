@@ -31,9 +31,11 @@ suppressPackageStartupMessages({
 
 # Study 1
 
-## Descriptive Statistics
+## Baseline Maesures
 
 {{< include ./sections/apx_study1_descriptive_stats.qmd >}}
+
+\newpage
 
 ## EMA Survey Questions
 
@@ -47,7 +49,7 @@ suppressPackageStartupMessages({
 
 \newpage
 
-## Multilevel Correlations **between CS and UCS components of State Self-Compassion**
+## Multilevel Correlations between CS and UCS components of State Self-Compassion
 
 {{< include ./sections/apx_study1_multilevel_correlations.qmd >}}
 
@@ -60,8 +62,6 @@ suppressPackageStartupMessages({
 \newpage
 
 ## Direct Test of the BCH for State Self-Compassion
-
-va sostituito con l'analisi nuova.
 
 {{< include ./sections/apx_study1_bip_cont_hyp.qmd >}}
 
@@ -107,6 +107,8 @@ For our analyses, we employed the identical models utilized in Study 1.
 
 ### Direct Test of the BCH for State Self-Compassion {.unnumbered}
 
+{{< include ./sections/apx_study2_direct_test.qmd >}}
+
 For our analysis, we employed the identical Stan model utilized in Study 1.
 
 \newpage
@@ -122,5 +124,17 @@ For our analysis, we employed the identical Stan model utilized in Study 1.
 {{< include ./sections/apx_study2_decentering.qmd >}}
 
 \newpage
+
+# Dimensionality Test {.unnumbered}
+
+{{< include ./sections/apx_rev1_cfa_multilevel.qmd >}}
+
+\newpage
+
+# Modeling the Dynamic Relationship Between Compassionate and Uncompassionate Self-Responding: An Idionomic Approach
+
+{{< include ./sections/apx_rev1_idionomic.qmd >}}
+
+\pagebreak
 
 ## References

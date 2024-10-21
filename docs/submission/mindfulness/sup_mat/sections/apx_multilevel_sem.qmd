@@ -1,0 +1,55 @@
+Previous research has extensively investigated the bipolar continuum hypothesis by examining the dimensionality of *trait* self-compassion using various psychometric methods [@brenner2017two; @cleare2018investigation; @neff2016self; @neff2017examining; @neff2019examining; @petrocchi2014dimensionality]. These studies have consistently reported that models incorporating a general factor demonstrate superior fit indices, thereby providing empirical support for Neff's hypothesis.
+
+With the following analysis we aim to extend this line of inquiry by conducting a novel psychometric evaluation of the dimensionality of *state* self-compassion. Our approach is distinctive in that it accounts for the multilevel structure inherent in our data, addressing a critical gap in the existing literature. To this end, we employed a series of multilevel confirmatory factor analysis (CFA) models, applied to the combined data from our two studies. This analytical strategy allows us to appropriately model the hierarchical nature of our data, where repeated measurements are nested within days, which are in turn nested within individuals.
+
+We specified and compared three distinct models to elucidate the underlying structure of state self-compassion:
+
+- In the **One-Factor Model**, we hypothesized that state self-compassion could be represented by a single latent factor, capturing variance both within and between individuals. 
+  
+- The **Two-Factor Model** allowed for a conceptualization where state self-compassion is represented by two distinct latent factors—CS and UCS—operating at both the within-person and between-person levels.
+
+- The **Bifactor Model** tested whether state self-compassion is best represented by a general self-compassion factor alongside orthogonal specific factors (CS and UCS), separating variance attributable to the general factor from variance explained by the specific factors.
+
+The goodness-of-fit indices for each model are presented in Table 1.
+
+**Table 1. Goodness-of-Fit Indices for the One-Factor, Two-Factor, and Bifactor Models**
+
+| Model       | CFI   | TLI   | RMSEA | SRMR (Within) | SRMR (Between) | AIC       | BIC       |
+|-------------|-------|-------|-------|---------------|----------------|-----------|-----------|
+| One-Factor  | 0.935 | 0.910 | 0.050 | 0.033         | 0.058          | 475881.5  | 476195.3  |
+| Two-Factor  | 0.972 | 0.959 | 0.034 | 0.024         | 0.050          | 474810.2  | 475139.6  |
+| Bifactor    | 0.987 | 0.971 | 0.029 | 0.016         | 0.031          | 474376.7  | 474816.0  |
+
+As shown in Table 1, the goodness-of-fit indices progressively improve from the One-Factor Model to the Two-Factor Model, with the Bifactor Model demonstrating the best overall fit. The Comparative Fit Index (CFI) and Tucker-Lewis Index (TLI) both exceed the commonly accepted threshold of 0.95 for the Two-Factor and Bifactor Models, indicating strong model fit. Additionally, the Root Mean Square Error of Approximation (RMSEA) and Standardized Root Mean Square Residual (SRMR) values decrease across models, further supporting improved fit with more complex structures.
+
+We conducted a series of Likelihood Ratio Tests (LRTs) to formally assess improvements in model fit:
+
+- Comparing the One-Factor Model with the Two-Factor Model yielded an LRT statistic of 1068.792 with 5 degrees of freedom ($p < 0.001$), indicating that the Two-Factor Model significantly improves fit. This suggests that conceptualizing state self-compassion as two distinct components (CS and UCS) better represents the data.
+  
+- The comparison between the Two-Factor Model and the Bifactor Model resulted in an LRT statistic of 506.656 with 17 degrees of freedom ($p < 0.001$), demonstrating that the Bifactor Model offers further improvement in fit. This suggests that, beyond distinct compassionate and uncompassionate components, a general self-compassion factor provides additional explanatory power.
+
+In summary, from a psychometric standpoint, both the Two-Factor and Bifactor Models provide better fit than the One-Factor Model, with the Bifactor Model yielding the best statistical fit. These results suggest that self-compassion is best conceptualized as comprising both a general factor and specific components (CS and UCS). However, while the Bifactor Model offers superior statistical fit, its added complexity raises questions about the practical significance of modeling both general and specific factors.
+
+### Practical Importance
+
+Dimensionality assessments should not rely exclusively on statistical fit indices but should also consider the substantive contributions of each factor [@rodriguez2016evaluating; @ferrando2018assessing]. While more complex models typically achieve better fit, they may overfit the data, particularly when too many factors are specified [@ferrando2019external]. A balance between model complexity and interpretability is essential for drawing meaningful conclusions.
+
+To evaluate whether the data supports a unidimensional or multifactorial structure, we applied the following criteria:
+
+1. **Factor Correlation**:  
+   In the Bifactor Model, correlations between the general factor and specific factors are constrained to zero, theoretically separating them. The lack of correlation between general and specific factors implies a distinct role for each factor, negating the need to interpret correlations in this case.
+
+2. **Explained Common Variance (ECV)**:  
+   ECV estimates how much common variance is explained by the general versus specific factors. The general factor in the Bifactor Model (Gen_w) has high standardized loadings on items (e.g., SCP1 = 0.614, SCN2 = 0.579 at the within-level), suggesting it accounts for most of the variance. Specific factors (POS_w and NEG_w) show weaker loadings, indicating that the general factor dominates the variance explanation.
+
+3. **Omega Hierarchical (ωH)**:  
+   ωH measures how much variance in the total score is due to the general factor. In the Bifactor Model, the general factor explains a large proportion of the variance (e.g., SCP1 = 0.614, SCN2 = 0.579), while specific factors contribute much less, supporting the predominance of the general factor.
+
+4. **Bifactor Model Analysis**:  
+   The Bifactor Model confirms the dominance of the general factor, as specific factor loadings are consistently lower (e.g., POS_w on SCP3 = -0.313, NEG_b on SCN8 = 0.288), indicating that the specific factors add limited explanatory value beyond the general factor.
+
+5. **Change in R-squared**:  
+   The general factor in the Bifactor Model explains a substantial portion of variance (e.g., R-squared for SCP1 = 0.425 within-level, 0.786 between-level). In contrast, the specific factors provide only marginal additional explanation, suggesting that a unidimensional solution may be more parsimonious without significant loss of explanatory power.
+
+In summary, the results from the multilevel CFA analysis support Neff’s hypothesis that CS and UCS are related at the trait or global level, as indicated by the superior fit of the Bifactor Model. The strong correlation between CS and UCS at the latent level suggests that, across participants, individuals with high levels of CS tend to have lower levels of UCS, and vice versa.
+

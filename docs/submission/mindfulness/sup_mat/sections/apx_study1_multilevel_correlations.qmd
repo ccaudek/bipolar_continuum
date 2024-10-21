@@ -1,10 +1,11 @@
-We conducted a multilevel analysis to compute the correlation between the CS and the UCS components of state self-compassion, and each of the six subscales of the Self-Compassion Scale (Neff, 2003). 
+We conducted a multilevel analysis to compute the correlation between the Compassionate Self (CS) and Uncompassionate Self (UCS) components of state self-compassion, and each of the six subscales of the Self-Compassion Scale (Neff, 2003).
 
-<!-- These correlations represent average effects across participants, while adjusting for random intercepts attributed to individual differences among participants. -->
+Multilevel correlations provide a more accurate estimate of the relationships between variables in hierarchical or clustered data compared to simple bivariate correlations. In our study, participants were assessed multiple times across different moments and days, creating a nested data structure where measurements are clustered within individuals. A multilevel approach accounts for this clustering by separating within-person variation from between-person variation, which leads to more precise estimates of the associations. In contrast, a simple bivariate correlation would not distinguish between these sources of variation, potentially conflating individual-level effects with population-level patterns and resulting in biased estimates.
 
-These correlations are an average effect across participants, adjusted for the random intercepts attributable to individual differences among participants in our hierarchical model. For both components of state self-compassion, the correlation with the State Self-Compassion scale were modest. For CS, the largest multilevel correlation was with self-kindness, r = 0.24, 89% CI[0.15, 0.32]; for UCS, the largest multilevel correlation was with isolation, r = 0.21, 89% CI[0.10, 0.31]. 
+By using multilevel correlations, we estimated an average effect across participants, adjusting for the random intercepts attributable to individual differences in the hierarchical model. For both components of state self-compassion, the correlations with the subscales of the Self-Compassion Scale were modest. For CS, the largest multilevel correlation was with self-kindness, r = 0.24, 89% CI [0.15, 0.32]; for UCS, the largest multilevel correlation was with isolation, r = 0.21, 89% CI [0.10, 0.31].
 
-**CS Component of SSC**
+
+### CS Component of State Self-Compassion
 
 ```r
 fit_cs <- brm(
@@ -30,7 +31,7 @@ fit_cs <- brm(
 | Over-Identification | -0.00    | 0.06       | -0.10        | 0.09         |
 
 
-**UCS Component of SSC**
+### UCS Component of State Self-Compassion
 
 ```r
 fit_ucs <- brm(
