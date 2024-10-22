@@ -1,25 +1,28 @@
-We employed a Bayesian hierarchical model in which UCS was the linear predictor of CS to examine the association between the two components of state SC. This model also incorporated covariates such as within-day centered negative affect and context evaluation. Random effects were included to account for variability across participants, days, and measurements, which is crucial for capturing the inherent fluctuations in state self-compassion. The use of EMA data, enriched with relevant covariates, allowed for a thorough examination of the CS-UCS relationship under diverse conditions.
+In this section, we present a nomothetic analysis of the relationship between the two components of state self-compassion, Uncompassionate Self (UCS) and Compassionate Self (CS). This analysis was conducted using a Bayesian hierarchical model, where UCS was predicted by CS to assess the association between these components. The model also incorporated covariates, such as within-day centered negative affect and context evaluation, to capture the influence of these factors on the UCS-CS relationship. Random effects were included at the participant, day, and measurement levels to account for individual and temporal variability, critical for understanding fluctuations in state self-compassion.
 
-The predictive outcomes from this model directly tested the BCH. A credible negative fixed-effect slope for CS would validate the hypothesis, showing that increases in CS are associated with decreases in UCS, thus supporting the bipolar nature of state self-compassion. Conversely, a non-credible or positive fixed-effect slope for CS would challenge the BCH, suggesting that CS and UCS might function independently or even synergistically, rather than as opposing elements on a single continuum (Figure 1).
-The central finding was a robust negative association between CS and UCS, with a median estimate of -0.44 (89% CI [-0.47, -0.42]). This result validates the BCH by demonstrating that higher levels of CS are associated with lower levels of UCS. 
+Although the results of this nomothetic analysis are not discussed in the main manuscript, they are included here for completeness. The idionomic analysis described in the main manuscript, which combines data from two experiments, provides a more comprehensive view of the UCS-CS association. In contrast, this section presents a mixed-effects model separately for each experiment to address the same research question.
 
-After controlling for CS, negative affect showed a modest positive influence on UCS (β = 0.12, 89% CI [0.116, 0.13]), while the unpleasantness of the event had a minimal impact on UCS (β = 0.01, 89% CI [0.002, 0.02]). These findings indicate that contextual factors and negative affect play nuanced roles in shaping state self-compassion.
-Substantial variability was observed in the random-effect slopes for CS across participants, with a median estimate of 0.29 (89% CI [0.26, 0.32]). This variability suggests substantial individual differences in how CS impacts UCS, reflecting the complex interplay between personality, context, and self-compassion.
+The outcomes of this nomothetic model offer a direct test of the Bipolar Continuum Hypothesis (BCH). A credible negative fixed-effect slope for CS would support the BCH, indicating that higher levels of CS are associated with lower levels of UCS, thus suggesting a bipolar relationship. Conversely, a non-credible or positive slope would challenge the BCH, implying that CS and UCS may function independently or synergistically rather than as opposing components.
 
-Additionally, the analysis highlighted notable variability in UCS levels among participants (β = 0.63, 89% CI [0.59, 0.67]), underscoring considerable individual differences in state self-compassion responses. UCS also exhibited day-to-day variability (β = 0.04, 89% CI [0.02, 0.06]), albeit to a lesser extent than individual variability. This emphasizes the influence of daily emotional states and contextual stressors on self-compassion levels, reinforcing the state-dependent nature of self-compassion. Finally, the model reported minimal measurement error (median estimate: 0.01, 89% CI [0.001, 0.039]), attesting to the reliability of the assessment tools used.
+![The estimates are expressed in terms of inter-individual differences and intra-individual variations, both within a day and across different days. The bars represent 89% credibility intervals. β_(CS ) represents the beta coefficients for CS; β_(negative affect) and β_(context valence )denote the beta coefficients for NegAff and context valence, respectively; σ_measurement is the standard deviation of the distribution of random effects coefficients for the 5 daily observations; σ_(day )represents the standard deviation of the distribution of random effects coefficients across 10 days; σ_(participant )indicates the standard deviation of the distribution of random effects coefficients across participants (subjects); σ_(participant slope CS) is the standard deviation of the slopes describing the effect of CS on UCS for each participant; σ_UCS is the estimated standard deviation of the population residuals distribution.](./sections/figures/plot_bch_piel.pdf)
 
-In summary, the robust variability in UCS across participants and the credible random slope effects for CS indicate that the relationship between CS and UCS is influenced by a variety of factors. The moderate level of unexplained variability in UCS (median estimate: 0.41, 89% CI [0.40, 0.414]) suggests that additional factors, potentially outside the scope of this model, influence UCS levels. These factors may include unmeasured psychological variables such as personal beliefs, coping mechanisms, or external social support.
+The central finding of this analysis was a robust negative association between CS and UCS, with a median slope estimate of -0.44 (89% CI [-0.47, -0.42]). This result supports the BCH by demonstrating that increases in CS are associated with decreases in UCS.
 
-![The estimates are expressed in terms of inter-individual differences and intra-individual variations, both within a day and across different days. The bars represent 89% credibility intervals. β_(CS ) represents the beta coefficients for CS; β_(negative affect) and β_(context valence )denote the beta coefficients for NegAff and context valence, respectively; σ_measurement is the standard deviation of the distribution of random effects coefficients for the 5 daily observations; σ_(day )represents the standard deviation of the distribution of random effects coefficients across 10 days; σ_(participant )indicates the standard deviation of the distribution of random effects coefficients across participants (subjects); σ_(participant slope CS) is the standard deviation of the slopes describing the effect of CS on UCS for each participant; σ_UCS is the estimated standard deviation of the population residuals distribution.](sections/figures/plot_bch_piel.pdf)
+After controlling for CS, negative affect had a modest positive effect on UCS (β = 0.12, 89% CI [0.116, 0.13]), while the evaluation of context unpleasantness showed a minimal impact (β = 0.01, 89% CI [0.002, 0.02]). These findings suggest that contextual factors and negative affect play nuanced roles in shaping state self-compassion.
 
+The random-effect slopes for CS varied substantially across participants (median estimate: 0.29, 89% CI [0.26, 0.32]), reflecting significant individual differences in how CS affects UCS. This variability indicates that the relationship between CS and UCS is influenced by factors such as personality and contextual circumstances.
 
-We employed a hierarchical Bayesian model to explore the relationship between state self-compassion components (CS and UCS) and their interactions with other covariates (negative affect, decentering, and context evaluation). By incorporating both fixed and random effects, our model aims to capture variability at the levels of individual participants, days, and measurements, providing a comprehensive understanding of the dynamics underlying the BCH.
+The analysis also revealed considerable individual differences in UCS levels (β = 0.63, 89% CI [0.59, 0.67]) and moderate day-to-day variability (β = 0.04, 89% CI [0.02, 0.06]), though the latter was less pronounced. This variability emphasizes the state-dependent nature of self-compassion and the influence of daily emotional states and contextual stressors.
 
-In our model, the uncompassionate component (UCS) is represented using a t-distribution, which accommodates potential outliers and enhances the robustness of our analysis. This distribution is parameterized with a degree of freedom parameter (`nu`), an error term (`sigma_ucs`), and is influenced by both fixed and random effects.
+Measurement error was minimal, with a median estimate of 0.01 (89% CI [0.001, 0.039]), indicating the reliability of the assessment tools used.
 
-The priors for the model parameters were selected to facilitate regularization:
+In summary, this nomothetic analysis confirmed a strong negative association between CS and UCS, supporting the BCH. The substantial variability in random slopes across participants highlights the complexity of the CS-UCS relationship, which is influenced by individual differences and context. Despite the robust findings, unexplained variability in UCS (median estimate: 0.41, 89% CI [0.40, 0.414]) suggests that additional factors, possibly related to unmeasured psychological variables, influence UCS levels.
 
-$$   
+### Model Implementation
+
+The hierarchical Bayesian model included random effects for participants, days, and measurements and used a t-distribution to account for potential outliers in UCS. The following priors were employed to regularize the estimates:
+
+$$
 \begin{aligned}
 \alpha_{ucs} &\sim \text{Normal}(0, 1) \\
 \beta_{cs}, \beta_{covariates} &\sim \text{Normal}(0, 1) \\
@@ -29,58 +32,48 @@ z_{participant}, z_{day}, z_{measurement}, z_{participant\_slope\_cs} &\sim \tex
 \end{aligned}
 $$
 
-The Stan implementation is provided below:
+The Stan code for the model is presented below:
 
 ```stan
 data {
-  int<lower=0> N; // Total number of observations
-  int<lower=0> P; // Number of participants
-  int<lower=0> D; // Number of days
-  int<lower=0> M; // Number of measurements per day per participant
+  int<lower=0> N; // Total observations
+  int<lower=0> P; // Participants
+  int<lower=0> D; // Days
+  int<lower=0> M; // Measurements per day
   array[N] int<lower=1, upper=P> participant; 
-  // Participant index for each observation
-  array[N] int<lower=1, upper=D> day; // Day index for each observation
-  array[N] int<lower=1, upper=M> measurement; 
-  // Measurement index for each observation
-  array[N] real CS; // Compassionate Self measures
-  array[N] real UCS; // Uncompassionate Self measures
-  array[N] real neg_affect; // Negative Affect measures
-  array[N] real decentering; // Decentering measures
-  array[N] real context_eval; // Context evaluation measures
+  array[N] int<lower=1, upper=D> day; 
+  array[N] int<lower=1, upper=M> measurement;
+  array[N] real CS; 
+  array[N] real UCS;
+  array[N] real neg_affect; 
+  array[N] real decentering;
+  array[N] real context_eval;
 }
 
 parameters {
-  real alpha_ucs; // Intercept for UCS
-  real beta_cs; // Overall effect of CS on UCS
-  array[3] real beta_covariates; // Coefficients for other covariates
-
-  // Random intercepts
+  real alpha_ucs;
+  real beta_cs;
+  array[3] real beta_covariates;
   vector[P] z_participant;
   vector[D] z_day;
   vector[M] z_measurement;
-
-  // Random slopes for CS at the participant level
   vector[P] z_participant_slope_cs;
-
-  real<lower=0> sigma_participant; // SD of participant intercepts
-  real<lower=0> sigma_day; // SD of day intercepts
-  real<lower=0> sigma_measurement; // SD of measurement intercepts
-  real<lower=0> sigma_participant_slope_cs; // SD of participant slopes for CS
-  real<lower=0> sigma_ucs; // Error term for UCS model
-  real<lower=0> nu; // Degrees of freedom for t-distribution
+  real<lower=0> sigma_participant;
+  real<lower=0> sigma_day;
+  real<lower=0> sigma_measurement;
+  real<lower=0> sigma_participant_slope_cs;
+  real<lower=0> sigma_ucs;
+  real<lower=0> nu;
 }
 
 model {
-  // Priors
   alpha_ucs ~ normal(0, 1);
   beta_cs ~ normal(0, 1);
   beta_covariates ~ normal(0, 1);
-
   z_participant ~ normal(0, 1);
   z_day ~ normal(0, 1);
   z_measurement ~ normal(0, 1);
   z_participant_slope_cs ~ normal(0, 1);
-
   sigma_participant ~ exponential(1);
   sigma_day ~ exponential(1);
   sigma_measurement ~ exponential(1);
@@ -88,63 +81,19 @@ model {
   sigma_ucs ~ exponential(1);
   nu ~ gamma(2, 0.1);
 
-  // Likelihood for UCS using t-distribution
   for (n in 1:N) {
-    UCS[n] ~ student_t(
-      nu,
-      alpha_ucs +
-      (beta_cs + sigma_participant_slope_cs *
-        z_participant_slope_cs[participant[n]]) * CS[n] +
-      beta_covariates[1] * neg_affect[n] +
-      beta_covariates[2] * decentering[n] +
-      beta_covariates[3] * context_eval[n] +
-      sigma_participant * z_participant[participant[n]] +
-      sigma_day * z_day[day[n]] +
-      sigma_measurement * z_measurement[measurement[n]],
-      sigma_ucs
-    );
-  }
-}
-
-generated quantities {
-  array[N] real pred_UCS;
-  array[N] real log_lik;
-
-  for (n in 1:N) {
-    pred_UCS[n] = student_t_rng(
-      nu,
-      alpha_ucs +
-      (beta_cs + sigma_participant_slope_cs *
-        z_participant_slope_cs[participant[n]]) * CS[n] +
-      beta_covariates[1] * neg_affect[n] +
-      beta_covariates[2] * decentering[n] +
-      beta_covariates[3] * context_eval[n
-
-] +
-      sigma_participant * z_participant[participant[n]] +
-      sigma_day * z_day[day[n]] +
-      sigma_measurement * z_measurement[measurement[n]],
-      sigma_ucs
-    );
-
-    log_lik[n] = student_t_lpdf(
-      UCS[n] |
-      nu,
-      alpha_ucs +
-      (beta_cs + sigma_participant_slope_cs *
-        z_participant_slope_cs[participant[n]]) * CS[n] +
-      beta_covariates[1] * neg_affect[n] +
-      beta_covariates[2] * decentering[n] +
-      beta_covariates[3] * context_eval[n] +
-      sigma_participant * z_participant[participant[n]] +
-      sigma_day * z_day[day[n]] +
-      sigma_measurement * z_measurement[measurement[n]],
-      sigma_ucs
-    );
+    UCS[n] ~ student_t(nu,
+                      alpha_ucs +
+                      (beta_cs + sigma_participant_slope_cs * z_participant_slope_cs[participant[n]]) * CS[n] +
+                      beta_covariates[1] * neg_affect[n] +
+                      beta_covariates[2] * decentering[n] +
+                      beta_covariates[3] * context_eval[n] +
+                      sigma_participant * z_participant[participant[n]] +
+                      sigma_day * z_day[day[n]] +
+                      sigma_measurement * z_measurement[measurement[n]],
+                      sigma_ucs);
   }
 }
 ```
 
-Through the integration of multiple levels of random effects and the adoption of a robust likelihood function via the t-distribution, our hierarchical Bayesian model provides a nuanced analysis of the interaction between CS and UCS, shedding light on the dynamics underlying state self-compassion within a broader psychological context.
-
-
+This model captures the complexity of the UCS-CS relationship across multiple levels, providing a detailed picture of the dynamic interactions underlying state self-compassion.

@@ -61,7 +61,7 @@ suppressPackageStartupMessages({
 
 \newpage
 
-## Direct Test of the BCH for State Self-Compassion
+### Nomothetic Analysis of the Relationship Between UCS and CS
 
 {{< include ./sections/apx_study1_bip_cont_hyp.qmd >}}
 
@@ -105,7 +105,7 @@ For our analyses, we employed the identical models utilized in Study 1.
 
 \newpage
 
-### Direct Test of the BCH for State Self-Compassion {.unnumbered}
+### Nomothetic Analysis of the Relationship Between UCS and CS {.unnumbered}
 
 {{< include ./sections/apx_study2_direct_test.qmd >}}
 
