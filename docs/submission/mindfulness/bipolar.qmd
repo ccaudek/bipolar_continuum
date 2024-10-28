@@ -721,15 +721,6 @@ Idiographic analysis. Posterior Predictive Check for the hierarchical model fitt
 
 
 
-<!-- ### Idiographic versus Nomothetic Approaches -->
-
-<!-- We believe that, for the purposes of testing Neff’s hypothesis, using a Bayesian multilevel model in the present study is both justified and appropriate. While more specialized idiographic approaches, such as the GIMME method [@wright2019focusing], offer specific advantages, these are not necessary for the current analysis. @wright2019focusing highlight two main strengths of GIMME over multilevel modeling: (1) it does not require assuming that all individuals follow the same functional form, and (2) it avoids assuming normally distributed random effects. However, in our case, assuming a linear relationship between UCS and CS aligns with the theoretical basis of our study and allows us to directly test the hypothesis that motivated our research. -->
-
-<!-- Regarding the assumption of normally distributed random effects, while it is true that all statistical analyses are conditional on the model assumptions, our results are strongly supported by the good fit of the model, as evidenced by posterior predictive checks, R-hat values, and the absence of convergence issues. Thus, these assumptions do not undermine the validity of our conclusions. Moreover, multilevel modeling provides an additional advantage over purely data-driven idiographic methods by greatly attenuating the risk of overfitting. GIMME, while excellent for uncovering individual-level variation without prior assumptions, can sometimes risk overfitting when dealing with complex, noisy data, as noted by @wright2019focusing. Given our specific research question—testing the hypothesized relationship between CS and UCS—a simpler multilevel model is better suited, as it effectively bridge nomothetic and idiographic approaches, because they simultaneously estimate within-person associations among variables (e.g., daily stress→negative affect) and between-person differences in those associations [@conner2009experience]. -->
-
-
-
-
 
 \pagebreak
 
@@ -754,12 +745,6 @@ We generated 89% Credibility Intervals instead of the conventional 95% to avoid 
 
 # Bibliography
 
-
-<!-- nomothetic (i.e., group-based)  -->
-
-<!-- a within-person level. -->
-
-<!-- to estimate the coefficients depicted in Fig. 1 for each individual -->
 
 
 
