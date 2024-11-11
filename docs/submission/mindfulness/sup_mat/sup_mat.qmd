@@ -1,10 +1,18 @@
 ---
 title: "Supplementary Information" 
-subtitle: "State Self-Compassion Dynamics: Evidence for the Bipolar Continuum Hypothesis"
-format: pdf
-csl: apa.csl
-editor: visual
-bibliography: "bibliography.bib"
+subtitle: "State Self-Compassion Dynamics: Partial Evidence for the Bipolar Continuum Hypothesis"
+format: 
+    pdf:
+      toc: true
+      toc-depth: 2
+      number-sections: true
+      geometry: "left=3cm,right=3cm,top=2.5cm,bottom=2.5cm"
+      header-includes: |
+         \usepackage{fancyhdr}
+         \pagestyle{fancy}
+         \fancyhead[L]{Supplementary Information}
+      bibliography: bibliography.bib
+      cls: apa7.cls
 ---
 
 ```{r}
@@ -31,7 +39,7 @@ suppressPackageStartupMessages({
 
 # Study 1
 
-## Baseline Maesures
+## Baseline Measures
 
 {{< include ./sections/apx_study1_descriptive_stats.qmd >}}
 
@@ -69,7 +77,7 @@ suppressPackageStartupMessages({
 
 # Study 2
 
-## Descriptive Statistics
+## Baseline Measures
 
 {{< include ./sections/apx_study2_descriptive_stats.qmd >}}
 
@@ -131,7 +139,7 @@ For our analysis, we employed the identical Stan model utilized in Study 1.
 
 \newpage
 
-# Modeling the Dynamic Relationship Between Compassionate and Uncompassionate Self-Responding: An Idionomic Approach
+# Idionomic Analysis
 
 {{< include ./sections/apx_rev1_idionomic.qmd >}}
 

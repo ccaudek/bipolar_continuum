@@ -94,7 +94,7 @@ kable(fixed_effects_data, "latex", booktabs = TRUE, longtable = TRUE) %>%
   column_spec(9, width = "1.1cm")
 ```
 
-Based on the model comparison using the LOO method, the best-fitting model is "Model 1: Full Fixed Effects." It exhibits the highest estimated log pointwise predictive density (elpd_loo) and the lowest Leave-One-Out Information Criterion (looic), suggesting superior predictive performance compared to the other models.
+Based on the model comparison using the LOO method, the best-fitting model is "Model 1: Full Fixed Effects." It exhibits the highest estimated log pointwise predictive density (`elpd_loo`) and the lowest Leave-One-Out Information Criterion (`looic`), suggesting superior predictive performance compared to the other models.
 
 The final model for predicting the compassionate responding component of state self-compassion is as follows:
 
@@ -195,7 +195,7 @@ kable(random_effects_data_new, "latex", booktabs = TRUE, longtable = TRUE) %>%
 
 ```
 
-When considering fixed-effect structures for the USC component, our analysis identified 'Model 1: Full Fixed Effects' as the best-fitting model. This model exhibited the highest estimated log pointwise predictive density (elpd_loo) and the lowest Leave-One-Out Information Criterion (looic) among the options. These results closely mirror the findings from the SC component analysis, where 'Model 1: Full Fixed Effects' also emerged as the preferred model.
+When considering fixed-effect structures for the USC component, our analysis identified 'Model 1: Full Fixed Effects' as the best-fitting model. This model exhibited the highest estimated log pointwise predictive density (`elpd_loo`) and the lowest Leave-One-Out Information Criterion (`looic`) among the options. These results closely mirror the findings from the SC component analysis, where 'Model 1: Full Fixed Effects' also emerged as the preferred model.
 
 The congruence in results between the SC and USC components underscores the consistency and reliability of our modeling approach. For both SC and USC, we have selected 'Model 1: Full Fixed Effects' as the optimal model, demonstrating superior predictive performance compared to more complex alternatives.
 
