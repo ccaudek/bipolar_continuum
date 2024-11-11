@@ -101,19 +101,19 @@ suppressPackageStartupMessages({
 
 \newpage
 
-### Impact of Academic Exam on Negative Affect {.unnumbered}
+### Impact of Academic Exam on Negative Affect  
 
 {{< include ./sections/apx_study2_impact_of_exam_on_neg_aff.qmd >}}
 
 \newpage
 
-### Testing the BCH Through Contextual Influences of the State Self-Compassion.
+### Testing the Bipolar Continuum Hypothesis Through Contextual Influences of the State Self-Compassion.
 
 For our analyses, we employed the identical models utilized in Study 1.
 
 \newpage
 
-### Nomothetic Analysis of the Relationship Between UCS and CS {.unnumbered}
+### Nomothetic Analysis of the Relationship Between UCS and CS  
 
 {{< include ./sections/apx_study2_direct_test.qmd >}}
 
@@ -127,13 +127,13 @@ For our analysis, we employed the identical Stan model utilized in Study 1.
 
 \newpage
 
-## Decentering and SC and USC Correlation {.unnumbered}
+## Decentering and SC and USC Correlation  
 
 {{< include ./sections/apx_study2_decentering.qmd >}}
 
 \newpage
 
-# Dimensionality Test {.unnumbered}
+# Dimensionality Test 
 
 {{< include ./sections/apx_rev1_cfa_multilevel.qmd >}}
 
