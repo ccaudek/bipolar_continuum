@@ -1,0 +1,101 @@
+
+## Analyses of Positive Associations Between CS and UCS
+
+This section investigates whether participants who demonstrated a positive association between the Compassionate Self (CS) and Uncompassionate Self (UCS) components of the State Self-Compassion Scale differ from other participants. A positive association, where higher levels of CS are accompanied by higher levels of UCS, is fundamentally incompatible with the Bipolar Continuum Hypothesis, which posits an inverse relationship between these components. To explore whether such results could be attributed to response biases—such as "careless responding" or "insufficient effort"—we analyzed indices of systematic response behavior using data combined from two studies ($N = 495$).
+
+In the first step of the analysis, a hierarchical Bayesian model was fitted separately for each participant to estimate the individual slope between CS and UCS. This model included random intercepts for participants, days, and measurements within days, as well as random slopes for CS and negative affect (NA) at the participant level. Interaction terms between CS and NA, along with contextual factors (momentary, daily, and person-level evaluations), were incorporated to account for potential modulation of UCS by these variables. A t-distribution was used to model the error term, addressing potential non-normality in the UCS data. Weakly informative priors ensured plausible yet flexible parameter estimation, and posterior predictive checks confirmed that the model adequately represented the observed data.
+
+Participants were classified as showing a positive UCS-CS association if the lower bound of the 89% credible interval for the slope coefficient was positive. Using this criterion, 52 participants (10.5% of the sample) were identified.
+
+To assess whether these positive associations were driven by response biases, we conducted a Bayesian multilevel analysis comparing indices of careless responding between the positive-slope group and the remaining participants. Four separate regression models, one for each careless responding index, accounted for the hierarchical structure of the data, including repeated measurements across days and occasions within days. Random effects were specified for participants, days, and time windows to capture the nested nature of the data.
+
+The results of these analyses provided posterior estimates of the differences in careless responding indices between the groups, offering insights into whether a positive UCS-CS association reflects genuine deviation from the Bipolar Continuum Hypothesis or artifacts of systematic response behavior.
+
+We examined four careless responding indices, as defined by the `careless` R package.
+
+### Longstring Index
+
+The Longstring index measures the longest sequence of consecutive identical responses provided by a participant during a single measurement occasion. A high Longstring index may indicate "straightlining," a response pattern often associated with careless or inattentive behavior. If the posterior estimate of the average Longstring index is credibly higher for participants with a positive UCS-CS association, it would suggest that this group exhibits a greater tendency toward careless responding.
+
+To investigate the relationship between group membership and the Longstring index, we employed a hierarchical Bayesian cumulative ordinal regression model using the `brm` function from the `brms` R package. The model specification is as follows:
+
+```r
+mod_longstring <- brm(
+  formula = longstring_val ~ is_pos_slope_group +
+    (1 | user_id / day / time_window),
+  family = cumulative(link = "logit"),  # Cumulative ordinal regression
+  data = df_result,                     # Input data
+  backend = "cmdstanr"                  # Backend for computation
+)
+```
+
+### Model Details:
+
+- **Outcome Variable**: `longstring_val`, representing the Longstring index, is treated as an ordinal variable.
+- **Predictor**: `is_pos_slope_group`, a binary variable indicating group membership:
+  - `1`: Participants with a positive UCS-CS slope, where the 89% credible interval does not include zero.
+  - `0`: All other participants.
+- **Random Effects**: The model accounts for hierarchical clustering at three levels:
+  - **User ID** (`user_id`): Captures between-subject variability.
+  - **Day** (`day`): Accounts for within-subject, day-to-day variability.
+  - **Time Window** (`time_window`): Addresses measurement occasion-specific variability within each day.
+- **Link Function**: A cumulative logit link is used, appropriate for ordinal outcomes.
+
+This model structure allows us to estimate the impact of group membership on the Longstring index while appropriately accounting for the nested structure of the data.
+
+
+| Parameter | Mean | SE | Lower bound | Upper bound | Rhat |
+|-----------|------|-----|-------------|-------------|------|
+| Intercept[1] | -3.205 | 0.118 | -3.448 | -2.987 | 1.016 |
+| Intercept[2] | 1.316 | 0.078 | 1.164 | 1.470 | 1.006 |
+| Intercept[3] | 3.660 | 0.131 | 3.422 | 3.927 | 1.014 |
+| Intercept[4] | 5.105 | 0.166 | 4.802 | 5.441 | 1.015 |
+| Intercept[5] | 6.372 | 0.198 | 6.009 | 6.779 | 1.014 |
+| Intercept[6] | 7.118 | 0.221 | 6.712 | 7.567 | 1.013 |
+| Intercept[7] | 7.444 | 0.232 | 7.006 | 7.919 | 1.014 |
+| is_pos_slope_group1 | 0.047 | 0.203 | -0.355 | 0.441 | 1.000 |
+
+: Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for each parameter of the constant effect model bmod1.
+
+
+::: {#fig-longstring}
+![](../../../../02_idiographic_test/plots/careless/mod_longstring_plot.png){width="80%"}
+
+Conditional effect of Group on Longstring Index. Vertical bars represent 89% credibility intervals.
+:::
+
+
+### Intra-Individual Response Variability
+
+Intra-Individual Response Variability (IRV) is defined as the standard deviation of responses across a set of consecutive items for a given individual (Dunn et al., 2018). A lower IRV is often interpreted as an indicator of a greater tendency toward careless responding.
+
+
+
+### Even-Odd Inconsistency Index
+
+The Even-Odd Inconsistency Index measures response inconsistency by dividing a unidimensional scale into two halves—an even-odd split—and analyzing the relationship between the two subsets of items. The procedure is as follows: 
+
+1. **Split the scale**: Items are divided into two subsets, with even-numbered items forming one subset and odd-numbered items forming the other.  
+2. **Compute subscale scores**: The average response for each subset is calculated, resulting in two scores—one for the even subscale and one for the odd subscale.  
+3. **Calculate within-person correlation**: A correlation is computed between the two subscale scores for each participant, treating the even scores as variable $x$ and the odd scores as variable $y$, resulting in a correlation coefficient $r(x, y)$.  
+4. **Correct for scale length**: The correlation is adjusted for the reduced length of the scale using the Spearman–Brown prophecy formula.  
+5. **Compute the inconsistency score**: The final score is calculated as $0 - r(x, y)$, where higher values indicate a greater likelihood of careless responding.
+
+For the present analysis, the Compassionate Self (CS) items were treated as odd, and the Uncompassionate Self (UCS) items were treated as even. Higher scores on this index indicate greater response inconsistency, suggesting a higher tendency toward careless responding.
+
+
+### Mahalanobis Distance
+
+Mahalanobis Distance ($D^2$) is a multivariate measure used to detect outliers, including patterns that may indicate careless responding. It evaluates the distance of an individual’s response set from the overall distribution of responses in the dataset. Higher $D^2$ values suggest that a participant’s responses deviate markedly from the typical response pattern, potentially reflecting careless responding. Lower $D^2$ values indicate responses closer to the average, consistent with careful engagement.
+
+
+
+
+
+
+
+
+
+
+
+

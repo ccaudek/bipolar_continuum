@@ -51,6 +51,12 @@ suppressPackageStartupMessages({
 
 \newpage
 
+## Data Quality Management and Subject Selection 
+
+{{< include ./sections/apx_careless_study1.qmd >}}
+
+\newpage
+
 ## Model Convergence Diagnostics
 
 {{< include ./sections/apx_model_convergence_diag.qmd >}}
@@ -88,6 +94,13 @@ suppressPackageStartupMessages({
 {{< include ./sections/apx_study2_survey_questions.qmd >}}
 
 \newpage
+
+\newpage
+
+## Data Quality Management and Subject Selection 
+
+{{< include ./sections/apx_careless_study2.qmd >}}
+
 
 ## Model Convergence Diagnostics
 
@@ -144,5 +157,9 @@ For our analysis, we employed the identical Stan model utilized in Study 1.
 {{< include ./sections/apx_rev1_idionomic.qmd >}}
 
 \pagebreak
+
+# Careless responding
+
+{{< include ./sections/apx_careless_responding.qmd >}}
 
 ## References

@@ -103,8 +103,6 @@ names(df)
 
 cor(df[, 4:11]) |> round(2)
 
-# Assuming df is your data frame
-
 
 # Generate input list for Stan --------------------------------------------
 
@@ -176,7 +174,6 @@ fit_mcmc <- mod$sample(
   seed = 42
 )
 
-
 # Extract posterior samples
 posterior_samples <- fit_mcmc$draws(format = "df")
 
@@ -208,13 +205,20 @@ mcmc_areas(as.matrix(posterior_samples), pars = c("beta_cs")) +
 
 
 posterior_summary <- fit$summary(
-  variables = c("beta_cs", "beta_interaction", "sigma_participant_slope_cs")
+  variables = c(
+    "beta_cs", "beta_interaction", "sigma_participant_slope_cs"
+    )
   )
 print(posterior_summary)
+# variable                       mean   median      sd     mad      q5      q95
+# <chr>                         <dbl>    <dbl>   <dbl>   <dbl>   <dbl>    <dbl>
+#   1 beta_cs                    -0.459   -0.459   0.00686 0.00699 -0.470  -0.447  
+# 2 beta_interaction           -0.00960 -0.00959 0.00404 0.00410 -0.0160 -0.00280
+# 3 sigma_participant_slope_cs  0.226    0.226   0.00221 0.00215  0.223   0.230  
 
 # Extract the individual slopes for CS (z_participant_slope_cs) from the posterior samples
 z_participant_slope_cs_samples <- posterior_samples %>% 
-  select(starts_with("z_participant_slope_cs"))
+  dplyr::select(starts_with("z_participant_slope_cs"))
 
 # Calculate the mean slope for each individual
 individual_slopes <- apply(as.matrix(z_participant_slope_cs_samples), 2, mean)
@@ -225,7 +229,7 @@ summary(individual_slopes)
 # Extract the posterior samples for the fixed effect (beta_cs) and random slopes (z_participant_slope_cs)
 beta_cs_samples <- posterior_samples$`beta_cs`
 z_participant_slope_cs_samples <- posterior_samples %>% 
-  select(starts_with("z_participant_slope_cs"))
+  dplyr::select(starts_with("z_participant_slope_cs"))
 
 # Sum the fixed effect (beta_cs) and the random effect (z_participant_slope_cs) for each participant
 # This gives you the total slope for each participant at each posterior draw
@@ -245,6 +249,7 @@ ggplot(data.frame(slope = individual_total_slopes), aes(x = slope)) +
 
 
 mean(individual_total_slopes < 0)
+# [1] 0.6606061
 
 # Save fit.
 # fit_mcmc$save_object("idiographic_fit.rds")

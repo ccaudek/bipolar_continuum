@@ -1,5 +1,7 @@
 .DS_Store
 
+*.rds
+
 # History files
 .Rhistory
 .Rapp.history
@@ -46,3 +48,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+02_idiographic_test/mcmc/mod_longstring.rds
+mod_longstring.rds
+02_idiographic_test/mcmc/idiographic_fit.rds

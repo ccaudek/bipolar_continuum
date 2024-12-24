@@ -1,0 +1,74 @@
+
+### Phase 1
+
+#### Threshold
+
+A total of 4 participants met the same criterion as in Study 1 and were excluded from subsequent EMA data collection.
+
+### Phase 2
+
+For the EMA data, we conducted additional checks on the repeated administrations of the 8-item State Self-Compassion Scale to ensure response quality at the individual level. The same procedure employed in Study 1 was applied. During the EMA phase, no participants met the previously defined criterion for careless responding. Consequently, all participants who adhered to the study’s response frequency requirements were included in the final statistical analyses.
+
+#### Longstring Index
+
+Participants above threshold:
+
+```
+[1] "3G9w87dIub" "EeBXR2talY" "FhfdJyT6nt" "J0WsOxy0o3" "b6R6tTzsS7" "g9cEPgECi1"
+[7] "iWiTcM0XQi" "iu9CLYtxLk" "tWpsiZTczv"
+```
+
+#### Intra-Individual Response Variability
+
+```
+[1] "45mHKKVMIN" "CZIrlFFO8q" "Vp186aKWos" "g9cEPgECi1" "iWiTcM0XQi" "jU44mS9UEY"
+[7] "lrPniUJyJW" "pwXBMuUaGn" "vZzZ2CQI1Y"
+```
+
+#### Even-Odd Inconsistency Index
+
+```
+[1] "45mHKKVMIN" "5mj5JDmsGx" "DLmVdq3BgZ" "HlenUrgXqD" "T8mcvDfSY8" "jU44mS9UEY"
+[7] "pKeDLoRNEn" "syDt2ITTz6" "yyglmubaxF"
+```
+
+#### Mahalanobis Distance
+
+```
+[1] "EGsRU0NlSY" "Ih6VUVbRrP" "OV3BvqLJzV" "PdMJioTieb" "UI4Dt125ht" "Wb89oDLuXJ"
+[7] "iNIZH3Qu7a" "iWiTcM0XQi" "qxUKuz1hse"
+```
+
+### Integrating Metrics to Determine Careless Responding
+
+```r
+vectors <- list(mahad_bad, longstring_bad, irv_bad, even_odd_bad)
+
+# Function to find shared elements across combinations
+shared_counts <- map(2:4, ~ {
+  combos <- combn(vectors, .x, simplify = FALSE)
+  shared <- map(combos, ~ Reduce(intersect, .x)) %>% unlist() %>% unique()
+  length(shared)
+}) %>% set_names(paste0("shared_by_", 2:4))
+
+# Output the results
+shared_counts
+# $shared_by_2
+# [1] 4
+# 
+# $shared_by_3
+# [1] 0
+# 
+# $shared_by_4
+# [1] 0
+```
+
+
+
+
+
+
+
+
+
+
