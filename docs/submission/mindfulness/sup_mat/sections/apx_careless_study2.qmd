@@ -1,57 +1,33 @@
 
-### Phase 1
+To ensure consistency and comparability with Study 1, we applied the same procedures to identify and exclude participants with inattentive or careless responding in Study 2.
 
-#### Threshold
+### Compliance Rate
 
-A total of 4 participants met the same criterion as in Study 1 and were excluded from subsequent EMA data collection.
+Participants with a compliance rate below 50% were excluded from the analysis, resulting in the exclusion of two participants.
 
-### Phase 2
+### Time to Completion (TTC)
 
-For the EMA data, we conducted additional checks on the repeated administrations of the 8-item State Self-Compassion Scale to ensure response quality at the individual level. The same procedure employed in Study 1 was applied. During the EMA phase, no participants met the previously defined criterion for careless responding. Consequently, all participants who adhered to the study’s response frequency requirements were included in the final statistical analyses.
+Following the approach used in Study 1, we applied the lower fence of the interquartile range (IQR) rule to identify participants with unusually short time-to-completion (TTC) values. No participants had TTC values below this threshold, suggesting no evidence of careless responding based on average response times.
 
-#### Longstring Index
+### Careless Responding on the State Self-Compassion Scale
 
-Participants above threshold:
+To assess inattentive responding, we calculated four indices—Longstring Index, Intra-Individual Response Variability (IRV), Even-Odd Inconsistency Index, and Mahalanobis Distance—based on responses to the State Self-Compassion Scale. Participants were flagged as potential careless responders if their scores exceeded the 95th percentile on any index. Participants flagged on more than two indices were classified as careless responders.
 
-```
-[1] "3G9w87dIub" "EeBXR2talY" "FhfdJyT6nt" "J0WsOxy0o3" "b6R6tTzsS7" "g9cEPgECi1"
-[7] "iWiTcM0XQi" "iu9CLYtxLk" "tWpsiZTczv"
-```
+#### Integration of Metrics to Identify Careless Responding
 
-#### Intra-Individual Response Variability
-
-```
-[1] "45mHKKVMIN" "CZIrlFFO8q" "Vp186aKWos" "g9cEPgECi1" "iWiTcM0XQi" "jU44mS9UEY"
-[7] "lrPniUJyJW" "pwXBMuUaGn" "vZzZ2CQI1Y"
-```
-
-#### Even-Odd Inconsistency Index
-
-```
-[1] "45mHKKVMIN" "5mj5JDmsGx" "DLmVdq3BgZ" "HlenUrgXqD" "T8mcvDfSY8" "jU44mS9UEY"
-[7] "pKeDLoRNEn" "syDt2ITTz6" "yyglmubaxF"
-```
-
-#### Mahalanobis Distance
-
-```
-[1] "EGsRU0NlSY" "Ih6VUVbRrP" "OV3BvqLJzV" "PdMJioTieb" "UI4Dt125ht" "Wb89oDLuXJ"
-[7] "iNIZH3Qu7a" "iWiTcM0XQi" "qxUKuz1hse"
-```
-
-### Integrating Metrics to Determine Careless Responding
+To evaluate the overlap of flagged participants across indices, we used the following R script to calculate shared participants flagged by two, three, or four indices:
 
 ```r
 vectors <- list(mahad_bad, longstring_bad, irv_bad, even_odd_bad)
 
-# Function to find shared elements across combinations
+# Identify shared flagged participants across combinations of indices
 shared_counts <- map(2:4, ~ {
   combos <- combn(vectors, .x, simplify = FALSE)
   shared <- map(combos, ~ Reduce(intersect, .x)) %>% unlist() %>% unique()
   length(shared)
 }) %>% set_names(paste0("shared_by_", 2:4))
 
-# Output the results
+# Output results
 shared_counts
 # $shared_by_2
 # [1] 4
@@ -63,12 +39,7 @@ shared_counts
 # [1] 0
 ```
 
+#### Final Assessment
 
-
-
-
-
-
-
-
+No participants exceeded the threshold on more than two indices during the EMA phase of Study 2. Consequently, all participants who met the response frequency criterion were retained for the final statistical analyses. 
 
