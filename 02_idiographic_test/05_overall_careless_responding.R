@@ -81,6 +81,66 @@ study_2_df <- study_2_temp |>
 # df <- bind_rows(study_1_df, study_2_df)
 df <- study_1_df # only study 1
 
+
+# Remove invalid values of time_window ------------------------------------ 
+
+# Group by user_id and day, and count unique time_window values
+time_window_check <- df %>%
+  group_by(user_id, day) %>%
+  summarize(
+    unique_time_windows = n_distinct(time_window),  # Count unique time windows
+    invalid_time_windows = any(!time_window %in% 1:5),  # Check for invalid values
+    .groups = "drop"
+  )
+
+# Identify problematic rows
+problems <- time_window_check %>%
+  dplyr::filter(unique_time_windows > 5 | invalid_time_windows)
+
+# Display the problematic rows
+print(problems)
+
+# Count the total number of subjects and days with issues
+total_problems <- nrow(problems)
+cat("Total problematic subject-days:", total_problems, "\n")
+
+df_clean <- df %>%
+  dplyr::filter(time_window %in% 1:5)
+
+# Group by user_id and day, and count unique time_window values
+time_window_check <- df_clean %>%
+  group_by(user_id, day) %>%
+  summarize(
+    unique_time_windows = n_distinct(time_window),  # Count unique time windows
+    invalid_time_windows = any(!time_window %in% 1:5),  # Check for invalid values
+    .groups = "drop"
+  )
+
+# Identify problematic rows
+problems <- time_window_check %>%
+  filter(unique_time_windows > 5 | invalid_time_windows)
+
+# Display the problematic rows
+print(problems)
+
+# Count the total number of subjects and days with issues
+total_problems <- nrow(problems)
+cat("Total problematic subject-days:", total_problems, "\n")
+
+
+# Remove duplicates -------------------------------------------------------
+
+first_non_na <- function(x) {
+  x[!is.na(x)][1]
+}
+
+df_clean <- df_clean %>%
+  group_by(user_id, day, time_window) %>%
+  summarize(across(everything(), first_non_na), .groups = "drop")
+
+# Change the name of the data.frame
+df <- df_clean
+
 # Scale negative affect and context
 df$neg_aff_Moment <- scale(df$neg_aff_Moment) |> as.numeric()
 df$neg_aff_Day <- scale(df$neg_aff_Day) |> as.numeric()
@@ -108,17 +168,16 @@ length(unique_ids)
 
 shared_cr_indices(df)
 # $shared_by_2
-# [1] 3
+# [1] 2
 # 
 # $shared_by_3
-# [1] 2
+# [1] 1
 # 
 # $shared_by_4
 # [1] 0
 
 # Conclusion
-# There are 3 participants with extreme values on two CR indices, and 
-# 2 participants with extreme values on 3 CR indices.
+# There are only 3 participants with extreme values on two or more CR indices.
 
 
 # Study 2 -----------------------------------------------------------------
@@ -126,6 +185,67 @@ shared_cr_indices(df)
 df <- study_2_df # only study 2
 length(unique(df$user_id))
 # [1] 169
+
+
+# Remove invalid values of time_window ------------------------------------ 
+
+# Group by user_id and day, and count unique time_window values
+time_window_check <- df %>%
+  group_by(user_id, day) %>%
+  summarize(
+    unique_time_windows = n_distinct(time_window),  # Count unique time windows
+    invalid_time_windows = any(!time_window %in% 1:5),  # Check for invalid values
+    .groups = "drop"
+  )
+
+# Identify problematic rows
+problems <- time_window_check %>%
+  dplyr::filter(unique_time_windows > 5 | invalid_time_windows)
+
+# Display the problematic rows
+print(problems)
+
+# Count the total number of subjects and days with issues
+total_problems <- nrow(problems)
+cat("Total problematic subject-days:", total_problems, "\n")
+
+df_clean <- df %>%
+  dplyr::filter(time_window %in% 1:5)
+
+# Group by user_id and day, and count unique time_window values
+time_window_check <- df_clean %>%
+  group_by(user_id, day) %>%
+  summarize(
+    unique_time_windows = n_distinct(time_window),  # Count unique time windows
+    invalid_time_windows = any(!time_window %in% 1:5),  # Check for invalid values
+    .groups = "drop"
+  )
+
+# Identify problematic rows
+problems <- time_window_check %>%
+  filter(unique_time_windows > 5 | invalid_time_windows)
+
+# Display the problematic rows
+print(problems)
+
+# Count the total number of subjects and days with issues
+total_problems <- nrow(problems)
+cat("Total problematic subject-days:", total_problems, "\n")
+
+
+# Remove duplicates -------------------------------------------------------
+
+first_non_na <- function(x) {
+  x[!is.na(x)][1]
+}
+
+df_clean <- df_clean %>%
+  group_by(user_id, day, time_window) %>%
+  summarize(across(everything(), first_non_na), .groups = "drop")
+
+# Change the name of the data.frame
+df <- df_clean
+
 
 # Scale negative affect and context
 df$neg_aff_Moment <- scale(df$neg_aff_Moment) |> as.numeric()
@@ -154,7 +274,7 @@ length(unique_ids)
 
 shared_cr_indices(df)
 # $shared_by_2
-# [1] 4
+# [1] 3
 # 
 # $shared_by_3
 # [1] 1

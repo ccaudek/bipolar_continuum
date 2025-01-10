@@ -1,17 +1,19 @@
+In this study, we identified a subset of participants who demonstrated a positive association between the Compassionate Self (CS) and Uncompassionate Self (UCS) components of the State Self-Compassion Scale. This positive association, characterized by higher levels of CS coinciding with higher levels of UCS, stands in direct opposition to the Bipolar Continuum Hypothesis, which posits an inverse relationship between these components. A Reviewer suggested that this finding might be attributed to response biases, such as "careless responding" or "insufficient effort." These biases could manifest as participants consistently selecting the same response option, irrespective of their actual subjective state.
 
-## Analyses of Positive Associations Between CS and UCS
+To evaluate this alternative explanation, we analyzed four indices of careless responding—Longstring Index, Intra-Individual Response Variability (IRV), Even-Odd Inconsistency Index, and Mahalanobis Distance. We compared these indices between two groups: participants exhibiting a positive UCS-CS association and all other participants. To maximize statistical power, this analysis was conducted using the combined dataset from both studies ($N = 495$).
 
-This section investigates whether participants who demonstrated a positive association between the Compassionate Self (CS) and Uncompassionate Self (UCS) components of the State Self-Compassion Scale differ from other participants. A positive association, where higher levels of CS are accompanied by higher levels of UCS, is fundamentally incompatible with the Bipolar Continuum Hypothesis, which posits an inverse relationship between these components. To explore whether such results could be attributed to response biases—such as "careless responding" or "insufficient effort"—we analyzed indices of systematic response behavior using data combined from two studies ($N = 495$).
+## Analysis Steps
 
-In the first step of the analysis, a hierarchical Bayesian model was fitted separately for each participant to estimate the individual slope between CS and UCS. This model included random intercepts for participants, days, and measurements within days, as well as random slopes for CS and negative affect (NA) at the participant level. Interaction terms between CS and NA, along with contextual factors (momentary, daily, and person-level evaluations), were incorporated to account for potential modulation of UCS by these variables. A t-distribution was used to model the error term, addressing potential non-normality in the UCS data. Weakly informative priors ensured plausible yet flexible parameter estimation, and posterior predictive checks confirmed that the model adequately represented the observed data.
+### Step 1: Identifying Positive UCS-CS Associations
+A hierarchical Bayesian model was fitted individually for each participant to estimate the slope between UCS and CS. This model accounted for the hierarchical structure of the data by incorporating random intercepts for participants, days, and measurements within days, as well as random slopes for CS and negative affect (NA) at the participant level. Interaction terms between CS and NA, as well as contextual factors (momentary, daily, and person-level evaluations), were included to account for potential modulation of UCS. A t-distribution was employed for the error term to address potential non-normality in the UCS data. Weakly informative priors ensured plausible parameter estimation, and posterior predictive checks confirmed that the model provided a good fit to the observed data.
 
-Participants were classified as showing a positive UCS-CS association if the lower bound of the 89% credible interval for the slope coefficient was positive. Using this criterion, 52 participants (10.5% of the sample) were identified.
+Participants were classified as exhibiting a positive UCS-CS association if the lower bound of the 89% credible interval for the slope coefficient was positive. Based on this criterion, 52 participants (10.5% of the sample) were identified as belonging to the positive-slope group.
 
-To assess whether these positive associations were driven by response biases, we conducted a Bayesian multilevel analysis comparing indices of careless responding between the positive-slope group and the remaining participants. Four separate regression models, one for each careless responding index, accounted for the hierarchical structure of the data, including repeated measurements across days and occasions within days. Random effects were specified for participants, days, and time windows to capture the nested nature of the data.
+### Step 2: Comparing Careless Responding Indices
+To assess whether the positive UCS-CS associations were driven by response biases, a Bayesian multilevel analysis was conducted to compare the four indices of careless responding between the positive-slope group and the remaining participants. Separate regression models were fitted for each index, accounting for the nested structure of the data with random effects specified for participants, days, and time windows within days. These models allowed us to robustly estimate differences in systematic response behavior between the two groups.
 
-The results of these analyses provided posterior estimates of the differences in careless responding indices between the groups, offering insights into whether a positive UCS-CS association reflects genuine deviation from the Bipolar Continuum Hypothesis or artifacts of systematic response behavior.
-
-We examined four careless responding indices, as defined by the `careless` R package.
+## Results and Interpretation
+The Bayesian analyses provided posterior estimates of differences in careless responding indices between participants with positive UCS-CS associations and those without. These estimates allowed us to evaluate whether the observed positive associations reflected genuine deviations from the Bipolar Continuum Hypothesis or were artifacts of systematic response biases. By incorporating hierarchical modeling and Bayesian estimation, this analysis offered a nuanced approach to understanding the potential role of response behavior in shaping the observed patterns, contributing to the reliability and interpretability of the study’s findings.
 
 ### Longstring Index
 
@@ -29,7 +31,7 @@ mod_longstring <- brm(
 )
 ```
 
-### Model Details:
+**Model Details:**
 
 - **Outcome Variable**: `longstring_val`, representing the Longstring index, is treated as an ordinal variable.
 - **Predictor**: `is_pos_slope_group`, a binary variable indicating group membership:
@@ -68,7 +70,6 @@ Conditional effect of Group on Longstring Index. Vertical bars represent 89% cre
 ### Intra-Individual Response Variability
 
 Intra-Individual Response Variability (IRV) is defined as the standard deviation of responses across a set of consecutive items for a given individual (Dunn et al., 2018). A lower IRV is often interpreted as an indicator of a greater tendency toward careless responding.
-
 
 
 ### Even-Odd Inconsistency Index

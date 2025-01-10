@@ -15,7 +15,7 @@
 if(!requireNamespace("pacman")) install.packages("pacman")
 pacman::p_load(
   here, tictoc, rio, tidyverse, cmdstanr, posterior, bayesplot, 
-  careless, brms, papaja, magrittr, purrr
+  careless, brms, purrr
 )
 
 # Set seed
@@ -166,7 +166,7 @@ length(unique_ids)
 # Compute indices for careless responding ---------------------------------
 
 # Remove three values with NAs on time_window.
-df_clean <- df_clean[!is.na(df$time_window), ]
+df_clean <- df_clean[!is.na(df_clean$time_window), ]
 
 # Define the columns containing the scale items
 scs_cols <- c(

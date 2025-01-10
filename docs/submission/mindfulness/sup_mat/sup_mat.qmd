@@ -75,9 +75,15 @@ suppressPackageStartupMessages({
 
 \newpage
 
-### Nomothetic Analysis of the Relationship Between UCS and CS
+## Nomothetic Analysis of the Relationship Between UCS and CS
 
 {{< include ./sections/apx_study1_bip_cont_hyp.qmd >}}
+
+\newpage
+
+## Data Quality
+
+{{< include ./sections/apx_careless_study1.qmd >}}
 
 \newpage
 
@@ -92,8 +98,6 @@ suppressPackageStartupMessages({
 ## EMA Survey Questions
 
 {{< include ./sections/apx_study2_survey_questions.qmd >}}
-
-\newpage
 
 \newpage
 
@@ -158,8 +162,10 @@ For our analysis, we employed the identical Stan model utilized in Study 1.
 
 \pagebreak
 
-# Careless responding
+# Examining Response Bias 
 
-{{< include ./sections/apx_careless_responding.qmd >}}
+{{< include ./sections/apx_response_bias.qmd >}}
+
+\pagebreak
 
 ## References

@@ -1,41 +1,34 @@
 
-To ensure data quality, we implemented a procedure for identifying and excluding participants exhibiting patterns of inattentive or careless responding.
+To ensure data quality, we employed a comprehensive set of behavioral indicators to detect inattentive or insufficient-effort responding, including the compliance rate and metrics designed to identify aberrant response patterns [@ulitzsch2024screen; @hasselhorn2023modeling]. These indicators evaluated both response patterns and supplementary data (e.g., timing metrics, engagement levels), flagging anomalies that might suggest inattentive or low-effort responding [@meade2012identifying]. Common anomalies included response invariability, inconsistencies across responses, and multivariate outliers.
+
+Notably, our data-quality assessment was conducted post hoc, rather than by embedding directed prompts (e.g., instructed-response items) in the survey. Although such items can effectively detect careless responding, they present several drawbacks [@ulitzsch2024screen]. First, adding items to detect inattentiveness can lengthen the questionnaire, paradoxically increasing the chance of respondent fatigue—particularly in studies using Ecological Momentary Assessment (EMA). Second, in repeated-measures contexts, these items may confuse participants who must maintain clarity about task expectations across multiple assessment occasions. By employing a post-hoc analysis using behavioral indicators, we minimized participant burden and preserved the integrity of the EMA design.
+
+Compliance rate, defined as the ratio of completed assessments to the total number of expected assessments, served as a key criterion for gauging insufficient engagement. Participants failing to meet a prespecified compliance threshold were excluded from analyses to maintain the reliability of the dataset.
 
 ### Compliance Rate
 
-Missing data due to non-compliance can influence the validity of conclusions drawn from statistical inference, particularly when data are systematically missing (i.e., not missing at random), as this introduces bias. To address this issue, participants with a compliance rate below 50% were excluded from the study. This criterion resulted in the exclusion of 7 participants.
+Non-compliance introduces systematic missing data, which can bias statistical inference if the data are not missing at random. To mitigate this risk, participants with a compliance rate below 50% were excluded. Based on this criterion, seven participants were removed from the dataset.
 
-### Time to Complete (TTC)
+### Time to Complete 
 
-The **Time to Complete (TTC)** was defined as the difference between the timestamp when a participant submitted the EMA survey and the timestamp when they began the survey. For each participant, we calculated the median TTC across all their submissions. 
+The **Time to Complete** (TTC) metric was calculated from the moment participants opened an EMA survey to the time they submitted it. Due to the right-skewed nature of survey completion times, we calculated each participant’s median TTC using log-transformed values. We then applied the lower fence of the interquartile range (IQR) rule to these log-transformed medians to identify unusually short completion times. No participant fell below this lower-fence threshold, indicating no evidence of careless responding based on survey duration.
 
-To identify participants with unusually short TTCs, we applied the lower fence of the interquartile range (IQR) rule. None of the participants had TTC values below this threshold, indicating no evidence of careless responding in terms of the average response times.
+### Careless responding on the State Self-Compassion Scale 
 
-### Assessing Careless Responding on the State Self-Compassion Scale
+We assessed careless responding on the State Self-Compassion Scale items by using four metrics provided by the **careless** R package: the Longstring Index, Intra-Individual Response Variability (IRV), the Even-Odd Inconsistency Index, and Mahalanobis Distance. These metrics, designed to evaluate response patterns, offer a robust framework for identifying inattentive or inconsistent behavior. 
 
-Responses on the State Self-Compassion Scale were evaluated for potential careless responding using the **careless** R package, which provides multiple indices to assess response quality. Four metrics were computed to identify aberrant response patterns: the Longstring Index, Intra-Individual Response Variability (IRV), the Even-Odd Inconsistency Index, and Mahalanobis Distance. Together, these indices offer a comprehensive framework for evaluating the reliability of self-reported data.
+- **Longstring Index**: Measures the longest sequence of identical responses within a survey. High values suggest “straightlining,” a common marker of inattentiveness.
+- **Intra-Individual Response Variability (IRV)**: Reflects the variability in responses across consecutive items. Low IRV may indicate lower engagement or attention.
+- **Even-Odd Inconsistency Index**: Assesses internal consistency by correlating mean scores of even- and odd-numbered items. Lower correlations suggest greater inconsistency.
+- **Mahalanobis Distance ($D^2$)**: Identifies multivariate outliers by quantifying deviations from an expected response pattern. High $D^2$ values indicate unusual response profiles.
 
-#### Careless Responding Metrics
+We performed these analyses at two levels: person and occasion.
 
-**Longstring Index**  
-The Longstring Index identifies the longest sequence of identical responses within a measurement occasion. Higher values may indicate "straightlining," a common marker of inattentive behavior.
+#### Person-Level Analysis of Behavioral Indices 
 
-**Intra-Individual Response Variability (IRV)**  
-IRV, calculated as the standard deviation of responses across consecutive items, reflects engagement. Lower IRV values suggest less variability, potentially indicating reduced attentiveness.
+Participants were flagged as potential careless responders if their index scores exceeded the 95th percentile on any of the four metrics. Participants flagged on more than two indices were classified as careless responders.
 
-**Even-Odd Inconsistency Index**  
-This index assesses response inconsistency by correlating mean scores from even- and odd-numbered items. Greater inconsistency between these subsets indicates a higher likelihood of careless responding.
-
-**Mahalanobis Distance**  
-Mahalanobis Distance ($D^2$) detects multivariate outliers by measuring deviations from typical response patterns. Elevated $D^2$ values suggest responses that differ significantly from the dataset norm.
-
-#### Threshold for Careless Responding
-
-Participants were flagged as potential careless responders if their scores exceeded the 95th percentile on any index. Those flagged on more than two indices were classified as careless responders.  
-
-#### Integration of Metrics to Determine Careless Responding
-
-The following R script calculates the number of participants exceeding thresholds across various combinations of indices:  
+The following R script illustrates how we counted participants who exceeded thresholds for various combinations of indices:
 
 ```r
 vectors <- list(mahad_bad, longstring_bad, irv_bad, even_odd_bad)
@@ -59,14 +52,61 @@ shared_counts
 # [1] 0
 ```
 
-#### Final Assessment
+No participant exceeded thresholds on more than two indices during the EMA phase, so no exclusions were made based on these metrics.
 
-This analysis identified no participants exceeding thresholds on more than two indices during the EMA phase. 
+#### Occasion-Level Analysis of Behavioral Indices 
 
-Studi precedenti che, in generale, confrontando campioni di studenti volontari e campioni di Mechanicak Turk workers, emerge che  MTurk respondents were more careless than respondents from student groups [@aruguete2019serious]. 
+To complement the participant-level analysis, we conducted an occasion-level analysis to capture instances of momentary inattentiveness. This approach allowed us to detect subtle, transient lapses in engagement that might otherwise remain undetected in participant-level summaries.
 
-A recent study examined specifically the problm of careless responding in EMA studies. In a sample of volunteer students, comparable to the present one, @hasselhorn2023modeling used latent profiles of momentary careless responding on the occasion level and latent classes of individuals (who differ in the distribution of careless responding profiles across occasions) on the person level to identify care less responding using multilevel latent class analysis (ML-LCA). At the person level, they identified four latent classes (“careful,” “frequently careless,” and two types of “infrequently careless” respondents). Importantly, the Frequently Careless Class comprised only the 2% of participants. 
+By evaluating responses at the occasion level:
 
-This result aligns with findings from similar studies, which suggest that careless responding is rare in EMA contexts. Factors such as shorter questionnaires, voluntary participation, and the option to discontinue participation likely reduce inattentiveness compared to traditional cross-sectional surveys [@welling2021possible]. Consequently, all participants who met response frequency requirements were included in the final analyses.
+- momentary lapses in engagement could be flagged without excluding an entire participant;
+- the analysis gained granularity, enabling targeted handling of problematic data points;
+- the design aligns with recent work emphasizing the importance of evaluating variability over time in EMA research [@hasselhorn2023modeling].
+
+We calculated the four careless-responding indices (Longstring, IRV, Even-Odd Inconsistency, and Mahalanobis Distance) separately for each occasion on the State Self-Compassion Scale (SCS). We then flagged occasions exceeding **adjusted fences** derived from bootstrapped IQRs. Finally, we aggregated flagged occasions to compute a proportion of flagged data points per participant.
+
+##### Results
+
+- **Distribution of Flagged Occasions**:
+  - **80.4%** of occasions were never flagged by any metric.
+  - **17.7%** of occasions were flagged on one metric, indicating mild evidence of momentary inattention.
+  - **1.77%** of occasions were flagged on two metrics, suggesting stronger evidence of momentary lapses.
+  - **<0.2%** of occasions were flagged on three or more metrics, representing very rare instances of substantial carelessness.
+
+- **Proportion of Flagged Occasions per Participant**:
+  - the median proportion of flagged occasions per participant was **<5%**, reflecting low overall incidence of momentary inattentiveness;
+  - no participant showed persistently high flagging rates across occasions, underscoring the reliability of the dataset.
 
 
+### Final Assessment
+
+Both the person-level and occasion-level analyses confirmed a low incidence of inattentive or careless responding. These findings attest to the dataset’s robustness and highlight the strengths of this study’s design.
+
+Compared to other study designs—particularly those involving paid participants, such as Amazon Mechanical Turk—our sample exhibited notably fewer inattentive responses. This discrepancy is likely attributable to varying levels of intrinsic motivation [@aruguete2019serious]. For instance, participants on Amazon Mechanical Turk may exhibit lower intrinsic motivation due to minimal monetary compensation, while our volunteers, who committed to completing weekly surveys over a two-month period, were likely driven by higher intrinsic motivation.
+
+Recent research supports these observations in the context of EMA studies. For example, @hasselhorn2023modeling used multilevel latent class analysis (ML-LCA) with volunteer participants to identify profiles of momentary careless responding at the occasion level and latent classes of individuals who varied in their distribution of careless responses across occasions. They identified four latent classes: "careful," "frequently careless," and two categories of "infrequently careless" respondents. Notably, the "frequently careless" class accounted for only 2% of participants, even in a more intensive EMA design involving multiple daily notifications over seven consecutive days.
+
+Study design plays a critical role in influencing participant compliance and data quality. Intensive EMA designs, characterized by frequent and intrusive assessments, are associated with participant fatigue, reduced response accuracy, and increased inattentiveness [@shiffman2008ecological]. In contrast, our study employed a less intensive approach, with participants receiving only one notification per week rather than multiple daily prompts.
+
+Other additional factors likely contributed to the minimization of inattentive responses in our study:
+
+- **Brevity of EMA questionnaires:** Participants faced minimal cognitive burden, encouraging thoughtful responses.
+- **Flexibility to discontinue participation:** Participants retained the option to withdraw at any time, reducing potential disengagement due to fatigue or other external pressures.
+
+These features collectively reduced the likelihood of inattentive responses compared to traditional cross-sectional surveys [@welling2021possible] and more intensive EMA studies [@hasselhorn2023modeling].
+
+### Data Reanalysis
+
+To evaluate whether excluding flagged occasions—defined as those identified on $geq$2 metrics—would affect the primary outcomes, we conducted a secondary analysis of the Study 1 data. This analysis focused on the nomothetic model assessing the relationships between the Uncompassionate Self (UCS) and Compassionate Self (CS) components of state self-compassion, after controlling for Negative Affect and Context Evaluation. Results from the full dataset are provided in Figure 1.
+
+The reanalysis produced results that were effectively identical to those derived from the full dataset, underscoring the robustness of the findings. Hence, we retained all participants who met the compliance requirements in our final analyses. Below is a table summarizing the posterior estimates from the reanalysis, alongside their standard deviations and 89% credibility intervals:
+
+| Variable              | Mean     | SD      | Q5.5   | Q94.5  |
+|-----------------------|----------|---------|--------|--------|
+| alpha_ucs            | -0.0005  | 0.0403  | -0.0644|  0.0643|
+| beta_cs              | -0.4470  | 0.0183  | -0.4770| -0.4180|
+| beta_negative_affect |  0.1160  | 0.0059  |  0.1070|  0.1250|
+| beta_context_valence |  0.0101  | 0.0055  |  0.0013|  0.0189|
+
+These results confirm the reliability of the final dataset and the validity of our conclusions, demonstrating a high level of data quality in this long-term EMA study design.
