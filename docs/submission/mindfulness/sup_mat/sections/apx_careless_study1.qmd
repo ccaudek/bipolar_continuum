@@ -75,7 +75,7 @@ We calculated the four careless-responding indices (Longstring, IRV, Even-Odd In
   - **<0.2%** of occasions were flagged on three or more metrics, representing very rare instances of substantial carelessness.
 
 - **Proportion of Flagged Occasions per Participant**:
-  - the median proportion of flagged occasions per participant was **<5%**, reflecting low overall incidence of momentary inattentiveness;
+  - the mean proportion of occasions flagged on two or more metrics per participant was **<2%**, reflecting low overall incidence of momentary inattentiveness;
   - no participant showed persistently high flagging rates across occasions, underscoring the reliability of the dataset.
 
 
@@ -98,7 +98,7 @@ These features collectively reduced the likelihood of inattentive responses comp
 
 ### Data Reanalysis
 
-To evaluate whether excluding flagged occasions—defined as those identified on $geq$2 metrics—would affect the primary outcomes, we conducted a secondary analysis of the Study 1 data. This analysis focused on the nomothetic model assessing the relationships between the Uncompassionate Self (UCS) and Compassionate Self (CS) components of state self-compassion, after controlling for Negative Affect and Context Evaluation. Results from the full dataset are provided in Figure 1.
+To evaluate whether excluding flagged occasions—defined as those identified on $\geq$ 2 metrics—would affect the primary outcomes, we conducted a secondary analysis of the Study 1 data. This analysis focused on the nomothetic model assessing the relationships between the Uncompassionate Self (UCS) and Compassionate Self (CS) components of state self-compassion, after controlling for Negative Affect and Context Evaluation. Results from the full dataset are provided in Figure 1.
 
 The reanalysis produced results that were effectively identical to those derived from the full dataset, underscoring the robustness of the findings. Hence, we retained all participants who met the compliance requirements in our final analyses. Below is a table summarizing the posterior estimates from the reanalysis, alongside their standard deviations and 89% credibility intervals:
 

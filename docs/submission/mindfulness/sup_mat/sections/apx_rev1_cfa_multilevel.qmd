@@ -11,7 +11,7 @@ We specified and compared three distinct models to determine the underlying stru
 - The **Bifactor Model** examines whether state self-compassion is best characterized by a general self-compassion factor along with orthogonal specific factors (CS and UCS), isolating the variance explained by the general factor from that explained by the specific factors.
 
 
-### Mplus script for the One-Factor Model
+## Mplus script for the One-Factor Model
 
 ```code
 TITLE: Multilevel One-Factor Model with covariates at moment, day, and person level;
@@ -76,7 +76,7 @@ OUTPUT:
 
 \pagebreak
 
-### Mplus script for the Two-Factor Model
+## Mplus script for the Two-Factor Model
 
 ```code
 TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person level;
@@ -150,7 +150,7 @@ OUTPUT:
 
 \pagebreak
 
-### Mplus script for the Bifactor Model
+## Mplus script for the Bifactor Model
 
 ```code
 TITLE: Multilevel Bifactor Model with covariates at moment, day, and person level;
@@ -241,6 +241,34 @@ OUTPUT:
 | **SCN8**        | 0.208                                         | 0.288                                          |
 
 The table presents standardized loadings for both the general factor and the specific positive and negative factors at the within and between levels. These loadings illustrate the bifactor structure and how each item loads onto the general and specific factors.
+
+### Interpretation 
+
+#### General Factor
+
+The **general factor** exhibited strong and consistent loadings across items, particularly at the between-subject level (ranging from 0.143 to 0.935), reflecting a robust overarching construct of self-compassion across individuals. The within-subject loadings were also notable, albeit slightly weaker (0.210 to 0.623). This suggests that the general factor captures substantial common variance among items both across and within individuals.
+
+- Items SCP7 ("At this moment I am able to accept my flaws and weaknesses"; between-level loading: 0.935) and SCP1 ("I'm giving myself the caring and tenderness I need"; 0.860) demonstrated the strongest loadings at the between-subject level, indicating their critical role in representing the general self-compassion construct.
+- SCN8 ("At this moment I let myself be carried away by my emotions") exhibited weak loadings on the general factor at both levels (within: 0.210; between: 0.143), implying limited shared variance with the general factor and potentially unique characteristics for this item.
+
+#### Specific Factors
+
+The **positive and negative factors** captured variance unique to the positive and negative components of self-compassion, beyond what is explained by the general factor.
+
+1. **Positive Factor**:
+   - Within-subject loadings for SCP1 and SCP7 were modest (0.219 and 0.246, respectively), while SCP3 ("I’m remembering that there are lots of others in the world feeling like I am") and SCP6 ("I'm keeping things in perspective") had negligible or negative loadings (-0.313 and -0.009, respectively). This suggests limited within-subject differentiation of the positive factor from the general factor.
+   - Between-subject loadings were also modest but slightly stronger for SCP7 (0.322) and SCP1 (0.215), highlighting these items' modest roles in capturing positive-specific variance at the between-person level.
+
+2. **Negative Factor**:
+   - Negative items (e.g., SCN2 ("I'm obsessing and fixating on everything that’s wrong"), SCN4 ("I feel like I'm struggling more than others right now"), SCN5 ("I feel intolerant and impatient toward myself"), SCN8 ("At this moment I let myself be carried away by my emotions")) had moderate loadings on the negative factor at both levels, with slightly higher between-subject loadings (e.g., SCN2: 0.626, SCN4: 0.378). This indicates that the negative-specific factor captures meaningful unique variance, particularly across individuals.
+
+#### Implications
+
+- The strong loadings on the general factor, especially at the between-subject level, suggest that state self-compassion is predominantly a unidimensional construct at the higher level.
+- The specific factors capture additional nuance, with the negative-specific factor demonstrating relatively more consistent loadings than the positive-specific factor. This may reflect a more distinct role for negative-specific items in characterizing individual differences in state self-compassion.
+- Weak or negative loadings on specific factors (e.g., SCP3 on the positive factor) suggest that some items primarily contribute to the general factor, reinforcing the overarching nature of state self-compassion.
+
+In summary, the bifactor model successfully captures both the shared variance across all state self-compassion items and the unique variance attributable to positive and negative components. The results emphasize the predominance of a general state self-compassion factor while acknowledging the contribution of specific dimensions, particularly for the negative-specific factor. 
 
 \newpage
 

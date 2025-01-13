@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -29,12 +29,40 @@ ul.task-list li input[type="checkbox"] {
 <script src="apx_rev1_cfa_multilevel_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="apx_rev1_cfa_multilevel_files/libs/quarto-html/anchor.min.js"></script>
 <link href="apx_rev1_cfa_multilevel_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="apx_rev1_cfa_multilevel_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="apx_rev1_cfa_multilevel_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="apx_rev1_cfa_multilevel_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -46,6 +74,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <p>Previous research has extensively explored the bipolar continuum hypothesis by investigating the dimensionality of <em>trait</em> self-compassion using various psychometric approaches <span class="citation" data-cites="brenner2017two cleare2018investigation neff2016self neff2017examining neff2019examining petrocchi2014dimensionality">[@brenner2017two; @cleare2018investigation; @neff2016self; @neff2017examining; @neff2019examining; @petrocchi2014dimensionality]</span>. These studies consistently show that models including a general factor yield superior fit indices, offering strong empirical support for Neff’s hypothesis.</p>
 <p>The current study seeks to build upon this foundation by conducting a novel psychometric evaluation of the dimensionality of <em>state</em> self-compassion. Our analysis is unique in that it examines repeated measurements of <em>state</em> self-compassion within the same participants. To address the multilevel nature of the data, we applied a series of multilevel Confirmatory Factor Analysis (CFA) models to the combined datasets from both studies. This approach allows for a precise representation of the hierarchical structure, where repeated measurements are nested within days, which are further nested within individuals.</p>
 <p>We specified and compared three distinct models to determine the underlying structure of state self-compassion:</p>
@@ -54,8 +83,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p>The <strong>Two-Factor Model</strong> conceptualizes state self-compassion as comprising two correlated but distinct latent factors—CS (compassionate self-responding) and UCS (uncompassionate self-responding)—functioning at both the within-person and between-person levels.</p></li>
 <li><p>The <strong>Bifactor Model</strong> examines whether state self-compassion is best characterized by a general self-compassion factor along with orthogonal specific factors (CS and UCS), isolating the variance explained by the general factor from that explained by the specific factors.</p></li>
 </ul>
-<section id="mplus-script-for-the-one-factor-model" class="level3">
-<h3 class="anchored" data-anchor-id="mplus-script-for-the-one-factor-model">Mplus script for the One-Factor Model</h3>
+<section id="mplus-script-for-the-one-factor-model" class="level2">
+<h2 class="anchored" data-anchor-id="mplus-script-for-the-one-factor-model">Mplus script for the One-Factor Model</h2>
 <pre class="code"><code>TITLE: Multilevel One-Factor Model with covariates at moment, day, and person level;
 
 DATA: 
@@ -91,10 +120,9 @@ MODEL:
 
 OUTPUT:
   TECH1 TECH8 STANDARDIZED MODINDICES;</code></pre>
-</section>
 <section id="table-standardized-factor-loadings-for-multilevel-one-factor-model" class="level3">
 <h3 class="anchored" data-anchor-id="table-standardized-factor-loadings-for-multilevel-one-factor-model">Table: Standardized Factor Loadings for Multilevel One-Factor Model</h3>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 17%">
 <col style="width: 40%">
@@ -167,8 +195,9 @@ OUTPUT:
 </ul></li>
 </ul>
 </section>
-<section id="mplus-script-for-the-two-factor-model" class="level3">
-<h3 class="anchored" data-anchor-id="mplus-script-for-the-two-factor-model">Mplus script for the Two-Factor Model</h3>
+</section>
+<section id="mplus-script-for-the-two-factor-model" class="level2">
+<h2 class="anchored" data-anchor-id="mplus-script-for-the-two-factor-model">Mplus script for the Two-Factor Model</h2>
 <pre class="code"><code>TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person level;
 
 DATA: 
@@ -212,10 +241,9 @@ MODEL:
 
 OUTPUT:
   TECH1 TECH8 STANDARDIZED MODINDICES;</code></pre>
-</section>
 <section id="table-standardized-factor-loadings-for-multilevel-two-factor-model" class="level3">
 <h3 class="anchored" data-anchor-id="table-standardized-factor-loadings-for-multilevel-two-factor-model">Table: Standardized Factor Loadings for Multilevel Two-Factor Model</h3>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 15%">
 <col style="width: 41%">
@@ -297,8 +325,9 @@ OUTPUT:
 </ul></li>
 </ul>
 </section>
-<section id="mplus-script-for-the-bifactor-model" class="level3">
-<h3 class="anchored" data-anchor-id="mplus-script-for-the-bifactor-model">Mplus script for the Bifactor Model</h3>
+</section>
+<section id="mplus-script-for-the-bifactor-model" class="level2">
+<h2 class="anchored" data-anchor-id="mplus-script-for-the-bifactor-model">Mplus script for the Bifactor Model</h2>
 <pre class="code"><code>TITLE: Multilevel Bifactor Model with covariates at moment, day, and person level;
 
 DATA:
@@ -360,10 +389,9 @@ MODEL:
 
 OUTPUT:
   TECH1 TECH8 STANDARDIZED MODINDICES(ALL);</code></pre>
-</section>
 <section id="table-standardized-factor-loadings-for-multilevel-bifactor-model" class="level3">
 <h3 class="anchored" data-anchor-id="table-standardized-factor-loadings-for-multilevel-bifactor-model">Table: Standardized Factor Loadings for Multilevel Bifactor Model</h3>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 15%">
 <col style="width: 41%">
@@ -476,11 +504,47 @@ OUTPUT:
 </table>
 <p>The table presents standardized loadings for both the general factor and the specific positive and negative factors at the within and between levels. These loadings illustrate the bifactor structure and how each item loads onto the general and specific factors.</p>
 </section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<section id="general-factor" class="level4">
+<h4 class="anchored" data-anchor-id="general-factor">General Factor</h4>
+<p>The <strong>general factor</strong> exhibited strong and consistent loadings across items, particularly at the between-subject level (ranging from 0.143 to 0.935), reflecting a robust overarching construct of self-compassion across individuals. The within-subject loadings were also notable, albeit slightly weaker (0.210 to 0.623). This suggests that the general factor captures substantial common variance among items both across and within individuals.</p>
+<ul>
+<li>Items SCP7 (“At this moment I am able to accept my flaws and weaknesses”; between-level loading: 0.935) and SCP1 (“I’m giving myself the caring and tenderness I need”; 0.860) demonstrated the strongest loadings at the between-subject level, indicating their critical role in representing the general self-compassion construct.</li>
+<li>SCN8 (“At this moment I let myself be carried away by my emotions”) exhibited weak loadings on the general factor at both levels (within: 0.210; between: 0.143), implying limited shared variance with the general factor and potentially unique characteristics for this item.</li>
+</ul>
+</section>
+<section id="specific-factors" class="level4">
+<h4 class="anchored" data-anchor-id="specific-factors">Specific Factors</h4>
+<p>The <strong>positive and negative factors</strong> captured variance unique to the positive and negative components of self-compassion, beyond what is explained by the general factor.</p>
+<ol type="1">
+<li><strong>Positive Factor</strong>:
+<ul>
+<li>Within-subject loadings for SCP1 and SCP7 were modest (0.219 and 0.246, respectively), while SCP3 (“I’m remembering that there are lots of others in the world feeling like I am”) and SCP6 (“I’m keeping things in perspective”) had negligible or negative loadings (-0.313 and -0.009, respectively). This suggests limited within-subject differentiation of the positive factor from the general factor.</li>
+<li>Between-subject loadings were also modest but slightly stronger for SCP7 (0.322) and SCP1 (0.215), highlighting these items’ modest roles in capturing positive-specific variance at the between-person level.</li>
+</ul></li>
+<li><strong>Negative Factor</strong>:
+<ul>
+<li>Negative items (e.g., SCN2 (“I’m obsessing and fixating on everything that’s wrong”), SCN4 (“I feel like I’m struggling more than others right now”), SCN5 (“I feel intolerant and impatient toward myself”), SCN8 (“At this moment I let myself be carried away by my emotions”)) had moderate loadings on the negative factor at both levels, with slightly higher between-subject loadings (e.g., SCN2: 0.626, SCN4: 0.378). This indicates that the negative-specific factor captures meaningful unique variance, particularly across individuals.</li>
+</ul></li>
+</ol>
+</section>
+<section id="implications" class="level4">
+<h4 class="anchored" data-anchor-id="implications">Implications</h4>
+<ul>
+<li>The strong loadings on the general factor, especially at the between-subject level, suggest that state self-compassion is predominantly a unidimensional construct at the higher level.</li>
+<li>The specific factors capture additional nuance, with the negative-specific factor demonstrating relatively more consistent loadings than the positive-specific factor. This may reflect a more distinct role for negative-specific items in characterizing individual differences in state self-compassion.</li>
+<li>Weak or negative loadings on specific factors (e.g., SCP3 on the positive factor) suggest that some items primarily contribute to the general factor, reinforcing the overarching nature of state self-compassion.</li>
+</ul>
+<p>In summary, the bifactor model successfully captures both the shared variance across all state self-compassion items and the unique variance attributable to positive and negative components. The results emphasize the predominance of a general state self-compassion factor while acknowledging the contribution of specific dimensions, particularly for the negative-specific factor.</p>
+</section>
+</section>
+</section>
 <section id="goodness-of-fit-indices" class="level2">
 <h2 class="anchored" data-anchor-id="goodness-of-fit-indices">Goodness-of-fit indices</h2>
 <p>Goodness-of-fit indices for each model are presented in Table 1.</p>
 <p><strong>Table 1. Goodness-of-Fit Indices for the One-Factor, Two-Factor, and Bifactor Models</strong></p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 14%">
 <col style="width: 8%">
@@ -552,16 +616,16 @@ OUTPUT:
 <li><p><strong>Factor Correlation</strong>:<br>
 In the Two-Factor Model, the within-level correlation between the Compassionate Self (CS) and Uncompassionate Self (UCS) factors was 0.825, while the between-level correlation was 0.817. These high correlations suggest a strong overlap between the two factors, which might indicate a common underlying construct at both the within- and between-person levels.</p></li>
 <li><p><strong>Explained Common Variance (ECV)</strong>:<br>
-ECV quantifies how much of the shared variance among items is explained by the general versus specific factors. In the Bifactor Model, the general factor (Gen_w) exhibited high standardized loadings on items (e.g., SCP1 = 0.614, SCN2 = 0.579 at the within-person level), indicating that it accounts for the majority of the common variance. By comparison, the loadings of the specific factors (POS_w and NEG_w) were notably lower, suggesting that they explain less variance. This finding underscores the dominance of the general factor in accounting for self-compassion.</p></li>
-<li><p><strong>Omega Hierarchical (ωH)</strong>:<br>
+ECV quantifies how much of the shared variance among items is explained by the general versus specific factors. In the Bifactor Model, the general factor (<span class="math inline">\(\text{Gen}_w\)</span>) exhibited high standardized loadings on items (e.g., SCP1 = 0.614, SCN2 = 0.579 at the within-person level), indicating that it accounts for the majority of the common variance. By comparison, the loadings of the specific factors (<span class="math inline">\(\text{POS}_w\)</span> and <span class="math inline">\(\text{NEG}_w\)</span>) were notably lower, suggesting that they explain less variance. This finding underscores the dominance of the general factor in accounting for self-compassion.</p></li>
+<li><p><strong>Omega Hierarchical (<span class="math inline">\(\omega_H\)</span>)</strong>:<br>
 <span class="math inline">\(\omega_H\)</span> estimates how much of the variance in total scores is attributable to the general factor. In the Bifactor Model, the general factor explained a substantial proportion of the variance (e.g., SCP1 = 0.614, SCN2 = 0.579), while the specific factors contributed relatively little. This suggests that the general factor plays a predominant role in explaining individual differences in self-compassion, further supporting the interpretation of a primarily unidimensional construct.</p></li>
 <li><p><strong>Bifactor Model Analysis</strong>:<br>
-The Bifactor Model highlights the predominance of the general factor, as the loadings of the specific factors were consistently lower (e.g., POS_w on SCP3 = -0.313, NEG_b on SCN8 = 0.288). This indicates that the specific factors (CS and UCS) provide limited explanatory power beyond the general self-compassion factor. Consequently, the Bifactor Model supports a conceptualization where a single general factor underlies the variance in self-compassion, with the specific factors adding relatively small additional value.</p></li>
+The Bifactor Model highlights the predominance of the general factor, as the loadings of the specific factors were consistently lower (e.g., <span class="math inline">\(\text{POS}_w\)</span> on SCP3 = -0.313, <span class="math inline">\(\text{NEG}_b\)</span> on SCN8 = 0.288). This indicates that the specific factors (CS and UCS) provide limited explanatory power beyond the general self-compassion factor. Consequently, the Bifactor Model supports a conceptualization where a single general factor underlies the variance in self-compassion, with the specific factors adding relatively small additional value.</p></li>
 <li><p><strong>Change in R-squared</strong>:<br>
 The Bifactor Model shows that the general factor accounts for a large proportion of the variance (e.g., R-squared for SCP1 = 0.425 at the within-person level, 0.786 at the between-person level). The specific factors contribute only marginally to the overall variance explained, suggesting that a unidimensional structure may be more parsimonious without significantly compromising the model’s explanatory power.</p></li>
 </ol>
-<p>In summary, the results of the multilevel CFA analyses lend support to Neff’s hypothesis that CS and UCS are related at the trait or global level. The strong correlations between CS and UCS at the latent level indicate that individuals who exhibit high levels of CS tend to have lower levels of UCS, and vice versa, reinforcing the notion that these two aspects are inversely related at a general, trait-like level.</p>
-<p>However, it is important to emphasize that multilevel CFA focuses on <em>latent, person-level relationships</em>, which capture broader, long-term patterns. The present findings show that CS and UCS are correlated at a global, trait-like level across individuals. In contrast, analyses targeting <em>momentary dynamics</em> may reveal that CS and UCS operate more independently within individuals during short-term, context-specific situations. This distinction highlights that while Neff’s hypothesis may hold at the trait level, further investigation is necessary to explore the relationship between CS and UCS at the momentary, within-person level.</p>
+<p>In summary, the results of the multilevel CFA analyses lend support to Neff’s hypothesis that, also for <em>state</em> self-compassion, CS and UCS are related at the global level. The strong correlations between CS and UCS at the latent level indicate that individuals who exhibit high levels of CS tend to have lower levels of UCS, and vice versa, reinforcing the notion that these two aspects are inversely related at a general level.</p>
+<p>However, it is important to emphasize that multilevel CFA focuses on <em>latent, person-level relationships</em>, which capture broader, long-term patterns. The present findings show that, for <em>state</em> self-compassion, CS and UCS are correlated at a global, trait-like level across individuals. In contrast, analyses targeting <em>momentary dynamics</em> may reveal that, for <em>state</em> self-compassion, CS and UCS operate more independently within individuals during short-term, context-specific situations. This distinction highlights that while Neff’s hypothesis may hold at the global level, further investigation is necessary to explore the relationship between CS and UCS at the momentary, within-person level.</p>
 </section>
 
 </main>
@@ -593,12 +657,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
     }
-  });
-  clipboard.on('success', function(e) {
+    return false;
+  }
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -630,11 +697,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -644,8 +748,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -657,9 +770,244 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -700,6 +1048,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

@@ -11,35 +11,71 @@ Following the approach used in Study 1, we applied the lower fence of the interq
 
 ### Careless Responding on the State Self-Compassion Scale
 
-To assess inattentive responding, we calculated four indices—Longstring Index, Intra-Individual Response Variability (IRV), Even-Odd Inconsistency Index, and Mahalanobis Distance—based on responses to the State Self-Compassion Scale. Participants were flagged as potential careless responders if their scores exceeded the 95th percentile on any index. Participants flagged on more than two indices were classified as careless responders.
+To assess inattentive responding, we calculated four indices—Longstring Index, Intra-Individual Response Variability (IRV), Even-Odd Inconsistency Index, and Mahalanobis Distance—based on responses to the State Self-Compassion Scale. We performed these analyses at two levels: person and occasion.
 
-#### Integration of Metrics to Identify Careless Responding
+#### Person-Level Analysis of Behavioral Indices
 
-To evaluate the overlap of flagged participants across indices, we used the following R script to calculate shared participants flagged by two, three, or four indices:
+Participants were flagged as potential careless responders if their index scores exceeded the
+95th percentile on any of the four metrics. Participants flagged on more than two indices were
+classified as careless responders.
 
 ```r
-vectors <- list(mahad_bad, longstring_bad, irv_bad, even_odd_bad)
-
-# Identify shared flagged participants across combinations of indices
-shared_counts <- map(2:4, ~ {
-  combos <- combn(vectors, .x, simplify = FALSE)
-  shared <- map(combos, ~ Reduce(intersect, .x)) %>% unlist() %>% unique()
-  length(shared)
-}) %>% set_names(paste0("shared_by_", 2:4))
-
-# Output results
-shared_counts
 # $shared_by_2
-# [1] 4
-# 
+# [1] 3
+#
 # $shared_by_3
-# [1] 0
-# 
+# [1] 1
+#
 # $shared_by_4
 # [1] 0
 ```
 
+One participant exceeded the thresholds on more than two indices during the EMA phase. Consequently, this participant was excluded from the reanalysis of the data, as detailed in @sec-study2-reanalysis.
+
+
+#### Occasion-Level Analysis of Behavioral Indices
+
+As in Study 1, to complement the participant-level analysis, we conducted an occasion-level analysis to capture instances of momentary inattentiveness.  
+
+We calculated the four careless-responding indices (Longstring, IRV, Even-Odd Inconsistency,
+and Mahalanobis Distance) separately for each occasion on the State Self-Compassion Scale
+(SCS). We then flagged occasions exceeding adjusted fences derived from bootstrapped
+IQRs. Finally, we aggregated flagged occasions to compute a proportion of flagged data
+points per participant.
+
+##### Results
+
+- **Distribution of Flagged Occasions**:
+  - **79.3%** of occasions were never flagged by any metric.
+  - **18.9%** of occasions were flagged on one metric, indicating mild evidence of mo-
+mentary inattention.
+  - **1.19%** of occasions were flagged on two metrics, suggesting stronger evidence of
+momentary lapses.
+  - **<0.2%** of occasions were flagged on three or more metrics, representing very rare
+instances of substantial carelessness.
+
+- **Proportion of Flagged Occasions per Participant**:
+  - the mean proportion of occasions flagged on two or more metrics per participant was **<2%**, reflecting low overall incidence of momentary inattentiveness;
+  - no participant showed persistently high flagging rates across occasions, underscoring the reliability of the dataset.
+
 #### Final Assessment
 
-No participants exceeded the threshold on more than two indices during the EMA phase of Study 2. Consequently, all participants who met the response frequency criterion were retained for the final statistical analyses. 
+Also in Study 2, both the person-level and occasion-level analyses showed a low incidence of inattentive or careless responding. 
+
+### Data Reanalysis {#sec-study2-reanalysis}
+
+To evaluate whether excluding data flagged at the person-level and at the occasion-level, we conducted a secondary analysis of the Study 2 data. As for Study 1, this analysis focused on the nomothetic model assessing the relationships between the Uncompassionate Self (UCS) and Compassionate Self (CS) components of state self-compassion, after controlling for Negative Affect and Context Evaluation. Results from the full dataset are provided in Figure 2.
+
+Also for Study 2, the reanalysis produced results that were effectively identical to those derived from the full dataset. Hence, we retained all participants who met the compliance requirements in our final analyses. Below is a table summarizing the posterior estimates from the reanalysis, alongside their standard deviations and 89% credibility intervals:
+
+| Variable              | Mean     | SD      | Q5.5   | Q94.5  |
+|-----------------------|----------|---------|--------|--------|
+| alpha_ucs            | 0.107  | 0.0526  | 0.0226|  0.192 |
+| beta_cs              | -0.429  | 0.0250  | -0.469| -0.389 |
+| beta_negative_affect |  0.0562  | 0.00742  |  0.0444 | 0.0682 |
+| beta_context_valence |  -0.00365  | 0.00652  |  -0.0141 |  0.00683 |
+| beta_decentering     | -0.108 | 0.00718 | -0.120 | -0.0969 |
+
+
+
 

@@ -17,7 +17,7 @@ format:
 
 ```{r}
 #| include = FALSE
-#| 
+#|
 suppressPackageStartupMessages({
   library("here")
   library("dplyr")
