@@ -1,4 +1,4 @@
-We employ a hierarchical Bayesian model to compare the CS or UCS components of state self-compassion across two time points: the day before and the day after an academic exam. This model accounts for the hierarchical structure of the EMA data, which includes repeated measures across multiple days and times. Specifically, we compare 12 administration distributed over separate days, each containing 5 notifications at different times, against a single notification on the evening following the exam.
+We employed a hierarchical Bayesian model to compare the CS and UCS components of state self-compassion across three time periods: the day before an academic exam (pre-exam), the day after the exam (post-exam), and a baseline period consisting of notifications collected on non-exam days distant from the exam.
 
 Our model incorporates random intercepts for subjects, days, and measurement times, as well as random slopes for the exam day effects:
 
@@ -124,4 +124,5 @@ generated quantities {
 }
 ```
 
-This hierarchical Bayesian model was also applied to the UCS component of state self-compassion, following the same structure and parameterization.
+The hierarchical Bayesian model was implemented separately for each component of state self-compassion: once with CS as the dependent variable and once with UCS as the dependent variable (`sc`).  
+

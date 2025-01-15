@@ -61,11 +61,11 @@ suppressPackageStartupMessages({
 
 {{< include ./sections/apx_model_convergence_diag.qmd >}}
 
-\newpage
+<!-- \newpage -->
 
-## Multilevel Correlations between CS and UCS components of State Self-Compassion
+<!-- ## Multilevel Correlations between CS/UCS and each item of the State Self-Compassion Scale -->
 
-{{< include ./sections/apx_study1_multilevel_correlations.qmd >}}
+<!-- {{< include ./sections/apx_study1_multilevel_correlations.qmd >}} -->
 
 \newpage
 
@@ -112,7 +112,7 @@ suppressPackageStartupMessages({
 
 \newpage
 
-## Impact of Academic Exam on State Self-Compassion
+## Analysis 1: Impact of Academic Exam on State Self-Compassion
 
 {{< include ./sections/apx_study2_exam_ssc.qmd >}}
 
