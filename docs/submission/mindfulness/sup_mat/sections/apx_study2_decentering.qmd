@@ -1,1 +1,24 @@
-Decentering [@bennett2021decentering; @bernstein2015decentering] and self-compassion are related constructs. Both constructs contribute to psychological well-being through slightly different mechanisms. Decentering aids in diminishing identification with negative thoughts and feelings, enabling individuals to observe them without judgment or automatic reactions. This detachment can create space for self-compassion to emerge, as individuals can acknowledge their challenging experiences with greater kindness and understanding. Self-compassion, in turn, can facilitate the decentering process by offering a gentler and more welcoming approach to difficult emotions and thoughts. When individuals can treat themselves with compassion, they may find it easier to observe their internal experiences without being overwhelmed. Self-compassion allows individuals to confront failures, mistakes, and self-criticism with kindness and understanding rather than judgment or reproach. This approach can facilitate decentering, as individuals learn to view such experiences as common to all humans, rather than reflections of their personal worth. Both decentering and self-compassion contribute to psychological resilience. Decentering helps maintain a more balanced and objective perspective, while self-compassion provides emotional support and a more positive response to challenges. Mindfulness plays a key role in connecting decentering and self-compassion. Mindfulness practice encourages both decentering and self-compassion by promoting non-judgmental observation of internal experiences and greater self-kindness.
+
+Decentering, a mindfulness process allowing non-judgmental observation of thoughts and emotions, was explored as a novel dimension to test the Bipolar Continuum Hypothesis [@bennett2021decentering; @bernstein2015decentering]. Decentering may strengthen CS by enabling greater kindness toward negative emotions and simultaneously reduce UCS. Study 2 included four additional items adapted from prior EMA research to measure decentering abilities, providing deeper insight into how mindfulness processes influence self-compassion components.
+
+While decentering fosters detachment from negative thoughts and feelings, allowing space for self-compassion, it also potentially reshapes stress processing by framing emotions as transient rather than reflective of personal identity. This dual effect suggests that decentering and self-compassion are interrelated, each contributing to psychological resilience. Mindfulness connects these constructs, encouraging both non-judgmental observation (decentering) and greater self-kindness (self-compassion), ultimately promoting well-being.
+
+**Statistical Model Specification.**  
+To investigate the interaction between decentering and CS in predicting UCS, the following Bayesian multivariate model was used:
+
+```r
+model_interaction <- brm(
+  bf(UCS ~ dec * CS + (1 + CS | user_id)) +
+    bf(CS ~ dec + (1 | user_id)),
+  data = d1,
+  family = student(),
+  chains = 4,
+  cores = 8,
+  threads = threading(2),
+  backend = "cmdstanr",
+  control = list(adapt_delta = 0.95, max_treedepth = 12)
+)
+```
+
+This model included random slopes for CS at the user level, reflecting variability in the CS-UCS relationship across participants, and controlled for decentering as a fixed effect. A Student’s t-distribution was employed to account for outliers.
+

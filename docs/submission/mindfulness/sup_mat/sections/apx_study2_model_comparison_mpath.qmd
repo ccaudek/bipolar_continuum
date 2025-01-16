@@ -1,0 +1,44 @@
+
+In Study 2, we evaluated the impact of contextual variables on state self-compassion using two Bayesian hierarchical models, one for each dependent variable: UCS and CS. Both models incorporated fixed effects for negative affect, context, and decentering, each measured at the person, day, and moment levels, as well as random intercepts to account for variability across participants and days.
+
+### brms Code
+
+The final models were specified as follows, using the `brms` package:
+
+```r
+# Model for UCS
+model_ucs <- brm(
+  bf(usc ~ na_moment + na_day + na_person + 
+         context_moment + context_day + context_person +
+         dec_moment + dec_day + dec_person +
+         (1 | user_id) + (1 | user_id:day),
+     sigma ~ 1),
+  data = dataset,
+  family = student(),
+  chains = 4,
+  cores = 8,
+  iter = 4000,
+  warmup = 1000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  backend = "cmdstanr"
+)
+
+# Model for CS
+model_cs <- brm(
+  bf(cs ~ na_moment + na_day + na_person + 
+         context_moment + context_day + context_person +
+         dec_moment + dec_day + dec_person +
+         (1 | user_id) + (1 | user_id:day),
+     sigma ~ 1),
+  data = dataset,
+  family = student(),
+  chains = 4,
+  cores = 8,
+  iter = 4000,
+  warmup = 1000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  backend = "cmdstanr"
+)
+```
+
+

@@ -1,0 +1,49 @@
+To estimate the multilevel correlation between the components of state self-compassion (CS and UCS), we fitted a Bayesian multilevel model using the `brms` package. The model accounts for the nested structure of the data (measurements nested within days, and days nested within participants). This approach ensures that both within- and between-person variability in the relationship between CS and UCS are accurately modeled.
+
+### Model Specification
+
+The model was specified as follows:
+
+```r
+f_joint <- brm(
+  data = d1,
+  family = student,
+  bf(
+    mvbind(SC, USC) ~ 1 + # Include intercepts for both components
+      (1 | user_id) + # Random intercept for participants
+      (1 | user_id:day) + # Random intercept for days within participants
+      (1 | user_id:day:time_window) # Random intercept for time windows within days
+  ) +
+    set_rescor(TRUE), # Estimate residual correlations
+  iter = 8000, # Total iterations
+  warmup = 2000, # Warmup iterations
+  chains = 4, # Number of chains
+  cores = 8, # Number of cores for parallel computation
+  seed = 210191, # Seed for reproducibility
+  backend = "cmdstanr" # Backend for faster computations
+)
+```
+
+### Extracting Residual Correlations
+
+The residual correlation between CS and UCS at the momentary level was extracted from the posterior draws using the following function:
+
+```r
+extract_overall_correlation <- function(model) {
+  draws <- as_draws_df(model)
+  rescor_cols <- grep("^rescor__SC__USC", names(draws), value = TRUE)
+  rescor_samples <- draws[[rescor_cols]]
+  overall_correlation <- median(rescor_samples, na.rm = TRUE)
+  ci_lower <- quantile(rescor_samples, 0.055, na.rm = TRUE)
+  ci_upper <- quantile(rescor_samples, 0.945, na.rm = TRUE)
+  data.frame(
+  correlation = overall_correlation, ci_lower = ci_lower, ci_upper = ci_upper
+  )
+}
+```
+
+### Results
+
+The overall within-person correlation between CS and UCS was estimated to be $r = -0.48$, with an 89% credible interval (CI) of $[-0.49, -0.47]$. This moderate negative correlation reflects the inverse relationship between CS and UCS at the state level, accounting for the nested data structure.
+
+Additionally, the lagged correlation between state CS at a given time point and state UCS at the immediately preceding time point was weaker, estimated at $r = -0.10$ with an 89% CI of $[-0.12, -0.08]$. This highlights the temporal dynamics and suggests that immediate emotional and contextual factors influence the momentary relationship between CS and UCS.

@@ -1,20 +1,33 @@
-This section details the script used to test the hypothesis that the correlation between the SC and USC components of state self-compassion is influenced by the level of personal concern. The same statistical model was applied to three distinct datasets, each representing different time points relative to an examination period:
+This section describes the statistical modeling approach used to test the hypothesis that the relationship between the CS and UCS components of state self-compassion varies depending on the level of personal concern, operationalized by proximity to an academic exam (**H3**). The analysis included data from three distinct time points:
 
 1. **Pre-Exam Dataset**: Data collected one day before the exam.
 2. **Post-Exam Dataset**: Data collected one day after the exam.
 3. **Baseline Dataset**: Data collected during a period unrelated to any exam.
 
-```r
-bform <- 
-  bf(mvbind(psc, nsc) ~ 1 + (1 | user_id)) +
-  set_rescor(TRUE)
+The model incorporated a multivariate response structure for CS and UCS, with random effects accounting for within- and between-subject variability across multiple time scales. The model specification was as follows:
 
-mod <- brm(
-  bform,
-  data = d,
-  backend = "cmdstanr",
-  chains = 4
+```r
+f_joint <- brm(
+  data = alldata,
+  family = student,
+  bf(
+    mvbind(SC, USC) ~ 0 + exam_day +
+      (1 + exam_day | user_id) +
+      (1 | user_id:day) +
+      (1 | user_id:day:time_window),
+    sigma ~ 0 + exam_day
+  ) +
+    set_rescor(TRUE),
+  iter = 8000,
+  warmup = 2000,
+  chains = 4,
+  cores = 8,
+  seed = 210191,
+  backend = "cmdstanr"
 )
 ```
 
+This model explicitly included fixed effects for the variable `exam_day`, reflecting the proximity to the exam (e.g., pre-exam, post-exam, or baseline), and allowed random slopes for `exam_day` at the participant level (`user_id`). Additional random intercepts were specified for `user_id:day` and `user_id:day:time_window`, capturing nested within-day and within-time-window variability. The residual correlation structure between CS and UCS was estimated using the `set_rescor(TRUE)` option, and heteroscedasticity was modeled through the inclusion of `sigma ~ 0 + exam_day`. 
+
+The model was fit using the `cmdstanr` backend in `brms`, employing a robust Student's t-distribution for residuals to account for potential outliers. The sampling process utilized 4 chains, 8000 iterations (2000 warmup), and 8 cores, ensuring robust convergence diagnostics and precise parameter estimation. 
 

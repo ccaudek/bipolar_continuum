@@ -1,19 +1,36 @@
-As observed in Study 1, both negative affect and contextual valence are key indicators of an individual's position on the bipolar continuum of state self-compassion, which ranges from CS to UCS. High levels of negative affect were associated with proximity to the UCS pole, while low levels suggested alignment with the CS pole. Similarly, we expected that higher levels of contextual valence (i.e., more positive evaluations of context) would be associated with the CS pole. Additionally, decentering, an essential aspect of mindfulness, was anticipated to demonstrate an inverse relationship with UCS, with higher levels of decentering linked to the CS pole and lower levels indicating proximity to the UCS pole.
 
-To replicate the analysis from Study 1, we tested the Bipolar Continuum Hypothesis with a nomothetic Bayesian hierarchical analysis. In this model, UCS was predicted linearly from CS, while also accounting for within-day centered negative affect, decentering, and the unpleasantness of the event as covariates. Random effects for participants, days, and the event unpleasantness were incorporated to address individual variability and measurement precision (see Figure 2).
+As an extension of the main analyses, we conducted a supplementary test of the Bipolar Continuum Hypothesis using a nomothetic Bayesian hierarchical model. This approach mirrors the analysis detailed in the Supplementary Material for Study 1, allowing for direct comparison across studies.  
 
-![The estimates are expressed in terms of inter-individual differences and intra-individual variations, both within a day and across different days. The bars represent 89% credibility intervals. $\beta_{CS}$ represents the beta coefficients for CS; $\beta_\text{negative affect}$, $\beta_\text{context valence}$ and $\beta_\text{decentering}$ denote the beta coefficients for negative affect, context valence and decentering respectively; $\sigma_\text{measurement}$ is the standard deviation of the distribution of random effects coefficients for the 5 daily observations; $\sigma_\text{day}$ represents the standard deviation of the distribution of random effects coefficients across 10 days; $\sigma_\text{participant}$ indicates the standard deviation of the distribution of random effects coefficients across participants (N subjects); $\sigma_\text{participant slope CS}$ is the standard deviation of the slopes describing the effect of CS on UCS for each participant; $\sigma_{UCS}$ is the estimated standard deviation of the population residuals distribution.](sections/figures/plot_bch_mpath.pdf)
+Consistent with the findings of Study 1, negative affect and contextual factors were key indicators of an individual's position along the bipolar continuum of state self-compassion, ranging from CS to UCS. Higher levels of negative affect were associated with proximity to the UCS pole, while lower levels aligned with the CS pole. Similarly, more positive evaluations of context were expected to correspond to the CS pole. Decentering, a mindfulness-related process, was hypothesized to exhibit an inverse relationship with UCS, with higher levels of decentering linked to the CS pole and lower levels to the UCS pole.  
 
-The analysis revealed several significant fixed effects. A strong negative relationship between CS and UCS was observed ($\beta$ = -0.43, 89% CI [-0.47, -0.39]), confirming that higher levels of CS correspond to lower levels of UCS and thus supporting the Bipolar Continuum Hypothesis. Higher levels of negative affect were associated with increased UCS ($\beta$ = 0.07, 89% CI [0.06, 0.08]), indicating a modest positive influence. Decentering showed an inverse relationship with UCS ($\beta$ = -0.08, 89% CI [-0.09, -0.07]), suggesting that higher mindfulness (decentering) is associated with lower levels of UCS. The impact of event unpleasantness was slight and marginally negative ($\beta$ = -0.005, 89% CI [-0.016, 0.005]).
+UCS was modeled as a linear function of CS while controlling for momentary negative affect, decentering, and event unpleasantness. Random effects at the participant, day, and measurement levels captured individual variability and temporal fluctuations (see Figure 2).  
 
-The random effects analysis revealed substantial variability in UCS levels among participants ($\beta$ = 0.61, 89% CI [0.56, 0.67]), indicating individual differences in state self-compassion responses. Daily fluctuations were minor, with a median estimate of 0.04 (89% CI [0.02, 0.06]). The model also demonstrated high reliability, as indicated by minimal measurement error (median estimate: 0.01, 89% CI [0.001, 0.039]).
+![The estimates reflect both inter-individual differences and intra-individual variations across days and moments. The bars represent 89% credibility intervals. $\beta_{CS}$ denotes the coefficient for CS; $\beta_\text{negative affect}$, $\beta_\text{context valence}$, and $\beta_\text{decentering}$ represent coefficients for negative affect, contextual valence, and decentering, respectively; $\sigma_\text{measurement}$, $\sigma_\text{day}$, and $\sigma_\text{participant}$ correspond to the standard deviations of random effects across measurements, days, and participants. $\sigma_\text{participant slope CS}$ captures the variability in CS slopes across participants; $\sigma_{UCS}$ reflects residual population-level variability.](sections/figures/plot_bch_mpath.pdf)  
 
-The analysis further highlighted individual differences in how CS influences UCS, with a random slope median estimate of 0.29 (89% CI [0.26, 0.32]). There was moderate unexplained variability in UCS (median estimate: 0.39, 89% CI [0.38, 0.41]), suggesting that additional factors beyond the scope of this model contribute to UCS levels.
+### Key Findings  
 
-In summary, the results from Study 2 echo those of Study 1, demonstrating a strong inverse relationship between CS and UCS, reinforcing the validity of the Bipolar Continuum Hypothesis. This robust negative correlation, observed even when accounting for momentary negative affect and other contextual factors, supports the hypothesis that self-compassion operates as a bipolar construct rather than as independent or synergistic elements. The influence of negative affect and decentering on UCS, coupled with the consistent individual differences, highlights the dynamic nature of state self-compassion and the nuanced roles of personal and contextual factors.
+**Fixed Effects:**  
 
-These findings underscore the applicability of the Bipolar Continuum Hypothesis across diverse contexts and individual differences. The minimal daily fluctuations and substantial between-person variability further emphasize the role of personal traits and situational factors in shaping state self-compassion responses.
+  - CS was strongly negatively associated with UCS ($\beta = -0.43$, 89% CI [-0.47, -0.39]), confirming that higher CS levels correspond to lower UCS levels.  
+  - Negative affect showed a modest positive effect on UCS ($\beta = 0.07$, 89% CI [0.06, 0.08]).  
+  - Decentering had an inverse effect on UCS ($\beta = -0.08$, 89% CI [-0.09, -0.07]), indicating that greater mindfulness is associated with lower UCS levels.  
+  - Event unpleasantness exhibited minimal and statistically inconclusive effects on UCS ($\beta = -0.005$, 89% CI [-0.016, 0.005]).  
 
+**Random Effects:**  
+
+  - Substantial between-participant variability was observed in UCS levels ($\sigma_\text{participant} = 0.61$, 89% CI [0.56, 0.67]).  
+  - Day-to-day fluctuations in UCS were minor ($\sigma_\text{day} = 0.04$, 89% CI [0.02, 0.06]).  
+  - Measurement error was negligible ($\sigma_\text{measurement} = 0.01$, 89% CI [0.001, 0.039]).  
+  - Participant-level variability in the effect of CS on UCS was moderate ($\sigma_\text{participant slope CS} = 0.29$, 89% CI [0.26, 0.32]).  
+  - Residual population variability in UCS was estimated at $\sigma_\text{UCS} = 0.39$, 89% CI [0.38, 0.41], suggesting that additional unmeasured factors influence UCS.  
+
+### Conclusion  
+
+The results from Study 2 align closely with those of Study 1, supporting the Bipolar Continuum Hypothesis. The robust negative association between CS and UCS persisted after controlling for momentary negative affect and contextual factors, reinforcing the conceptualization of state self-compassion as a bipolar construct.  
+
+These findings underscore the dynamic interplay of personal and contextual influences on state self-compassion. While day-to-day fluctuations were minimal, substantial between-person variability highlights the critical role of individual differences in shaping self-compassion responses. 
+
+For this analysis, we employed the same Stan model utilized in Study 1.  
 
 
 

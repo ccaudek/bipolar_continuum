@@ -1,227 +1,56 @@
-In this section, we describe the statistical analysis used to assess the impact of contextual variables on state self-compassion. Our analysis specifically focuses on three key areas: differences across individuals, variations between days within the same individual, and fluctuations within a single day for each individual.
 
-Prior to implementing the final Bayesian hierarchical models, we performed a model selection process for determining the most fitting structures for both random and fixed effects within our dataset. In the final models, we examined the CS and UCS aspects of SSC as a function of six predictors: negative affect and context evaluation. Each of these predictors was uniquely centered to distinctly capture and differentiate the three dimensions of variance we were interested in -- namely, inter-individual differences, between-day variations within individuals, and within-day fluctuations for each individual. 
+To evaluate the impact of contextual variables on state self-compassion, we developed two Bayesian hierarchical models, one for each dependent variable: UCS and CS. Both models shared identical fixed-effect and random-effect structures, with predictors including negative affect (person, day, moment) and context evaluation (person, day, moment). This approach allowed us to examine state self-compassion dynamics across individuals, days, and moments.
 
-We started by exploring the full fixed-effect structure and proceeded with a systematic comparison of models featuring varying degrees of random-effect complexity. Once we determined the optimal random-effect structure, we turned our attention to assessing models with different fixed-effects configurations. To facilitate model comparison, we used the Leave-One-Out (LOO) method, a robust Bayesian model selection technique implemented within Stan. 
+### Model Selection Process
 
-This technique evaluates out-of-sample prediction accuracy by sequentially excluding individual observations from the dataset and assessing the model’s performance on these excluded points. Models demonstrating lower LOO values were interpreted as having superior fit and enhanced predictive accuracy. In our modeling process, we integrated regularizing priors, which served to mitigate overfitting by applying constraints that direct the model towards more plausible outcomes. Additionally, we employed partial pooling to boost the accuracy of estimations across various groups. We fitted the models using the cmdstan interface and with the brms package, which leverages the computational power of Stan for Bayesian inference.
+A systematic model selection process was undertaken to identify the optimal random- and fixed-effect structures. Initially, we tested random-effect configurations ranging from simple participant-level clustering to more complex structures incorporating nested effects and random slopes. Using the Leave-One-Out Information Criterion (LOOIC) for model comparison, we identified that random intercepts for participants and days provided the best balance between model complexity and predictive accuracy.
 
-### CS Component 
-#### Random effects
+For the fixed effects, we tested configurations that included all predictors (negative affect and context) at all levels (person, day, moment). The best-fitting model included all fixed effects, demonstrating superior predictive performance.
 
-```{r}
-#| echo: false
-suppressPackageStartupMessages({
-  library(tidyverse)
-  library(kableExtra)
-  library(knitr)
-})
+### Final Models
 
-random_effects_data <- data.frame(
-  Model = c("Model 1: Basic Model", 
-            "Model 2: Add Random Effect user_id", 
-            "Model 3: Add Random Effects for user_id and user_id:day", 
-            "Model 4: Add Random Slopes for na_moment, na_day on user_id", 
-            "Model 5: Complex Random Effects Structure"),
-  elpd_diff = c(0.00, -281.13, -551.34, -1666.63, -6024.44),
-  se_diff = c(0.00, 55.04, 45.91, 71.51, 114.52),
-  elpd_loo = c(-8383.79, -8664.92, -8935.13, -10050.41, -14408.22),
-  se_elpd_loo = c(114.38, 123.20, 110.27, 105.37, 85.91),
-  p_loo = c(2760.33, 24642.01, 2312.90, 369.61, 9.62),
-  se_p_loo = c(23.56, 87.90, 19.53, 3.49, 0.16),
-  looic = c(16767.57, 17329.84, 17870.25, 20100.83, 28816.44),
-  se_looic = c(228.77, 246.39, 220.54, 210.75, 171.81)
+Both models included fixed effects for negative affect and context at the person, day, and moment levels, along with random intercepts for participants and days. 
+
+### Model Diagnostics
+
+We checked convergence using R-hat values, which were close to 1 for all parameters, indicating proper convergence. Posterior predictive checks demonstrated good model fit for both CS and UCS, with simulated data closely resembling observed data distributions.
+
+### brms Code
+
+The final models were specified as follows, using the `brms` package:
+
+```r
+# Model for UCS
+model_ucs <- brm(
+  bf(usc ~ na_moment + na_day + na_person + 
+         context_moment + context_day + context_person +
+         (1 | user_id) + (1 | user_id:day),
+     sigma ~ 1),
+  data = dataset,
+  family = student(),
+  chains = 4,
+  cores = 8,
+  iter = 4000,
+  warmup = 1000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  backend = "cmdstanr"
 )
 
-# kable(random_effects_data, "latex", booktabs = TRUE, digits = 2) %>%
-#   kable_styling(latex_options = c("striped", "hold_position"), full_width = TRUE) %>%
-#   column_spec(1, width = "1.65cm") %>%
-#   column_spec(2:9, width = "1.60cm") %>%
-#   add_footnote("Note: Model 1: Basic Model; Model 2: Add Random Effect user_id; Model 3: Add Random Effects for
-#   user_id and user_id:day; Model 4: Add Random Slopes for na_moment, na_day on user_id; Model 5: 
-#   Complex Random Effects Structure.", notation = "none")
-
-# Print the table using kable and kableExtra
-kable(random_effects_data, "latex", booktabs = TRUE, longtable = TRUE) %>%
-  kable_styling(latex_options = c("repeat_header"), font_size = 7) %>%
-  column_spec(1, width = "3cm") %>%
-  column_spec(2, width = "1.1cm") %>%
-  column_spec(3, width = "1.1cm") %>%
-  column_spec(4, width = "1.6cm") %>%
-  column_spec(5, width = "1.6cm") %>%
-  column_spec(6, width = "1.1cm") %>%
-  column_spec(7, width = "1.1cm") %>%
-  column_spec(8, width = "1.1cm") %>%
-  column_spec(9, width = "1.1cm")
-```
-
-The model comparison, utilizing the LOO method, indicates that there is no valid justification for employing a random-effect structure more complex than participant-level clustering. In other words, the simpler approach of clustering at the participant level provides an adequate representation for our data, as evidenced by the minimal improvements gained from more intricate random-effect structures.
-
-\newpage
-
-#### Fixed-Effects
-
-```{r}
-#| echo: false
-# Second Random-Effects Table Data
-
-# Create the data frame
-fixed_effects_data <- data.frame(
-  Model = c("Model 1: Full Fixed Effects", 
-            "Model 2: Only na", 
-            "Model 3: Only con"),
-  elpd_diff = c(0.00, -21.57, -1580.99),
-  se_diff = c(0.00, 7.81, 64.59),
-  elpd_loo = c(-10050.04, -10071.61, -11631.03),
-  se_elpd_loo = c(105.34, 105.26, 110.22),
-  p_loo = c(368.99, 366.92, 378.08),
-  se_p_loo = c(3.49, 3.48, 3.39),
-  looic = c(20100.07, 20143.21, 23262.05),
-  se_looic = c(210.69, 210.52, 220.43)
+# Model for CS
+model_cs <- brm(
+  bf(cs ~ na_moment + na_day + na_person + 
+         context_moment + context_day + context_person +
+         (1 | user_id) + (1 | user_id:day),
+     sigma ~ 1),
+  data = dataset,
+  family = student(),
+  chains = 4,
+  cores = 8,
+  iter = 4000,
+  warmup = 1000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  backend = "cmdstanr"
 )
-
-# Print the table using kable and kableExtra
-kable(fixed_effects_data, "latex", booktabs = TRUE, longtable = TRUE) %>%
-  kable_styling(latex_options = c("repeat_header"), font_size = 7) %>%
-  column_spec(1, width = "3cm") %>%
-  column_spec(2, width = "1.1cm") %>%
-  column_spec(3, width = "1.1cm") %>%
-  column_spec(4, width = "1.6cm") %>%
-  column_spec(5, width = "1.6cm") %>%
-  column_spec(6, width = "1.1cm") %>%
-  column_spec(7, width = "1.1cm") %>%
-  column_spec(8, width = "1.1cm") %>%
-  column_spec(9, width = "1.1cm")
 ```
 
-Based on the model comparison using the LOO method, the best-fitting model is "Model 1: Full Fixed Effects." It exhibits the highest estimated log pointwise predictive density (`elpd_loo`) and the lowest Leave-One-Out Information Criterion (`looic`), suggesting superior predictive performance compared to the other models.
-
-The final model for predicting the compassionate responding component of state self-compassion is as follows:
-
-$$
-\begin{aligned}
-sc &\sim \text{Student-t}(\mu, \sigma, \nu) \\
-\mu &= \beta_{0} + \\
-&\quad \beta_{\text{na\_moment}} \times \text{na\_moment} + \beta_{\text{na\_day}} \times \text{na\_day} + \beta_{\text{na\_person}} \times \text{na\_person} + \\
-&\quad \beta_{\text{context\_moment}} \times \text{context\_moment} + \beta_{\text{context\_day}} \times \text{context\_day} + \\
-&\beta_{\text{context\_person}} \times \text{context\_person} + \\
-&\quad b_{\text{user\_id}}[j] + b_{\text{bysubj\_day}}[k] \\
-b_{\text{user\_id}}[j] &\sim \mathcal{N}(0, \Sigma_{\text{user\_id}}) \\
-b_{\text{bysubj\_day}}[k] &\sim \mathcal{N}(0, \sigma^2_{\text{bysubj\_day}}) \\
-\beta &\sim \text{priors1} \\
-\sigma &\sim \text{Half-Cauchy}(0, \text{scale}) \\
-\nu &\sim \text{Exponential}(\text{rate}) \\
-\\
-\text{Where:} & \\
-\Sigma_{\text{user\_id}} &= \text{Full covariance matrix for random effects within user\_id} \\
-\sigma^2_{\text{bysubj\_day}} &= \text{Var}(b_{\text{bysubj\_day}}[k])
-\end{aligned}
-$$
-
-\newpage 
-
-### USC Component
-
-In parallel with our analysis of the SC component, we conducted a model comparison for the USC component. 
-
-#### Random-Effects
-
-```{r}
-#| echo: false
-random_effects_data <- data.frame(
-  Model = c("Model 1: Basic Model", 
-            "Model 2: Add Random Effect user_id", 
-            "Model 3: Add Random Effects for user_id and user_id:day", 
-            "Model 4: Add Random Slopes for na_moment, na_day on user_id", 
-            "Model 5: Complex Random Effects Structure"),
-  elpd_diff = c(0.00, -393.72, -539.99, -1646.63, -5363.17),
-  se_diff = c(0.00, 36.24, 93.24, 64.84, 98.42),
-  elpd_loo = c(-8325.73, -8719.45, -8865.73, -9972.36, -13688.90),
-  se_elpd_loo = c(103.75, 101.44, 140.28, 96.36, 77.90),
-  p_loo = c(2507.22, 2181.38, 37464.65, 345.11, 8.61),
-  se_p_loo = c(22.25, 18.63, 116.55, 3.36, 0.15),
-  looic = c(16651.46, 17438.91, 17731.46, 19944.72, 27377.80),
-  se_looic = c(207.50, 202.89, 280.56, 192.72, 155.79)
-)
-
-
-# Print the table using kable and kableExtra
-kable(random_effects_data, "latex", booktabs = TRUE, longtable = TRUE) %>%
-  kable_styling(latex_options = c("repeat_header"), font_size = 7) %>%
-  column_spec(1, width = "3cm") %>%
-  column_spec(2, width = "1.1cm") %>%
-  column_spec(3, width = "1.1cm") %>%
-  column_spec(4, width = "1.6cm") %>%
-  column_spec(5, width = "1.6cm") %>%
-  column_spec(6, width = "1.1cm") %>%
-  column_spec(7, width = "1.1cm") %>%
-  column_spec(8, width = "1.1cm") %>%
-  column_spec(9, width = "1.1cm")
-
-```
-
-Our evaluation of random-effect structures using the LOO method yielded results consistent with those observed for the SC component. The model comparison for USC indicates that there is no compelling justification for employing a random-effect structure more complex than clustering at the participant level. This echoes the findings from the SC component analysis, where participant-level clustering proved sufficient to adequately represent our data. 
-
-#### Fixed-Effects
-
-```{r}
-#| echo: false
-random_effects_data_new <- data.frame(
-  Model = c("Model 1: Full Fixed Effects", 
-            "Model 2: Only na", 
-            "Model 3: Only con"),
-  elpd_diff = c(0.00, -18.65, -1938.50),
-  se_diff = c(0.00, 6.72, 69.27),
-  elpd_loo = c(-9973.73, -9992.38, -11912.23),
-  se_elpd_loo = c(96.34, 96.39, 101.58),
-  p_loo = c(346.60, 346.37, 363.87),
-  se_p_loo = c(3.37, 3.40, 3.46),
-  looic = c(19947.46, 19984.75, 23824.47),
-  se_looic = c(192.67, 192.79, 203.15)
-)
-
-# Print the table using kable and kableExtra
-kable(random_effects_data_new, "latex", booktabs = TRUE, longtable = TRUE) %>%
-  kable_styling(latex_options = c("repeat_header"), font_size = 7) %>%
-  column_spec(1, width = "3cm") %>%
-  column_spec(2, width = "1.1cm") %>%
-  column_spec(3, width = "1.1cm") %>%
-  column_spec(4, width = "1.6cm") %>%
-  column_spec(5, width = "1.6cm") %>%
-  column_spec(6, width = "1.1cm") %>%
-  column_spec(7, width = "1.1cm") %>%
-  column_spec(8, width = "1.1cm") %>%
-  column_spec(9, width = "1.1cm")
-
-```
-
-When considering fixed-effect structures for the USC component, our analysis identified 'Model 1: Full Fixed Effects' as the best-fitting model. This model exhibited the highest estimated log pointwise predictive density (`elpd_loo`) and the lowest Leave-One-Out Information Criterion (`looic`) among the options. These results closely mirror the findings from the SC component analysis, where 'Model 1: Full Fixed Effects' also emerged as the preferred model.
-
-The congruence in results between the SC and USC components underscores the consistency and reliability of our modeling approach. For both SC and USC, we have selected 'Model 1: Full Fixed Effects' as the optimal model, demonstrating superior predictive performance compared to more complex alternatives.
-
-The final model for predicting the uncompassionate responding component of state self-compassion is as follows:
-
-$$
-\begin{aligned}
-usc &\sim \text{Student-t}(\mu, \sigma, \nu) \\
-\mu &= \beta_{0} + \\
-&\quad \beta_{\text{na\_moment}} \times \text{na\_moment} + \beta_{\text{na\_day}} \times \text{na\_day} + \beta_{\text{na\_person}} \times \text{na\_person} + \\
-&\quad \beta_{\text{context\_moment}} \times \text{context\_moment} + \beta_{\text{context\_day}} \times \text{context\_day} + \\
-&\beta_{\text{context\_person}} \times \text{context\_person} + \\
-&\quad b_{\text{user\_id}}[j] + b_{\text{bysubj\_day}}[k] \\
-b_{\text{user\_id}}[j] &\sim \mathcal{N}(0, \Sigma_{\text{user\_id}}) \\
-b_{\text{bysubj\_day}}[k] &\sim \mathcal{N}(0, \sigma^2_{\text{bysubj\_day}}) \\
-\beta &\sim \text{priors1} \\
-\sigma &\sim \text{Half-Cauchy}(0, \text{scale}) \\
-\nu &\sim \text{Exponential}(\text{rate}) \\
-\\
-\text{Where:} & \\
-\Sigma_{\text{user\_id}} &= \text{Full covariance matrix for random effects within user\_id} \\
-\sigma^2_{\text{bysubj\_day}} &= \text{Var}(b_{\text{bysubj\_day}}[k])
-\end{aligned}
-$$
-
-The two models were estimated using a Student's t-distribution with identity links for the mean ($\mu$), scale ($\sigma$), and degrees of freedom ($\nu$). The analysis was based on 12621 observations, 326 participants, with the posterior distribution derived from 12000 post-warmup draws across four chains.
-
-In both cases, the model diagnostics indicate satisfactory convergence with Rhat values close to 1 for all parameters. The Bulk_ESS and Tail_ESS values suggest adequate effective sample sizes for reliable estimation and inference.
 

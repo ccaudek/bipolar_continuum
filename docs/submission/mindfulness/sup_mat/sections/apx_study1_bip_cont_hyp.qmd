@@ -1,59 +1,63 @@
-In this section, we present a nomothetic analysis of the relationship between the two components of state self-compassion, UCS and CS. This analysis was conducted using a Bayesian hierarchical model, where UCS was predicted by CS to assess the association between these components. The model also incorporated covariates, such as within-day centered negative affect and context evaluation, to capture the influence of these factors on the UCS-CS relationship. Random effects were included at the participant, day, and measurement levels to account for individual and temporal variability, critical for understanding fluctuations in state self-compassion.
+One objective of this study was to test Hypothesis **H4**, examining the association between the CS and UCS components of state self-compassion within the multilevel structure of our EMA data. While the idionomic approach used in the manuscript provides a detailed individual-level analysis, this supplementary section presents a traditional nomothetic analysis to align with prior literature.
 
-Although the results of this nomothetic analysis are not discussed in the main manuscript, they are included here for completeness. The idionomic analysis described in the main manuscript, which combines data from two experiments, provides a more comprehensive view of the UCS-CS association. In contrast, this section presents a mixed-effects model separately for each experiment to address the same research question.
+### Rationale  
 
-The outcomes of this nomothetic model offer a direct test of the Bipolar Continuum Hypothesis. A credible negative fixed-effect slope for CS would support the Bipolar Continuum Hypothesis, indicating that higher levels of CS are associated with lower levels of UCS, thus suggesting a bipolar relationship. Conversely, a non-credible or positive slope would challenge the Bipolar Continuum Hypothesis, implying that CS and UCS may function independently or synergistically rather than as opposing components.
+Multilevel models are commonly used to address questions like H4, but they often assume psychological homogeneity and aggregate data toward group-level trends, potentially obscuring individual variability and temporal dynamics (Sahdra et al., 2024; Gelman, Hill, & Vehtari, 2020). To address these concerns, the manuscript used an idionomic approach combining data from both studies. However, for completeness, this section employs Bayesian hierarchical models separately for each study to assess the UCS-CS relationship under a nomothetic framework.
+
+### Method  
+
+The Bayesian hierarchical model predicted UCS from CS while including the following covariates: negative affect and context evaluation. Random intercepts at the participant, day, and measurement levels captured individual and temporal variability. The model also incorporated random slopes for CS to reflect individual differences in the UCS-CS relationship. Predictors were scaled to enable consistent interpretation, and a Student’s t-distribution was used for UCS to handle potential outliers.
+
+The model’s fixed effects were tested to evaluate the Bipolar Continuum Hypothesis. A credible negative slope for CS would support the hypothesis, indicating a bipolar relationship, while a positive or non-credible slope would challenge it.
+
+### Results  
 
 ![The estimates are expressed in terms of inter-individual differences and intra-individual variations, both within a day and across different days. The bars represent 89% credibility intervals. $\beta_{CS}$ represents the beta coefficients for CS; $\beta_{\text{negative affect}}$ and $\beta_{\text{context valence}}$ denote the beta coefficients for negative affect and context valence, respectively; $\sigma_\text{measurement}$ is the standard deviation of the distribution of random effects coefficients for the 5 daily observations; $\sigma_\text{day}$ represents the standard deviation of the distribution of random effects coefficients across 10 days; $\sigma_\text{participant}$ indicates the standard deviation of the distribution of random effects coefficients across participants (subjects); $\sigma_\text{participant slope CS}$ is the standard deviation of the slopes describing the effect of CS on UCS for each participant; $\sigma_{UCS}$ is the estimated standard deviation of the population residuals distribution.](./sections/figures/plot_bch_piel.pdf)
 
-The central finding of this analysis was a robust negative association between CS and UCS, with a median slope estimate of -0.44 (89% CI [-0.47, -0.42]). This result supports the Bipolar Continuum Hypothesis by demonstrating that increases in CS are associated with decreases in UCS.
+The analysis revealed a robust negative association between CS and UCS, with a median slope of -0.44 (89% CI [-0.47, -0.42]), consistent with the Bipolar Continuum Hypothesis.  
 
-After controlling for CS, negative affect had a modest positive effect on UCS ($\beta$ = 0.12, 89% CI [0.116, 0.13]), while the evaluation of context unpleasantness showed a minimal impact ($\beta$ = 0.01, 89% CI [0.002, 0.02]). These findings suggest that contextual factors and negative affect play nuanced roles in shaping state self-compassion.
+- **Covariates**: Negative affect positively influenced UCS ($\beta$ = 0.12, 89% CI [0.116, 0.13]), while context evaluation had minimal impact ($\beta$ = 0.01, 89% CI [0.002, 0.02]).  
+- **Random Slopes**: The relationship between CS and UCS varied significantly across participants (median slope variability: 0.29, 89% CI [0.26, 0.32]), indicating substantial individual differences.  
+- **Random Effects**: UCS levels showed considerable variability across participants ($\beta$ = 0.63, 89% CI [0.59, 0.67]) and moderate day-to-day fluctuations ($\beta$ = 0.04, 89% CI [0.02, 0.06]).  
+- **Measurement Error**: Minimal error (median estimate: 0.01, 89% CI [0.001, 0.039]) demonstrated the reliability of the data.
 
-The random-effect slopes for CS varied substantially across participants (median estimate: 0.29, 89% CI [0.26, 0.32]), reflecting significant individual differences in how CS affects UCS. This variability indicates that the relationship between CS and UCS is influenced by factors such as personality and contextual circumstances.
+These findings align with the Bipolar Continuum Hypothesis, showing that higher CS levels correspond to lower UCS levels. The variability in slopes highlights the complexity of the CS-UCS relationship, influenced by personality and contextual factors.
 
-The analysis also revealed considerable individual differences in UCS levels ($\beta$ = 0.63, 89% CI [0.59, 0.67]) and moderate day-to-day variability ($\beta$ = 0.04, 89% CI [0.02, 0.06]), though the latter was less pronounced. This variability emphasizes the state-dependent nature of self-compassion and the influence of daily emotional states and contextual stressors.
+### Model Specification  
 
-Measurement error was minimal, with a median estimate of 0.01 (89% CI [0.001, 0.039]), indicating the reliability of the assessment tools used.
-
-In summary, this nomothetic analysis shows a strong negative association between CS and UCS, supporting the Bipolar Continuum Hypothesis The substantial variability in random slopes across participants highlights the complexity of the CS-UCS relationship, which is influenced by individual differences and context. Despite the robust findings, unexplained variability in UCS (median estimate: 0.41, 89% CI [0.40, 0.414]) suggests that additional factors, possibly related to unmeasured psychological variables, influence UCS levels.
-
-### Model Implementation
-
-The hierarchical Bayesian model included random effects for participants, days, and measurements and used a t-distribution to account for potential outliers in UCS. The following priors were employed to regularize the estimates:
+The hierarchical Bayesian model used the following priors and included random effects for participants, days, and measurements:
 
 $$
 \begin{aligned}
-\alpha_{ucs} &\sim \text{Normal}(0, 1) \\
-\beta_{cs}, \beta_{covariates} &\sim \text{Normal}(0, 1) \\
-z_{participant}, z_{day}, z_{measurement}, z_{participant\_slope\_cs} &\sim \text{Normal}(0, 1) \\
-\sigma_{participant}, \sigma_{day}, \sigma_{measurement}, \sigma_{participant\_slope\_cs}, \sigma_{ucs} &\sim \text{Exponential}(1) \\
-\nu &\sim \text{Gamma}(2, 0.1)
+\alpha_{ucs} &\sim \text{Normal}(0, 1), \quad \beta_{cs}, \beta_{covariates} \sim \text{Normal}(0, 1), \\
+z_{participant}, z_{day}, z_{measurement}, z_{participant\_slope\_cs} &\sim \text{Normal}(0, 1), \\
+\sigma_{participant}, \sigma_{day}, \sigma_{measurement}, \sigma_{participant\_slope\_cs}, \sigma_{ucs} &\sim \text{Exponential}(1), \\
+\nu &\sim \text{Gamma}(2, 0.1).
 \end{aligned}
 $$
 
-The Stan code for the model is presented below:
+The detailed Stan code is included below:
 
 ```stan
 data {
-  int<lower=0> N; // Total observations
+  int<lower=0> N; // Observations
   int<lower=0> P; // Participants
   int<lower=0> D; // Days
-  int<lower=0> M; // Measurements per day
-  array[N] int<lower=1, upper=P> participant; 
-  array[N] int<lower=1, upper=D> day; 
+  int<lower=0> M; // Measurements
+  array[N] int<lower=1, upper=P> participant;
+  array[N] int<lower=1, upper=D> day;
   array[N] int<lower=1, upper=M> measurement;
-  array[N] real CS; 
+  array[N] real CS;
   array[N] real UCS;
-  array[N] real neg_affect; 
-  array[N] real decentering;
+  array[N] real neg_affect;
   array[N] real context_eval;
 }
 
 parameters {
   real alpha_ucs;
   real beta_cs;
-  array[3] real beta_covariates;
+  real beta_neg_affect;
+  real beta_context_eval;
   vector[P] z_participant;
   vector[D] z_day;
   vector[M] z_measurement;
@@ -69,7 +73,8 @@ parameters {
 model {
   alpha_ucs ~ normal(0, 1);
   beta_cs ~ normal(0, 1);
-  beta_covariates ~ normal(0, 1);
+  beta_neg_affect ~ normal(0, 1);
+  beta_context_eval ~ normal(0, 1);
   z_participant ~ normal(0, 1);
   z_day ~ normal(0, 1);
   z_measurement ~ normal(0, 1);
@@ -84,15 +89,14 @@ model {
   for (n in 1:N) {
     UCS[n] ~ student_t(nu,
                       alpha_ucs +
-                      (beta_cs + sigma_participant_slope_cs * z_participant_slope_cs[participant[n]]) * CS[n] +
-                      beta_covariates[1] * neg_affect[n] +
-                      beta_covariates[2] * decentering[n] +
-                      beta_covariates[3] * context_eval[n] +
+                      beta_cs * CS[n] +
+                      beta_neg_affect * neg_affect[n] +
+                      beta_context_eval * context_eval[n] +
                       sigma_participant * z_participant[participant[n]] +
                       sigma_day * z_day[day[n]] +
-                      sigma_measurement * z_measurement[measurement[n]],
+                      sigma_measurement * z_measurement[measurement[n]] +
+                      sigma_participant_slope_cs * z_participant_slope_cs[participant[n]],
                       sigma_ucs);
   }
 }
 ```
-
