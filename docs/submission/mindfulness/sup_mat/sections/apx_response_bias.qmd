@@ -1,6 +1,7 @@
-In this study, we identified a subset of participants who demonstrated a positive association between the Compassionate Self (CS) and Uncompassionate Self (UCS) components of the State Self-Compassion Scale. This positive association, characterized by higher levels of CS coinciding with higher levels of UCS, stands in direct opposition to the Bipolar Continuum Hypothesis, which posits an inverse relationship between these components. A Reviewer suggested that this finding might be attributed to response biases, such as "careless responding" or "insufficient effort." These biases could manifest as participants consistently selecting the same response option, irrespective of their actual subjective state.
 
-To evaluate this alternative explanation, we analyzed four indices of careless responding—Longstring Index, Intra-Individual Response Variability (IRV), Even-Odd Inconsistency Index, and Mahalanobis Distance. We compared these indices between two groups: participants exhibiting a positive UCS-CS association and all other participants. To maximize statistical power, this analysis was conducted using the combined dataset from both studies ($N = 495$).
+In a final analysis, we explored the potential impact of response bias. Our focus was on the subset of participants who exhibited a positive association between the CS and UCS components of the state self-compassion Scale. This positive relationship—where higher levels of CS coincide with higher levels of UCS—directly contradicts the Bipolar Continuum Hypothesis, which posits an inverse relationship between these components. A Reviewer suggested that this unexpected pattern could stem from response biases, such as "careless responding" or "insufficient effort," where participants may repeatedly select the same response option for both components, irrespective of their actual subjective state.
+
+To assess this possibility, we analyzed four established indices of careless responding: the Longstring Index, Intra-Individual Response Variability (IRV), Even-Odd Inconsistency Index, and Mahalanobis Distance. These indices were compared between two groups: participants with a positive UCS-CS association and all other participants. To ensure sufficient statistical power, this analysis utilized the combined dataset from both studies ($N = 495$).
 
 ### Analysis Steps
 
@@ -86,3 +87,6 @@ For the present analysis, the Compassionate Self (CS) items were treated as odd,
 
 Mahalanobis Distance ($D^2$) is a multivariate measure used to detect outliers, including patterns that may indicate careless responding. It evaluates the distance of an individual’s response set from the overall distribution of responses in the dataset. Higher $D^2$ values suggest that a participant’s responses deviate markedly from the typical response pattern, potentially reflecting careless responding. Lower $D^2$ values indicate responses closer to the average, consistent with careful engagement.
 
+### Time to Completion
+
+TODO
