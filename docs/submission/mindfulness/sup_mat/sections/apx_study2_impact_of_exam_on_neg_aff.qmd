@@ -15,7 +15,16 @@ res_neg_aff_on_second_exam <-
 res_neg_aff_on_second_exam
 ```
 
-In an additional analysis, we investigated whether temporal segmentation—defined as assessments conducted immediately before an exam, immediately after an exam, and during periods unrelated to academic examinations—impacts levels of personal concern (*i.e.*, stress). To address this question, we compared the average levels of negative affect across these three time points. During the study period, students were subjected to two separate exams. The results revealed a consistent pattern across both examinations, with a marked reduction in negative affect from the day before to the day after the exams.
 
-For the first exam, we observed a substantial standardized decrease in negative affect the day following the exam compared to the day prior. The decrease was -0.92 (Standard Error, $SE = 0.10$), corresponding to a Cohen's $d$ of -0.98, with an 89% CI of [-1.23, -0.78]. Similarly, for the second exam, the standardized decrease in negative affect was -0.39 ($SE = 0.08$), yielding a Cohen's $d$ of -0.54, with an 89% CI of [-0.75, -0.36].
+We examined how stress levels, measured as negative affect, changed based on the timing of assessments relative to exams. Assessments were categorized into three time points: immediately before an exam, immediately after an exam, and during periods unrelated to exams. This approach allowed us to compare average levels of negative affect across these three periods.
+
+Students participated in two exams during the study. The results showed a clear and consistent pattern: negative affect decreased significantly from the day before to the day after each exam.
+
+**Exam 1.** 
+For the first exam, we observed a substantial reduction in negative affect the day following the exam compared to the day prior. The standardized decrease was -0.92 ($SE = 0.10$), corresponding to a Cohen's $d$ of -0.98. The 89% credible interval (CI) ranged from -1.23 to -0.78, indicating a strong and reliable effect.
+
+**Exam 2.**
+Similarly, for the second exam, the standardized decrease in negative affect was smaller but still notable, at -0.39 ($SE = 0.08$). This corresponds to a Cohen's $d$ of -0.54, with an 89% CI of [-0.75, -0.36]. 
+
+These findings indicate that the timing of assessments relative to exam periods influenced participants' stress levels, as reflected by changes in negative affect. Specifically, assessments conducted immediately after exams consistently showed lower stress levels compared to those conducted before exams. This supports the effectiveness of the study design in capturing the expected temporal variation in stress levels among students.
 

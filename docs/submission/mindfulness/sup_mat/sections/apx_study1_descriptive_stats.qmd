@@ -1,36 +1,46 @@
-To exclude the possibility of emotional disorders or psychological conditions, we administered a series of validated psychological assessment questionnaires.
+To rule out the possibility of emotional disorders or psychological conditions, we administered a series of validated psychological assessment questionnaires.
 
-*Depression Anxiety Stress Scale-21* (DASS-21). The DASS-21 [@Lovibond1995] is a 21-item self-report questionnaire to assess depression (*i.e.*, “I felt down-hearted and blue”), anxiety (*i.e.*, “I felt I was close to panic”) and stress (*i.e.*, “I found it difficult to relax”) symptoms, over the past week. Items are rated on a 4-point Likert scale ranging from 0 (*It never happened to me*) to 3 (*It happened to me almost always*). Both the original and its Italian version [@bottesi2015] demonstrate adequate reliability.
+**Depression Anxiety Stress Scale-21 (DASS-21).**  
+The DASS-21 [@Lovibond1995] is a 21-item self-report questionnaire designed to assess symptoms of depression (*e.g.*, “I felt down-hearted and blue”), anxiety (*e.g.*, “I felt I was close to panic”), and stress (*e.g.*, “I found it difficult to relax”) over the past week. Items are rated on a 4-point Likert scale ranging from 0 (*Did not apply to me at all*) to 3 (*Applied to me very much, or most of the time*). Both the original and Italian versions [@bottesi2015] demonstrate strong psychometric properties, including adequate reliability and validity.
 
-*Rosenberg Self - Esteem Scale* (RSES). The RSES [@Rosenberg1965] assesses individual self-esteem levels through a 10-item scale (*e.g.,* "I feel that I'm a person of worth, at least on an equal basis with others"). Respondents rate each statement on a 4-point Likert scale, ranging from 4 (*Strongly Agree*) to 1 (*Strongly Disagree*). Higher total scores indicate higher self-esteem.
+**Rosenberg Self-Esteem Scale (RSES).**  
+The RSES [@Rosenberg1965] evaluates individual self-esteem levels using a 10-item scale (*e.g.*, "I feel that I am a person of worth, at least on an equal basis with others"). Respondents rate each statement on a 4-point Likert scale from 1 (*Strongly Disagree*) to 4 (*Strongly Agree*), with higher scores indicating greater self-esteem. The scale has been widely validated and demonstrates strong reliability in both its original and translated versions.
 
-*Self-Compassion Scale* (SCS). The SCS [@neff2003development], is a self-report questionnaire comprising 26 items designed to assess individuals’ enduring Self-Compassion traits in their daily lives. The SCS encompasses six subscales: Self-Kindness, Common Humanity, Mindfulness, Self-Judgment, Isolation, and Over-Identification. Respondents were instructed to rate the frequency of their Self-Compassionate attitudes using a 5-point scale, ranging from 1 (*Almost Never*) to 5 (*Almost Always*). To ensure consistency in scoring, negative items were reverse coded, with higher scores indicating a greater absence of negative Self-Compassion traits. The psychometric properties of the SCS have been found to be robust. For the total score, the Cronbach’s alpha coefficient was reported as 0.96 in the original work by @neff2003development. Additionally, the test-retest reliability demonstrated adequate results, with a correlation coefficient ($r$) of 0.93 for the total score and ranging from 0.80 to 0.88 for the subscales.
+**Self-Compassion Scale (SCS).**  
+The SCS [@neff2003development] is a 26-item self-report measure designed to assess self-compassion in daily life. The SCS comprises six subscales: Self-Kindness, Common Humanity, Mindfulness, Self-Judgment, Isolation, and Over-Identification. Participants rate the frequency of self-compassionate behaviors on a 5-point Likert scale ranging from 1 (*Almost Never*) to 5 (*Almost Always*). Negative items are reverse-coded, and higher scores indicate greater self-compassion. The SCS demonstrates excellent psychometric properties, with a Cronbach’s alpha of 0.96 for the total score in the original validation study [@neff2003development]. Test-retest reliability is also strong, with a total score correlation of $r = 0.93$, and subscale correlations ranging from $r = 0.80$ to $r = 0.88$.
 
-*Difficulties in Emotion Regulation Scale* (DERS). The DERS is a 36-item self-report measure developed to assess the complexities in emotion regulation processes among individuals [@gratz2004difficulties]. This scale is divided into six subscales, each targeting a specific dimension of emotion regulation difficulties: Nonacceptance of Emotional Responses (NER), Difficulties Engaging in Goal-Directed Behavior (DEGB), Impulse Control Difficulties (ICD), Lack of Emotional Awareness (LEA), Limited Access to Emotion Regulation Strategies (LAERS), and Lack of Emotional Clarity (LEC). Respondents are asked to rate each item on a 5-point Likert scale that ranges from 0 (*Never*) to 4 (*Always*), reflecting the frequency with which they experience each emotion regulation difficulty. The higher the score, the greater the difficulties in emotion regulation an individual is likely to have. Both the original version and its Italian adaptation [@sighinolfi2010difficulties], have demonstrated strong psychometric properties, including adequate reliability and validity.
+**Difficulties in Emotion Regulation Scale (DERS).**  
+The DERS [@gratz2004difficulties] is a 36-item self-report measure designed to assess challenges in emotion regulation. It includes six subscales: Nonacceptance of Emotional Responses (NER), Difficulties Engaging in Goal-Directed Behavior (DEGB), Impulse Control Difficulties (ICD), Lack of Emotional Awareness (LEA), Limited Access to Emotion Regulation Strategies (LAERS), and Lack of Emotional Clarity (LEC). Respondents rate items on a 5-point Likert scale ranging from 0 (*Almost Never*) to 4 (*Almost Always*), with higher scores indicating greater difficulties in emotion regulation. Both the original scale and its Italian adaptation [@sighinolfi2010difficulties] have shown robust psychometric properties, including strong reliability and validity.
 
-The following table presents the descriptive statistics for all the aforementioned measures. It includes the estimated posterior mean (Estimate), Standard Error, and the 95% credibility interval, computed using a Bayesian model. Bayesian modeling was employed to account for deviations from Gaussianity.
+### Descriptive Statistics
 
+Descriptive statistics for all administered measures are presented below, including the estimated posterior mean, standard error, and 95% credibility intervals computed using a Bayesian model. Bayesian modeling was employed to accommodate deviations from Gaussianity and provide robust parameter estimates.
 
-| Variable                  | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
+| Measure                   | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
 |---------------------------|----------|------------|--------------|--------------|
-| $DASS-21_{Stress}$        | 7.58     | 0.45       | 6.92         | 8.14         |
-| $DASS-21_{Anxiety}$       | 1.04     | 0.19       | 0.89         | 1.93         |
-| $DASS-21_{Depression}$    | 2.97     | 0.29       | 2.02         | 3.63         |
-| $RSES$                    | 28.05    | 0.26       | 27.53        | 28.55        |
-| $SCS_{total-score}$       | 17.45    | 0.21       | 17.05        | 17.87        |
-| $SCS_{Self-Kindness}$     | 2.98     | 0.04       | 2.89         | 3.06         |
-| $SCS_{Common-Humanity}$   | 3.11     | 0.04       | 3.02         | 3.20         |
-| $SCS_{Mindfulness}$       | 3.11     | 0.04       | 3.03         | 3.20         |
-| $SCS_{Self-Judgment}$     | 2.74     | 0.04       | 2.65         | 2.82         |
-| $SCS_{Isolation}$         | 2.74     | 0.05       | 2.65         | 2.84         |
-| $SCS_{Over-Identification}$ | 2.78   | 0.05       | 2.68         | 2.88         |
-| $DERS_{total score}$      | 67.89    | 2.07       | 63.79        | 71.64        |
-| $DERS_{NER}$              | 6.23     | 0.43       | 5.95         | 7.02         |
-| $DERS_{DEGB}$             | 13.41    | 0.78       | 12.46        | 15.78        |
-| $DERS_{ICD}$              | 4.99     | 0.02       | 4.95         | 5.00         |
-| $DERS_{LEA}$              | 11.52    | 0.82       | 9.91         | 12.98        |
-| $DERS_{LAERS}$            | 13.01    | 0.67       | 11.52        | 14.11        |
-| $DERS_{LEC}$              | 9.91     | 0.65       | 8.36         | 11.14        |
+| **DASS-21**               |          |            |              |              |
+| Stress                    | 7.58     | 0.45       | 6.92         | 8.14         |
+| Anxiety                   | 1.04     | 0.19       | 0.89         | 1.93         |
+| Depression                | 2.97     | 0.29       | 2.02         | 3.63         |
+| **RSES**                  | 28.05    | 0.26       | 27.53        | 28.55        |
+| **SCS**                   |          |            |              |              |
+| Total Score               | 17.45    | 0.21       | 17.05        | 17.87        |
+| Self-Kindness             | 2.98     | 0.04       | 2.89         | 3.06         |
+| Common Humanity           | 3.11     | 0.04       | 3.02         | 3.20         |
+| Mindfulness               | 3.11     | 0.04       | 3.03         | 3.20         |
+| Self-Judgment             | 2.74     | 0.04       | 2.65         | 2.82         |
+| Isolation                 | 2.74     | 0.05       | 2.65         | 2.84         |
+| Over-Identification       | 2.78     | 0.05       | 2.68         | 2.88         |
+| **DERS**                  |          |            |              |              |
+| Total Score               | 67.89    | 2.07       | 63.79        | 71.64        |
+| Nonacceptance (NER)       | 6.23     | 0.43       | 5.95         | 7.02         |
+| Goal Behavior (DEGB)      | 13.41    | 0.78       | 12.46        | 15.78        |
+| Impulse Control (ICD)     | 4.99     | 0.02       | 4.95         | 5.00         |
+| Emotional Awareness (LEA) | 11.52    | 0.82       | 9.91         | 12.98        |
+| Regulation Strategies     | 13.01    | 0.67       | 11.52        | 14.11        |
+| Emotional Clarity (LEC)   | 9.91     | 0.65       | 8.36         | 11.14        |
 
-There is no evidence of emotional disorders among participants. The obtained scores are consistent with those reported in other studies using the same measures within community samples [@bottesi2015; @sighinolfi2010difficulties; @neff2017examining; @sica2021health].
+### Summary
+
+Scores obtained from these measures are consistent with community norms reported in previous studies [@bottesi2015; @sighinolfi2010difficulties; @neff2017examining; @sica2021health], providing no evidence of notable emotional disorders among participants. 
 

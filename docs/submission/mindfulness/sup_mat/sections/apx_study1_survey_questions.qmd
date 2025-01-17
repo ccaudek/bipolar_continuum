@@ -1,100 +1,107 @@
-For each notification in the Ecological Momentary Assessment (EMA) protocol, participants were prompted to answer the following questions.
+For each notification in the Ecological Momentary Assessment (EMA) protocol, participants were prompted to respond to the following questions. These items were designed to capture participants' momentary emotional states, cognitive appraisals, and self-compassionate attitudes.
 
-1. Think about the most notable event that has occurred since you last received a notification. If this is your first notification of the day, consider the most significant event from the start of the day. How would you evaluate this event?
-   1) Very unpleasant
-   2) Unpleasant
-   3) Neither unpleasant nor pleasant
-   4) Pleasant
-   5) Very pleasant
+---
 
-2. At this moment I feel NERVOUS.
-   1) Not at all
-   2) A little
-   3) Moderately
-   4) Quite a bit
-   5) Very much
+1. **Think about the most notable event that has occurred since you last received a notification.**  
+   If this is your first notification of the day, consider the most significant event from the start of the day. How would you evaluate this event?  
+   - 1) Very unpleasant  
+   - 2) Unpleasant  
+   - 3) Neither unpleasant nor pleasant  
+   - 4) Pleasant  
+   - 5) Very pleasant  
 
-3. At this moment I feel UPSET.
-   1) Not at all
-   2) A little
-   3) Moderately
-   4) Quite a bit
-   5) Very much
+2. **At this moment, I feel NERVOUS.**  
+   - 1) Not at all  
+   - 2) A little  
+   - 3) Moderately  
+   - 4) Quite a bit  
+   - 5) Very much  
 
-4. At this moment I feel SATISFIED.
-   1) Not at all
-   2) A little
-   3) Moderately
-   4) Quite a bit
-   5) Very much
+3. **At this moment, I feel UPSET.**  
+   - 1) Not at all  
+   - 2) A little  
+   - 3) Moderately  
+   - 4) Quite a bit  
+   - 5) Very much  
 
-5. At this moment I feel CHEERFUL.
-   1) Not at all
-   2) A little
-   3) Moderately
-   4) Quite a bit
-   5) Very much
+4. **At this moment, I feel SATISFIED.**  
+   - 1) Not at all  
+   - 2) A little  
+   - 3) Moderately  
+   - 4) Quite a bit  
+   - 5) Very much  
 
-6. I’m giving myself the caring and tenderness I need.
-   1) Completely false
-   2) Moderately false 
-   3) Slightly false
-   4) Slightly true
-   5) Moderately true 
-   6) Completely true
+5. **At this moment, I feel CHEERFUL.**  
+   - 1) Not at all  
+   - 2) A little  
+   - 3) Moderately  
+   - 4) Quite a bit  
+   - 5) Very much  
 
-7. I’m obsessing and fixating on everything that’s wrong.
-   1) Completely false
-   2) Moderately false 
-   3) Slightly false
-   4) Slightly true
-   5) Moderately true 
-   6) Completely true
+---
 
-8. I’m remembering that there are lots of others in the world feeling like I am.
-   1) Completely false
-   2) Moderately false 
-   3) Slightly false
-   4) Slightly true
-   5) Moderately true 
-   6) Completely true  
+### Self-Compassionate Attitudes
 
-9. I feel like I’m struggling more than others right now.
-   1) Completely false
-   2) Moderately false 
-   3) Slightly false
-   4) Slightly true
-   5) Moderately true 
-   6) Completely true
+6. **I’m giving myself the caring and tenderness I need.**  
+   - 1) Completely false  
+   - 2) Moderately false  
+   - 3) Slightly false  
+   - 4) Slightly true  
+   - 5) Moderately true  
+   - 6) Completely true  
 
-10. I feel intolerant and impatient toward myself.
-    1) Completely false
-    2) Moderately false 
-    3) Slightly false
-    4) Slightly true
-    5) Moderately true 
-    6) Completely true
+7. **I’m obsessing and fixating on everything that’s wrong.**  
+   - 1) Completely false  
+   - 2) Moderately false  
+   - 3) Slightly false  
+   - 4) Slightly true  
+   - 5) Moderately true  
+   - 6) Completely true  
 
-11. I’m keeping things in perspective.
-    1) Completely false
-    2) Moderately false 
-    3) Slightly false
-    4) Slightly true
-    5) Moderately true 
-    6) Completely true
+8. **I’m remembering that there are lots of others in the world feeling like I am.**  
+   - 1) Completely false  
+   - 2) Moderately false  
+   - 3) Slightly false  
+   - 4) Slightly true  
+   - 5) Moderately true  
+   - 6) Completely true  
 
-12. At this moment I am able to accept my flaws and weaknesses.
-    1) Completely false
-    2) Moderately false 
-    3) Slightly false
-    4) Slightly true
-    5) Moderately true 
-    6) Completely true
+9. **I feel like I’m struggling more than others right now.**  
+   - 1) Completely false  
+   - 2) Moderately false  
+   - 3) Slightly false  
+   - 4) Slightly true  
+   - 5) Moderately true  
+   - 6) Completely true  
 
-13. At this moment I let myself be carried away by my emotions.
-    1) Completely false
-    2) Moderately false 
-    3) Slightly false
-    4) Slightly true
-    5) Moderately true 
-    6) Completely true
+10. **I feel intolerant and impatient toward myself.**  
+    - 1) Completely false  
+    - 2) Moderately false  
+    - 3) Slightly false  
+    - 4) Slightly true  
+    - 5) Moderately true  
+    - 6) Completely true  
+
+11. **I’m keeping things in perspective.**  
+    - 1) Completely false  
+    - 2) Moderately false  
+    - 3) Slightly false  
+    - 4) Slightly true  
+    - 5) Moderately true  
+    - 6) Completely true  
+
+12. **At this moment, I am able to accept my flaws and weaknesses.**  
+    - 1) Completely false  
+    - 2) Moderately false  
+    - 3) Slightly false  
+    - 4) Slightly true  
+    - 5) Moderately true  
+    - 6) Completely true  
+
+13. **At this moment, I let myself be carried away by my emotions.**  
+    - 1) Completely false  
+    - 2) Moderately false  
+    - 3) Slightly false  
+    - 4) Slightly true  
+    - 5) Moderately true  
+    - 6) Completely true  

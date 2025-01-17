@@ -100,11 +100,6 @@ suppressPackageStartupMessages({
 
 {{< include ./sections/apx_careless_study2.qmd >}}
 
-
-<!-- ## Model Convergence Diagnostics -->
-
-<!-- {{< include ./sections/apx_study2_model_convergence_diag.qmd >}} -->
-
 \newpage
 
 ## Analysis 1: Impact of Academic Exam on State Self-Compassion
@@ -113,7 +108,7 @@ suppressPackageStartupMessages({
 
 \newpage
 
-### Supplementary Analysis: Impact of Academic Exam on Negative Affect  
+## Supplementary Analysis: Impact of Academic Exam on Negative Affect  
 
 {{< include ./sections/apx_study2_impact_of_exam_on_neg_aff.qmd >}}
 
@@ -155,12 +150,13 @@ suppressPackageStartupMessages({
 
 {{< include ./sections/apx_rev1_idionomic.qmd >}}
 
+\newpage
 \pagebreak
 
 ## Examining Response Bias 
 
 {{< include ./sections/apx_response_bias.qmd >}}
 
-\pagebreak
+\newpage
 
-## References
+# References

@@ -11,21 +11,24 @@ We specified and compared three distinct models to determine the underlying stru
 - The **Bifactor Model** examines whether state self-compassion is best characterized by a general self-compassion factor along with orthogonal specific factors (CS and UCS), isolating the variance explained by the general factor from that explained by the specific factors.
 
 
-## Mplus script for the One-Factor Model
+### Mplus script for the One-Factor Model
 
 ```code
-TITLE: Multilevel One-Factor Model with covariates at moment, day, and person level;
+TITLE: Multilevel One-Factor Model with covariates at moment, day, and person 
+  level;
 
 DATA: 
   FILE = "data.dat";
 
 VARIABLE: 
   NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
-    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day 
+    neg_aff_Person;
   USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
     scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
   CLUSTER = user_id;  ! Clustering at the subject level
-  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  WITHIN = neg_aff_Moment neg_aff_Day;  
+  ! Covariates at the moment and day level
   BETWEEN = neg_aff_Person;  ! Covariate at the person level
 
 MISSING = .;
@@ -45,13 +48,14 @@ MODEL:
     SelfCompassion_b BY scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 
       scs_pos_6 scs_pos_7 scs_neg_8;
     SelfCompassion_b ON neg_aff_Person;  
-    ! Regress between-level self-compassion factor on person-level negative affect
+    ! Regress between-level self-compassion factor on person-level negative 
+    ! affect
 
 OUTPUT:
   TECH1 TECH8 STANDARDIZED MODINDICES;
 ```
 
-### Table: Standardized Factor Loadings for Multilevel One-Factor Model
+#### Table: Standardized Factor Loadings for Multilevel One-Factor Model
 
 | **Item**        | **Within-Level Standardized Loadings** | **Between-Level Standardized Loadings** |
 |-----------------|----------------------------------------|-----------------------------------------|
@@ -64,7 +68,7 @@ OUTPUT:
 | **SCS_POS_7**    | 0.587                                  | 0.835                                   |
 | **SCS_NEG_8**    | 0.279                                  | 0.262                                   |
 
-### Additional Summary Statistics
+#### Additional Summary Statistics
 
 - **Within-Level Explained Variance for SELFCOMP**: 19.6%
 - **Between-Level Explained Variance for SELFCOMP**: 21.7%
@@ -74,23 +78,25 @@ OUTPUT:
 - **Effect of Negative Affect on SELFCOMP (between level)**:
   - **NEG_AFF_PERSON**: -0.466
 
-\pagebreak
 
-## Mplus script for the Two-Factor Model
+### Mplus script for the Two-Factor Model
 
 ```code
-TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person level;
+TITLE: Multilevel Two-Factor Model with covariates at moment, day, and person 
+  level;
 
 DATA: 
   FILE = "data.dat";
 
 VARIABLE: 
   NAMES = user_id day time_window scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 
-    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
+    scs_neg_5 scs_pos_6 scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day 
+    neg_aff_Person;
   USEVARIABLES = scs_pos_1 scs_neg_2 scs_pos_3 scs_neg_4 scs_neg_5 scs_pos_6 
     scs_pos_7 scs_neg_8 neg_aff_Moment neg_aff_Day neg_aff_Person;
   CLUSTER = user_id;  ! Clustering at the subject level
-  WITHIN = neg_aff_Moment neg_aff_Day;  ! Covariates at the moment and day level
+  WITHIN = neg_aff_Moment neg_aff_Day;  
+  ! Covariates at the moment and day level
   BETWEEN = neg_aff_Person;  ! Covariate at the person level
 
 MISSING = .;
@@ -124,7 +130,7 @@ OUTPUT:
   TECH1 TECH8 STANDARDIZED MODINDICES;
 ```
 
-### Table: Standardized Factor Loadings for Multilevel Two-Factor Model
+#### Table: Standardized Factor Loadings for Multilevel Two-Factor Model
 
 | **Item**        | **Within-Level Standardized Loadings** | **Between-Level Standardized Loadings** |
 |-----------------|-----------------------------------------------|------------------------------------------------|
@@ -139,7 +145,7 @@ OUTPUT:
 | **SCS_NEG_5**   | 0.682                                         | 0.945                                          |
 | **SCS_NEG_8**   | 0.279                                         | 0.278                                          |
 
-### Additional Summary Statistics
+#### Additional Summary Statistics
 
 - **Within-Level Correlation between POSITIVE and NEGATIVE factors**: 0.825
 - **Between-Level Correlation between POSITIVE and NEGATIVE factors**: 0.817
@@ -148,18 +154,19 @@ OUTPUT:
 - **Residual Variances (Between Level)**:
   - **SCS_POS_1**: 0.187, **SCS_NEG_2**: 0.100, **SCS_POS_3**: 0.897, **SCS_NEG_4**: 0.367, **SCS_NEG_5**: 0.106, **SCS_POS_6**: 0.439, **SCS_POS_7**: 0.080, **SCS_NEG_8**: 0.923
 
-\pagebreak
 
-## Mplus script for the Bifactor Model
+### Mplus script for the Bifactor Model
 
 ```code
-TITLE: Multilevel Bifactor Model with covariates at moment, day, and person level;
+TITLE: Multilevel Bifactor Model with covariates at moment, day, and person 
+  level;
 
 DATA:
   FILE = "data.dat";
 
 VARIABLE:
-  NAMES = uid day tw scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
+  NAMES = uid day tw scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day 
+    na_per;
   USEVARIABLES = scp1 scn2 scp3 scn4 scn5 scp6 scp7 scn8 na_mom na_day na_per;
   CLUSTER = uid;
   WITHIN = na_mom na_day;
@@ -216,7 +223,7 @@ OUTPUT:
   TECH1 TECH8 STANDARDIZED MODINDICES(ALL);
 ```
 
-### Table: Standardized Factor Loadings for Multilevel Bifactor Model
+#### Table: Standardized Factor Loadings for Multilevel Bifactor Model
 
 | **Item**        | **Within-Level Standardized Loadings** | **Between-Level Standardized Loadings** |
 |-----------------|-----------------------------------------------|------------------------------------------------|
@@ -242,18 +249,14 @@ OUTPUT:
 
 The table presents standardized loadings for both the general factor and the specific positive and negative factors at the within and between levels. These loadings illustrate the bifactor structure and how each item loads onto the general and specific factors.
 
-### Interpretation 
+#### Interpretation 
 
-#### General Factor
-
-The **general factor** exhibited strong and consistent loadings across items, particularly at the between-subject level (ranging from 0.143 to 0.935), reflecting a robust overarching construct of self-compassion across individuals. The within-subject loadings were also notable, albeit slightly weaker (0.210 to 0.623). This suggests that the general factor captures substantial common variance among items both across and within individuals.
+**General Factor.** The **general factor** exhibited strong and consistent loadings across items, particularly at the between-subject level (ranging from 0.143 to 0.935), reflecting a robust overarching construct of self-compassion across individuals. The within-subject loadings were also notable, albeit slightly weaker (0.210 to 0.623). This suggests that the general factor captures substantial common variance among items both across and within individuals.
 
 - Items SCP7 ("At this moment I am able to accept my flaws and weaknesses"; between-level loading: 0.935) and SCP1 ("I'm giving myself the caring and tenderness I need"; 0.860) demonstrated the strongest loadings at the between-subject level, indicating their critical role in representing the general self-compassion construct.
 - SCN8 ("At this moment I let myself be carried away by my emotions") exhibited weak loadings on the general factor at both levels (within: 0.210; between: 0.143), implying limited shared variance with the general factor and potentially unique characteristics for this item.
 
-#### Specific Factors
-
-The **positive and negative factors** captured variance unique to the positive and negative components of self-compassion, beyond what is explained by the general factor.
+**Specific Factors.** The **positive and negative factors** captured variance unique to the positive and negative components of self-compassion, beyond what is explained by the general factor.
 
 1. **Positive Factor**:
    - Within-subject loadings for SCP1 and SCP7 were modest (0.219 and 0.246, respectively), while SCP3 ("I’m remembering that there are lots of others in the world feeling like I am") and SCP6 ("I'm keeping things in perspective") had negligible or negative loadings (-0.313 and -0.009, respectively). This suggests limited within-subject differentiation of the positive factor from the general factor.
@@ -262,7 +265,7 @@ The **positive and negative factors** captured variance unique to the positive a
 2. **Negative Factor**:
    - Negative items (e.g., SCN2 ("I'm obsessing and fixating on everything that’s wrong"), SCN4 ("I feel like I'm struggling more than others right now"), SCN5 ("I feel intolerant and impatient toward myself"), SCN8 ("At this moment I let myself be carried away by my emotions")) had moderate loadings on the negative factor at both levels, with slightly higher between-subject loadings (e.g., SCN2: 0.626, SCN4: 0.378). This indicates that the negative-specific factor captures meaningful unique variance, particularly across individuals.
 
-#### Implications
+**Implications.** 
 
 - The strong loadings on the general factor, especially at the between-subject level, suggest that state self-compassion is predominantly a unidimensional construct at the higher level.
 - The specific factors capture additional nuance, with the negative-specific factor demonstrating relatively more consistent loadings than the positive-specific factor. This may reflect a more distinct role for negative-specific items in characterizing individual differences in state self-compassion.
@@ -270,11 +273,10 @@ The **positive and negative factors** captured variance unique to the positive a
 
 In summary, the bifactor model successfully captures both the shared variance across all state self-compassion items and the unique variance attributable to positive and negative components. The results emphasize the predominance of a general state self-compassion factor while acknowledging the contribution of specific dimensions, particularly for the negative-specific factor. 
 
-\newpage
 
-## Goodness-of-fit indices
+### Goodness-of-fit indices
 
-Goodness-of-fit indices for each model are presented in Table 1. 
+The goodness-of-fit indices for each of the three multilevel CFA models described in the previous sections are presented in Table 1. 
 
 **Table 1. Goodness-of-Fit Indices for the One-Factor, Two-Factor, and Bifactor Models**
 
@@ -294,11 +296,10 @@ We conducted a series of Likelihood Ratio Tests (LRTs) to formally assess improv
 
 In summary, from a psychometric standpoint, both the Two-Factor and Bifactor Models provide better fit than the One-Factor Model, with the Bifactor Model yielding the best statistical fit. These results suggest that self-compassion is best conceptualized as comprising both a general factor and specific components (CS and UCS). However, while the Bifactor Model offers superior statistical fit, its added complexity raises questions about the practical significance of modeling both general and specific factors.
 
-\newpage
 
-## Practical Importance
+### Practical Importance
 
-Dimensionality assessments should not rely solely on statistical fit indices but should also incorporate the substantive significance of each factor [@rodriguez2016evaluating; @ferrando2018assessing]. Although more complex models often exhibit better statistical fit, they may overfit the data, especially when an excessive number of factors are included [@ferrando2019external]. Therefore, achieving a balance between model complexity and interpretability is crucial for drawing meaningful conclusions.
+While the previous section focused on the psychometric properties of the three multilevel CFA models under consideration, it is essential to emphasize that dimensionality assessments should not rely exclusively on statistical fit indices. Instead, they should also account for the substantive relevance and interpretability of each factor [@rodriguez2016evaluating; @ferrando2018assessing]. Although more complex models often achieve superior statistical fit, they risk overfitting the data, particularly when an excessive number of factors are included [@ferrando2019external]. Striking a balance between model complexity and interpretability is therefore critical to ensure that the conclusions drawn are both meaningful and practically applicable.
 
 To determine whether the data support a unidimensional or multifactorial structure for *state* self-compassion, we applied several criteria:
 

@@ -1,10 +1,20 @@
 
-Decentering, a mindfulness process allowing non-judgmental observation of thoughts and emotions, was explored as a novel dimension to test the Bipolar Continuum Hypothesis [@bennett2021decentering; @bernstein2015decentering]. Decentering may strengthen CS by enabling greater kindness toward negative emotions and simultaneously reduce UCS. Study 2 included four additional items adapted from prior EMA research to measure decentering abilities, providing deeper insight into how mindfulness processes influence self-compassion components.
+The Bipolar Continuum Hypothesis posits a stable inverse relationship between the CS (Compassionate Self) and UCS (Uncompassionate Self) components of state self-compassion. In this analysis, decentering—a mindfulness-related process—was examined as a potential moderator of this relationship. The purpose was to investigate whether mindfulness processes introduce flexibility into the CS-UCS coupling, suggesting that the strength of the bipolar structure may vary across individuals or contexts.
 
-While decentering fosters detachment from negative thoughts and feelings, allowing space for self-compassion, it also potentially reshapes stress processing by framing emotions as transient rather than reflective of personal identity. This dual effect suggests that decentering and self-compassion are interrelated, each contributing to psychological resilience. Mindfulness connects these constructs, encouraging both non-judgmental observation (decentering) and greater self-kindness (self-compassion), ultimately promoting well-being.
+Decentering, characterized by the non-judgmental observation of thoughts and emotions, is theorized to promote psychological resilience. It reframes negative thoughts and emotions as transient experiences rather than fixed aspects of identity, fostering acceptance and self-compassion. Specifically, decentering was expected to enhance CS by encouraging kindness and acceptance of negative emotions while reducing UCS by mitigating self-critical and over-identifying tendencies. If decentering moderates the CS-UCS relationship, it would provide evidence that mindfulness processes reinforce the bipolar structure by strengthening the inverse coupling between these two poles.
 
-**Statistical Model Specification.**  
-To investigate the interaction between decentering and CS in predicting UCS, the following Bayesian multivariate model was used:
+### Hypotheses and Measurement
+
+The analysis hypothesized that higher levels of decentering would be associated with a stronger inverse relationship between CS and UCS (**H2**). This moderated relationship reflects greater psychological flexibility, with decentering enhancing self-compassion and reducing uncompassionate responses.
+
+To assess decentering, four items adapted from prior EMA research [@bennett2021decentering; @bernstein2015decentering] were incorporated into Study 2. These items enabled a nuanced evaluation of how mindfulness processes shape self-compassion components.
+
+
+### Bayesian Hierarchical Model
+
+To test this hypothesis, we employed a Bayesian hierarchical regression model predicting UCS as a function of CS, decentering, and their interaction. This model accounted for variability across three levels—person, day, and moment—capturing both individual differences and temporal dynamics. The interaction term (CS × Decentering) was central to determining whether decentering moderates the CS-UCS relationship.
+
+The model specification is detailed below:
 
 ```r
 model_interaction <- brm(
@@ -20,5 +30,23 @@ model_interaction <- brm(
 )
 ```
 
-This model included random slopes for CS at the user level, reflecting variability in the CS-UCS relationship across participants, and controlled for decentering as a fixed effect. A Student’s t-distribution was employed to account for outliers.
+- **Fixed Effects:** UCS was predicted by CS, decentering, and their interaction to test moderation.
+- **Random Effects:** Random intercepts and slopes for CS were included at the person, day, and moment levels to capture variability in the CS-UCS relationship across individuals and time points.
+- **Student’s t-Distribution:** A robust Student’s t-distribution was used for UCS to account for potential outliers.
+
+### Results and Interpretation
+
+The analysis yielded the following findings:
+
+1. **Person-Level Effects:**  
+   The interaction between CS and decentering was negative (β = -0.05; 89% CI: [-0.08, -0.02]), indicating that individuals with higher levels of decentering showed a stronger inverse relationship between CS and UCS. This supports the hypothesis that decentering reinforces the bipolar structure of self-compassion at a trait level, suggesting that mindfulness-related processes stabilize the CS-UCS coupling.
+
+2. **Day- and Moment-Level Effects:**  
+   At the day and moment levels, the interaction effects were close to zero, with 89% credible intervals including zero. These findings suggest that the moderating role of decentering is not evident at shorter timescales and is more relevant to stable, trait-like patterns of self-compassion rather than transient fluctuations.
+
+### Contribution to the Test of the Bipolar Continuum Hypothesis
+
+This analysis provides important evidence supporting the Bipolar Continuum Hypothesis. By demonstrating that decentering strengthens the inverse relationship between CS and UCS at the person level, the findings validate the hypothesis that self-compassion operates as a dynamic yet stable bipolar construct. The results further highlight the role of mindfulness processes, such as decentering, in reinforcing the bipolar structure and promoting psychological flexibility.
+
+Decentering’s impact on the CS-UCS relationship underscores its potential as a mindfulness-related mechanism for fostering self-compassion. While day-to-day and moment-to-moment effects were minimal, the trait-level findings suggest that decentering contributes to resilience by stabilizing self-compassion components over time. These insights align with the broader research aim of testing and validating the Bipolar Continuum Hypothesis while emphasizing the importance of mindfulness processes in self-compassion dynamics.
 

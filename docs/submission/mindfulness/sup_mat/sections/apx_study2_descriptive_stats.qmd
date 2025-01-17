@@ -1,16 +1,20 @@
+The table below presents the descriptive statistics for the psychological assessment measures administered in Study 2. The results include the estimated posterior mean, standard error, and 95% credibility intervals, computed using a Bayesian model to account for potential deviations from Gaussian assumptions.
 
-| Variable            | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
-|---------------------|----------|------------|--------------|--------------|
-| $DASS-21_{Stress}$  | 7.24     | 0.73       | 6.10         | 9.37         |
-| $DASS-21_{Anxiety}$ | 3.43     | 1.55       | 0.95         | 6.32         |
-| $DASS-21_{Depression}$| 3.00    | 0.36      | 2.17         | 3.92         |
-| $RSES$                | 22.88    | 0.52       | 21.84        | 23.86        |
-| $SCS_{total-score}$        | 17.00    | 0.42       | 16.19        | 17.84   |
-| $SCS_{Self-Kindness}$      | 2.88     | 0.10       | 2.70         | 3.07    |
-| $SCS_{Common-Humanity}$    | 3.00     | 0.09       | 2.83         | 3.17    |
-| $SCS_{Mindfulness}$        | 3.07     | 0.09       | 2.89         | 3.23    |
-| $SCS_{Self-Judgment}$      | 2.69     | 0.09       | 2.51         | 2.87    |
-| $SCS_{Isolation}$          | 2.69     | 0.09       | 2.50         | 2.87    |
-| $SCS_{Over-Identification}$| 2.67     | 0.09       | 2.50         | 2.85    |
+| Measure                  | Estimate | Std. Error | 95% CI Lower | 95% CI Upper |
+|--------------------------|----------|------------|--------------|--------------|
+| **DASS-21**              |          |            |              |              |
+| Stress                   | 7.24     | 0.73       | 6.10         | 9.37         |
+| Anxiety                  | 3.43     | 1.55       | 0.95         | 6.32         |
+| Depression               | 3.00     | 0.36       | 2.17         | 3.92         |
+| **RSES**                 | 22.88    | 0.52       | 21.84        | 23.86        |
+| **SCS**                  |          |            |              |              |
+| Total Score              | 17.00    | 0.42       | 16.19        | 17.84        |
+| Self-Kindness            | 2.88     | 0.10       | 2.70         | 3.07         |
+| Common Humanity          | 3.00     | 0.09       | 2.83         | 3.17         |
+| Mindfulness              | 3.07     | 0.09       | 2.89         | 3.23         |
+| Self-Judgment            | 2.69     | 0.09       | 2.51         | 2.87         |
+| Isolation                | 2.69     | 0.09       | 2.50         | 2.87         |
+| Over-Identification      | 2.67     | 0.09       | 2.50         | 2.85         |
 
-There was no indication of emotional disorders among the participants. The obtained scores aligned with those found in previous studies that used the same assessment tools in community samples  [@bottesi2015; @neff2017examining; @sica2021health].
+## Summary
+The results indicate no evidence of emotional disorders among participants. The scores align closely with those reported in prior studies that utilized these assessment tools in community samples [@bottesi2015; @neff2017examining; @sica2021health]. 

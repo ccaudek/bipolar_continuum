@@ -12,7 +12,8 @@ f_joint <- brm(
     mvbind(SC, USC) ~ 1 + # Include intercepts for both components
       (1 | user_id) + # Random intercept for participants
       (1 | user_id:day) + # Random intercept for days within participants
-      (1 | user_id:day:time_window) # Random intercept for time windows within days
+      (1 | user_id:day:time_window) 
+      # Random intercept for time windows within days
   ) +
     set_rescor(TRUE), # Estimate residual correlations
   iter = 8000, # Total iterations

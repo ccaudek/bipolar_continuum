@@ -23,54 +23,86 @@ The analysis revealed a robust negative association between CS and UCS, with a m
 
 These findings align with the Bipolar Continuum Hypothesis, showing that higher CS levels correspond to lower UCS levels. The variability in slopes highlights the complexity of the CS-UCS relationship, influenced by personality and contextual factors.
 
+
 ### Model Specification  
 
-The hierarchical Bayesian model used the following priors and included random effects for participants, days, and measurements:
+We implemented a hierarchical Bayesian model to account for participant-level, day-level, and measurement-level variability. The model included random effects and used the following prior distributions:
+
+#### Priors
 
 $$
 \begin{aligned}
-\alpha_{ucs} &\sim \text{Normal}(0, 1), \quad \beta_{cs}, \beta_{covariates} \sim \text{Normal}(0, 1), \\
+\alpha_{ucs} &\sim \text{Normal}(0, 1), \\
+\beta_{cs}, \beta_{covariates} &\sim \text{Normal}(0, 1), \\
 z_{participant}, z_{day}, z_{measurement}, z_{participant\_slope\_cs} &\sim \text{Normal}(0, 1), \\
 \sigma_{participant}, \sigma_{day}, \sigma_{measurement}, \sigma_{participant\_slope\_cs}, \sigma_{ucs} &\sim \text{Exponential}(1), \\
 \nu &\sim \text{Gamma}(2, 0.1).
 \end{aligned}
 $$
 
-The detailed Stan code is included below:
+
+#### Likelihood
+
+The model assumes that the observed values of \( \text{UCS} \) follow a Student-\( t \) distribution. The parameters account for fixed effects (e.g., \( \alpha_{ucs} \), \( \beta_{cs} \)), random effects, and measurement error:
+
+$$
+\text{UCS}[n] \sim \text{Student-}t\left( \nu, \mu_n, \sigma_{ucs} \right),
+$$
+
+where:
+
+$$
+\begin{aligned}
+\mu_n = & \ \alpha_{ucs} \\
+        & + \beta_{cs} \cdot \text{CS}[n] \\
+        & + \beta_{neg\_affect} \cdot \text{neg\_affect}[n] \\
+        & + \beta_{context\_eval} \cdot \text{context\_eval}[n] \\
+        & + \sigma_{participant} \cdot z_{participant}[\text{participant}[n]] \\
+        & + \sigma_{day} \cdot z_{day}[\text{day}[n]] \\
+        & + \sigma_{measurement} \cdot z_{measurement}[\text{measurement}[n]] \\
+        & + \sigma_{participant\_slope\_cs} \cdot z_{participant\_slope\_cs}[\text{participant}[n]].
+\end{aligned}
+$$
+
+
+#### Stan Code
+
+The full implementation in Stan is shown below:
 
 ```stan
 data {
-  int<lower=0> N; // Observations
-  int<lower=0> P; // Participants
-  int<lower=0> D; // Days
-  int<lower=0> M; // Measurements
-  array[N] int<lower=1, upper=P> participant;
-  array[N] int<lower=1, upper=D> day;
-  array[N] int<lower=1, upper=M> measurement;
-  array[N] real CS;
-  array[N] real UCS;
-  array[N] real neg_affect;
-  array[N] real context_eval;
+  int<lower=0> N; // Total observations
+  int<lower=0> P; // Number of participants
+  int<lower=0> D; // Number of days
+  int<lower=0> M; // Number of measurements
+  array[N] int<lower=1, upper=P> participant; // Participant index
+  array[N] int<lower=1, upper=D> day;         // Day index
+  array[N] int<lower=1, upper=M> measurement; // Measurement index
+  array[N] real CS;                           // Predictor: CS
+  array[N] real UCS;                          // Response: UCS
+  array[N] real neg_affect;                   // Covariate: Negative affect
+  array[N] real context_eval;                 // Covariate: Context evaluation
 }
 
 parameters {
-  real alpha_ucs;
-  real beta_cs;
-  real beta_neg_affect;
-  real beta_context_eval;
-  vector[P] z_participant;
-  vector[D] z_day;
-  vector[M] z_measurement;
-  vector[P] z_participant_slope_cs;
-  real<lower=0> sigma_participant;
-  real<lower=0> sigma_day;
-  real<lower=0> sigma_measurement;
-  real<lower=0> sigma_participant_slope_cs;
-  real<lower=0> sigma_ucs;
-  real<lower=0> nu;
+  real alpha_ucs;                         // Intercept
+  real beta_cs;                           // Effect of CS
+  real beta_neg_affect;                   // Effect of negative affect
+  real beta_context_eval;                 // Effect of context evaluation
+  vector[P] z_participant;                // Participant random effects
+  vector[D] z_day;                        // Day random effects
+  vector[M] z_measurement;                // Measurement random effects
+  vector[P] z_participant_slope_cs;       // Random slopes for CS by participant
+  real<lower=0> sigma_participant;        // SD for participant random effects
+  real<lower=0> sigma_day;                // SD for day random effects
+  real<lower=0> sigma_measurement;        // SD for measurement random effects
+  real<lower=0> sigma_participant_slope_cs; // SD for CS slopes
+  real<lower=0> sigma_ucs;                // Measurement noise
+  real<lower=0> nu;                       // Degrees of freedom for Student-t
 }
 
 model {
+  // Priors
   alpha_ucs ~ normal(0, 1);
   beta_cs ~ normal(0, 1);
   beta_neg_affect ~ normal(0, 1);
@@ -86,17 +118,21 @@ model {
   sigma_ucs ~ exponential(1);
   nu ~ gamma(2, 0.1);
 
+  // Likelihood
   for (n in 1:N) {
-    UCS[n] ~ student_t(nu,
-                      alpha_ucs +
-                      beta_cs * CS[n] +
-                      beta_neg_affect * neg_affect[n] +
-                      beta_context_eval * context_eval[n] +
-                      sigma_participant * z_participant[participant[n]] +
-                      sigma_day * z_day[day[n]] +
-                      sigma_measurement * z_measurement[measurement[n]] +
-                      sigma_participant_slope_cs * z_participant_slope_cs[participant[n]],
-                      sigma_ucs);
+    UCS[n] ~ student_t(
+      nu,
+      alpha_ucs +
+        beta_cs * CS[n] +
+        beta_neg_affect * neg_affect[n] +
+        beta_context_eval * context_eval[n] +
+        sigma_participant * z_participant[participant[n]] +
+        sigma_day * z_day[day[n]] +
+        sigma_measurement * z_measurement[measurement[n]] +
+        sigma_participant_slope_cs * z_participant_slope_cs[participant[n]],
+      sigma_ucs
+    );
   }
 }
 ```
+
