@@ -57,15 +57,15 @@ suppressPackageStartupMessages({
 
 \newpage
 
-## Analysis 1: Correlations Between the CS and UCS Components
+## Analysis 1: Multilevel Reliability
 
-{{< include ./sections/apx_study1_correlations.qmd >}}
+{{< include ./sections/apx_study1_reliability.qmd >}}
 
 \newpage
 
-## Analysis 2: Multilevel Reliability
+## Analysis 2: Correlations Between the CS and UCS Components
 
-{{< include ./sections/apx_study1_reliability.qmd >}}
+{{< include ./sections/apx_study1_correlations.qmd >}}
 
 \newpage
 

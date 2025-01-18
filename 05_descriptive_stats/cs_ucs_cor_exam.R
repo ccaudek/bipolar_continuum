@@ -41,12 +41,13 @@ alldata1$USC <- scale(
 # Outliers detection ------------------------------------------------------
 
 d1 <- alldata1 |>
-  dplyr::select(SC, USC, user_id, day, time_window)
+  dplyr::select(SC, USC, user_id, day, time_window) |>
+  drop_na()
 
-outliers <- check_outliers(d, method = "mcd", verbose = FALSE)
+outliers <- check_outliers(d1, method = "mcd", verbose = FALSE)
 outliers
 
-d_clean <- d[-which(outliers), ]
+d_clean <- d1[-which(outliers), ]
 # The analysis after removing outliers produces the same coclusion as the
 # analysis of the complete data set. Therefore, the complete data set will
 # be used.
@@ -80,7 +81,6 @@ print(summary(f_joint)) # Check convergence (R-hat should be close to 1)
 pp_check(f_joint, resp = "SC") + xlim(-5, 5) # Posterior predictive checks
 pp_check(f_joint, resp = "USC") + xlim(-5, 5) # Posterior predictive checks
 
-
 # Function to compute a single SC-USC correlation with 89% credible intervals
 extract_overall_correlation <- function(model) {
   # Extract posterior draws of residual correlations
@@ -113,14 +113,12 @@ extract_overall_correlation <- function(model) {
   return(results)
 }
 
-
 # Extract and print results
 results <- extract_overall_correlation(f_joint)
 
 # Print formatted results
 cat("\nOverall within-person SC-USC correlation:\n")
 print(knitr::kable(results, digits = 3))
-
 
 # Correlation plot
 p1 <- ggplot(results$correlations, aes(x = period, y = correlation)) +
