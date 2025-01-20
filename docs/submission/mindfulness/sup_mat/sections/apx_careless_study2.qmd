@@ -64,7 +64,7 @@ Also in Study 2, both the person-level and occasion-level analyses showed a low 
 
 ### Data Reanalysis {#sec-study2-reanalysis}
 
-To evaluate whether excluding data flagged at the person-level and at the occasion-level, we conducted a secondary analysis of the Study 2 data. As for Study 1, this analysis focused on the nomothetic model assessing the relationships between the Uncompassionate Self (UCS) and Compassionate Self (CS) components of state self-compassion, after controlling for Negative Affect and Context Evaluation. Results from the full dataset are provided in Figure 2.
+To evaluate whether excluding data flagged at the person-level and at the occasion-level, we conducted a secondary analysis of the Study 2 data. As for Study 1, this analysis focused on the nomothetic model assessing the relationships between the UCS and CS components of state self-compassion, after controlling for Negative Affect, Context Evaluation, and Decentering. Results from the full dataset are provided in Figure 2.
 
 Also for Study 2, the reanalysis produced results that were effectively identical to those derived from the full dataset. Hence, we retained all participants who met the compliance requirements in our final analyses. Below is a table summarizing the posterior estimates from the reanalysis, alongside their standard deviations and 89% credibility intervals:
 

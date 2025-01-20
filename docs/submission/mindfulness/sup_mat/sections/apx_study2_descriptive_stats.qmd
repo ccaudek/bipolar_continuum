@@ -16,5 +16,6 @@ The table below presents the descriptive statistics for the psychological assess
 | Isolation                | 2.69     | 0.09       | 2.50         | 2.87         |
 | Over-Identification      | 2.67     | 0.09       | 2.50         | 2.85         |
 
-## Summary
+### Summary
+
 The results indicate no evidence of emotional disorders among participants. The scores align closely with those reported in prior studies that utilized these assessment tools in community samples [@bottesi2015; @neff2017examining; @sica2021health]. 
