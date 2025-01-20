@@ -1,22 +1,22 @@
 # Overview ----------------------------------------------------------------
 # Associated project: Mindfulness paper on EMA self-compassion
-# Script purpose: can careless responding explain the positive 
+# Script purpose: can careless responding explain the positive
 #   association between CS and UCS that has been found for some
 #   participants? The analysis uses the data for both studies combined.
 #
 # Written by: Corrado Caudek (corrado.caudek@unifi.it)
 # Version: 2024-12-20
-# Last update: 
+# Last update:
 # Status: Final
-# Notes: 
+# Notes:
 # TODO: Complete the MCMC analysis for the last 3 indices.
 
 
 # Prelims -----------------------------------------------------------------
 
-if(!requireNamespace("pacman")) install.packages("pacman")
+if (!requireNamespace("pacman")) install.packages("pacman")
 pacman::p_load(
-  here, tictoc, rio, tidyverse, cmdstanr, posterior, bayesplot, 
+  here, tictoc, rio, tidyverse, cmdstanr, posterior, bayesplot,
   careless, brms, papaja, magrittr
 )
 
@@ -49,7 +49,7 @@ study_2_temp <- rio::import(here::here("data", "study_2_data.csv"))
 
 x_scaled <- function(x) {
   (x - min(x)) / (max(x) - min(x)) * (5 - 1) + 1
-} 
+}
 
 study_2_temp$neg_aff_raw <- study_2_temp$neg_aff
 study_2_temp$neg_aff <- x_scaled(study_2_temp$neg_aff_raw)
@@ -58,15 +58,15 @@ study_2_temp$neg_aff_raw <- NULL
 # Add negative affect scaled by occasion, day, person
 study_2_temp <- center3L(
   dataname = study_2_temp,
-  varname = neg_aff, 
-  idname = user_id, 
+  varname = neg_aff,
+  idname = user_id,
   dayname = day
 )
 
 study_2_temp <- center3L(
   dataname = study_2_temp,
-  varname = context, 
-  idname = user_id, 
+  varname = context,
+  idname = user_id,
   dayname = day
 )
 
@@ -114,7 +114,7 @@ length(unique_ids)
 # Find user_id of participants with UCS-CS slope greater than 0 by considering
 # the 89% CI (with lower bound > 0).
 
-# Read MCMC samples: Import the posterior samples generated from the Stan 
+# Read MCMC samples: Import the posterior samples generated from the Stan
 # model used in the script 01_idiographic_model.R
 fit_mcmc <- readRDS(
   here::here("02_idiographic_test", "mcmc", "idiographic_fit.rds")
@@ -129,7 +129,7 @@ beta_interaction_samples <- posterior_samples$`beta_interaction`
 sigma_cs_slope_samples <- posterior_samples$`sigma_participant_slope_cs`
 
 # Extract the individual slopes for CS (z_participant_slope_cs) from the posterior samples
-z_participant_slope_cs_samples <- posterior_samples %>% 
+z_participant_slope_cs_samples <- posterior_samples %>%
   dplyr::select(starts_with("z_participant_slope_cs"))
 
 # Calculate the mean slope for each individual
@@ -137,7 +137,7 @@ individual_slopes <- apply(as.matrix(z_participant_slope_cs_samples), 2, mean)
 
 # Extract the posterior samples for the fixed effect (beta_cs) and random slopes (z_participant_slope_cs)
 beta_cs_samples <- posterior_samples$`beta_cs`
-z_participant_slope_cs_samples <- posterior_samples %>% 
+z_participant_slope_cs_samples <- posterior_samples %>%
   dplyr::select(starts_with("z_participant_slope_cs"))
 
 # Sum the fixed effect (beta_cs) and the random effect (z_participant_slope_cs) for each participant
@@ -153,8 +153,10 @@ summary(individual_total_slopes)
 # Plot the distribution of total individual slopes (fixed + random effects)
 ggplot(data.frame(slope = individual_total_slopes), aes(x = slope)) +
   geom_histogram(binwidth = 0.05, fill = "blue", alpha = 0.7) +
-  labs(title = "Distribution of Total Individual Slopes for CS on UCS",
-       x = "Total Individual CS Effect on UCS (Fixed + Random Effects)", y = "Count")
+  labs(
+    title = "Distribution of Total Individual Slopes for CS on UCS",
+    x = "Total Individual CS Effect on UCS (Fixed + Random Effects)", y = "Count"
+  )
 
 mean(individual_total_slopes < 0)
 # [1] 0.6606061
@@ -162,12 +164,12 @@ mean(individual_total_slopes < 0)
 # Calcola i quantili 5.5% e 94.5% per ogni soggetto
 cred_intervals <- apply(
   individual_total_slope_samples,
-  2, 
-  quantile, 
+  2,
+  quantile,
   probs = c(0.055, 0.945)
 )
 
-# cred_intervals è ora una matrice 2 x P 
+# cred_intervals è ora una matrice 2 x P
 # dove la prima riga è il quantile al 5.5% e la seconda al 94.5%
 
 # Identifica i soggetti per i quali il limite inferiore (5.5%) è > 0
@@ -197,10 +199,10 @@ df$is_pos_slope_group <- ifelse(
   df$user_id %in% subjects_positive_strong, 1, 0
 )
 
-# group_neg_slope <- df |> 
+# group_neg_slope <- df |>
 #   dplyr::filter(is_pos_slope_group == 0)
-# 
-# group_pos_slope <- df |> 
+#
+# group_pos_slope <- df |>
 #   dplyr::filter(is_pos_slope_group == 1)
 
 
@@ -266,7 +268,7 @@ summary(mod_longstring, prob = .89)
 # Intercept[6]            5.59      0.10     5.44     5.74 1.00      976      771
 # Intercept[7]            5.89      0.11     5.71     6.06 1.00     1007      990
 # is_pos_slope_group1     0.04      0.05    -0.03     0.11 1.00     1024      907
-# 
+#
 #                     Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 # Intercept[1]           -3.20      0.12    -3.41    -3.02 1.02      188      655
 # Intercept[2]            1.32      0.08     1.19     1.44 1.01      383     1240
@@ -280,7 +282,7 @@ summary(mod_longstring, prob = .89)
 # Generate APA Table
 
 a <- summary(mod_longstring)
-summary_mod_longstring <- rbind(data.frame(a$fixed), data.frame(a$spec_pars) )
+summary_mod_longstring <- rbind(data.frame(a$fixed), data.frame(a$spec_pars))
 
 summary_mod_longstring <- summary_mod_longstring[1:8, ]
 
@@ -291,13 +293,13 @@ summary_mod_longstring %<>%
   rownames_to_column(var = "parameter")
 
 # rownames(summary_mod1) <- c("$\\alpha$", "$\\beta$", "$\\sigma_{e}$")
-colnames(summary_mod_longstring) <- c("mean","SE", "lower bound", "upper bound", "Rhat")
+colnames(summary_mod_longstring) <- c("mean", "SE", "lower bound", "upper bound", "Rhat")
 
 write.csv(
-  summary_mod_longstring, 
+  summary_mod_longstring,
   file = here::here(
     "02_idiographic_test", "plots", "careless", "summary_mod_longstring.csv"
-    ), 
+  ),
   row.names = FALSE
 )
 
@@ -331,13 +333,13 @@ plot_ce <- ce$`is_pos_slope_group` %>%
   ggplot(aes(x = as.factor(effect1__), y = estimate__, ymin = lower__, ymax = upper__)) +
   geom_pointrange() +
   labs(
-    x = "Group",  # Etichetta asse X
-    y = "Longstring",  # Etichetta asse Y
-    title = "Effects of Group on Longstring"  # Titolo del grafico (opzionale)
+    x = "Group", # Etichetta asse X
+    y = "Longstring", # Etichetta asse Y
+    title = "Effects of Group on Longstring" # Titolo del grafico (opzionale)
   ) +
   scale_x_discrete(labels = c("0" = "Non-positive\nslope", "1" = "Positive\nslope")) +
   theme(
-    axis.text.x = element_text()  # Rotazione delle etichette asse X, se necessario
+    axis.text.x = element_text() # Rotazione delle etichette asse X, se necessario
   )
 
 # Visualizzazione del grafico
@@ -347,25 +349,25 @@ print(plot_ce)
 ggsave(
   filename = here::here(
     "02_idiographic_test", "plots", "careless", "mod_longstring_plot.png"
-  ),  
-  plot = plot_ce,  # Nome dell'oggetto del grafico
-  width = 8,  # Larghezza in pollici
-  height = 6,  # Altezza in pollici
-  dpi = 300  # Risoluzione (300 DPI è standard per la stampa)
+  ),
+  plot = plot_ce, # Nome dell'oggetto del grafico
+  width = 8, # Larghezza in pollici
+  height = 6, # Altezza in pollici
+  dpi = 300 # Risoluzione (300 DPI è standard per la stampa)
 )
 
 
 # Intra-individual Response Variability -----------------------------------
 
-df_irv <- df |> 
-  rowwise() |> 
+df_irv <- df |>
+  rowwise() |>
   mutate(
     irv_val = irv(matrix(c_across(all_of(scs_cols)), nrow = 1))
-  ) |> 
+  ) |>
   ungroup()
 
 # Select columns for multilevel analysis
-df_irv <- df_irv |> 
+df_irv <- df_irv |>
   dplyr::select(
     user_id, day, time_window, is_pos_slope_group, irv_val
   )
@@ -379,9 +381,9 @@ if (
   )
 ) {
   mod_irv <- brm(
-    formula = irv_val ~ is_pos_slope_group + 
-      (1 | user_id/day/time_window),
-    family = skew_normal(),  
+    formula = irv_val ~ is_pos_slope_group +
+      (1 | user_id / day / time_window),
+    family = skew_normal(),
     data = df_irv,
     backend = "cmdstanr",
     file = here::here("02_idiographic_test", "mcmc", "mod_irv.rds")
@@ -401,6 +403,28 @@ summary(mod_irv, prob = 0.89)
 conditional_effects(mod_irv, "is_pos_slope_group")
 
 
+# Calcolo degli effetti condizionali
+ce <- conditional_effects(mod_irv, "is_pos_slope_group")
+
+# Personalizzazione del grafico
+plot_ce <- ce$`is_pos_slope_group` %>%
+  ggplot(aes(x = as.factor(effect1__), y = estimate__, ymin = lower__, ymax = upper__)) +
+  geom_pointrange() +
+  labs(
+    x = "Group", # Etichetta asse X
+    y = "Intra-individual Response Variability", # Etichetta asse Y
+    title = "Effects of Group on IRV" # Titolo del grafico (opzionale)
+  ) +
+  scale_x_discrete(labels = c("0" = "Non-positive\nslope", "1" = "Positive\nslope")) +
+  theme(
+    axis.text.x = element_text() # Rotazione delle etichette asse X, se necessario
+  )
+
+# Visualizzazione del grafico
+print(plot_ce)
+
+
+
 # evenodd -----------------------------------------------------------------
 
 # Define even and odd items
@@ -412,12 +436,12 @@ df_evenodd <- df %>%
   mutate(
     even_mean = rowMeans(across(all_of(even_items)), na.rm = TRUE),
     odd_mean = rowMeans(across(all_of(odd_items)), na.rm = TRUE),
-    evenodd_val = 1 - abs(even_mean - odd_mean) / (even_mean + odd_mean)  # Consistency metric
+    evenodd_val = 1 - abs(even_mean - odd_mean) / (even_mean + odd_mean) # Consistency metric
   ) %>%
   ungroup()
 
 # Select columns for multilevel analysis
-df_evenodd <- df_evenodd |> 
+df_evenodd <- df_evenodd |>
   dplyr::select(
     user_id, day, time_window, is_pos_slope_group, evenodd_val
   )
@@ -435,9 +459,9 @@ if (
   )
 ) {
   mod_evenodd <- brm(
-    formula = evenodd_val ~ is_pos_slope_group + 
-      (1 | user_id/day/time_window),
-    family = asym_laplace(),  
+    formula = evenodd_val ~ is_pos_slope_group +
+      (1 | user_id / day / time_window),
+    family = asym_laplace(),
     data = df_evenodd_clean,
     backend = "cmdstanr",
     file = here::here("02_idiographic_test", "mcmc", "mod_evenodd.rds")
@@ -457,11 +481,37 @@ summary(mod_evenodd)
 conditional_effects(mod_evenodd, "is_pos_slope_group")
 
 
+
+# Calcolo degli effetti condizionali
+ce <- conditional_effects(mod_evenodd, "is_pos_slope_group")
+
+# Personalizzazione del grafico
+plot_ce <- ce$`is_pos_slope_group` %>%
+  ggplot(aes(x = as.factor(effect1__), y = estimate__, ymin = lower__, ymax = upper__)) +
+  geom_pointrange() +
+  labs(
+    x = "Group", # Etichetta asse X
+    y = "Even-Odd", # Etichetta asse Y
+    title = "Effects of Group on Even-Odd" # Titolo del grafico (opzionale)
+  ) +
+  scale_x_discrete(labels = c("0" = "Non-positive\nslope", "1" = "Positive\nslope")) +
+  theme(
+    axis.text.x = element_text() # Rotazione delle etichette asse X, se necessario
+  )
+
+# Visualizzazione del grafico
+print(plot_ce)
+
+
+
+
 # Mahalanobis Distance ----------------------------------------------------
 
 # Define the columns for Mahalanobis calculation
-scs_cols <- c("scs_pos_1", "scs_neg_1", "scs_pos_2", "scs_neg_2", 
-              "scs_neg_3", "scs_pos_3", "scs_pos_4", "scs_neg_4")
+scs_cols <- c(
+  "scs_pos_1", "scs_neg_1", "scs_pos_2", "scs_neg_2",
+  "scs_neg_3", "scs_pos_3", "scs_pos_4", "scs_neg_4"
+)
 
 # Subset the data for the SCS columns
 scs_matrix <- as.matrix(df[, scs_cols])
@@ -480,9 +530,9 @@ if (
   )
 ) {
   mod_mahad <- brm(
-    formula = mahad_val ~ is_pos_slope_group + 
-      (1 | user_id/day/time_window),
-    family = asym_laplace(),  
+    formula = mahad_val ~ is_pos_slope_group +
+      (1 | user_id / day / time_window),
+    family = asym_laplace(),
     data = df,
     backend = "cmdstanr",
     file = here::here("02_idiographic_test", "mcmc", "mod_mahad.rds")
@@ -501,10 +551,34 @@ summary(mod_mahad)
 
 conditional_effects(mod_mahad, "is_pos_slope_group")
 
-# Conclusion: According to four CR indices considered, there is no evidence that  
+# Conclusion: According to four CR indices considered, there is no evidence that
 # participants with a positive UCS-CS slope show a higher level of CR than the
 # other participants.
 
+
+
+
+# Calcolo degli effetti condizionali
+ce <- conditional_effects(mod_mahad, "is_pos_slope_group")
+
+# Personalizzazione del grafico
+plot_ce <- ce$`is_pos_slope_group` %>%
+  ggplot(aes(x = as.factor(effect1__), y = estimate__, ymin = lower__, ymax = upper__)) +
+  geom_pointrange() +
+  labs(
+    x = "Group", # Etichetta asse X
+    y = "Mahalanobis Distance", # Etichetta asse Y
+    title = "Effects of Group on Mahalanobis Distance" # Titolo del grafico (opzionale)
+  ) +
+  scale_x_discrete(labels = c("0" = "Non-positive\nslope", "1" = "Positive\nslope")) +
+  theme(
+    axis.text.x = element_text() # Rotazione delle etichette asse X, se necessario
+  )
+
+# Visualizzazione del grafico
+print(plot_ce)
+
+
+
+
 # eof ---
-
-
