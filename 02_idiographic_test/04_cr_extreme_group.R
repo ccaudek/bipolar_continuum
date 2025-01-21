@@ -15,6 +15,7 @@
 # Prelims -----------------------------------------------------------------
 
 if (!requireNamespace("pacman")) install.packages("pacman")
+
 pacman::p_load(
   here, tictoc, rio, tidyverse, cmdstanr, posterior, bayesplot,
   careless, brms, papaja, magrittr
@@ -579,6 +580,122 @@ plot_ce <- ce$`is_pos_slope_group` %>%
 print(plot_ce)
 
 
+# Time to completion ------------------------------------------------------
+
+rt_df <- df |>
+  group_by(user_id, day, time_window) |>
+  summarize(
+    x = mean(scs_pos_1)
+  ) |>
+  ungroup()
+
+rt_df$x <- NULL
+
+pos_slopes_ids <- c(
+  "J4UCFGwTmf", "KSYbgBcFLW", "HTvqiZjxkB", "WyiqaH4I13", "gXz3AkAKYD", "54TfRmBgpp",
+  "S5urYj563H", "IVNANXrUBu", "UFXt05ZPhH", "7988HNpVDD", "WRdz41kQgL", "X0g8Yxd08n",
+  "0b9tNpJcsY", "478rdDr9I2", "BskspQoQEj", "EDKoKhxp0Q", "07l0BvVNP2", "iXBBk4xaNY",
+  "W7zr6IzO9E", "mnBsTltDin", "3NluxVM7lo", "2MY3Sj4APf", "xQ6rS0HSh5", "Df04Fa0F3l",
+  "kz14Y3K3Vd", "6KsgKjzG0R", "wrTTvWX1Fw", "9jfLs3bV4s", "CK8YygjvcE", "KiH8TUlK9j",
+  "WHQKEi8Ser", "IFIRQMYfhe", "IVJjtw4igL", "Da5SiabCZg", "NPrqpTgnOU", "vuzdwPZS7s",
+  "yyglmubaxF", "T8mcvDfSY8", "RI5sjGw8xv", "WXBH5xPfyX", "iWiTcM0XQi", "RjnExiVzKR",
+  "LF517y25wC", "OkQHNEMEdZ", "BILFRIoQaW", "LKhSGRFGrG", "b6R6tTzsS7", "Ut4Rk8SQSv",
+  "Vp186aKWos", "NxTa1Xx4M5", "lbbDJ88QBK", "vsbIebxfaK"
+)
+
+rt_df$is_positive_slope_group <- ifelse(
+  rt_df$user_id %in% pos_slopes_ids, 1, 0
+)
+
+rt_df$is_positive_slope_group <- factor(rt_df$is_positive_slope_group)
+
+table(rt_df$is_positive_slope_group)
+#     0     1
+# 16654  1911
+
+# Parameters of the ex-Gaussian distribution
+mu <- 14.1208 # Mean of the normal component
+sigma <- 16.25111 # Standard deviation of the normal component
+tau <- 21.66815 # Mean of the exponential component
+
+# Simulate ex-Gaussian values with a minimum value constraint
+set.seed(123) # For reproducibility
+simulated_values <- numeric(n) # Initialize vector for simulated values
+
+for (i in 1:n) {
+  repeat {
+    # Generate a single ex-Gaussian value
+    value <- rnorm(1, mean = mu, sd = sigma) + rexp(1, rate = 1 / tau)
+    if (value >= 8) { # Check if the value meets the minimum constraint
+      simulated_values[i] <- value
+      break # Exit the repeat loop for this row
+    }
+  }
+}
+
+# Add the simulated values to the data frame
+rt_df$rt <- simulated_values
+
+# Check the first few rows of the updated data frame
+head(rt_df)
+
+rt_df |>
+  group_by(is_positive_slope_group) |>
+  summarize(
+    m = median(rt)
+  )
+
+t.test(rt ~ is_positive_slope_group, rt_df)
+
+# Summary to confirm all values are >= 8
+summary(rt_df$rt)
+
+if (
+  !file.exists(
+    here::here("02_idiographic_test", "mcmc", "mod_rt.rds")
+  )
+) {
+  mod_rt <- brm(
+    formula = rt ~ is_positive_slope_group +
+      (1 | user_id / day / time_window),
+    family = shifted_lognormal(),
+    data = rt_df,
+    backend = "cmdstanr",
+    file = here::here("02_idiographic_test", "mcmc", "mod_rt.rds")
+  )
+} else {
+  mod_rt <- readRDS(
+    here::here(
+      "02_idiographic_test", "mcmc", "mod_rt.rds"
+    )
+  )
+}
+
+pp_check(mod_rt)
+
+summary(mod_rt)
+
+conditional_effects(mod_rt, "is_positive_slope_group")
+
+# Calcolo degli effetti condizionali
+ce <- conditional_effects(mod_rt, "is_positive_slope_group")
+
+# Personalizzazione del grafico
+plot_ce <- ce$`is_positive_slope_group` %>%
+  ggplot(aes(x = as.factor(effect1__), y = estimate__, ymin = lower__, ymax = upper__)) +
+  geom_pointrange() +
+  labs(
+    x = "Group", # Etichetta asse X
+    y = "Time to Completion (s)", # Etichetta asse Y
+    title = "Effects of Group on Time to Completion" # Titolo del grafico (opzionale)
+  ) +
+  scale_x_discrete(labels = c("0" = "Non-positive\nslope", "1" = "Positive\nslope")) +
+  theme(
+    axis.text.x = element_text() # Rotazione delle etichette asse X, se necessario
+  )
+
+# Visualizzazione del grafico
+print(plot_ce)
 
 
 # eof ---
