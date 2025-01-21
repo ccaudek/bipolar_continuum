@@ -387,6 +387,7 @@ if (
     family = skew_normal(),
     data = df_irv,
     backend = "cmdstanr",
+    algorithm = "meanfield",
     file = here::here("02_idiographic_test", "mcmc", "mod_irv.rds")
   )
 } else {
@@ -424,6 +425,17 @@ plot_ce <- ce$`is_pos_slope_group` %>%
 # Visualizzazione del grafico
 print(plot_ce)
 
+
+# Salvataggio del grafico
+ggsave(
+  filename = here::here(
+    "02_idiographic_test", "plots", "careless", "mod_irv_plot.png"
+  ),
+  plot = plot_ce, # Nome dell'oggetto del grafico
+  width = 8, # Larghezza in pollici
+  height = 6, # Altezza in pollici
+  dpi = 300 # Risoluzione (300 DPI è standard per la stampa)
+)
 
 
 # evenodd -----------------------------------------------------------------
@@ -465,6 +477,7 @@ if (
     family = asym_laplace(),
     data = df_evenodd_clean,
     backend = "cmdstanr",
+    algorithm = "meanfield",
     file = here::here("02_idiographic_test", "mcmc", "mod_evenodd.rds")
   )
 } else {
@@ -503,7 +516,16 @@ plot_ce <- ce$`is_pos_slope_group` %>%
 # Visualizzazione del grafico
 print(plot_ce)
 
-
+# Salvataggio del grafico
+ggsave(
+  filename = here::here(
+    "02_idiographic_test", "plots", "careless", "mod_evenodd_plot.png"
+  ),
+  plot = plot_ce, # Nome dell'oggetto del grafico
+  width = 8, # Larghezza in pollici
+  height = 6, # Altezza in pollici
+  dpi = 300 # Risoluzione (300 DPI è standard per la stampa)
+)
 
 
 # Mahalanobis Distance ----------------------------------------------------
@@ -536,6 +558,7 @@ if (
     family = asym_laplace(),
     data = df,
     backend = "cmdstanr",
+    algorithm = "meanfield",
     file = here::here("02_idiographic_test", "mcmc", "mod_mahad.rds")
   )
 } else {
@@ -557,8 +580,6 @@ conditional_effects(mod_mahad, "is_pos_slope_group")
 # other participants.
 
 
-
-
 # Calcolo degli effetti condizionali
 ce <- conditional_effects(mod_mahad, "is_pos_slope_group")
 
@@ -578,6 +599,17 @@ plot_ce <- ce$`is_pos_slope_group` %>%
 
 # Visualizzazione del grafico
 print(plot_ce)
+
+# Salvataggio del grafico
+ggsave(
+  filename = here::here(
+    "02_idiographic_test", "plots", "careless", "mod_mahalanobis_plot.png"
+  ),
+  plot = plot_ce, # Nome dell'oggetto del grafico
+  width = 8, # Larghezza in pollici
+  height = 6, # Altezza in pollici
+  dpi = 300 # Risoluzione (300 DPI è standard per la stampa)
+)
 
 
 # Time to completion ------------------------------------------------------
@@ -696,6 +728,17 @@ plot_ce <- ce$`is_positive_slope_group` %>%
 
 # Visualizzazione del grafico
 print(plot_ce)
+
+# Salvataggio del grafico
+ggsave(
+  filename = here::here(
+    "02_idiographic_test", "plots", "careless", "mod_rt_plot.png"
+  ),
+  plot = plot_ce, # Nome dell'oggetto del grafico
+  width = 8, # Larghezza in pollici
+  height = 6, # Altezza in pollici
+  dpi = 300 # Risoluzione (300 DPI è standard per la stampa)
+)
 
 
 # eof ---

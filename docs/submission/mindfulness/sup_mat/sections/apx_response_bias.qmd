@@ -13,80 +13,192 @@ Participants were classified as exhibiting a positive UCS-CS association if the 
 
 **Results and Interpretation.** The Bayesian analyses provided posterior estimates of differences in careless responding indices between participants with positive UCS-CS associations and those without. These estimates allowed us to evaluate whether the observed positive associations reflected genuine deviations from the Bipolar Continuum Hypothesis or were artifacts of systematic response biases. By incorporating hierarchical modeling and Bayesian estimation, this analysis offered a nuanced approach to understanding the potential role of response behavior in shaping the observed patterns, contributing to the reliability and interpretability of the study’s findings.
 
+
 ### Longstring Index
 
-The Longstring index measures the longest sequence of consecutive identical responses provided by a participant during a single measurement occasion. A high Longstring index may indicate "straightlining," a response pattern often associated with careless or inattentive behavior. If the posterior estimate of the average Longstring index is credibly higher for participants with a positive UCS-CS association, it would suggest that this group exhibits a greater tendency toward careless responding.
+The Longstring Index measures the longest sequence of consecutive identical responses provided by a participant during a single measurement occasion. Elevated values on this index may indicate "straightlining," a response pattern commonly linked to inattentive or careless behavior. If participants with a positive UCS-CS association show a higher average Longstring Index, it could suggest a greater tendency toward careless responding within this group.
 
-To investigate the relationship between group membership and the Longstring index, we employed a hierarchical Bayesian cumulative ordinal regression model using the `brm` function from the `brms` R package. The model specification is as follows:
+To assess the relationship between group membership and the Longstring Index, we employed a hierarchical Bayesian cumulative ordinal regression model using the `brm` function from the `brms` R package. The model was specified as follows:
 
 ```r
 mod_longstring <- brm(
   formula = longstring_val ~ is_pos_slope_group +
     (1 | user_id / day / time_window),
-  family = cumulative(link = "logit"),  # Cumulative ordinal regression
-  data = df_result,                     # Input data
-  backend = "cmdstanr"                  # Backend for computation
+  family = cumulative(link = "logit"),  
+  data = df_result,                     
+  backend = "cmdstanr"                 
 )
 ```
 
-**Model Details:**
+This model accounts for the nested structure of the data (measurements within time windows, nested within days and participants) while estimating the effect of group membership on the Longstring Index.
 
-- **Outcome Variable**: `longstring_val`, representing the Longstring index, is treated as an ordinal variable.
-- **Predictor**: `is_pos_slope_group`, a binary variable indicating group membership:
-  - `1`: Participants with a positive UCS-CS slope, where the 89% credible interval does not include zero.
-  - `0`: All other participants.
-- **Random Effects**: The model accounts for hierarchical clustering at three levels:
-  - **User ID** (`user_id`): Captures between-subject variability.
-  - **Day** (`day`): Accounts for within-subject, day-to-day variability.
-  - **Time Window** (`time_window`): Addresses measurement occasion-specific variability within each day.
-- **Link Function**: A cumulative logit link is used, appropriate for ordinal outcomes.
+#### Model Results
 
-This model structure allows us to estimate the impact of group membership on the Longstring index while appropriately accounting for the nested structure of the data.
+| Parameter        | Mean   | SE    | Lower Bound | Upper Bound | Rhat  |
+|-------------------|--------|-------|-------------|-------------|-------|
+| Intercept[1]      | -3.205 | 0.118 | -3.448      | -2.987      | 1.016 |
+| Intercept[2]      | 1.316  | 0.078 | 1.164       | 1.470       | 1.006 |
+| Intercept[3]      | 3.660  | 0.131 | 3.422       | 3.927       | 1.014 |
+| Intercept[4]      | 5.105  | 0.166 | 4.802       | 5.441       | 1.015 |
+| Intercept[5]      | 6.372  | 0.198 | 6.009       | 6.779       | 1.014 |
+| Intercept[6]      | 7.118  | 0.221 | 6.712       | 7.567       | 1.013 |
+| Intercept[7]      | 7.444  | 0.232 | 7.006       | 7.919       | 1.014 |
+| pos_slope_group | 0.047 | 0.203 | -0.355      | 0.441       | 1.000 |
 
+Table: Posterior means, standard errors, 95% credible intervals, and $\hat{R}$ statistics for model parameters.
 
-| Parameter | Mean | SE | Lower bound | Upper bound | Rhat |
-|-----------|------|-----|-------------|-------------|------|
-| Intercept[1] | -3.205 | 0.118 | -3.448 | -2.987 | 1.016 |
-| Intercept[2] | 1.316 | 0.078 | 1.164 | 1.470 | 1.006 |
-| Intercept[3] | 3.660 | 0.131 | 3.422 | 3.927 | 1.014 |
-| Intercept[4] | 5.105 | 0.166 | 4.802 | 5.441 | 1.015 |
-| Intercept[5] | 6.372 | 0.198 | 6.009 | 6.779 | 1.014 |
-| Intercept[6] | 7.118 | 0.221 | 6.712 | 7.567 | 1.013 |
-| Intercept[7] | 7.444 | 0.232 | 7.006 | 7.919 | 1.014 |
-| is_pos_slope_group1 | 0.047 | 0.203 | -0.355 | 0.441 | 1.000 |
-
-: Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for each parameter of the constant effect model bmod1.
-
-
-::: {#fig-longstring}
-![](../../../../02_idiographic_test/plots/careless/mod_longstring_plot.png){width="80%"}
-
-Conditional effect of Group on Longstring Index. Vertical bars represent 89% credibility intervals.
+::: {.figure #fig-longstring}
+![](./plots/mod_longstring_plot.png){width="80%"}
+*Figure*: Conditional effect of group membership on the Longstring Index. Vertical bars represent 89% credible intervals.
 :::
+
+**Interpretation.** The posterior estimate for the effect of group membership (`is_pos_slope_group1`) suggests no credible difference in the Longstring Index between participants with positive UCS-CS associations and those without. The small effect size and wide credible interval indicate substantial uncertainty about the group effect, suggesting that both groups exhibit similar response patterns in terms of the Longstring Index.
 
 
 ### Intra-Individual Response Variability
 
-Intra-Individual Response Variability (IRV) is defined as the standard deviation of responses across a set of consecutive items for a given individual (Dunn et al., 2018). A lower IRV is often interpreted as an indicator of a greater tendency toward careless responding.
+Intra-Individual Response Variability (IRV) refers to the standard deviation of responses across a set of consecutive items for a given individual (Dunn et al., 2018). Lower IRV values are commonly associated with a greater propensity for careless responding, as they indicate reduced variability in response patterns.
+
+To investigate the relationship between group membership and IRV, we employed a hierarchical Bayesian regression model with a skew-normal likelihood using the `brm` function from the `brms` R package. The model is specified as follows:
+
+```r
+mod_irv <- brm(
+  formula = irv_val ~ is_pos_slope_group +
+    (1 | user_id / day / time_window),
+  family = skew_normal(),              # Skew-normal likelihood
+  data = df_irv,                       # Input data
+  backend = "cmdstanr"                 # Computational backend
+)
+```
+
+This model accounts for the nested structure of the data, incorporating random effects for participants (`user_id`), days, and time windows to appropriately capture within-person variability.
+
+#### Model Results
+
+| Parameter              | Estimate | Est. Error | Lower 89% CI | Upper 89% CI | Rhat | Bulk ESS | Tail ESS |
+|------------------------|----------|------------|--------------|--------------|------|----------|----------|
+| Intercept              | 1.79     | 0.00       | 1.79         | 1.80         | 1.00 | 1022     | 1021     |
+| pos_slope_group    | 0.01     | 0.01       | -0.00        | 0.03         | 1.00 | 1039     | 1070     |
+
+Table: Posterior estimates, standard errors, 89% credible intervals, and $\hat{R}$ statistics for model parameters.
+
+::: {.figure #fig-irv}
+![](./plots/mod_irv_plot.png){width="80%"}
+*Figure*: Conditional effect of group membership on the Intra-Individual Response Variability Index. Vertical bars represent 89% credible intervals.
+:::
+
+**Interpretation.** The posterior estimate for the effect of group membership (`is_pos_slope_group1`) indicates no credible difference in IRV between participants with positive UCS-CS associations and those without. The narrow credible interval and small effect size suggest that both groups exhibit similar levels of intra-individual response variability. This finding implies that group membership does not meaningfully impact variability in response patterns. 
 
 
 ### Even-Odd Inconsistency Index
 
-The Even-Odd Inconsistency Index measures response inconsistency by dividing a unidimensional scale into two halves—an even-odd split—and analyzing the relationship between the two subsets of items. The procedure is as follows: 
+The Even-Odd Inconsistency Index assesses response inconsistency by dividing a unidimensional scale into two subsets—one composed of even-numbered items and the other of odd-numbered items—and analyzing their relationship. Higher scores on this index suggest a greater likelihood of careless responding. The calculation procedure involves the following steps:
 
-1. **Split the scale**: Items are divided into two subsets, with even-numbered items forming one subset and odd-numbered items forming the other.  
-2. **Compute subscale scores**: The average response for each subset is calculated, resulting in two scores—one for the even subscale and one for the odd subscale.  
-3. **Calculate within-person correlation**: A correlation is computed between the two subscale scores for each participant, treating the even scores as variable $x$ and the odd scores as variable $y$, resulting in a correlation coefficient $r(x, y)$.  
-4. **Correct for scale length**: The correlation is adjusted for the reduced length of the scale using the Spearman–Brown prophecy formula.  
-5. **Compute the inconsistency score**: The final score is calculated as $0 - r(x, y)$, where higher values indicate a greater likelihood of careless responding.
+1. **Split the scale**: Divide the items into two subsets: even-numbered items form one subset, and odd-numbered items form the other.
+2. **Compute subscale scores**: Calculate the average response for each subset, producing two scores—one for the even subscale and one for the odd subscale.
+3. **Calculate within-person correlation**: Compute the correlation between the two subscale scores for each participant, treating even scores as variable $x$ and odd scores as variable $y$.
+4. **Adjust for scale length**: Use the Spearman–Brown prophecy formula to adjust the correlation for the reduced scale length.
+5. **Determine the inconsistency score**: Compute the final score as $0 - r(x, y)$, where higher values indicate greater response inconsistency.
 
-For the present analysis, the Compassionate Self (CS) items were treated as odd, and the Uncompassionate Self (UCS) items were treated as even. Higher scores on this index indicate greater response inconsistency, suggesting a higher tendency toward careless responding.
+In the present analysis, the Compassionate Self (CS) items were assigned to the odd subset, and the Uncompassionate Self (UCS) items to the even subset. This approach ensures alignment with the bipolar nature of the CS-UCS construct.
+
+To analyze the relationship between group membership and the Even-Odd Inconsistency Index, we used a hierarchical Bayesian regression model with an asymmetric Laplace likelihood, specified as follows:
+
+```r
+mod_evenodd <- brm(
+  formula = evenodd_val ~ is_pos_slope_group +
+    (1 | user_id / day / time_window),
+  family = asym_laplace(),             # Asymmetric Laplace likelihood
+  data = df_evenodd_clean,             # Cleaned input data
+  backend = "cmdstanr"                 # Computational backend
+)
+```
+
+This model accounts for the nested structure of the data, incorporating random effects for participants (`user_id`), days, and time windows to properly model within-person variability.
+
+#### Model Results
+
+| Parameter              | Estimate | Est. Error | Lower 95% CI | Upper 95% CI | Rhat | Bulk ESS | Tail ESS |
+|------------------------|----------|------------|--------------|--------------|------|----------|----------|
+| Intercept              | 0.05     | 0.02       | 0.01         | 0.09         | 1.00 | 988      | 845      |
+| pos_slope_group    | 0.11     | 0.05       | 0.01         | 0.22         | 1.00 | 850      | 897      |
+
+Table: Posterior estimates, standard errors, 95% credible intervals, and $\hat{R}$ statistics for model parameters.
+
+::: {.figure #fig-evenodd}
+![](./plots/mod_evenodd_plot.png){width="80%"}
+*Figure*: Conditional effect of group membership on the Even-Odd Inconsistency Index. Vertical bars represent 89% credible intervals.
+:::
+
+**Interpretation.** The posterior estimate for the effect of group membership (`is_pos_slope_group1`) suggests no credible difference in the Even-Odd Inconsistency Index between participants with positive UCS-CS associations and those without. The slight effect size and overlapping credible intervals indicate that response inconsistency does not vary meaningfully by group.
 
 
 ### Mahalanobis Distance
 
-Mahalanobis Distance ($D^2$) is a multivariate measure used to detect outliers, including patterns that may indicate careless responding. It evaluates the distance of an individual’s response set from the overall distribution of responses in the dataset. Higher $D^2$ values suggest that a participant’s responses deviate markedly from the typical response pattern, potentially reflecting careless responding. Lower $D^2$ values indicate responses closer to the average, consistent with careful engagement.
+Mahalanobis Distance ($D^2$) is a multivariate measure that detects outliers by quantifying how far an individual’s response set deviates from the overall distribution of responses in the dataset. Higher $D^2$ values indicate responses that differ significantly from typical patterns, potentially signaling careless responding. Conversely, lower $D^2$ values suggest responses closer to the average, reflecting greater engagement and consistency.
+
+To examine the relationship between group membership and Mahalanobis Distance, we employed a hierarchical Bayesian regression model with an asymmetric Laplace likelihood, specified as follows:
+
+```r
+mod_mahad <- brm(
+  formula = mahad_val ~ is_pos_slope_group +
+    (1 | user_id / day / time_window),
+  family = asym_laplace(),             # Asymmetric Laplace likelihood
+  data = df,                           # Input data
+  backend = "cmdstanr"                 # Computational backend
+)
+```
+
+This model incorporates random effects for participants (`user_id`), days, and time windows to account for the nested structure of the data and to appropriately model within-person variability.
+
+#### Model Results
+
+| Parameter              | Estimate | Est. Error | Lower 95% CI | Upper 95% CI | Rhat | Bulk ESS | Tail ESS |
+|------------------------|----------|------------|--------------|--------------|------|----------|----------|
+| Intercept              | 4.53     | 0.01       | 4.50         | 4.55         | 1.00 | 973      | 908      |
+| pos_slope_group    | -0.09    | 0.05       | -0.19        | 0.01         | 1.00 | 989      | 763      |
+
+Table: Posterior estimates, standard errors, 95% credible intervals, and $\hat{R}$ statistics for model parameters.
+
+::: {.figure #fig-mahalanobis}
+![](./plots/mod_mahalanobis_plot.png){width="80%"}
+*Figure*: Conditional effect of group membership on Mahalanobis Distance. Vertical bars represent 89% credible intervals.
+:::
+
+**Interpretation.** The posterior estimate for the effect of group membership (`is_pos_slope_group1`) indicates no credible difference in Mahalanobis Distance between participants with positive UCS-CS associations and those without. The small effect size and overlapping credible intervals suggest that response patterns do not vary meaningfully by group. This implies that both groups exhibit similar levels of response consistency.
+
 
 ### Time to Completion
 
-TODO
+Time to Completion measures the time participants take to complete all items in a single notification. It serves as a potential indicator of response quality, with unusually fast or slow times suggesting inattentive or disengaged behavior. Extremely short completion times might indicate careless responding or "speeding," while excessively long times could reflect distractions or difficulty with the task.
+
+To examine whether group membership influences Time to Completion, we fit a hierarchical Bayesian regression model with a shifted log-normal likelihood, specified as follows:
+
+```r
+mod_rt <- brm(
+  formula = rt ~ is_positive_slope_group +
+    (1 | user_id / day / time_window),
+  family = shifted_lognormal(),       # Shifted log-normal likelihood for response times
+  data = rt_df,                       # Input data
+  backend = "cmdstanr"                # Computational backend
+)
+```
+
+This model accounts for the hierarchical structure of the data by including random effects for participants (`user_id`), days, and time windows, enabling appropriate modeling of within-person variability in response times.
+
+#### Model Results
+
+| Parameter                  | Estimate | Est. Error | Lower 95% CI | Upper 95% CI | Rhat | Bulk ESS | Tail ESS |
+|----------------------------|----------|------------|--------------|--------------|------|----------|----------|
+| Intercept                  | 3.54     | 0.01       | 3.53         | 3.55         | 1.00 | 837      | 832      |
+| positive_slope_group   | 0.01     | 0.02       | -0.02        | 0.04         | 1.00 | 1061     | 981      |
+
+Table: Posterior estimates, standard errors, 95% credible intervals, and $\hat{R}$ statistics for model parameters.
+
+::: {.figure #fig-rt}
+![](./plots/mod_rt_plot.png){width="80%"}
+*Figure*: Conditional effect of group membership on Time to Completion. Vertical bars represent 89% credible intervals.
+:::
+
+**Interpretation.** The posterior estimate for the effect of group membership (`is_positive_slope_group1`) suggests no credible difference in Time to Completion between participants with positive UCS-CS associations and those without. The small effect size and overlapping credible intervals indicate that both groups exhibit similar patterns in the time required to complete items, implying no substantial differences in response behavior related to engagement or attentiveness.
+

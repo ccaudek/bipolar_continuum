@@ -35,7 +35,7 @@ suppressPackageStartupMessages({
 })
 ```
 
-\newpage
+\clearpage
 
 # Study 1
 
@@ -43,44 +43,43 @@ suppressPackageStartupMessages({
 
 {{< include ./sections/apx_study1_descriptive_stats.qmd >}}
 
-\newpage
+\clearpage
 
 ## EMA Survey Questions
 
 {{< include ./sections/apx_study1_survey_questions.qmd >}}
 
-\newpage
+\clearpage
 
 ## Data Quality Management and Subject Selection 
 
 {{< include ./sections/apx_careless_study1.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 1: Multilevel Reliability
 
 {{< include ./sections/apx_study1_reliability.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 2: Correlations Between the CS and UCS Components
 
 {{< include ./sections/apx_study1_correlations.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 3: Impact of Contextual Influences on CS and UCS
 
 {{< include ./sections/apx_study1_model_comparison_piel.qmd >}}
 
-\newpage
+\clearpage
 
 ## Supplementary Analysis: Nomothetic Evaluation of the CS-UCS Relationship {#sec-nomothetic-an-study1}
 
 {{< include ./sections/apx_study1_bip_cont_hyp.qmd >}}
 
-\newpage
-
+\clearpage
 
 # Study 2
 
@@ -88,55 +87,55 @@ suppressPackageStartupMessages({
 
 {{< include ./sections/apx_study2_descriptive_stats.qmd >}}
 
-\newpage
+\clearpage
 
 ## EMA Survey Questions
 
 {{< include ./sections/apx_study2_survey_questions.qmd >}}
 
-\newpage
+\clearpage
 
 ## Data Quality Management and Subject Selection 
 
 {{< include ./sections/apx_careless_study2.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 1: Impact of Academic Exam on State Self-Compassion
 
 {{< include ./sections/apx_study2_exam_ssc.qmd >}}
 
-\newpage
+\clearpage
 
 ## Supplementary Analysis: Impact of Academic Exam on Negative Affect  
 
 {{< include ./sections/apx_study2_impact_of_exam_on_neg_aff.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 2: Impact of Contextual Influences on CS and UCS
 
 {{< include ./sections/apx_study2_model_comparison_mpath.qmd >}}
 
-\newpage
+\clearpage
 
 ## Supplementary Analysis: Nomothetic Evaluation of the CS-UCS Relationship 
 
 {{< include ./sections/apx_study2_direct_test.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 3: Levels of Personal Concern
 
 {{< include ./sections/apx_study2_personal_concerns.qmd >}}
 
-\newpage
+\clearpage
 
 ## Analysis 4: Decentering and SC and USC Correlation  
 
 {{< include ./sections/apx_study2_decentering.qmd >}}
 
-\newpage
+\clearpage
 
 # Both Studies Combined
 
@@ -144,19 +143,18 @@ suppressPackageStartupMessages({
 
 {{< include ./sections/apx_rev1_cfa_multilevel.qmd >}}
 
-\newpage
+\clearpage
 
 ## Idionomic Analysis
 
 {{< include ./sections/apx_rev1_idionomic.qmd >}}
 
-\newpage
-\pagebreak
+\clearpage
 
 ## Examining Response Bias 
 
 {{< include ./sections/apx_response_bias.qmd >}}
 
-\newpage
+\clearpage
 
 # References
